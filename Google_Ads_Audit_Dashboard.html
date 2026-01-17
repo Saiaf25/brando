@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>تدقيق حساب Google Ads - لوحة التحليل</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Baloo Bhaijaan 2', sans-serif;
+            background: #0a0a0a;
+            min-height: 100vh;
+            color: #b5bfaf;
+            line-height: 1.8;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #93268e 0%, #1a1a1a 100%);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #93268e;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        header p {
+            color: #b5bfaf;
+            font-size: 1.2rem;
+        }
+
+        .status-banner {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .status-item {
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .status-good {
+            background: rgba(34, 197, 94, 0.15);
+            border: 2px solid #22c55e;
+            color: #22c55e;
+        }
+
+        .status-warning {
+            background: rgba(251, 191, 36, 0.15);
+            border: 2px solid #fbbf24;
+            color: #fbbf24;
+        }
+
+        .status-critical {
+            background: rgba(239, 68, 68, 0.15);
+            border: 2px solid #ef4444;
+            color: #ef4444;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+            padding: 25px 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #222;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            border-color: #93268e;
+            transform: translateY(-3px);
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #93268e;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            color: #b5bfaf;
+            font-size: 0.9rem;
+        }
+
+        .metric-note {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .section {
+            background: linear-gradient(145deg, #141414 0%, #0a0a0a 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 1px solid #222;
+        }
+
+        .section:hover {
+            border-color: #333;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #222;
+        }
+
+        .section-number {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: #93268e;
+            color: #fff;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .audit-content {
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-right: 4px solid #93268e;
+        }
+
+        .audit-content h4 {
+            color: #b577aa;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .audit-content p, .audit-content li {
+            color: #b5bfaf;
+            margin-bottom: 8px;
+        }
+
+        .audit-content ul {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .audit-content ul li {
+            padding: 8px 0;
+            padding-right: 20px;
+            position: relative;
+        }
+
+        .audit-content ul li::before {
+            content: "•";
+            position: absolute;
+            right: 0;
+            color: #93268e;
+            font-weight: bold;
+        }
+
+        .commentary-box {
+            background: linear-gradient(135deg, rgba(147, 38, 142, 0.1) 0%, rgba(0,0,0,0.2) 100%);
+            border: 1px solid rgba(147, 38, 142, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .commentary-box h4 {
+            color: #93268e;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .commentary-box p {
+            color: #b5bfaf;
+            font-size: 0.95rem;
+        }
+
+        .highlight-box {
+            background: rgba(147, 38, 142, 0.1);
+            border: 1px solid #93268e;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin: 15px 0;
+            color: #fff;
+        }
+
+        .impact-section {
+            margin-top: 15px;
+        }
+
+        .impact-section h5 {
+            color: #ef4444;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .impact-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .impact-item {
+            background: rgba(239, 68, 68, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .campaigns-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .campaign-tag {
+            background: rgba(147, 38, 142, 0.2);
+            border: 1px solid #93268e;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #b577aa;
+        }
+
+        .decision-box {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(0,0,0,0.2) 100%);
+            border: 2px solid #fbbf24;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .decision-box h4 {
+            color: #fbbf24;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .decision-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .decision-option {
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+
+        .decision-option h5 {
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .decision-option p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .recommendation-section {
+            margin-top: 20px;
+        }
+
+        .rec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .rec-card {
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 25px;
+            border-top: 4px solid;
+        }
+
+        .rec-immediate { border-color: #ef4444; }
+        .rec-structural { border-color: #fbbf24; }
+        .rec-optimize { border-color: #93268e; }
+        .rec-scale { border-color: #22c55e; }
+
+        .rec-card h4 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .rec-card ul {
+            list-style: none;
+        }
+
+        .rec-card ul li {
+            padding: 10px 0;
+            padding-right: 25px;
+            position: relative;
+            color: #b5bfaf;
+            border-bottom: 1px solid #222;
+            font-size: 0.95rem;
+        }
+
+        .rec-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .rec-card ul li::before {
+            content: "←";
+            position: absolute;
+            right: 0;
+            color: #93268e;
+        }
+
+        .warning-note {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #fca5a5;
+            font-size: 0.9rem;
+        }
+
+        .info-note {
+            background: rgba(147, 38, 142, 0.1);
+            border: 1px solid rgba(147, 38, 142, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #b577aa;
+            font-size: 0.9rem;
+        }
+
+        .time-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 8px;
+            height: 100px;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+
+        .time-bar {
+            width: 40px;
+            border-radius: 4px 4px 0 0;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #666;
+            padding-top: 5px;
+        }
+
+        .time-bar.peak {
+            background: #93268e;
+            color: #fff;
+        }
+
+        .time-bar.low {
+            background: #333;
+        }
+
+        .outcome-section {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(0,0,0,0.2) 100%);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .outcome-section h3 {
+            color: #22c55e;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+        }
+
+        .outcome-stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .outcome-stat {
+            text-align: center;
+        }
+
+        .outcome-stat .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #22c55e;
+        }
+
+        .outcome-stat .label {
+            color: #b5bfaf;
+            font-size: 0.9rem;
+        }
+
+        .final-verdict {
+            background: linear-gradient(135deg, #93268e 0%, #1a1a1a 100%);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid #93268e;
+        }
+
+        .final-verdict h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .final-verdict p {
+            color: #b5bfaf;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        .verdict-highlight {
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #444;
+            font-size: 0.9rem;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .positive-box {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .positive-box h5 {
+            color: #22c55e;
+            margin-bottom: 10px;
+        }
+
+        .negative-box {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .negative-box h5 {
+            color: #ef4444;
+            margin-bottom: 10px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .service-tag {
+            background: rgba(147, 38, 142, 0.15);
+            border: 1px solid rgba(147, 38, 142, 0.3);
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            color: #b577aa;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .status-banner {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .outcome-stats {
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>تدقيق حساب Google Ads</h1>
+            <p>مراجعة الأداء وتقييم إمكانيات النمو</p>
+
+            <div class="status-banner">
+                <div class="status-item status-good">✓ الحساب لا يخسر أموال</div>
+                <div class="status-item status-warning">⚠ غير جاهز للتوسع</div>
+                <div class="status-item status-critical">! يحتاج إعادة هيكلة</div>
+            </div>
+        </header>
+
+        <!-- Key Metrics -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value">106K</div>
+                <div class="metric-label">ريال - إجمالي الإنفاق</div>
+                <div class="metric-note">آخر 30 يوم</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">2,580</div>
+                <div class="metric-label">نقرة</div>
+                <div class="metric-note">إجمالي الزيارات</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">41</div>
+                <div class="metric-label">ريال - تكلفة النقرة</div>
+                <div class="metric-note">متوسط CPC</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" style="color: #22c55e;">15-17%</div>
+                <div class="metric-label">معدل النقر CTR</div>
+                <div class="metric-note">أداء قوي</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">96%</div>
+                <div class="metric-label">من الموبايل</div>
+                <div class="metric-note">توزيع الأجهزة</div>
+            </div>
+        </div>
+
+        <!-- Section 1: Executive Summary -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="section-title">الملخص التنفيذي</h2>
+            </div>
+
+            <div class="audit-content">
+                <h4>نتائج المراجعة (آخر 30 يوم)</h4>
+                <ul>
+                    <li>الطلب في السوق قوي واهتمام البحث في تزايد</li>
+                    <li>الإعلانات تحقق CTR مرتفع مما يدل على قوة الرسائل الإعلانية</li>
+                    <li>المشكلة الأساسية ليست في الترافيك أو الطلب</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>التحديات الجوهرية:</strong> هيكل الحساب • تشتت البيانات • استراتيجية التحويل غير واضحة
+                </div>
+            </div>
+
+            <div class="commentary-box">
+                <h4>📌 تعليق على الملخص</h4>
+                <p>الوضع الحالي يمثل فرصة وليس أزمة. وجود طلب قوي مع CTR مرتفع يعني أن الجمهور المستهدف صحيح والرسائل الإعلانية فعالة. المشكلة تقنية بحتة في البنية التحتية للحساب، وهذا قابل للإصلاح بشكل منهجي خلال أسابيع قليلة.</p>
+            </div>
+
+            <div class="two-column" style="margin-top: 20px;">
+                <div class="positive-box">
+                    <h5>✓ الحساب حالياً</h5>
+                    <p>لا يخسر أموال - يعمل عند نقطة التعادل أو أفضل قليلاً</p>
+                </div>
+                <div class="negative-box">
+                    <h5>✗ لكن</h5>
+                    <p>غير جاهز للنمو المستدام - زيادة الميزانية ستزيد الإنفاق فقط وليس النتائج</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Performance Overview -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="section-title">نظرة عامة على الأداء</h2>
+            </div>
+
+            <div class="audit-content">
+                <h4>إحصائيات آخر 30 يوم</h4>
+                <ul>
+                    <li>إجمالي الإنفاق: ~106,000 ريال</li>
+                    <li>النقرات: ~2,580</li>
+                    <li>متوسط تكلفة النقرة: ~41 ريال</li>
+                    <li>معدل النقر: 15% - 17%</li>
+                    <li>96% من الترافيك من أجهزة الموبايل</li>
+                </ul>
+
+                <div class="warning-note">
+                    <strong>ملاحظة من التدقيق:</strong> CTR المرتفع يعني أن المستخدمين مهتمين، لكنه لا يضمن جودة التحويلات أو قابلية التوسع.
+                </div>
+            </div>
+
+            <div class="commentary-box">
+                <h4>📌 تعليق على الأداء</h4>
+                <p>تكلفة النقرة 41 ريال مرتفعة نسبياً، لكن في قطاع الخدمات الطبية المنزلية هذا متوقع نظراً للمنافسة وقيمة العميل المرتفعة. النقطة الأهم هي أن 96% من الترافيك موبايل - وهذا يتطلب التأكد من أن صفحات الهبوط وتجربة التحويل محسّنة بالكامل للموبايل، وأن أرقام الاتصال تعمل بنقرة واحدة (click-to-call).</p>
+            </div>
+        </div>
+
+        <!-- Section 3: Campaign Structure Review -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="section-title">مراجعة هيكل الحملات</h2>
+            </div>
+
+            <div class="audit-content">
+                <h4>3.1 التجزئة المفرطة (Over-Segmentation)</h4>
+                <p>الحساب يحتوي على عدة حملات Search تستهدف نفس النية:</p>
+
+                <div class="campaigns-list">
+                    <span class="campaign-tag">Search-1</span>
+                    <span class="campaign-tag">Search-2</span>
+                    <span class="campaign-tag">Search-3</span>
+                    <span class="campaign-tag">Search-4</span>
+                </div>
+
+                <p>جميع الحملات تركز على: نفس الخدمات • نفس الجمهور • نفس السوق</p>
+
+                <div class="impact-section">
+                    <h5>التأثير:</h5>
+                    <div class="impact-list">
+                        <div class="impact-item">البيانات مقسمة بين الحملات</div>
+                        <div class="impact-item">Smart Bidding لا يتعلم بكفاءة</div>
+                        <div class="impact-item">الحملات تتنافس ضد بعضها</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="commentary-box">
+                <h4>📌 تعليق على التجزئة المفرطة</h4>
+                <p>كل حملة تحتاج حد أدنى من التحويلات شهرياً (30-50 تحويل) حتى يتمكن Smart Bidding من التحسين بشكل فعال. تقسيم الحملات يعني أن كل واحدة تحصل على جزء من البيانات، مما يُبطئ عملية التعلم ويجعل الخوارزمية تعمل بمعلومات ناقصة. الحل هو الدمج لتركيز البيانات.</p>
+            </div>
+
+            <div class="audit-content" style="margin-top: 20px;">
+                <h4>3.2 تداخل أنواع الحملات (Campaign Type Overlap)</h4>
+                <p>الحساب يشمل:</p>
+                <ul>
+                    <li>حملات Search</li>
+                    <li>حملات Call-only</li>
+                    <li>حملات Performance Max</li>
+                </ul>
+
+                <p>جميع الحملات تستهدف نفس الخدمات والمستخدمين، مما يسبب:</p>
+
+                <div class="impact-section">
+                    <h5>التأثير:</h5>
+                    <div class="impact-list">
+                        <div class="impact-item">تنافس ذاتي (Self-competition)</div>
+                        <div class="impact-item">إشارات متضاربة للخوارزمية</div>
+                        <div class="impact-item">نتائج CPA غير مستقرة</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="commentary-box">
+                <h4>📌 تعليق على تداخل الحملات</h4>
+                <p>عندما يبحث مستخدم عن خدماتكم، ثلاث حملات مختلفة تدخل المزاد وتتنافس على نفس الشخص. هذا يرفع تكلفة النقرة بشكل مصطنع ويُربك خوارزمية Google في تحديد أي حملة يجب أن تفوز. النتيجة: دفع أكثر للحصول على نفس العميل، مع عدم وضوح أي حملة تحقق النتائج فعلياً.</p>
+            </div>
+        </div>
+
+        <!-- Section 4: Budget & Spend Behavior -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2 class="section-title">سلوك الميزانية والإنفاق</h2>
+            </div>
+
+            <div class="audit-content">
+                <h4>الملاحظات:</h4>
+                <ul>
+                    <li>الإنفاق يزيد بدون استراتيجية توسع واضحة</li>
+                    <li>حملات اختبارية (مثل "CPA Test") لا تزال تعمل وتستهلك ميزانية</li>
+                </ul>
+
+                <div class="impact-section">
+                    <h5>المشاكل:</h5>
+                    <div class="impact-list">
+                        <div class="impact-item">لا يوجد مدة محددة للاختبارات</div>
+                        <div class="impact-item">لا توجد قواعد إيقاف واضحة</div>
+                        <div class="impact-item">الميزانية "تنجرف" بدلاً من نمو محكوم</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="commentary-box">
+                <h4>📌 تعليق على إدارة الميزانية</h4>
+                <p>حملات الاختبار بدون معايير نجاح محددة ومدة زمنية واضحة تصبح "حملات زومبي" - تستمر في الإنفاق بدون هدف. يجب وضع framework للاختبارات يشمل: فرضية واضحة، ميزانية محددة، مدة زمنية، ومعايير النجاح/الفشل قبل إطلاق أي اختبار.</p>
+            </div>
+        </div>
+
+        <!-- Section 5: Conversion Tracking & Strategy -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <h2 class="section-title">تتبع التحويلات والاستراتيجية</h2>
+            </div>
+
+            <div class="audit-content">
+                <h4>المشكلة الأساسية:</h4>
+                <p>لا يوجد هدف تحويل أساسي واحد وواضح.</p>
+
+                <div class="highlight-box">
+                    <strong>الوضع الحالي:</strong> المكالمات ونماذج العملاء المحتملين كلاهما مُعرَّف كتحويلات أساسية (Primary Conversions)
+                </div>
+
+                <div class="impact-section">
+                    <h5>التأثير:</h5>
+                    <div class="impact-list">
+                        <div class="impact-item">Google لا يمكنه التحسين بدقة</div>
+                        <div class="impact-item">CPA يصبح غير موثوق</div>
+                        <div class="impact-item">رؤى الأداء مضللة</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="decision-box">
+                <h4>⚡ قرار استراتيجي مطلوب</h4>
+                <p>الحساب يجب أن يكون إما:</p>
+
+                <div class="decision-options">
+                    <div class="decision-option">
+                        <h5>📞 مركّز على المكالمات</h5>
+                        <p>Call-focused</p>
+                    </div>
+                    <div class="decision-option">
+                        <h5>📝 مركّز على العملاء المحتملين</h5>
+                        <p>Lead-focused</p>
+                    </div>
+                </div>
+
+                <p style="text-align: center; margin-top: 15px; color: #fbbf24; font-weight: 600;">وليس كلاهما في نفس الوقت</p>
+            </div>
+
+            <div class="commentary-box">
+                <h4>📌 تعليق على استراتيجية التحويل</h4>
+                <p>هذه النقطة جوهرية. عندما تُعرِّف هدفين مختلفين كـ Primary، الخوارزمية تحاول تحسين كليهما معاً، لكن سلوك من يتصل يختلف عن سلوك من يملأ نموذج. القرار يجب أن يُبنى على: أين يحدث الإغلاق الأفضل؟ هل فريق المبيعات أقوى على الهاتف أم في المتابعة؟ ما هو وقت الاستجابة المتاح؟ الهدف الثانوي يبقى كـ Secondary Conversion للتتبع فقط.</p>
+            </div>
+        </div>
+
+        <!-- Section 6: Keywords & Search Intent -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">6</div>
+                <h2 class="section-title">الكلمات المفتاحية ونية البحث</h2>
+            </div>
+
+            <div class="audit-content">
+                <h4>المشكلة:</h4>
+                <p>نوايا مستخدمين مختلفة مخلوطة في نفس الحملات:</p>
+
+                <div class="services-grid">
+                    <div class="service-tag">طبيب منزلي</div>
+                    <div class="service-tag">تمريض منزلي</div>
+                    <div class="service-tag">مرافق مريض</div>
+                    <div class="service-tag">رعاية كبار السن</div>
+                </div>
+
+                <div class="warning-note">
+                    <strong>المشكلة:</strong> كل نية لها سلوك مستخدم مختلف وجودة عملاء محتملين مختلفة.
+                </div>
+
+                <div class="impact-section">
+                    <h5>النتيجة:</h5>
+                    <div class="impact-list">
+                        <div class="impact-item">CPA غير متسق</div>
+                        <div class="impact-item">جودة عملاء محتملين متفاوتة</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="commentary-box">
+                <h4>📌 تعليق على خلط النوايا</h4>
+                <p>كل خدمة تمثل شريحة مختلفة: "طبيب منزلي" = حاجة طارئة، قرار سريع، سعر أعلى. "مرافق مريض" = حاجة مستمرة، قرار عائلي، حساسية سعرية أكبر. خلطهم يجعل من المستحيل معرفة أي خدمة مربحة وأيها تستنزف الميزانية. الفصل يتيح تخصيص الرسائل والميزانيات حسب ربحية كل خدمة.</p>
+            </div>
+        </div>
+
+        <!-- Section 7: Recommendations Review -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">7</div>
+                <h2 class="section-title">مراجعة التوصيات</h2>
+            </div>
+
+            <div class="audit-content">
+                <h4>توصيات مع تحفظات:</h4>
+
+                <div style="margin: 20px 0;">
+                    <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; margin-bottom: 10px;">
+                        <strong style="color: #b577aa;">إضافة Broad Match Keywords</strong>
+                        <p style="color: #888; margin-top: 5px;">(يجب تنظيف هيكل الحساب ومصطلحات البحث أولاً)</p>
+                    </div>
+
+                    <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; margin-bottom: 10px;">
+                        <strong style="color: #b577aa;">إنشاء حملة Performance Max</strong>
+                        <p style="color: #888; margin-top: 5px;">(إضافة المزيد من الأتمتة بدون تحكم يزيد التداخل)</p>
+                    </div>
+
+                    <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; margin-bottom: 10px;">
+                        <strong style="color: #b577aa;">توسيع Search Partners</strong>
+                        <p style="color: #888; margin-top: 5px;">(جودة العملاء المحتملين عادةً منخفضة في الخدمات الطبية)</p>
+                    </div>
+
+                    <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px;">
+                        <strong style="color: #b577aa;">تحديد Target CPA</strong>
+                        <p style="color: #888; margin-top: 5px;">يُوصى به فقط بعد: توحيد استراتيجية التحويل • تجميع البيانات • تقليل عدد الحملات</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="commentary-box">
+                <h4>📌 تعليق على التوصيات</h4>
+                <p>التدقيق محق في التحفظات. Broad Match بدون negative keywords قوية = إهدار ميزانية. PMax بدون تحكم = سرقة ترافيك Search. Search Partners في الطب = جودة ضعيفة. Target CPA ببيانات مشتتة = تحسين خاطئ. الترتيب الصحيح: نظّف أولاً، ثم وسّع.</p>
+            </div>
+        </div>
+
+        <!-- Section 8: Time Insights -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">8</div>
+                <h2 class="section-title">رؤى التوقيت</h2>
+            </div>
+
+            <div class="audit-content">
+                <h4>الملاحظات:</h4>
+                <ul>
+                    <li>أفضل أداء بين الساعة 12 ظهراً و 10 مساءً</li>
+                </ul>
+
+                <div class="time-chart">
+                    <div class="time-bar low" style="height: 20%;">صباح<br>باكر</div>
+                    <div class="time-bar low" style="height: 35%;">صباح</div>
+                    <div class="time-bar peak" style="height: 75%;">12-4</div>
+                    <div class="time-bar peak" style="height: 100%;">4-8</div>
+                    <div class="time-bar peak" style="height: 80%;">8-10</div>
+                    <div class="time-bar low" style="height: 30%;">ليل</div>
+                </div>
+
+                <div class="impact-section">
+                    <h5>الفجوات الحالية:</h5>
+                    <div class="impact-list">
+                        <div class="impact-item">لا يوجد جدولة إعلانات صارمة</div>
+                        <div class="impact-item">حملات المكالمات تعمل خارج ساعات العمل</div>
+                        <div class="impact-item">فرص تحسين ضائعة</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="commentary-box">
+                <h4>📌 تعليق على التوقيت</h4>
+                <p>إعلانات Call-only خارج ساعات العمل = ميزانية مهدرة إذا لم يرد أحد. الحل: جدولة Call campaigns فقط أثناء ساعات العمل، واستخدام Lead form campaigns للأوقات الأخرى لالتقاط الطلب دون الحاجة لاستجابة فورية. كذلك يمكن استخدام bid adjustments لرفع العروض في أوقات الذروة.</p>
+            </div>
+        </div>
+
+        <!-- Section 9: Performance Max Review -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">9</div>
+                <h2 class="section-title">مراجعة Performance Max</h2>
+            </div>
+
+            <div class="audit-content">
+                <h4>إعداد Performance Max الحالي:</h4>
+                <ul>
+                    <li>لا توجد حدود ميزانية واضحة</li>
+                    <li>إشارات جمهور ضعيفة أو عامة</li>
+                    <li>لا يوجد فصل بين Brand و Non-brand</li>
+                </ul>
+
+                <div class="impact-section">
+                    <h5>النتيجة:</h5>
+                    <div class="impact-list">
+                        <div class="impact-item">Performance Max يستهلك ترافيك Search</div>
+                        <div class="impact-item">قيمة إضافية محدودة (Limited incremental value)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="commentary-box">
+                <h4>📌 تعليق على Performance Max</h4>
+                <p>PMax بدون إعداد صحيح يأخذ "الفاكهة السهلة" - البحث عن البراند والعملاء الذين كانوا سيتحولون على أي حال. لإضافة قيمة حقيقية: يجب استبعاد Brand keywords، إضافة audience signals قوية (قوائم عملاء، زوار موقع)، وتحديد ميزانية منفصلة. بدون ذلك، PMax يسرق نسب Search campaigns بدون جلب عملاء جدد.</p>
+            </div>
+        </div>
+
+        <!-- Section 10: Final Assessment -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">10</div>
+                <h2 class="section-title">التقييم النهائي</h2>
+            </div>
+
+            <div class="audit-content">
+                <div class="highlight-box">
+                    الحساب حالياً مبني بمنهج "شراء ميديا" وليس كـ "نظام نمو"
+                </div>
+
+                <div class="impact-section">
+                    <h5>هذا يؤدي إلى:</h5>
+                    <div class="impact-list">
+                        <div class="impact-item">إنفاق أعلى</div>
+                        <div class="impact-item">CPA غير مستقر</div>
+                        <div class="impact-item">قابلية توسع محدودة</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="commentary-box">
+                <h4>📌 تعليق على التقييم</h4>
+                <p>الفرق بين "شراء ميديا" و"نظام نمو": الأول يركز على إنفاق الميزانية والحصول على ترافيك، الثاني يركز على بناء آلة تتعلم وتتحسن باستمرار. الحساب الحالي ينفق ويحصل على نتائج، لكنه لا يتعلم أو يتحسن لأن البيانات مشتتة والأهداف غير واضحة.</p>
+            </div>
+        </div>
+
+        <!-- Section 11: Recommended Action Plan -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">11</div>
+                <h2 class="section-title">خطة العمل الموصى بها</h2>
+            </div>
+
+            <div class="rec-grid">
+                <div class="rec-card rec-immediate">
+                    <h4>🔴 إجراءات فورية</h4>
+                    <ul>
+                        <li>إيقاف الحملات المكررة والمتداخلة</li>
+                        <li>إيقاف حملات الاختبار غير المحكومة</li>
+                        <li>تحديد هدف تحويل أساسي واحد</li>
+                    </ul>
+                </div>
+
+                <div class="rec-card rec-structural">
+                    <h4>🟡 تحسينات هيكلية</h4>
+                    <ul>
+                        <li>تقليل حملات Search وتجميعها حسب النية</li>
+                        <li>فصل الخدمات بوضوح</li>
+                        <li>تشغيل حملة مكالمات واحدة بجدولة صارمة</li>
+                    </ul>
+                </div>
+
+                <div class="rec-card rec-optimize">
+                    <h4>🟣 مرحلة التحسين</h4>
+                    <ul>
+                        <li>تنظيف مصطلحات البحث وإضافة negative keywords</li>
+                        <li>تحسين جداول الإعلانات حسب أوقات الذروة</li>
+                        <li>تحسين دقة تتبع التحويلات</li>
+                    </ul>
+                </div>
+
+                <div class="rec-card rec-scale">
+                    <h4>🟢 التحضير للتوسع</h4>
+                    <ul>
+                        <li>إعادة بناء Performance Max بتحكم واضح</li>
+                        <li>تفعيل Enhanced Conversions بشكل صحيح</li>
+                        <li>تحضير الحساب لقابلية Smart Bidding</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="commentary-box">
+                <h4>📌 تعليق على خطة العمل</h4>
+                <p>الترتيب منطقي: أوقف النزيف أولاً (الحملات المكررة)، ثم أصلح الأساس (الهيكل)، ثم حسّن (الكلمات والجدولة)، ثم وسّع (PMax و Smart Bidding). محاولة التوسع قبل إصلاح الأساس ستُضخّم المشاكل الموجودة. المدة المتوقعة: 4-6 أسابيع للمراحل الثلاث الأولى.</p>
+            </div>
+        </div>
+
+        <!-- Section 12: Conclusion -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">12</div>
+                <h2 class="section-title">الخلاصة</h2>
+            </div>
+
+            <div class="audit-content">
+                <h4>الحساب يمتلك:</h4>
+                <div class="two-column">
+                    <div class="positive-box">
+                        <ul style="list-style: none;">
+                            <li style="padding: 5px 0;">✓ طلب قوي</li>
+                            <li style="padding: 5px 0;">✓ فرصة سوقية</li>
+                            <li style="padding: 5px 0;">✓ تفاعل ممتاز</li>
+                        </ul>
+                    </div>
+                    <div class="negative-box">
+                        <p><strong>لكن بدون إعادة الهيكلة:</strong></p>
+                        <p>زيادة الميزانية ستزيد الإنفاق فقط، وليس النتائج</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="outcome-section" style="margin-top: 25px;">
+                <h3>النتائج المتوقعة بعد تطبيق التغييرات</h3>
+
+                <div class="outcome-stats">
+                    <div class="outcome-stat">
+                        <div class="value">25-35%</div>
+                        <div class="label">تخفيض في CPA</div>
+                    </div>
+                    <div class="outcome-stat">
+                        <div class="value">↑</div>
+                        <div class="label">جودة العملاء المحتملين</div>
+                    </div>
+                    <div class="outcome-stat">
+                        <div class="value">↑</div>
+                        <div class="label">جودة المكالمات</div>
+                    </div>
+                    <div class="outcome-stat">
+                        <div class="value">✓</div>
+                        <div class="label">جاهز للنمو المستدام</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="commentary-box" style="margin-top: 25px;">
+                <h4>📌 التعليق النهائي</h4>
+                <p>التدقيق يؤكد أن الأساسيات موجودة: السوق يريد الخدمة، والإعلانات تجذب الانتباه. المشكلة 100% تقنية في إعداد الحساب. تخفيض 25-35% في CPA واقعي ومحافظ إذا تم تنفيذ الخطة بشكل صحيح. الأهم: بعد الإصلاح، كل ريال إضافي في الميزانية سيُترجم لنتائج فعلية وليس مجرد إنفاق.</p>
+            </div>
+        </div>
+
+        <!-- Final Verdict -->
+        <div class="final-verdict">
+            <h3>الحكم النهائي</h3>
+            <div class="verdict-highlight">
+                "الحساب مبني بمنهج شراء ميديا وليس كنظام نمو"
+            </div>
+            <p>
+                الطلب موجود، الفرصة موجودة، التفاعل ممتاز. المطلوب هو تحويل الحساب من "آلة إنفاق" إلى "آلة نمو" من خلال: توحيد البيانات، تحديد هدف واحد، وإزالة التنافس الداخلي.
+            </p>
+        </div>
+
+        <footer>
+            <p>لوحة تحليل تدقيق Google Ads • بناءً على مراجعة أداء 30 يوم</p>
+        </footer>
+    </div>
+</body>
+</html>
