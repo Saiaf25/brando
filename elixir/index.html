@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brandology | Monthly Pulse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #e01e37;
+      --yellow: #ffd23f;
+      --black: #050505;
+      --white: #f7f7f7;
+      --gray: #1e1e1e;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Baloo Bhaijaan 2', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at top, #0f0f0f 0%, #030303 60%);
+      color: var(--white);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+
+    header {
+      background: linear-gradient(120deg, var(--black), var(--red));
+      padding: 2rem;
+      border-radius: 24px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      inset: 1.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 20px;
+      pointer-events: none;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: 0.04em;
+    }
+
+    header p {
+      margin: 0.75rem 0 0;
+      font-size: 1.1rem;
+      max-width: 720px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.15);
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .content-grid {
+      display: grid;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .panel {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 1.75rem;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.35);
+    }
+
+    .panel h2, .panel h3 {
+      margin: 0 0 0.75rem;
+      letter-spacing: 0.02em;
+      color: var(--yellow);
+    }
+
+    .panel h2 span {
+      color: var(--white);
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .kpi-card {
+      position: relative;
+      padding: 1.25rem 1.5rem;
+      border-radius: 18px;
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      padding: 1px;
+      background: linear-gradient(130deg, var(--red), var(--yellow));
+      -webkit-mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+
+    .kpi-metric {
+      font-size: 1rem;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.75);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.08em;
+    }
+
+    .kpi-value {
+      font-size: 2.4rem;
+      margin: 0;
+      color: var(--white);
+    }
+
+    .month-tag {
+      font-size: 1rem;
+      margin-left: 0.5rem;
+      color: rgba(255, 255, 255, 0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .kpi-sub {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.95rem;
+      margin-top: 0.6rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .trend {
+      font-weight: 600;
+    }
+
+    .trend.up {
+      color: var(--yellow);
+    }
+
+    .trend.down {
+      color: var(--red);
+    }
+
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .timeline-card {
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 1.25rem;
+    }
+
+    .timeline-card h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.2rem;
+      color: var(--white);
+    }
+
+    .timeline-card p {
+      margin: 0 0 0.75rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+    }
+
+    .timeline-months {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .timeline-month {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.85);
+      padding: 0.15rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .timeline-month:last-child {
+      border-bottom: none;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+      font-size: 0.98rem;
+    }
+
+    thead {
+      background: rgba(224, 30, 55, 0.15);
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.75rem 0.85rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--yellow);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .pill {
+      display: inline-flex;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    footer {
+      margin-top: 2.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 1.5rem;
+      }
+      .panel {
+        padding: 1.25rem;
+      }
+      .kpi-value {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="badge">Brandology · Oct 2025 → Mar 2026</div>
+      <h1>اكسير Monthly Performance Pulse</h1>
+    </header>
+
+    <div class="content-grid">
+      <section class="panel">
+        <h2>Monthly <span>Highlights</span></h2>
+        <div class="kpi-grid" id="kpiCards"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Timeline <span>Snapshots</span></h2>
+        <p style="margin-top:-0.25rem;color:rgba(255,255,255,0.75);">Each card lists the exact values recorded for that metric from October 2025 through March 2026.</p>
+        <div class="timeline-grid" id="timelineGrid"></div>
+        <h3>Insight Notes</h3>
+        <ul id="insightList"></ul>
+      </section>
+
+      <section class="panel">
+        <h2>Metric <span>Ledger</span></h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Oct 2025</th>
+                <th>Nov 2025</th>
+                <th>Dec 2025</th>
+                <th>Jan 2026</th>
+                <th>Feb 2026</th>
+                <th>Mar 2026</th>
+              </tr>
+            </thead>
+            <tbody id="metricTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      Built with Baloo Bhaijaan 2 · Palette: white · red · black · yellow
+    </footer>
+  </div>
+
+  <script>
+    const monthOrder = [
+      { label: 'October 2025', short: 'Oct 25' },
+      { label: 'November 2025', short: 'Nov 25' },
+      { label: 'December 2025', short: 'Dec 25' },
+      { label: 'January 2026', short: 'Jan 26' },
+      { label: 'February 2026', short: 'Feb 26' },
+      { label: 'March 2026', short: 'Mar 26' }
+    ];
+
+    const dataset = [
+      {
+        metric: 'Budget Spent',
+        unit: 'usd',
+        suffix: '',
+        context: 'Paid media investment levels',
+        months: {
+          'October 2025': null,
+          'November 2025': 1763,
+          'December 2025': 2985,
+          'January 2026': 3172,
+          'February 2026': null,
+          'March 2026': null
+        }
+      },
+      {
+        metric: 'Cost Per Message',
+        unit: 'usd',
+        suffix: '',
+        context: 'Efficiency of conversations',
+        months: {
+          'October 2025': null,
+          'November 2025': 4,
+          'December 2025': 3,
+          'January 2026': 2,
+          'February 2026': null,
+          'March 2026': null
+        }
+      },
+      {
+        metric: 'Cost per link click',
+        unit: 'usd',
+        suffix: '',
+        context: 'Spend per click',
+        months: {
+          'October 2025': null,
+          'November 2025': null,
+          'December 2025': 0.12,
+          'January 2026': 0.06,
+          'February 2026': null,
+          'March 2026': null
+        }
+      },
+      {
+        metric: 'Reach',
+        unit: 'count',
+        suffix: 'people',
+        context: 'Unique reach captured',
+        months: {
+          'October 2025': null,
+          'November 2025': 1262813,
+          'December 2025': null,
+          'January 2026': null,
+          'February 2026': null,
+          'March 2026': null
+        }
+      },
+      {
+        metric: 'Link Click',
+        unit: 'count',
+        suffix: 'clicks',
+        context: 'Traffic to owned properties',
+        months: {
+          'October 2025': null,
+          'November 2025': 864,
+          'December 2025': 605,
+          'January 2026': 6707,
+          'February 2026': null,
+          'March 2026': null
+        }
+      },
+      {
+        metric: 'Message',
+        unit: 'count',
+        suffix: 'messages',
+        context: 'Inbound conversations',
+        months: {
+          'October 2025': null,
+          'November 2025': 424,
+          'December 2025': 1137,
+          'January 2026': 1621,
+          'February 2026': null,
+          'March 2026': null
+        }
+      }
+    ];
+
+    const formatValue = (value, recordOrUnit) => {
+      if (value === null || typeof value === 'undefined' || Number.isNaN(value)) {
+        return '—';
+      }
+      const formatter = new Intl.NumberFormat('en-US', { maximumFractionDigits: value < 1 ? 2 : 0 });
+      const amount = formatter.format(value);
+      const record = typeof recordOrUnit === 'string' ? { unit: recordOrUnit } : (recordOrUnit || {});
+      if (record.unit === 'usd') {
+        return `$${amount}`;
+      }
+      if (record.unit === 'percent') {
+        return `${amount}%`;
+      }
+      return record.suffix ? `${amount} ${record.suffix}` : amount;
+    };
+
+    const getLatestPoint = (record) => {
+      for (let i = monthOrder.length - 1; i >= 0; i -= 1) {
+        const label = monthOrder[i].label;
+        const value = record.months[label];
+        if (typeof value === 'number') {
+          return { label, value, index: i };
+        }
+      }
+      return null;
+    };
+
+    const getPreviousPoint = (record, startIndex) => {
+      if (startIndex === undefined) return null;
+      for (let i = startIndex - 1; i >= 0; i -= 1) {
+        const label = monthOrder[i].label;
+        const value = record.months[label];
+        if (typeof value === 'number') {
+          return { label, value, index: i };
+        }
+      }
+      return null;
+    };
+
+    const focusMetrics = ['Budget Spent', 'Link Click', 'Message'];
+    const cardContainer = document.getElementById('kpiCards');
+
+    focusMetrics.forEach((name) => {
+      const record = dataset.find((item) => item.metric === name);
+      if (!record) return;
+      const latest = getLatestPoint(record);
+      const previous = latest ? getPreviousPoint(record, latest.index) : null;
+      const trendValue = latest && previous ? latest.value - previous.value : null;
+      const trendClass = trendValue === null ? '' : trendValue >= 0 ? 'up' : 'down';
+      const card = document.createElement('article');
+      card.className = 'kpi-card';
+      card.innerHTML = `
+        <div class="kpi-metric">${record.metric}</div>
+        <p class="kpi-value">${latest ? formatValue(latest.value, record) : '—'}
+          <span class="month-tag">${latest ? latest.label : ''}</span>
+        </p>
+        <div class="kpi-sub">
+          <span>${previous ? `${previous.label}: ${formatValue(previous.value, record)}` : 'No prior reading'}</span>
+          <span class="trend ${trendClass}">
+            ${trendValue === null ? '—' : `${trendValue >= 0 ? '+' : ''}${formatValue(Math.abs(trendValue), record)}`}
+          </span>
+        </div>
+        <p style="margin:0.75rem 0 0;font-size:0.95rem;color:rgba(255,255,255,0.7);">${record.context}</p>
+      `;
+      cardContainer.appendChild(card);
+    });
+
+    const tableBody = document.getElementById('metricTable');
+    dataset.forEach((record) => {
+      const row = document.createElement('tr');
+      const cells = monthOrder.map(({ label }) => `<td>${formatValue(record.months[label], record)}</td>`).join('');
+      row.innerHTML = `
+        <td>
+          <strong>${record.metric}</strong>
+          <div class="pill">${record.context}</div>
+        </td>
+        ${cells}
+      `;
+      tableBody.appendChild(row);
+    });
+
+    const insightList = document.getElementById('insightList');
+    const insights = dataset.map((record) => {
+      const latest = getLatestPoint(record);
+      const previous = latest ? getPreviousPoint(record, latest.index) : null;
+      if (latest && previous) {
+        const direction = latest.value - previous.value >= 0 ? 'moved up' : 'slid down';
+        return `${record.metric} ${direction} from ${formatValue(previous.value, record)} in ${previous.label} to ${formatValue(latest.value, record)} in ${latest.label}.`;
+      }
+      if (latest) {
+        return `${record.metric} only has a reading for ${latest.label}: ${formatValue(latest.value, record)}.`;
+      }
+      return null;
+    }).filter(Boolean);
+
+    insights.forEach((text) => {
+      const li = document.createElement('li');
+      li.textContent = text;
+      insightList.appendChild(li);
+    });
+
+    const timelineGrid = document.getElementById('timelineGrid');
+    dataset.forEach((record) => {
+      const card = document.createElement('article');
+      card.className = 'timeline-card';
+
+      const monthLines = monthOrder.map(({ label, short }) => {
+        return `
+          <div class="timeline-month">
+            <span>${short}</span>
+            <span>${formatValue(record.months[label], record)}</span>
+          </div>
+        `;
+      }).join('');
+
+      card.innerHTML = `
+        <h3>${record.metric}</h3>
+        <p>${record.context}</p>
+        <div class="timeline-months">
+          ${monthLines}
+        </div>
+      `;
+
+      timelineGrid.appendChild(card);
+    });
+  </script>
+</body>
+</html>
