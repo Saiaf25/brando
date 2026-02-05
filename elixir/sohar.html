@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Elixir Muscat | ad account report</title>
+  <title>Elixir Sohar | ad account report</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;600;700&display=swap" rel="stylesheet">
@@ -303,11 +303,11 @@
 <body>
   <div class="page">
     <header>
-      <div class="badge">Oct 2025 → Feb 2026</div>
-      <h1>Elixir Muscat | Monthly Performance Pulse</h1>
+      <div class="badge">Aug 2025 → Jan 2026</div>
+      <h1>Elixir Sohar | Monthly Performance Pulse</h1>
       <div class="switcher">
-        <a href="index.html" class="active">Muscat</a>
-        <a href="sohar.html">Sohar</a>
+        <a href="index.html">Muscat</a>
+        <a href="sohar.html" class="active">Sohar</a>
       </div>
     </header>
 
@@ -319,7 +319,7 @@
 
       <section class="panel">
         <h2>Timeline <span>Snapshots</span></h2>
-        <p style="margin-top:-0.25rem;color:rgba(255,255,255,0.75);">Each card lists the exact values recorded for that metric from October 2025 through Feb 2026.</p>
+        <p style="margin-top:-0.25rem;color:rgba(255,255,255,0.75);">Each card lists the exact values recorded for that metric from August 2025 through Jan 2026.</p>
         <div class="timeline-grid" id="timelineGrid"></div>
         <h3>Insight Notes</h3>
         <ul id="insightList"></ul>
@@ -332,12 +332,12 @@
             <thead>
               <tr>
                 <th>Metric</th>
+                <th>Aug 2025</th>
+                <th>Sep 2025</th>
                 <th>Oct 2025</th>
                 <th>Nov 2025</th>
                 <th>Dec 2025</th>
                 <th>Jan 2026</th>
-                <th>Feb 2026</th>
-                <th>Mar 2026</th>
               </tr>
             </thead>
             <tbody id="metricTable"></tbody>
@@ -353,12 +353,12 @@
 
   <script>
     const monthOrder = [
+      { label: 'August 2025', short: 'Aug 25' },
+      { label: 'September 2025', short: 'Sep 25' },
       { label: 'October 2025', short: 'Oct 25' },
       { label: 'November 2025', short: 'Nov 25' },
       { label: 'December 2025', short: 'Dec 25' },
-      { label: 'January 2026', short: 'Jan 26' },
-      { label: 'February 2026', short: 'Feb 26' },
-      { label: 'March 2026', short: 'Mar 26' }
+      { label: 'January 2026', short: 'Jan 26' }
     ];
 
     const dataset = [
@@ -368,12 +368,12 @@
         suffix: '',
         context: 'Paid media investment levels',
         months: {
-          'October 2025': null,
-          'November 2025': 1763,
-          'December 2025': 2985,
-          'January 2026': 3172,
-          'February 2026': null,
-          'March 2026': null
+          'August 2025': 1728.83,
+          'September 2025': 1807.89,
+          'October 2025': 2368.74,
+          'November 2025': 2507.65,
+          'December 2025': 1749.15,
+          'January 2026': 2059.35
         }
       },
       {
@@ -382,40 +382,26 @@
         suffix: '',
         context: 'Efficiency of conversations',
         months: {
-          'October 2025': null,
-          'November 2025': 4,
-          'December 2025': 3,
-          'January 2026': 2,
-          'February 2026': null,
-          'March 2026': null
+          'August 2025': 2.15,
+          'September 2025': 2.14,
+          'October 2025': 1.80,
+          'November 2025': 2.99,
+          'December 2025': 1.76,
+          'January 2026': 2.19
         }
       },
       {
-        metric: 'Cost per link click',
-        unit: 'usd',
-        suffix: '',
-        context: 'Spend per click',
-        months: {
-          'October 2025': null,
-          'November 2025': 0.09,
-          'December 2025': 0.12,
-          'January 2026': 0.06,
-          'February 2026': null,
-          'March 2026': null
-        }
-      },
-      {
-        metric: 'Link Click',
+        metric: 'Reach',
         unit: 'count',
-        suffix: 'clicks',
-        context: 'Traffic to owned properties',
+        suffix: 'people',
+        context: 'Unique reach captured',
         months: {
+          'August 2025': null,
+          'September 2025': null,
           'October 2025': null,
-          'November 2025': 864,
-          'December 2025': 605,
-          'January 2026': 6707,
-          'February 2026': null,
-          'March 2026': null
+          'November 2025': 1625630,
+          'December 2025': null,
+          'January 2026': null
         }
       },
       {
@@ -424,12 +410,26 @@
         suffix: 'messages',
         context: 'Inbound conversations',
         months: {
-          'October 2025': null,
-          'November 2025': 424,
-          'December 2025': 1137,
-          'January 2026': 1621,
-          'February 2026': null,
-          'March 2026': null
+          'August 2025': 804,
+          'September 2025': 846,
+          'October 2025': 1315,
+          'November 2025': 840,
+          'December 2025': 996,
+          'January 2026': 940
+        }
+      },
+      {
+        metric: 'Profile Visit Insta',
+        unit: 'count',
+        suffix: 'visits',
+        context: 'Instagram profile visits',
+        months: {
+          'August 2025': null,
+          'September 2025': null,
+          'October 2025': 441,
+          'November 2025': 4313,
+          'December 2025': null,
+          'January 2026': null
         }
       }
     ];
@@ -473,7 +473,7 @@
       return null;
     };
 
-    const focusMetrics = ['Budget Spent', 'Link Click', 'Message'];
+    const focusMetrics = ['Budget Spent', 'Message', 'Cost Per Message'];
     const cardContainer = document.getElementById('kpiCards');
 
     focusMetrics.forEach((name) => {
