@@ -467,20 +467,250 @@
         }
 
         @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 25px 15px;
+                border-radius: 15px;
+                margin-bottom: 20px;
+            }
+
             .header h1 {
-                font-size: 1.8em;
+                font-size: 1.5em;
+            }
+
+            .header .subtitle {
+                font-size: 1em;
+            }
+
+            .section-card,
+            .executive-summary,
+            .conclusion {
+                padding: 20px 15px;
+                border-radius: 15px;
+                margin-bottom: 20px;
+            }
+
+            .section-card h2,
+            .executive-summary h2,
+            .conclusion h2 {
+                font-size: 1.3em;
             }
 
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .stat-card {
+                padding: 15px;
+            }
+
+            .stat-number {
+                font-size: 2em;
+            }
+
+            .stat-label {
+                font-size: 0.95em;
             }
 
             .insight-grid {
                 grid-template-columns: 1fr;
             }
 
+            .summary-cards {
+                grid-template-columns: 1fr !important;
+                gap: 10px !important;
+            }
+
+            .section-card table,
+            table {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                white-space: nowrap;
+            }
+
+            th, td {
+                padding: 10px 12px;
+                font-size: 0.9em;
+            }
+
+            .highlight-box {
+                padding: 18px 15px;
+                font-size: 1em;
+                border-radius: 12px;
+            }
+
+            .action-section {
+                padding: 25px 15px;
+                border-radius: 15px;
+            }
+
+            .action-section h2 {
+                font-size: 1.4em;
+            }
+
+            .chart-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .donut-chart {
+                width: 200px;
+                height: 200px;
+            }
+
+            .conclusion-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .footer {
+                padding: 20px 10px;
+            }
+
+            .monthly-table-desktop,
+            .reasons-table-desktop {
+                display: none;
+            }
+
+            .monthly-cards-mobile,
+            .reasons-cards-mobile {
+                display: block !important;
+            }
+
+            .month-card {
+                background: white;
+                border-radius: 12px;
+                padding: 15px;
+                margin-bottom: 10px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            }
+
+            .month-card.current {
+                background: linear-gradient(135deg, #f3e5f5, #fce4ec);
+                border: 2px solid #93268e;
+            }
+
+            .month-card .month-name {
+                font-weight: 800;
+                font-size: 1.1em;
+                margin-bottom: 10px;
+                padding-bottom: 8px;
+                border-bottom: 2px solid #eee;
+            }
+
+            .month-card.current .month-name {
+                color: #93268e;
+                border-bottom-color: #93268e;
+            }
+
+            .month-card .month-stats {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+
+            .month-card .month-stat {
+                text-align: center;
+                padding: 8px;
+                background: rgba(0,0,0,0.03);
+                border-radius: 8px;
+            }
+
+            .month-card.current .month-stat {
+                background: rgba(147, 38, 142, 0.08);
+            }
+
+            .month-card .month-stat .val {
+                display: block;
+                font-weight: 700;
+                font-size: 1.15em;
+            }
+
+            .month-card.current .month-stat .val {
+                color: #93268e;
+            }
+
+            .month-card .month-stat .lbl {
+                font-size: 0.8em;
+                color: #666;
+            }
+
+            .reason-card {
+                background: white;
+                border-radius: 12px;
+                padding: 14px 16px;
+                margin-bottom: 8px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .reason-card.brandology-reason {
+                background: #e8f5e9;
+                border-right: 4px solid #2e7d32;
+            }
+
+            .reason-card .reason-name {
+                flex: 1;
+                font-weight: 600;
+                font-size: 0.95em;
+                line-height: 1.4;
+            }
+
+            .reason-card .reason-nums {
+                display: flex;
+                gap: 12px;
+                align-items: center;
+                flex-shrink: 0;
+            }
+
+            .reason-card .reason-count {
+                font-weight: 800;
+                font-size: 1.2em;
+                color: #93268e;
+            }
+
+            .reason-card .reason-pct {
+                font-size: 0.85em;
+                color: #666;
+                min-width: 45px;
+                text-align: left;
+            }
+
+            .reason-card .reason-tag {
+                font-size: 0.75em;
+                padding: 3px 8px;
+                border-radius: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.3em;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
             .stat-number {
-                font-size: 2.2em;
+                font-size: 1.8em;
+            }
+
+            .conclusion-stats {
+                grid-template-columns: 1fr;
+            }
+
+            th, td {
+                padding: 8px 10px;
+                font-size: 0.85em;
             }
         }
 
@@ -531,7 +761,8 @@
             <h2>📈 تطور الأداء الشهري</h2>
             <p style="text-align: center; margin-bottom: 20px; font-size: 1.1em; opacity: 0.8;">معدل اكتساب الليدز المهتمين في تصاعد مستمر</p>
 
-            <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px; text-align: center; font-size: 1.05em;">
+            <div class="monthly-table-desktop" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px; text-align: center; font-size: 1.05em; min-width: 700px;">
                 <thead>
                     <tr style="background: linear-gradient(135deg, #93268e, #934254); color: white;">
                         <th style="padding: 14px 18px; border-radius: 0 12px 0 0;">الشهر</th>
@@ -577,8 +808,49 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
 
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;">
+            <!-- Mobile Cards (hidden on desktop) -->
+            <div class="monthly-cards-mobile" style="display: none;">
+                <div class="month-card">
+                    <div class="month-name">نوفمبر 2025</div>
+                    <div class="month-stats">
+                        <div class="month-stat"><span class="val">307</span><span class="lbl">عملاء</span></div>
+                        <div class="month-stat"><span class="val">57,824</span><span class="lbl">إنفاق (ر.س)</span></div>
+                        <div class="month-stat"><span class="val">2,100</span><span class="lbl">نقرات</span></div>
+                        <div class="month-stat"><span class="val">188.4</span><span class="lbl">تكلفة العميل</span></div>
+                    </div>
+                </div>
+                <div class="month-card">
+                    <div class="month-name">ديسمبر 2025 <span style="color: #4caf50; font-size: 0.8em;">+32.9%</span></div>
+                    <div class="month-stats">
+                        <div class="month-stat"><span class="val">408</span><span class="lbl">عملاء</span></div>
+                        <div class="month-stat"><span class="val">92,073</span><span class="lbl">إنفاق (ر.س)</span></div>
+                        <div class="month-stat"><span class="val">2,400</span><span class="lbl">نقرات</span></div>
+                        <div class="month-stat"><span class="val">225.7</span><span class="lbl">تكلفة العميل</span></div>
+                    </div>
+                </div>
+                <div class="month-card">
+                    <div class="month-name">يناير 2026 <span style="color: #4caf50; font-size: 0.8em;">+139.0%</span></div>
+                    <div class="month-stats">
+                        <div class="month-stat"><span class="val">975</span><span class="lbl">عملاء</span></div>
+                        <div class="month-stat"><span class="val">93,500</span><span class="lbl">إنفاق (ر.س)</span></div>
+                        <div class="month-stat"><span class="val">2,300</span><span class="lbl">نقرات</span></div>
+                        <div class="month-stat"><span class="val">95.9</span><span class="lbl">تكلفة العميل</span></div>
+                    </div>
+                </div>
+                <div class="month-card current">
+                    <div class="month-name">فبراير 1-12, 2026 <span style="font-size: 0.75em;">12 يوم فقط</span></div>
+                    <div class="month-stats">
+                        <div class="month-stat"><span class="val">382</span><span class="lbl">عملاء</span></div>
+                        <div class="month-stat"><span class="val">38,780</span><span class="lbl">إنفاق (ر.س)</span></div>
+                        <div class="month-stat"><span class="val">848</span><span class="lbl">نقرات</span></div>
+                        <div class="month-stat"><span class="val">101.5</span><span class="lbl">تكلفة العميل</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-cards" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;">
                 <div style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); padding: 20px; border-radius: 15px; text-align: center;">
                     <div style="font-size: 2em; font-weight: 800; color: #2e7d32;">382</div>
                     <div style="font-size: 0.95em; color: #333;">عميل محتمل في 12 يوم فقط</div>
@@ -628,6 +900,9 @@
             </div>
 
             <h3>أسباب عدم الإتمام (296 حالة)</h3>
+
+            <!-- Desktop Table -->
+            <div class="reasons-table-desktop">
             <table>
                 <thead>
                     <tr>
@@ -694,6 +969,83 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
+
+            <!-- Mobile Cards -->
+            <div class="reasons-cards-mobile" style="display: none;">
+                <div class="reason-card">
+                    <div class="reason-name">السعر غير مناسب للعميل</div>
+                    <div class="reason-nums">
+                        <span class="reason-count">74</span>
+                        <span class="reason-pct">19.5%</span>
+                        <span class="reason-tag category-tag sales">مبادر</span>
+                    </div>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-name">الخدمة غير متوفرة</div>
+                    <div class="reason-nums">
+                        <span class="reason-count">49</span>
+                        <span class="reason-pct">12.9%</span>
+                        <span class="reason-tag category-tag sales">مبادر</span>
+                    </div>
+                </div>
+                <div class="reason-card brandology-reason">
+                    <div class="reason-name">خارج نطاق التغطية الجغرافية</div>
+                    <div class="reason-nums">
+                        <span class="reason-count">26</span>
+                        <span class="reason-pct">6.9%</span>
+                        <span class="reason-tag category-tag brandology">براندولوجي</span>
+                    </div>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-name">العميل سيفكر ويرجع لاحقاً</div>
+                    <div class="reason-nums">
+                        <span class="reason-count">22</span>
+                        <span class="reason-pct">5.8%</span>
+                        <span class="reason-tag category-tag sales">مبادر</span>
+                    </div>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-name">العميل لم يرد بعد التواصل</div>
+                    <div class="reason-nums">
+                        <span class="reason-count">18</span>
+                        <span class="reason-pct">4.7%</span>
+                        <span class="reason-tag category-tag sales">مبادر</span>
+                    </div>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-name">توجه للمستشفى أو حالة طارئة</div>
+                    <div class="reason-nums">
+                        <span class="reason-count">10</span>
+                        <span class="reason-pct">2.6%</span>
+                        <span class="reason-tag category-tag sales">مبادر</span>
+                    </div>
+                </div>
+                <div class="reason-card brandology-reason">
+                    <div class="reason-name">اتصال خاطئ أو استفسار غير حقيقي</div>
+                    <div class="reason-nums">
+                        <span class="reason-count">7</span>
+                        <span class="reason-pct">1.8%</span>
+                        <span class="reason-tag category-tag brandology">براندولوجي</span>
+                    </div>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-name">تجربة تواصل أو شكوى من الطبيب</div>
+                    <div class="reason-nums">
+                        <span class="reason-count">4</span>
+                        <span class="reason-pct">1.1%</span>
+                        <span class="reason-tag category-tag sales">مبادر</span>
+                    </div>
+                </div>
+                <div class="reason-card brandology-reason">
+                    <div class="reason-name">سوء فهم نوع الخدمة أو توقعات خاطئة</div>
+                    <div class="reason-nums">
+                        <span class="reason-count">2</span>
+                        <span class="reason-pct">0.5%</span>
+                        <span class="reason-tag category-tag brandology">براندولوجي</span>
+                    </div>
+                </div>
+            </div>
 
             <div class="insight-grid" style="margin-top: 25px;">
                 <div class="insight-card" style="border-right-color: #2e7d32;">
