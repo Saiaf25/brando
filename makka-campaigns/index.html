@@ -176,7 +176,8 @@ const P=v=>`E£ ${v.toLocaleString('en',{minimumFractionDigits:2,maximumFraction
 const P0=v=>`E£ ${v.toLocaleString('en',{minimumFractionDigits:0,maximumFractionDigits:0})}`;
 
 document.getElementById('kpis').innerHTML = `
-  <div class="kpi-card"><div class="kpi-label">إجمالي الإنفاق</div><div class="kpi-value">${P0(totalSpend)}</div><div class="kpi-sub">المتوسط ${P0(avgDailySpend)} / يوم</div></div>
+  <div class="kpi-card"><div class="kpi-label">إجمالي الإنفاق</div><div class="kpi-value">${P0(totalSpend)}</div></div>
+  <div class="kpi-card"><div class="kpi-label">متوسط الإنفاق اليومي</div><div class="kpi-value">${P0(avgDailySpend)}</div></div>
   <div class="kpi-card"><div class="kpi-label">إجمالي العملاء المحتملين</div><div class="kpi-value">${totalLeads}</div><div class="kpi-sub">المتوسط ${avgDailyLeads.toFixed(1)} / يوم</div></div>
   <div class="kpi-card"><div class="kpi-label">متوسط تكلفة العميل</div><div class="kpi-value">${P(avgCPL)}</div><div class="kpi-sub">المتوسط المرجح لـ ${days.length} يوم</div></div>
   <div class="kpi-card"><div class="kpi-label">أقل تكلفة عميل</div><div class="kpi-value">${P(bestCPL)}</div><div class="kpi-sub">${days[bestIdx].date} (${days[bestIdx].day})</div></div>
