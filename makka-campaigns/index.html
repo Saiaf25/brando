@@ -107,7 +107,7 @@
     <div class="bar-chart" id="spendChart"></div>
   </div>
   <div class="chart-card">
-    <h3>تكلفة العميل حسب اليوم — الأقل أفضل</h3>
+    <h3>تكلفة العميل حسب اليوم</h3>
     <div class="h-bar-chart" id="cpmChart"></div>
   </div>
 </div>
@@ -125,13 +125,12 @@
   <h3>التفاصيل اليومية الكاملة</h3>
   <table>
     <thead><tr>
-      <th>التاريخ</th><th>اليوم</th><th>الميزانية (E£)</th><th>العملاء المحتملين</th><th>تكلفة العميل</th><th>الإنفاق التراكمي</th><th>العملاء التراكمي</th><th>تكلفة العميل المتوسطة</th><th>الكفاءة</th>
+      <th>التاريخ</th><th>اليوم</th><th>الميزانية (E£)</th><th>العملاء المحتملين</th><th>تكلفة العميل</th><th>الإنفاق التراكمي</th><th>العملاء التراكمي</th><th>تكلفة العميل المتوسطة</th>
     </tr></thead>
     <tbody id="tableBody"></tbody>
     <tfoot id="tableFoot"></tfoot>
   </table>
 </div>
-<div class="summary-card" id="summary"></div>
 
 <script>
 const dayNames = {
@@ -179,10 +178,10 @@ const P0=v=>`E£ ${v.toLocaleString('en',{minimumFractionDigits:0,maximumFractio
 document.getElementById('kpis').innerHTML = `
   <div class="kpi-card"><div class="kpi-label">إجمالي الإنفاق</div><div class="kpi-value">${P0(totalSpend)}</div><div class="kpi-sub">المتوسط ${P0(avgDailySpend)} / يوم</div></div>
   <div class="kpi-card"><div class="kpi-label">إجمالي العملاء المحتملين</div><div class="kpi-value">${totalLeads}</div><div class="kpi-sub">المتوسط ${avgDailyLeads.toFixed(1)} / يوم</div></div>
-  <div class="kpi-card"><div class="kpi-label">تكلفة العميل المتوسطة</div><div class="kpi-value">${P(avgCPL)}</div><div class="kpi-sub">المتوسط المرجح لـ ${days.length} يوم</div></div>
-  <div class="kpi-card"><div class="kpi-label">أفضل تكلفة عميل</div><div class="kpi-value" style="color:var(--green)">${P(bestCPL)}</div><div class="kpi-sub">${days[bestIdx].date} (${days[bestIdx].day})</div></div>
-  <div class="kpi-card"><div class="kpi-label">أسوأ تكلفة عميل</div><div class="kpi-value" style="color:var(--red)">${P(worstCPL)}</div><div class="kpi-sub">${days[worstIdx].date} (${days[worstIdx].day})</div></div>
-  <div class="kpi-card"><div class="kpi-label">فجوة الكفاءة</div><div class="kpi-value">${(worstCPL/bestCPL).toFixed(1)}x</div><div class="kpi-sub">الأسوأ مقابل الأفضل</div></div>
+  <div class="kpi-card"><div class="kpi-label">متوسط تكلفة العميل</div><div class="kpi-value">${P(avgCPL)}</div><div class="kpi-sub">المتوسط المرجح لـ ${days.length} يوم</div></div>
+  <div class="kpi-card"><div class="kpi-label">أقل تكلفة عميل</div><div class="kpi-value">${P(bestCPL)}</div><div class="kpi-sub">${days[bestIdx].date} (${days[bestIdx].day})</div></div>
+  <div class="kpi-card"><div class="kpi-label">أعلى تكلفة عميل</div><div class="kpi-value">${P(worstCPL)}</div><div class="kpi-sub">${days[worstIdx].date} (${days[worstIdx].day})</div></div>
+  <div class="kpi-card"><div class="kpi-label">عدد الأيام</div><div class="kpi-value">${days.length}</div><div class="kpi-sub">فترة الاختبار</div></div>
 `;
 
 const maxSpend=Math.max(...days.map(d=>d.spend));
@@ -201,10 +200,9 @@ document.getElementById('spendChart').innerHTML = days.map((d,i)=>`
 
 document.getElementById('cpmChart').innerHTML = days.map((d,i)=>{
   const cpl=cpls[i], pct=(cpl/worstCPL)*100;
-  const barColor=i===bestIdx?'var(--green)':i===worstIdx?'var(--red)':'var(--accent)';
   return `<div class="h-bar-row">
     <div class="h-bar-label">${d.date.split(' ')[0]}</div>
-    <div class="h-bar-track"><div class="h-bar-fill" style="width:${pct}%;background:${barColor};">${P(cpl)}</div></div>
+    <div class="h-bar-track"><div class="h-bar-fill" style="width:${pct}%;background:var(--accent);">${P(cpl)}</div></div>
   </div>`;
 }).join('');
 
@@ -236,17 +234,13 @@ drawLineChart('cumSpendChart',cumSpend,'#2563EB','E£ ',0);
 drawLineChart('cumMsgChart',cumLeads,'#059669','',0);
 
 document.getElementById('tableBody').innerHTML = days.map((d,i)=>{
-  const cpl=cpls[i], isBest=i===bestIdx, isWorst=i===worstIdx;
-  let effClass='eff-mid',effLabel='متوسط';
-  if(cpl<=avgCPL*0.88){effClass='eff-good';effLabel='فعّال';}
-  else if(cpl>=avgCPL*1.12){effClass='eff-bad';effLabel='مكلف';}
+  const cpl=cpls[i];
   return `<tr>
     <td style="font-weight:700">${d.date}</td><td>${d.day}</td>
     <td>${P(d.spend)}</td><td>${d.leads}</td>
-    <td class="${isBest?'best':isWorst?'worst':''}">${P(cpl)}</td>
+    <td>${P(cpl)}</td>
     <td>${P(cumSpend[i])}</td><td>${cumLeads[i]}</td>
     <td>${P(runningCPL[i])}</td>
-    <td><span class="eff-badge ${effClass}">${effLabel}</span></td>
   </tr>`;
 }).join('');
 
@@ -254,24 +248,8 @@ document.getElementById('tableFoot').innerHTML=`<tr style="border-top:2px solid 
   <td style="font-weight:800" colspan="2">الإجمالي / المتوسط</td>
   <td style="font-weight:800">${P(totalSpend)}</td><td style="font-weight:800">${totalLeads}</td>
   <td style="font-weight:800">${P(avgCPL)}</td><td colspan="2"></td>
-  <td style="font-weight:800">${P(avgCPL)}</td><td></td>
+  <td style="font-weight:800">${P(avgCPL)}</td>
 </tr>`;
-
-const savingsIfBest=totalSpend-(bestCPL*totalLeads);
-const lastIdx=days.length-1;
-const spendTrend=((days[lastIdx].spend-days[0].spend)/days[0].spend*100).toFixed(0);
-document.getElementById('summary').innerHTML=`
-  <h3>📊 أهم الملاحظات والتوصيات</h3>
-  <ul>
-    <li><strong>${days[bestIdx].date} (${days[bestIdx].day}) أفضل يوم</strong> — ${days[bestIdx].leads} عميل محتمل بتكلفة ${P(cpls[bestIdx])}/عميل: أعلى حجم وأقل تكلفة. <span class="tag tag-green">أفضل عائد</span></li>
-    <li><strong>${days[worstIdx].date} (${days[worstIdx].day}) أسوأ يوم</strong> — ${days[worstIdx].leads} عميل محتمل فقط بتكلفة ${P(cpls[worstIdx])}/عميل، أغلى بـ ${(worstCPL/bestCPL).toFixed(1)} مرة من أفضل يوم. <span class="tag tag-red">يحتاج مراجعة</span></li>
-    <li><strong>الإنفاق يتجه نحو الارتفاع بنسبة ${spendTrend}%</strong> من ${days[0].date} إلى ${days[lastIdx].date} (${P(days[0].spend)} → ${P(days[lastIdx].spend)})، لكن حجم العملاء المحتملين لا يتناسب مع الزيادة.</li>
-    <li><strong>أعلى إنفاق يومي (${days[cumSpend.indexOf(Math.max(...days.map(d=>d.spend)))>=0?cumSpend.indexOf(Math.max(...days.map(d=>d.spend))):0].date} — ${P(Math.max(...days.map(d=>d.spend)))})</strong> يُظهر عوائد متناقصة عند زيادة الميزانية اليومية.</li>
-    <li><strong>تكلفة العميل التراكمية تحسنت</strong> من ${P(runningCPL[0])} بعد اليوم الأول إلى ${P(runningCPL[lastIdx])} بعد اليوم ${days.length}.</li>
-    <li><strong>التوفير المحتمل:</strong> لو حققت كل الأيام كفاءة أفضل يوم، ${totalLeads} عميل محتمل كانوا سيكلفون ${P(bestCPL*totalLeads)} — توفير <strong>${P(savingsIfBest)}</strong> (${(savingsIfBest/totalSpend*100).toFixed(1)}% من الإجمالي).</li>
-    <li><strong>التوصية:</strong> مراجعة الأيام ذات التكلفة المرتفعة وتحسين الاستهداف. الحفاظ على الميزانية اليومية في النطاق الذي يحقق أفضل كفاءة.</li>
-  </ul>
-`;
 </script>
 </body>
 </html>
