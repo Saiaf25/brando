@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FB Ads Daily Performance — Feb 2026</title>
+<title>أداء الحملات الإعلانية اليومي — فبراير ٢٠٢٦</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -21,7 +21,7 @@
     --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
   }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Baloo Bhaijaan 2',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; padding:32px; }
+  body { font-family:'Baloo Bhaijaan 2',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; padding:32px; direction:rtl; }
   .header { display:flex; align-items:baseline; gap:16px; margin-bottom:4px; }
   .header h1 { font-size:30px; font-weight:800; letter-spacing:-0.5px; color:var(--text); }
   .header span { color:var(--text-muted); font-size:14px; font-weight:500; }
@@ -48,13 +48,13 @@
   .legend-item { display:flex; align-items:center; gap:6px; font-size:11px; color:var(--text-muted); font-weight:500; }
   .legend-dot { width:10px; height:10px; border-radius:3px; }
 
-  .bar-chart { display:flex; align-items:flex-end; gap:14px; height:210px; }
+  .bar-chart { display:flex; align-items:flex-end; gap:8px; height:210px; direction:ltr; }
   .bar-group { flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end; }
-  .bar-val { font-size:10px; color:var(--text-muted); margin-bottom:3px; font-weight:600; white-space:nowrap; }
+  .bar-val { font-size:9px; color:var(--text-muted); margin-bottom:3px; font-weight:600; white-space:nowrap; }
   .bar { width:100%; max-width:46px; border-radius:6px 6px 2px 2px; min-height:6px; }
-  .bar-label { font-size:10px; color:var(--text-muted); margin-top:8px; text-align:center; line-height:1.3; font-weight:600; }
+  .bar-label { font-size:9px; color:var(--text-muted); margin-top:8px; text-align:center; line-height:1.3; font-weight:600; }
 
-  .h-bar-chart { display:flex; flex-direction:column; gap:10px; }
+  .h-bar-chart { display:flex; flex-direction:column; gap:10px; direction:ltr; }
   .h-bar-row { display:flex; align-items:center; gap:10px; }
   .h-bar-label { font-size:11px; color:var(--text-muted); min-width:44px; text-align:right; font-weight:600; }
   .h-bar-track { flex:1; height:30px; background:rgba(0,0,0,0.04); border-radius:6px; overflow:hidden; }
@@ -65,9 +65,9 @@
 
   .table-card { background:var(--card); border:1px solid var(--card-border); border-radius:14px; padding:24px; overflow-x:auto; margin-bottom:24px; box-shadow:var(--shadow); }
   .table-card h3 { font-size:15px; font-weight:700; margin-bottom:14px; }
-  table { width:100%; border-collapse:collapse; font-size:13px; }
-  thead th { text-align:left; padding:10px 12px; color:var(--text-muted); font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.8px; border-bottom:2px solid rgba(0,0,0,0.06); }
-  tbody td { padding:11px 12px; border-bottom:1px solid rgba(0,0,0,0.04); font-weight:500; }
+  table { width:100%; border-collapse:collapse; font-size:13px; direction:rtl; }
+  thead th { text-align:right; padding:10px 12px; color:var(--text-muted); font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.8px; border-bottom:2px solid rgba(0,0,0,0.06); }
+  tbody td { padding:11px 12px; border-bottom:1px solid rgba(0,0,0,0.04); font-weight:500; text-align:right; }
   tbody tr:last-child td { border-bottom:none; }
   tbody tr:hover { background:rgba(37,99,235,0.03); }
   .best { color:var(--green); font-weight:700; }
@@ -76,56 +76,56 @@
   .eff-good { background:rgba(5,150,105,0.1); color:var(--green); }
   .eff-mid { background:rgba(217,119,6,0.1); color:var(--accent4); }
   .eff-bad { background:rgba(230,57,70,0.1); color:var(--red); }
-  tfoot td { padding:12px 12px; }
+  tfoot td { padding:12px 12px; text-align:right; }
 
   .summary-card { background:linear-gradient(135deg,#F7F8FA 0%,#EEF0F5 100%); border:1px solid var(--card-border); border-radius:14px; padding:24px; box-shadow:var(--shadow); }
   .summary-card h3 { font-size:15px; font-weight:700; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
   .summary-card ul { list-style:none; padding:0; }
-  .summary-card li { color:var(--text-muted); font-size:13px; line-height:2.1; padding-left:20px; position:relative; font-weight:500; }
-  .summary-card li::before { content:'→'; position:absolute; left:0; color:var(--accent); font-weight:700; }
+  .summary-card li { color:var(--text-muted); font-size:13px; line-height:2.1; padding-right:20px; position:relative; font-weight:500; }
+  .summary-card li::before { content:'←'; position:absolute; right:0; color:var(--accent); font-weight:700; }
   .summary-card li strong { color:var(--text); }
-  .tag { display:inline-block; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:700; margin-left:4px; }
+  .tag { display:inline-block; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:700; margin-right:4px; }
   .tag-green { background:rgba(5,150,105,0.1); color:var(--green); }
   .tag-red { background:rgba(230,57,70,0.1); color:var(--red); }
 </style>
 </head>
 <body>
 <div class="header">
-  <h1>FB Ads — Daily Message Campaigns</h1>
-  <span>Feb 1–6, 2026 · EGP</span>
+  <h1>الحملات الإعلانية — الأداء اليومي</h1>
+  <span>١ – ١٣ فبراير ٢٠٢٦ · EGP</span>
 </div>
-<p class="subtitle">Daily spend vs. message leads with cost-per-message trends, cumulative tracking, and efficiency analysis</p>
+<p class="subtitle">الإنفاق اليومي مقابل العملاء المحتملين مع تحليل تكلفة العميل والتتبع التراكمي وتحليل الكفاءة</p>
 
 <div class="kpi-row" id="kpis"></div>
 <div class="charts-grid">
   <div class="chart-card">
-    <h3>Daily Spend vs Messages</h3>
+    <h3>الإنفاق اليومي مقابل العملاء المحتملين</h3>
     <div class="legend">
-      <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div> Spend (EGP)</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--accent4)"></div> Messages</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div> الميزانية (E£)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--accent4)"></div> العملاء المحتملين</div>
     </div>
     <div class="bar-chart" id="spendChart"></div>
   </div>
   <div class="chart-card">
-    <h3>Cost per Message by Day — Lower is Better</h3>
+    <h3>تكلفة العميل حسب اليوم — الأقل أفضل</h3>
     <div class="h-bar-chart" id="cpmChart"></div>
   </div>
 </div>
 <div class="charts-grid">
   <div class="chart-card">
-    <h3>Cumulative Spend (EGP)</h3>
+    <h3>الإنفاق التراكمي (E£)</h3>
     <div class="line-chart-wrap" id="cumSpendChart"></div>
   </div>
   <div class="chart-card">
-    <h3>Cumulative Messages</h3>
+    <h3>العملاء المحتملين التراكمي</h3>
     <div class="line-chart-wrap" id="cumMsgChart"></div>
   </div>
 </div>
 <div class="table-card">
-  <h3>Full Daily Breakdown</h3>
+  <h3>التفاصيل اليومية الكاملة</h3>
   <table>
     <thead><tr>
-      <th>Date</th><th>Day</th><th>Spend (EGP)</th><th>Messages</th><th>Cost / Msg</th><th>Cumul. Spend</th><th>Cumul. Msgs</th><th>Running CPM</th><th>Efficiency</th>
+      <th>التاريخ</th><th>اليوم</th><th>الميزانية (E£)</th><th>العملاء المحتملين</th><th>تكلفة العميل</th><th>الإنفاق التراكمي</th><th>العملاء التراكمي</th><th>تكلفة العميل المتوسطة</th><th>الكفاءة</th>
     </tr></thead>
     <tbody id="tableBody"></tbody>
     <tfoot id="tableFoot"></tfoot>
@@ -134,71 +134,83 @@
 <div class="summary-card" id="summary"></div>
 
 <script>
+const dayNames = {
+  'Sat':'السبت','Sun':'الأحد','Mon':'الإثنين','Tue':'الثلاثاء',
+  'Wed':'الأربعاء','Thu':'الخميس','Fri':'الجمعة'
+};
+
 const days = [
-  { date:'Feb 1', day:'Sun', spend:1006.44, msgs:15 },
-  { date:'Feb 2', day:'Mon', spend:1545.37, msgs:26 },
-  { date:'Feb 3', day:'Tue', spend:839.25,  msgs:17 },
-  { date:'Feb 4', day:'Wed', spend:1526.84, msgs:24 },
-  { date:'Feb 5', day:'Thu', spend:1799.86, msgs:15 },
-  { date:'Feb 6', day:'Fri', spend:2273.04, msgs:25 },
+  { date:'١ فبراير', day:'السبت', spend:1006.44, leads:15 },
+  { date:'٢ فبراير', day:'الأحد', spend:1545.37, leads:26 },
+  { date:'٣ فبراير', day:'الإثنين', spend:839.25,  leads:17 },
+  { date:'٤ فبراير', day:'الثلاثاء', spend:1526.84, leads:24 },
+  { date:'٥ فبراير', day:'الأربعاء', spend:1799.86, leads:15 },
+  { date:'٦ فبراير', day:'الخميس', spend:2273.04, leads:25 },
+  { date:'٧ فبراير', day:'الجمعة', spend:1989.62, leads:21 },
+  { date:'٨ فبراير', day:'السبت', spend:2436.46, leads:22 },
+  { date:'٩ فبراير', day:'الأحد', spend:2571.32, leads:37 },
+  { date:'١٠ فبراير', day:'الإثنين', spend:2451.57, leads:29 },
+  { date:'١١ فبراير', day:'الثلاثاء', spend:2479.55, leads:27 },
+  { date:'١٢ فبراير', day:'الأربعاء', spend:2369.63, leads:22 },
+  { date:'١٣ فبراير', day:'الخميس', spend:2234.19, leads:35 },
 ];
 
 const totalSpend = days.reduce((s,d)=>s+d.spend,0);
-const totalMsgs = days.reduce((s,d)=>s+d.msgs,0);
-const avgCPM = totalSpend / totalMsgs;
-const cpms = days.map(d=>d.spend/d.msgs);
-const bestCPM = Math.min(...cpms);
-const worstCPM = Math.max(...cpms);
-const bestIdx = cpms.indexOf(bestCPM);
-const worstIdx = cpms.indexOf(worstCPM);
+const totalLeads = days.reduce((s,d)=>s+d.leads,0);
+const avgCPL = totalSpend / totalLeads;
+const cpls = days.map(d=>d.spend/d.leads);
+const bestCPL = Math.min(...cpls);
+const worstCPL = Math.max(...cpls);
+const bestIdx = cpls.indexOf(bestCPL);
+const worstIdx = cpls.indexOf(worstCPL);
 const avgDailySpend = totalSpend / days.length;
-const avgDailyMsgs = totalMsgs / days.length;
+const avgDailyLeads = totalLeads / days.length;
 
-let cumSpend=[], cumMsgs=[], runningCPM=[];
+let cumSpend=[], cumLeads=[], runningCPL=[];
 days.forEach((d,i)=>{
   cumSpend.push((cumSpend[i-1]||0)+d.spend);
-  cumMsgs.push((cumMsgs[i-1]||0)+d.msgs);
-  runningCPM.push(cumSpend[i]/cumMsgs[i]);
+  cumLeads.push((cumLeads[i-1]||0)+d.leads);
+  runningCPL.push(cumSpend[i]/cumLeads[i]);
 });
 
-const E=v=>`E£ ${v.toLocaleString('en',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
-const E0=v=>`E£ ${v.toLocaleString('en',{minimumFractionDigits:0,maximumFractionDigits:0})}`;
+const P=v=>`E£ ${v.toLocaleString('en',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
+const P0=v=>`E£ ${v.toLocaleString('en',{minimumFractionDigits:0,maximumFractionDigits:0})}`;
 
 document.getElementById('kpis').innerHTML = `
-  <div class="kpi-card"><div class="kpi-label">Total 6-Day Spend</div><div class="kpi-value">${E0(totalSpend)}</div><div class="kpi-sub">Avg ${E0(avgDailySpend)} / day</div></div>
-  <div class="kpi-card"><div class="kpi-label">Total Messages</div><div class="kpi-value">${totalMsgs}</div><div class="kpi-sub">Avg ${avgDailyMsgs.toFixed(1)} / day</div></div>
-  <div class="kpi-card"><div class="kpi-label">Blended CPM</div><div class="kpi-value">${E(avgCPM)}</div><div class="kpi-sub">Weighted avg across 6 days</div></div>
-  <div class="kpi-card"><div class="kpi-label">Best Day CPM</div><div class="kpi-value" style="color:var(--green)">${E(bestCPM)}</div><div class="kpi-sub">${days[bestIdx].date} (${days[bestIdx].day})</div></div>
-  <div class="kpi-card"><div class="kpi-label">Worst Day CPM</div><div class="kpi-value" style="color:var(--red)">${E(worstCPM)}</div><div class="kpi-sub">${days[worstIdx].date} (${days[worstIdx].day})</div></div>
-  <div class="kpi-card"><div class="kpi-label">Efficiency Gap</div><div class="kpi-value">${(worstCPM/bestCPM).toFixed(1)}x</div><div class="kpi-sub">Worst vs best day</div></div>
+  <div class="kpi-card"><div class="kpi-label">إجمالي الإنفاق</div><div class="kpi-value">${P0(totalSpend)}</div><div class="kpi-sub">المتوسط ${P0(avgDailySpend)} / يوم</div></div>
+  <div class="kpi-card"><div class="kpi-label">إجمالي العملاء المحتملين</div><div class="kpi-value">${totalLeads}</div><div class="kpi-sub">المتوسط ${avgDailyLeads.toFixed(1)} / يوم</div></div>
+  <div class="kpi-card"><div class="kpi-label">تكلفة العميل المتوسطة</div><div class="kpi-value">${P(avgCPL)}</div><div class="kpi-sub">المتوسط المرجح لـ ${days.length} يوم</div></div>
+  <div class="kpi-card"><div class="kpi-label">أفضل تكلفة عميل</div><div class="kpi-value" style="color:var(--green)">${P(bestCPL)}</div><div class="kpi-sub">${days[bestIdx].date} (${days[bestIdx].day})</div></div>
+  <div class="kpi-card"><div class="kpi-label">أسوأ تكلفة عميل</div><div class="kpi-value" style="color:var(--red)">${P(worstCPL)}</div><div class="kpi-sub">${days[worstIdx].date} (${days[worstIdx].day})</div></div>
+  <div class="kpi-card"><div class="kpi-label">فجوة الكفاءة</div><div class="kpi-value">${(worstCPL/bestCPL).toFixed(1)}x</div><div class="kpi-sub">الأسوأ مقابل الأفضل</div></div>
 `;
 
 const maxSpend=Math.max(...days.map(d=>d.spend));
-const maxMsg=Math.max(...days.map(d=>d.msgs));
+const maxLead=Math.max(...days.map(d=>d.leads));
 document.getElementById('spendChart').innerHTML = days.map((d,i)=>`
   <div class="bar-group">
-    <div class="bar-val">${E0(d.spend)}</div>
+    <div class="bar-val">${P0(d.spend)}</div>
     <div style="display:flex;gap:4px;align-items:flex-end;width:100%;justify-content:center;">
-      <div class="bar" style="height:${(d.spend/maxSpend)*155}px;background:var(--accent);max-width:22px;opacity:0.8;"></div>
-      <div class="bar" style="height:${(d.msgs/maxMsg)*155}px;background:var(--accent4);max-width:22px;opacity:0.8;"></div>
+      <div class="bar" style="height:${(d.spend/maxSpend)*155}px;background:var(--accent);max-width:18px;opacity:0.8;"></div>
+      <div class="bar" style="height:${(d.leads/maxLead)*155}px;background:var(--accent4);max-width:18px;opacity:0.8;"></div>
     </div>
-    <div class="bar-val" style="margin-top:3px;margin-bottom:0;color:var(--accent4)">${d.msgs}</div>
-    <div class="bar-label">${d.date}<br>${d.day}</div>
+    <div class="bar-val" style="margin-top:3px;margin-bottom:0;color:var(--accent4)">${d.leads}</div>
+    <div class="bar-label">${d.date.split(' ')[0]}</div>
   </div>
 `).join('');
 
 document.getElementById('cpmChart').innerHTML = days.map((d,i)=>{
-  const cpm=cpms[i], pct=(cpm/worstCPM)*100;
+  const cpl=cpls[i], pct=(cpl/worstCPL)*100;
   const barColor=i===bestIdx?'var(--green)':i===worstIdx?'var(--red)':'var(--accent)';
   return `<div class="h-bar-row">
-    <div class="h-bar-label">${d.date}</div>
-    <div class="h-bar-track"><div class="h-bar-fill" style="width:${pct}%;background:${barColor};">${E(cpm)}</div></div>
+    <div class="h-bar-label">${d.date.split(' ')[0]}</div>
+    <div class="h-bar-track"><div class="h-bar-fill" style="width:${pct}%;background:${barColor};">${P(cpl)}</div></div>
   </div>`;
 }).join('');
 
 function drawLineChart(id,values,color,prefix='E£ ',dec=0){
   const el=document.getElementById(id);
-  const w=400,h=180,pad={t:20,r:60,b:30,l:10};
+  const w=500,h=180,pad={t:20,r:60,b:30,l:10};
   const maxV=Math.max(...values)*1.08, minV=0;
   const xStep=(w-pad.l-pad.r)/(values.length-1);
   const pts=values.map((v,i)=>({x:pad.l+i*xStep, y:pad.t+(1-(v-minV)/(maxV-minV))*(h-pad.t-pad.b)}));
@@ -214,49 +226,50 @@ function drawLineChart(id,values,color,prefix='E£ ',dec=0){
   pts.forEach((p,i)=>{
     const label=dec>0?`${prefix}${values[i].toLocaleString('en',{minimumFractionDigits:dec,maximumFractionDigits:dec})}`:`${prefix}${Math.round(values[i]).toLocaleString()}`;
     svg+=`<circle cx="${p.x}" cy="${p.y}" r="4" fill="${color}" stroke="white" stroke-width="2"/>`;
-    svg+=`<text x="${p.x}" y="${p.y-10}" fill="var(--text-muted)" font-size="9" text-anchor="middle" font-family="Baloo Bhaijaan 2" font-weight="600">${label}</text>`;
-    svg+=`<text x="${p.x}" y="${h-8}" fill="var(--text-muted)" font-size="9" text-anchor="middle" font-family="Baloo Bhaijaan 2" font-weight="600">${days[i].date.split(' ')[1]}</text>`;
+    svg+=`<text x="${p.x}" y="${p.y-10}" fill="var(--text-muted)" font-size="8" text-anchor="middle" font-family="Baloo Bhaijaan 2" font-weight="600">${label}</text>`;
+    svg+=`<text x="${p.x}" y="${h-8}" fill="var(--text-muted)" font-size="8" text-anchor="middle" font-family="Baloo Bhaijaan 2" font-weight="600">${days[i].date.split(' ')[0]}</text>`;
   });
   svg+=`</svg>`;
   el.innerHTML=svg;
 }
 drawLineChart('cumSpendChart',cumSpend,'#2563EB','E£ ',0);
-drawLineChart('cumMsgChart',cumMsgs,'#059669','',0);
+drawLineChart('cumMsgChart',cumLeads,'#059669','',0);
 
 document.getElementById('tableBody').innerHTML = days.map((d,i)=>{
-  const cpm=cpms[i], isBest=i===bestIdx, isWorst=i===worstIdx;
-  let effClass='eff-mid',effLabel='Average';
-  if(cpm<=avgCPM*0.88){effClass='eff-good';effLabel='Efficient';}
-  else if(cpm>=avgCPM*1.12){effClass='eff-bad';effLabel='Costly';}
+  const cpl=cpls[i], isBest=i===bestIdx, isWorst=i===worstIdx;
+  let effClass='eff-mid',effLabel='متوسط';
+  if(cpl<=avgCPL*0.88){effClass='eff-good';effLabel='فعّال';}
+  else if(cpl>=avgCPL*1.12){effClass='eff-bad';effLabel='مكلف';}
   return `<tr>
     <td style="font-weight:700">${d.date}</td><td>${d.day}</td>
-    <td>${E(d.spend)}</td><td>${d.msgs}</td>
-    <td class="${isBest?'best':isWorst?'worst':''}">${E(cpm)}</td>
-    <td>${E(cumSpend[i])}</td><td>${cumMsgs[i]}</td>
-    <td>${E(runningCPM[i])}</td>
+    <td>${P(d.spend)}</td><td>${d.leads}</td>
+    <td class="${isBest?'best':isWorst?'worst':''}">${P(cpl)}</td>
+    <td>${P(cumSpend[i])}</td><td>${cumLeads[i]}</td>
+    <td>${P(runningCPL[i])}</td>
     <td><span class="eff-badge ${effClass}">${effLabel}</span></td>
   </tr>`;
 }).join('');
 
 document.getElementById('tableFoot').innerHTML=`<tr style="border-top:2px solid rgba(0,0,0,0.08);">
-  <td style="font-weight:800" colspan="2">TOTAL / AVG</td>
-  <td style="font-weight:800">${E(totalSpend)}</td><td style="font-weight:800">${totalMsgs}</td>
-  <td style="font-weight:800">${E(avgCPM)}</td><td colspan="2"></td>
-  <td style="font-weight:800">${E(avgCPM)}</td><td></td>
+  <td style="font-weight:800" colspan="2">الإجمالي / المتوسط</td>
+  <td style="font-weight:800">${P(totalSpend)}</td><td style="font-weight:800">${totalLeads}</td>
+  <td style="font-weight:800">${P(avgCPL)}</td><td colspan="2"></td>
+  <td style="font-weight:800">${P(avgCPL)}</td><td></td>
 </tr>`;
 
-const savingsIfBest=totalSpend-(bestCPM*totalMsgs);
-const spendTrend=((days[5].spend-days[0].spend)/days[0].spend*100).toFixed(0);
+const savingsIfBest=totalSpend-(bestCPL*totalLeads);
+const lastIdx=days.length-1;
+const spendTrend=((days[lastIdx].spend-days[0].spend)/days[0].spend*100).toFixed(0);
 document.getElementById('summary').innerHTML=`
-  <h3>📊 Key Insights & Recommendations</h3>
+  <h3>📊 أهم الملاحظات والتوصيات</h3>
   <ul>
-    <li><strong>Feb 2 (Mon) is the best day</strong> — 26 messages at ${E(cpms[1])}/msg: highest volume, lowest cost. <span class="tag tag-green">Best ROI</span></li>
-    <li><strong>Feb 5 (Thu) is the worst</strong> — only 15 messages at ${E(cpms[4])}/msg, ${(worstCPM/bestCPM).toFixed(1)}x more expensive than Feb 2. <span class="tag tag-red">Investigate</span></li>
-    <li><strong>Spend trending up ${spendTrend}%</strong> from Feb 1 → Feb 6 (${E(days[0].spend)} → ${E(days[5].spend)}), but message volume isn't scaling proportionally.</li>
-    <li><strong>Peak spend day (Feb 6 — ${E(2273.04)})</strong> delivered 25 messages vs Feb 2's 26 messages at 32% lower cost. Diminishing returns on higher daily budgets.</li>
-    <li><strong>Running CPM climbed</strong> from ${E(runningCPM[0])} after Day 1, dipped to ${E(runningCPM[1])} after Day 2 (best), then worsened to ${E(runningCPM[5])} by Day 6.</li>
-    <li><strong>Potential savings:</strong> If every day hit Feb 2's efficiency, ${totalMsgs} messages would cost ${E(bestCPM*totalMsgs)} — saving <strong>${E(savingsIfBest)}</strong> (${(savingsIfBest/totalSpend*100).toFixed(1)}% of total).</li>
-    <li><strong>Recommendation:</strong> Cap daily budget near E£ 1,500 where efficiency peaks. Review Thu/Fri audience fatigue — CPM spikes suggest ad fatigue or poor targeting late in the week.</li>
+    <li><strong>${days[bestIdx].date} (${days[bestIdx].day}) أفضل يوم</strong> — ${days[bestIdx].leads} عميل محتمل بتكلفة ${P(cpls[bestIdx])}/عميل: أعلى حجم وأقل تكلفة. <span class="tag tag-green">أفضل عائد</span></li>
+    <li><strong>${days[worstIdx].date} (${days[worstIdx].day}) أسوأ يوم</strong> — ${days[worstIdx].leads} عميل محتمل فقط بتكلفة ${P(cpls[worstIdx])}/عميل، أغلى بـ ${(worstCPL/bestCPL).toFixed(1)} مرة من أفضل يوم. <span class="tag tag-red">يحتاج مراجعة</span></li>
+    <li><strong>الإنفاق يتجه نحو الارتفاع بنسبة ${spendTrend}%</strong> من ${days[0].date} إلى ${days[lastIdx].date} (${P(days[0].spend)} → ${P(days[lastIdx].spend)})، لكن حجم العملاء المحتملين لا يتناسب مع الزيادة.</li>
+    <li><strong>أعلى إنفاق يومي (${days[cumSpend.indexOf(Math.max(...days.map(d=>d.spend)))>=0?cumSpend.indexOf(Math.max(...days.map(d=>d.spend))):0].date} — ${P(Math.max(...days.map(d=>d.spend)))})</strong> يُظهر عوائد متناقصة عند زيادة الميزانية اليومية.</li>
+    <li><strong>تكلفة العميل التراكمية تحسنت</strong> من ${P(runningCPL[0])} بعد اليوم الأول إلى ${P(runningCPL[lastIdx])} بعد اليوم ${days.length}.</li>
+    <li><strong>التوفير المحتمل:</strong> لو حققت كل الأيام كفاءة أفضل يوم، ${totalLeads} عميل محتمل كانوا سيكلفون ${P(bestCPL*totalLeads)} — توفير <strong>${P(savingsIfBest)}</strong> (${(savingsIfBest/totalSpend*100).toFixed(1)}% من الإجمالي).</li>
+    <li><strong>التوصية:</strong> مراجعة الأيام ذات التكلفة المرتفعة وتحسين الاستهداف. الحفاظ على الميزانية اليومية في النطاق الذي يحقق أفضل كفاءة.</li>
   </ul>
 `;
 </script>
