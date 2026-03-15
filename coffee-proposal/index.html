@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عرض تعاون لتأسيس علامة تجارية في سوق القهوة المختصة السعودي | Brandology</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #E30613;
+    --dark-red: #C9100E;
+    --dark: #1F1E1E;
+    --medium: #3B3535;
+    --light-bg: #FAFAFA;
+    --white: #FFFFFF;
+    --border: #E8E4E4;
+    --gradient-start: #731919;
+    --gradient-end: #E52B2B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    background: var(--white);
+    color: var(--dark);
+    direction: rtl;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Scroll animations ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+
+  /* ── Hero ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(160deg, #731919 0%, #E52B2B 60%, #ff4444 100%);
+    color: white;
+    padding: 60px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── Hero animations ── */
+  @keyframes heroFadeIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes heroPulse {
+    0%, 100% { transform: scale(1); opacity: 0.08; }
+    50% { transform: scale(1.15); opacity: 0.12; }
+  }
+
+  .hero .hero-logo { animation: heroFadeIn 0.8s ease 0.2s both; }
+  .hero h1 { animation: heroFadeIn 0.8s ease 0.5s both; }
+  .hero .hero-meta { animation: heroFadeIn 0.8s ease 0.8s both; }
+
+  /* ── Stat counter glow on hover ── */
+  .stat-card {
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+
+  .stat-card:hover {
+    box-shadow: 0 12px 40px rgba(227, 6, 19, 0.1);
+    transform: translateY(-4px);
+  }
+
+  /* ── Table row highlight ── */
+  .data-table tbody tr {
+    transition: background 0.2s;
+  }
+
+  .data-table tbody tr:hover td {
+    background: #FFF5F5;
+  }
+
+  /* ── Card lift ── */
+  .card, .gap-card, .roadmap-card, .video-card, .season-card {
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+
+  .card:hover, .gap-card:hover, .video-card:hover, .season-card:hover {
+    box-shadow: 0 12px 36px rgba(0,0,0,0.08);
+    transform: translateY(-3px);
+  }
+
+  .roadmap-card:hover {
+    box-shadow: 0 12px 36px rgba(227, 6, 19, 0.12);
+    transform: translateY(-4px);
+  }
+
+  /* ── SEO box pulse ── */
+  .seo-box.highlight {
+    animation: subtlePulse 3s ease-in-out infinite;
+  }
+
+  @keyframes subtlePulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(227, 6, 19, 0); }
+    50% { box-shadow: 0 0 0 8px rgba(227, 6, 19, 0.08); }
+  }
+
+  /* ── Divider parallax-like ── */
+  .divider-banner {
+    background-attachment: fixed;
+  }
+
+  /* ── Gradient animated bg for hero ── */
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.08) 0%, transparent 60%);
+  }
+
+  .hero > * { position: relative; z-index: 1; }
+
+  .hero-logo {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    opacity: 0.9;
+    margin-bottom: 24px;
+    border: 2px solid rgba(255,255,255,0.4);
+    padding: 8px 28px;
+    border-radius: 30px;
+  }
+
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 800;
+    line-height: 1.25;
+    max-width: 800px;
+    margin-bottom: 24px;
+  }
+
+  .hero-meta {
+    font-size: 18px;
+    font-weight: 600;
+    opacity: 0.85;
+  }
+
+  .hero-meta span { margin: 0 12px; }
+
+  /* ── Layout ── */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  section {
+    padding: 80px 0;
+  }
+
+  section:nth-child(even) {
+    background: var(--light-bg);
+  }
+
+  /* ── Section header ── */
+  .section-header {
+    text-align: right;
+    margin-bottom: 40px;
+  }
+
+  .section-header h2 {
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.3;
+  }
+
+  .section-header .subtitle {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--medium);
+    margin-top: 8px;
+  }
+
+  .red-accent {
+    display: block;
+    width: 50px;
+    height: 4px;
+    background: var(--red);
+    border-radius: 2px;
+    margin-top: 14px;
+  }
+
+  /* ── Divider banner ── */
+  .divider-banner {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: white;
+    text-align: center;
+    padding: 60px 24px;
+  }
+
+  .divider-banner h2 {
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  /* ── About ── */
+  .about-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--medium);
+    text-align: justify;
+    line-height: 1.9;
+    max-width: 900px;
+  }
+
+  .about-text strong { color: var(--dark); }
+
+  .about-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+  }
+
+  .about-list li {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--medium);
+    padding: 4px 24px;
+  }
+
+  .about-list li::before {
+    content: '●';
+    color: var(--red);
+    margin-left: 10px;
+    font-size: 10px;
+    vertical-align: middle;
+  }
+
+  /* ── Stats grid ── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .stat-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    text-align: right;
+    transition: box-shadow 0.2s;
+  }
+
+  .stat-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+
+  .stat-number {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--red);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--medium);
+    margin-top: 8px;
+  }
+
+  .stat-desc {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--medium);
+    opacity: 0.8;
+    margin-top: 4px;
+  }
+
+  /* ── Insight box ── */
+  .insight-box {
+    background: #FFF5F5;
+    border-right: 4px solid var(--red);
+    padding: 20px 24px;
+    border-radius: 0 12px 12px 0;
+    margin-top: 28px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.8;
+  }
+
+  /* ── Source footer ── */
+  .source {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--medium);
+    opacity: 0.7;
+    margin-top: 24px;
+    text-align: right;
+  }
+
+  /* ── Data table ── */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+    min-width: 600px;
+  }
+
+  .data-table th {
+    background: #F5F0F0;
+    color: var(--red);
+    font-weight: 700;
+    padding: 14px 20px;
+    text-align: right;
+  }
+
+  .data-table td {
+    padding: 14px 20px;
+    text-align: right;
+    font-weight: 600;
+    color: var(--medium);
+    border-top: 1px solid #F0EDED;
+  }
+
+  .data-table tbody tr:hover td { background: #FEFAFA; }
+
+  /* ── Cards ── */
+  .cards-grid {
+    display: grid;
+    gap: 20px;
+  }
+
+  .cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    text-align: right;
+    transition: box-shadow 0.2s;
+  }
+
+  .card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+
+  .card-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: #FFF5F5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    font-size: 22px;
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+
+  .card-body {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--medium);
+    line-height: 1.7;
+  }
+
+  /* ── Gap cards ── */
+  .gap-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+  }
+
+  .gap-card .gap-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 10px;
+  }
+
+  .gap-card .gap-body {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--medium);
+    line-height: 1.7;
+  }
+
+  /* ── Phase header ── */
+  .phase-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
+  .phase-header h3 {
+    font-size: clamp(22px, 3.5vw, 34px);
+    font-weight: 700;
+    color: var(--red);
+  }
+
+  .duration-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #F5F0F0;
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--medium);
+  }
+
+  .phase-desc {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--medium);
+    margin-bottom: 28px;
+  }
+
+  /* ── Step rows ── */
+  .step-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .step-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--red);
+    flex-shrink: 0;
+    margin-top: 10px;
+  }
+
+  .step-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--medium);
+  }
+
+  .step-desc {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--medium);
+    opacity: 0.8;
+  }
+
+  /* ── Two columns ── */
+  .two-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  /* ── Pillars ── */
+  .pillar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .pillar-num {
+    font-size: 20px;
+    color: var(--medium);
+    opacity: 0.5;
+    flex-shrink: 0;
+    width: 36px;
+    font-weight: 400;
+  }
+
+  .pillar-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--medium);
+  }
+
+  .pillar-desc {
+    font-size: 15px;
+    color: var(--medium);
+    opacity: 0.7;
+  }
+
+  /* ── SEO comparison ── */
+  .seo-compare {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    text-align: center;
+  }
+
+  .seo-box {
+    background: var(--white);
+    border: 2px solid var(--red);
+    border-radius: 16px;
+    padding: 28px 16px;
+  }
+
+  .seo-box.highlight {
+    background: #FFF5F5;
+  }
+
+  .seo-big {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--red);
+    line-height: 1;
+  }
+
+  .seo-label {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--red);
+    margin-top: 8px;
+  }
+
+  .seo-sub {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--red);
+    margin-top: 6px;
+    opacity: 0.8;
+  }
+
+  /* ── Timeline ── */
+  .timeline {
+    position: relative;
+    padding-right: 40px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    right: 12px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--red), var(--medium));
+    border-radius: 2px;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 32px;
+    padding-right: 28px;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    right: -35px;
+    top: 8px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--red);
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px var(--red);
+  }
+
+  .timeline-month {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--dark);
+  }
+
+  .timeline-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--medium);
+  }
+
+  .timeline-desc {
+    font-size: 15px;
+    color: var(--medium);
+    opacity: 0.8;
+  }
+
+  /* ── Seasons ── */
+  .seasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+  }
+
+  .season-card {
+    background: var(--white);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 20px;
+    text-align: center;
+  }
+
+  .season-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--red);
+    margin: 0 auto 10px;
+  }
+
+  .season-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--medium);
+  }
+
+  .season-desc {
+    font-size: 14px;
+    color: var(--medium);
+    opacity: 0.7;
+  }
+
+  /* ── Why us ── */
+  .why-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 24px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .why-num {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--red);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .why-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--dark);
+  }
+
+  .why-desc {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--medium);
+    margin-top: 4px;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: linear-gradient(160deg, var(--gradient-start), var(--gradient-end));
+    color: white;
+    padding: 80px 24px;
+  }
+
+  .cta-section h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .cta-section .cta-sub {
+    font-size: 20px;
+    font-weight: 600;
+    opacity: 0.85;
+    margin-bottom: 36px;
+  }
+
+  .cta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .cta-num {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.5);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .cta-title {
+    font-size: 19px;
+    font-weight: 700;
+    color: white;
+  }
+
+  .cta-desc {
+    font-size: 15px;
+    color: rgba(255,255,255,0.8);
+    margin-top: 4px;
+  }
+
+  /* ── Footer ── */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 40px 24px;
+    font-size: 15px;
+  }
+
+  footer strong { color: white; }
+
+  /* ── Video items ── */
+  .video-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .video-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .video-num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--red);
+    opacity: 0.4;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .video-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--medium);
+  }
+
+  .video-desc {
+    font-size: 14px;
+    color: var(--medium);
+    opacity: 0.7;
+  }
+
+  /* ── Social icons row ── */
+  .social-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+
+  .social-chip {
+    background: #FFF5F5;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--medium);
+  }
+
+  /* ── Case study stats ── */
+  .case-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .case-stat {
+    text-align: center;
+    background: #FFF5F5;
+    border-radius: 14px;
+    padding: 20px 12px;
+  }
+
+  .case-stat .big {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--red);
+    line-height: 1;
+  }
+
+  .case-stat .label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--red);
+    margin-top: 6px;
+  }
+
+  /* ── Reasons grid ── */
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .reason-card {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .reason-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid var(--medium);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--medium);
+    flex-shrink: 0;
+  }
+
+  .reason-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--medium);
+  }
+
+  .reason-desc {
+    font-size: 14px;
+    color: var(--medium);
+    opacity: 0.8;
+  }
+
+  /* ── Roadmap cards ── */
+  .roadmap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .roadmap-card {
+    background: var(--white);
+    border-top: 4px solid var(--red);
+    border-radius: 0 0 16px 16px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+
+  .roadmap-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--red), #ff4444);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: -40px auto 12px;
+    font-size: 20px;
+    color: white;
+    box-shadow: 0 4px 12px rgba(227,6,19,0.3);
+  }
+
+  .roadmap-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--red);
+    margin-bottom: 6px;
+  }
+
+  .roadmap-duration {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--medium);
+    opacity: 0.7;
+  }
+
+  .roadmap-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .two-cols, .cols-2, .video-grid, .reasons-grid, .roadmap-grid-2 { grid-template-columns: 1fr; }
+    .cols-3, .roadmap-grid { grid-template-columns: 1fr 1fr; }
+    .cols-4 { grid-template-columns: 1fr 1fr; }
+    .case-stats { grid-template-columns: 1fr 1fr; }
+    .seo-compare { grid-template-columns: 1fr; }
+    section { padding: 50px 0; }
+  }
+
+  @media (max-width: 480px) {
+    .cols-3, .roadmap-grid { grid-template-columns: 1fr; }
+    .cols-4 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════ HERO ════════ -->
+<header class="hero">
+  <div class="hero-logo">Brandology</div>
+  <h1>عرض تعاون لتأسيس علامة تجارية في سوق القهوة المختصة السعودي</h1>
+  <div class="hero-meta">
+    <span>إعداد: Brandology</span>
+    <span>|</span>
+    <span>التاريخ: مارس 2026</span>
+    <span>|</span>
+    <span>الموقع: السعودية</span>
+  </div>
+</header>
+
+<!-- ════════ ABOUT ════════ -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>تعريف مختصر بشركة <span style="color:var(--dark-red);">Brandology</span></h2>
+      <span class="red-accent"></span>
+    </div>
+    <div class="about-text">
+      <p style="margin-bottom:14px;">شركة براندولوجي متخصصة في خدمات التسويق الرقمي والتطوير للشركات في القطاعات الاستثمارية المتنوعة؛ نشأت في عام 2019 م متخذةً من اسطنبول مقراً لفرعها الأول لتتخذ بعد ذلك من الرياض مقراً لفرعها الثاني في عام 2024 م.</p>
+      <p style="margin-bottom:14px;">تُقدم الشركة خدماتها في عدة أسواق إقليمية، وخدمت بالفعل أكثر من 150 عميل موزعين في أكثر من 20 دولة حول العالم كما ساهمت في توسعهم بشكل مباشر وزيادة أرباحهم واستقرار أعمالهم.</p>
+      <p><strong>تخدم الشركة ثلاث فئات رئيسة من العملاء وهم:</strong></p>
+      <ul class="about-list">
+        <li>الشركات والمتاجر</li>
+        <li>المؤسسات غير الربحية</li>
+        <li>التسويق للأشخاص وصناعة الرموز</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ DIVIDER ════════ -->
+<div class="divider-banner">
+  <h2>نظرة على<br>سوق القهوة المختصة بالسعودية</h2>
+</div>
+
+<!-- ════════ MARKET OVERVIEW ════════ -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>نظرة على السوق</h2>
+      <div class="subtitle">سوق القهوة المختصة في السعودية</div>
+      <span class="red-accent"></span>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-number">6.14B$</div><div class="stat-label">حجم سوق المقاهي</div><div class="stat-desc">متوقع 10 مليار دولار بحلول 2030</div></div>
+      <div class="stat-card"><div class="stat-number">8.23%</div><div class="stat-label">معدل النمو السنوي</div><div class="stat-desc">نمو مستدام ومتسارع</div></div>
+      <div class="stat-card"><div class="stat-number">36M</div><div class="stat-label">كوب قهوة يومياً</div><div class="stat-desc">الاستهلاك اليومي في المملكة</div></div>
+      <div class="stat-card"><div class="stat-number">63%</div><div class="stat-label">الشباب تحت 30</div><div class="stat-desc">من إجمالي السكان</div></div>
+      <div class="stat-card"><div class="stat-number">61K</div><div class="stat-label">ترخيص تجاري</div><div class="stat-desc">عدد تراخيص المقاهي</div></div>
+      <div class="stat-card"><div class="stat-number">79%</div><div class="stat-label">معاملات إلكترونية</div><div class="stat-desc">من إجمالي المعاملات التجارية 2024</div></div>
+    </div>
+    <div class="insight-box">
+      <strong>مؤشرات الفرص:</strong><br>
+      رؤية 2030 تستثمر 1.2 مليار ريال لتطوير إنتاج القهوة المحلي وزراعة 5 ملايين شجرة قهوة بحلول 2030.<br>
+      بنية تحتية رقمية مميزة: 99% انتشار إنترنت، 78% تغطية 5G، 92% ملكية هواتف ذكية.
+    </div>
+    <div class="source">المصادر: ResearchAndMarkets 2025, Gulf News, KPMG, Qahwa World / Vision 2030, Statista, Mordor Intelligence</div>
+  </div>
+</section>
+
+<!-- ════════ SEARCH BEHAVIOR ════════ -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>سلوك البحث - كيف يبحث الجمهور في محرك جوجل السعودية</h2>
+      <div class="subtitle">حجم البحث الشهري</div>
+      <span class="red-accent"></span>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>الكلمة المفتاحية</th><th>حجم البحث الشهري</th></tr></thead>
+        <tbody>
+          <tr><td>قهوة سعودية</td><td>6,300</td></tr>
+          <tr><td>قهوة مختصة</td><td>4,800</td></tr>
+          <tr><td>قهوة مقطرة</td><td>2,200</td></tr>
+          <tr><td>شنطة قهوة v60</td><td>700</td></tr>
+          <tr><td>دلة قهوة</td><td>500</td></tr>
+          <tr><td>محمصة قهوة مختصة</td><td>350</td></tr>
+          <tr><td>اظرف قهوة مختصة</td><td>200</td></tr>
+          <tr><td>قهوة مختصة بالجملة</td><td>150</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight-box">هذه عينة بسيطة من كلمات تمثل فرصا هامة لجذب العملاء المحتملين شهريا. إذا ظهر موقعكم في النتائج الأولى لهذه الكلمات، سيمثل جوجل بوابة مبيعات عضوية هامة.</div>
+    <div class="source">المصدر: Ahrefs Keywords Explorer - السعودية - مارس 2026</div>
+  </div>
+</section>
+
+<!-- ════════ COMPETITORS: AGGREGATORS ════════ -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>هيكل المنافسين - منصات التجميع</h2>
+      <div class="subtitle">الطبقة الأولى: منصات التجميع (Aggregators) - تبيع منتجات عشرات المحامص في مكان واحد</div>
+      <span class="red-accent"></span>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>المنصة</th><th>الزيارات العضوية/شهر</th><th>الكلمات المفتاحية</th><th>الروابط الخلفية</th></tr></thead>
+        <tbody>
+          <tr><td>WTR (وتر)</td><td>67,890</td><td>3,808</td><td>55</td></tr>
+          <tr><td>Beyyak (بياك)</td><td>21,237</td><td>1,248</td><td>167</td></tr>
+          <tr><td>QavaShop (كافاشوب)</td><td>20,434</td><td>2,205</td><td>1,220</td></tr>
+          <tr><td>Coffee Souq (سوق القهوة)</td><td>15,216</td><td>1,364</td><td>46</td></tr>
+          <tr><td>Cathaf (كثف)</td><td>386</td><td>47</td><td>28</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="source">المصدر: Ahrefs Batch Analysis - مارس 2026</div>
+  </div>
+</section>
+
+<!-- ════════ COMPETITORS: DTC ════════ -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>هيكل المنافسين - المحامص المباشرة (DTC)</h2>
+      <div class="subtitle">الطبقة الثانية: محامص بمتاجر إلكترونية مباشرة - منافسون مباشرون</div>
+      <span class="red-accent"></span>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>المحمصة</th><th>الزيارات العضوية/شهر</th><th>الكلمات المفتاحية</th><th>الروابط الخلفية</th></tr></thead>
+        <tbody>
+          <tr><td>Roasting House (بيت التحميص)</td><td>42,398</td><td>1,464</td><td>226</td></tr>
+          <tr><td>Black Knight (بلاك نايت)</td><td>18,170</td><td>854</td><td>211</td></tr>
+          <tr><td>Shub (شب)</td><td>15,660</td><td>1,298</td><td>199</td></tr>
+          <tr><td>Barns (بارنز)</td><td>15,522</td><td>459</td><td>242</td></tr>
+          <tr><td>October (اكتوبر)</td><td>1,555</td><td>149</td><td>66</td></tr>
+          <tr><td>Mozzn (مزن)</td><td>682</td><td>115</td><td>62</td></tr>
+          <tr><td>Jazwah (جزوة)</td><td>171</td><td>3</td><td>17</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="source">المصدر: Ahrefs Batch Analysis - مارس 2026</div>
+  </div>
+</section>
+
+<!-- ════════ CASE STUDY ════════ -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>دراسة حالة - بلاك نايت</h2>
+      <div class="subtitle">من محمصة صغيرة في الخبر إلى الرائد الأول في 6 سنوات</div>
+      <span class="red-accent"></span>
+    </div>
+    <div class="case-stats">
+      <div class="case-stat"><div class="big">177M+</div><div class="label">مشاهدة على المنصات</div></div>
+      <div class="case-stat"><div class="big">5K+</div><div class="label">عميل جملة</div></div>
+      <div class="case-stat"><div class="big">4.97</div><div class="label">تقييم العملاء من 5</div></div>
+      <div class="case-stat"><div class="big">130</div><div class="label">فرد في الفريق 2025</div></div>
+    </div>
+    <h3 style="font-size:20px;font-weight:700;color:var(--dark);margin-bottom:16px;">لماذا نجحت بلاك نايت؟</h3>
+    <div class="reasons-grid" style="margin-bottom:20px;">
+      <div class="reason-card"><div class="reason-num">1</div><div><div class="reason-title">الجودة أولاً</div><div class="reason-desc">محاصيل بتقييم SCA +86 من 7 دول</div></div></div>
+      <div class="reason-card"><div class="reason-num">2</div><div><div class="reason-title">الابتكار</div><div class="reason-desc">بوكسات التذوق، معالجات خاصة، أظرف القهوة</div></div></div>
+      <div class="reason-card"><div class="reason-num">3</div><div><div class="reason-title">الهوية السعودية</div><div class="reason-desc">فخر وطني + حضور دولي (Milano Host)</div></div></div>
+      <div class="reason-card"><div class="reason-num">4</div><div><div class="reason-title">المحتوى اليومي</div><div class="reason-desc">محتوى يومي على تيك توك من المصنع</div></div></div>
+    </div>
+    <div class="insight-box" style="background:#FFF5F5;border-color:var(--red);">
+      أسعار تنافسية: نطاق سعري من 45-96 رس للعبوات 250 جرام | خصومات موسمية: توفير يصل إلى 57% على بعض المنتجات | عروض البوكسات: خيارات متعددة بأسعار جذابة
+    </div>
+    <p style="font-size:16px;font-weight:700;color:var(--medium);margin-top:16px;"><strong style="color:var(--dark);">الدرس:</strong> محمصة سعودية تبدأ من الصفر تستطيع الريادة خلال سنوات. المفتاح: جودة + هوية + تسويق رقمي ذكي يستمع للعميل.</p>
+    <div class="source">المصادر: b-k.coffee, بيانات الشركة المنشورة, Ahrefs, Reddit</div>
+  </div>
+</section>
+
+<!-- ════════ GAPS & OPPORTUNITIES ════════ -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>الفجوات والفرص</h2>
+      <div class="subtitle">5 فجوات هامة</div>
+      <span class="red-accent"></span>
+    </div>
+    <div class="cards-grid cols-3" style="margin-bottom:20px;">
+      <div class="gap-card"><div class="gap-title">&#x1F3AC; السوق يحتاج المحتوى المرئي</div><div class="gap-body">لا يوجد محتوى عربي احترافي كافي لتعليم تحضير القهوة المختصة على يوتيوب وتيك توك.</div></div>
+      <div class="gap-card"><div class="gap-title">&#x1F4CB; غياب أدلة المقارنة والشراء</div><div class="gap-body">لا توجد مقالات شرائية قوية مثل المقارنة بين الأنواع والآلات وهو مجال محتوى عالي النية الشرائية بدون منافسة.</div></div>
+      <div class="gap-card"><div class="gap-title">&#x1F4E6; تسويق الاشتراكات الشهرية</div><div class="gap-body">لا أحد يسوّق للاشتراكات الشهرية بتركيز جيد. زاوية مفتوحة ومهمة.</div></div>
+    </div>
+    <div class="cards-grid cols-2">
+      <div class="gap-card"><div class="gap-title">&#x2615; الجسر بين القهوة التقليدية والمختصة</div><div class="gap-body">50% من السعوديين يشربون النوعين معاً. لا أحد يخاطبهم بمحتوى "من الدلة إلى V60".</div></div>
+      <div class="gap-card"><div class="gap-title">&#x1F381; أظرف القهوة (Drip Bags)</div><div class="gap-body">أسرع فئة نمواً. لا تحتاج معدات. بيت التحميص فاز بجائزة SCA 2024 عنها.</div></div>
+    </div>
+    <div class="source">المصادر: تحليل Brandology لمحتوى المنافسين, Ahrefs Content Gap Analysis, دراسة جامعة الملك سعود (PMC 2024)</div>
+  </div>
+</section>
+
+<!-- ════════ TARGET AUDIENCE ════════ -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>الجمهور المستهدف</h2>
+      <div class="subtitle">5 شرائح رئيسية</div>
+      <span class="red-accent"></span>
+    </div>
+    <div class="cards-grid cols-4" style="margin-bottom:20px;">
+      <div class="card"><div class="card-icon">&#x1F50D;</div><div class="card-title">المستكشف الجديد (18-25)</div><div class="card-body">دخل متوسط | يبحث عن "شنطة قهوة v60"<br><br><strong>المنتج:</strong> أظرف + بوكسات تجريبية<br><strong>القناة:</strong> تيك توك، إنستغرام</div></div>
+      <div class="card"><div class="card-icon">&#x2615;</div><div class="card-title">عاشق القهوة المنزلية (25-35)</div><div class="card-body">دخل فوق المتوسط | يبحث عن "محمصة قهوة مختصة"<br><br><strong>المنتج:</strong> حبوب single origin + اشتراكات<br><strong>القناة:</strong> يوتيوب، محركات البحث</div></div>
+      <div class="card"><div class="card-icon">&#x1F381;</div><div class="card-title">مقدّم الهدايا (22-40)</div><div class="card-body">يبحث عن "قهوة مختصة هدية"<br><br><strong>المنتج:</strong> بوكسات هدايا + كروت إهداء<br><strong>القناة:</strong> إنستغرام، جوجل (مواسم)</div></div>
+      <div class="card"><div class="card-icon">&#x1F4BC;</div><div class="card-title">صاحب المشروع B2B</div><div class="card-body">مقاهي، مكاتب، شركات | "قهوة مختصة بالجملة"<br><br><strong>المنتج:</strong> عبوات كيلو + توريد<br><strong>القناة:</strong> جوجل، لينكدإن</div></div>
+    </div>
+    <div class="card">
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px;">
+        <div class="card-icon" style="margin:0;">&#x1F1F8;</div>
+        <div class="card-title" style="margin:0;">محبّ القهوة السعودية (30-50)</div>
+      </div>
+      <div class="card-body">يبحث عن "قهوة سعودية" (6,300 بحث/شهر) | <strong>المنتج:</strong> قهوة جازان + دلال كهربائية | <strong>القناة:</strong> جوجل، واتساب</div>
+    </div>
+    <div class="source">المصادر: Ahrefs, KPMG Saudi Youth Report, دراسة جامعة الملك سعود (PMC 2024)</div>
+  </div>
+</section>
+
+<!-- ════════ DIVIDER: ROADMAP ════════ -->
+<div class="divider-banner">
+  <h2>ما سنقدمه لكم - خارطة الطريق</h2>
+  <p style="font-size:20px;opacity:0.85;margin-top:10px;">رحلة بناء علامتكم التجارية في 8 مراحل</p>
+</div>
+
+<!-- ════════ ROADMAP OVERVIEW ════════ -->
+<section>
+  <div class="container">
+    <div class="roadmap-grid">
+      <div class="roadmap-card"><div class="roadmap-icon">&#x1F3AF;</div><div class="roadmap-title">استراتيجية تموضع العلامة التجارية والتسمية</div><div class="roadmap-duration">3-4 أسابيع</div></div>
+      <div class="roadmap-card"><div class="roadmap-icon">&#x1F3A8;</div><div class="roadmap-title">الهوية البصرية</div><div class="roadmap-duration">3-4 أسابيع</div></div>
+      <div class="roadmap-card"><div class="roadmap-icon">&#x1F6D2;</div><div class="roadmap-title">بناء المتجر الإلكتروني</div><div class="roadmap-duration">4-6 أسابيع</div></div>
+    </div>
+    <div class="roadmap-grid-2">
+      <div class="roadmap-card"><div class="roadmap-icon">&#x1F4F1;</div><div class="roadmap-title">تأسيس التواجد على وسائل التواصل</div><div class="roadmap-duration">2-3 أسابيع</div></div>
+      <div class="roadmap-card"><div class="roadmap-icon">&#x1F4DD;</div><div class="roadmap-title">صناعة المحتوى + SEO + إعلانات + فيديو</div><div class="roadmap-duration">مستمرة</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ PHASE 1 ════════ -->
+<section>
+  <div class="container">
+    <div class="phase-header">
+      <h3>المرحلة 1 - استراتيجية العلامة التجارية والتسمية</h3>
+      <span class="duration-badge">المدة: 3-4 أسابيع</span>
+    </div>
+    <p class="phase-desc">سنبني الأساس: من أنتم؟ ماذا تمثلون؟ ولماذا يختاركم العميل؟</p>
+    <div class="two-cols">
+      <div>
+        <div class="step-row"><div class="step-dot"></div><div><div class="step-title">بحث وتحليل السوق</div><div class="step-desc">دراسة معمّقة للمنافسين والفجوات</div></div></div>
+        <div class="step-row"><div class="step-dot"></div><div><div class="step-title">تحديد الموقع الاستراتيجي (Positioning)</div><div class="step-desc">ما يجعلكم مختلفين عن 30+ محمصة</div></div></div>
+        <div class="step-row"><div class="step-dot"></div><div><div class="step-title">اختيار الاسم</div><div class="step-desc">5-7 خيارات مع فحص النطاقات والحسابات والسجل التجاري</div></div></div>
+      </div>
+      <div>
+        <div class="step-row"><div class="step-dot"></div><div><div class="step-title">صياغة القصة</div><div class="step-desc">شعار (Tagline)، رسالة العلامة، القيم الأساسية</div></div></div>
+        <div class="step-row"><div class="step-dot"></div><div><div class="step-title">دليل نبرة التواصل</div><div class="step-desc">Tone of Voice يعكس شخصية علامتكم</div></div></div>
+      </div>
+    </div>
+    <p style="font-size:15px;font-weight:600;color:var(--medium);margin-top:20px;">الاسم والهوية اللفظية يجعلان العملاء يتذكرونك.</p>
+  </div>
+</section>
+
+<!-- ════════ PHASE 2 ════════ -->
+<section>
+  <div class="container">
+    <div class="phase-header">
+      <h3>المرحلة 2 - الهوية البصرية</h3>
+      <span class="duration-badge">المدة: 3-4 أسابيع</span>
+    </div>
+    <p class="phase-desc">سنحوّل الاستراتيجية إلى هوية بصرية يتعرف عليها العملاء فوراً.</p>
+    <div class="cards-grid cols-3" style="margin-bottom:20px;">
+      <div class="card"><div class="card-icon">&#x270F;&#xFE0F;</div><div class="card-title">تصميم الشعار</div><div class="card-body">3 اتجاهات تصميمية مع مراجعات</div></div>
+      <div class="card"><div class="card-icon">&#x1F3A8;</div><div class="card-title">لوحة الألوان والخطوط</div><div class="card-body">عربي + إنجليزي</div></div>
+      <div class="card"><div class="card-icon">&#x1F4E6;</div><div class="card-title">تصميم التغليف</div><div class="card-body">عبوات 250غ، 1كجم، أظرف، بوكسات هدايا</div></div>
+    </div>
+    <div class="cards-grid cols-2">
+      <div class="card"><div class="card-icon">&#x1F4C4;</div><div class="card-title">مواد الطباعة</div><div class="card-body">بطاقات عمل، أوراق رسمية، ملصقات</div></div>
+      <div class="card"><div class="card-icon">&#x1F4D6;</div><div class="card-title">دليل الهوية البصرية</div><div class="card-body">Brand Guidelines شامل</div></div>
+    </div>
+    <div class="insight-box" style="margin-top:24px;">في سوق 30+ محمصة، التغليف هو أول ما يراه العميل. 70% من قرارات الشراء تتأثر بالمظهر البصري.</div>
+  </div>
+</section>
+
+<!-- ════════ PHASE 3 ════════ -->
+<section>
+  <div class="container">
+    <div class="phase-header">
+      <h3>المرحلة 3 - بناء المتجر الإلكتروني</h3>
+      <span class="duration-badge">المدة: 4-6 أسابيع</span>
+    </div>
+    <div class="two-cols">
+      <div>
+        <h4 style="font-size:18px;font-weight:700;color:var(--dark);margin-bottom:16px;">المنصة والتصميم</h4>
+        <div class="cards-grid cols-2" style="gap:12px;margin-bottom:12px;">
+          <div class="card" style="padding:18px;"><div class="card-title">Salla أو Zid أو شوبيفاي</div><div class="card-body">60-70% من متاجر القهوة المختصة على Salla</div></div>
+          <div class="card" style="padding:18px;"><div class="card-title">تصميم UX</div><div class="card-body">يعكس الهوية البصرية مع سهولة الشراء</div></div>
+        </div>
+        <div class="card" style="padding:18px;"><div class="card-title">صفحات المنتجات</div><div class="card-body">تصوير احترافي ووصف مقنع</div></div>
+      </div>
+      <div>
+        <h4 style="font-size:18px;font-weight:700;color:var(--dark);margin-bottom:16px;">المميزات التقنية</h4>
+        <div class="cards-grid cols-2" style="gap:12px;margin-bottom:12px;">
+          <div class="card" style="padding:18px;"><div class="card-title">بوابات الدفع</div><div class="card-body">مدى، Visa/MC، Apple Pay، تمارا/تابي</div></div>
+          <div class="card" style="padding:18px;"><div class="card-title">نظام التقييمات</div><div class="card-body">سلاح بلاك نايت: 4.97/5</div></div>
+        </div>
+        <div class="card" style="padding:18px;"><div class="card-title">أساس SEO تقني</div><div class="card-body">يدعم محركات البحث من اليوم الأول</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ PHASE 4 & 5 ════════ -->
+<section>
+  <div class="container">
+    <div class="phase-header">
+      <h3>المرحلة 4 و5 - وسائل التواصل وصناعة المحتوى</h3>
+    </div>
+    <div class="two-cols" style="margin-bottom:40px;">
+      <div>
+        <h4 style="font-size:17px;font-weight:700;color:var(--red);margin-bottom:14px;">وسائل التواصل (تأسيس 2-3 أسابيع ثم نشر مستمر)</h4>
+        <div class="social-row">
+          <span class="social-chip">&#x1F4F7; إنستغرام</span>
+          <span class="social-chip">&#x1F3AC; تيك توك</span>
+          <span class="social-chip">&#x1F426; تويتر/X</span>
+          <span class="social-chip">&#x1F4AC; واتساب بزنس</span>
+        </div>
+        <p style="font-size:14px;font-weight:600;color:var(--medium);">هوية بصرية للمنصات وقوالب محتوى + تقويم محتوى شهري</p>
+      </div>
+      <div>
+        <h4 style="font-size:17px;font-weight:700;color:var(--red);margin-bottom:14px;">صناعة المحتوى (مستمرة)</h4>
+        <div class="step-row"><div class="step-dot"></div><div><div class="step-title">تصوير منتجات احترافي</div><div class="step-desc">flat lay + lifestyle</div></div></div>
+        <div class="step-row"><div class="step-dot"></div><div><div class="step-title">فيديوهات Reels/TikTok</div><div class="step-desc">تحضير، يوميات المحمصة، مراجعات</div></div></div>
+        <div class="step-row"><div class="step-dot"></div><div><div class="step-title">مقالات المدونة</div><div class="step-desc">أدلة شراء، مقارنات، محتوى موسمي، محتوى تعليمي</div></div></div>
+        <div class="step-row"><div class="step-dot"></div><div><div class="step-title">نشرة بريد إلكتروني</div><div class="step-desc">أسبوعية لبناء المجتمع</div></div></div>
+      </div>
+    </div>
+
+    <h4 style="font-size:22px;font-weight:700;color:var(--dark);margin-bottom:20px;">أعمدة المحتوى الخمسة</h4>
+    <div class="pillar"><div class="pillar-num">01</div><div style="flex:1;"><div class="pillar-title">خلف الكواليس</div><div class="pillar-desc">التحميص، الإنتاج</div></div></div>
+    <div class="pillar"><div class="pillar-num">02</div><div style="flex:1;"><div class="pillar-title">تعليم وتثقيف</div><div class="pillar-desc">طرق التحضير</div></div></div>
+    <div class="pillar"><div class="pillar-num">03</div><div style="flex:1;"><div class="pillar-title">المنتجات</div><div class="pillar-desc">إطلاقات، عروض</div></div></div>
+    <div class="pillar"><div class="pillar-num">04</div><div style="flex:1;"><div class="pillar-title">المجتمع</div><div class="pillar-desc">قصص عملاء، مسابقات</div></div></div>
+    <div class="pillar"><div class="pillar-num">05</div><div style="flex:1;"><div class="pillar-title">الثقافة السعودية</div><div class="pillar-desc">هوية وطنية وتراث</div></div></div>
+  </div>
+</section>
+
+<!-- ════════ PHASE 6: SEO ════════ -->
+<section>
+  <div class="container">
+    <div class="phase-header">
+      <h3>المرحلة 6 - تحسين محركات البحث (SEO)</h3>
+      <span class="duration-badge">مستمرة - النتائج من الشهر 3-4</span>
+    </div>
+    <p class="phase-desc">القناة الأعلى عائداً على الاستثمار. وسوق القهوة المختصة فيه فراغ ضخم.</p>
+    <div class="cards-grid cols-3" style="margin-bottom:32px;">
+      <div class="card"><div class="card-icon">&#x1F4DD;</div><div class="card-title">SEO المحتوى</div><div class="card-body">60+ كلمة مفتاحية، مقالات 2,000-4,000 كلمة</div></div>
+      <div class="card"><div class="card-icon">&#x2699;&#xFE0F;</div><div class="card-title">SEO التقني</div><div class="card-body">سرعة، بنية روابط، Schema، خريطة موقع</div></div>
+      <div class="card"><div class="card-icon">&#x1F517;</div><div class="card-title">بناء الروابط</div><div class="card-body">تعاون مع مدونات القهوة، أدلة محلية</div></div>
+    </div>
+    <h4 style="font-size:18px;font-weight:700;color:var(--dark);margin-bottom:16px;">لماذا يجب علينا الاهتمام بمحركات البحث</h4>
+    <div class="seo-compare">
+      <div class="seo-box"><div class="seo-big">42K</div><div class="seo-label">زيارة/شهر</div><div class="seo-sub">Roasting House بفضل الاهتمام بـ SEO</div></div>
+      <div class="seo-box"><div class="seo-big">171</div><div class="seo-label">زيارة فقط!</div><div class="seo-sub">Jazwah بدون استثمار في SEO</div></div>
+      <div class="seo-box highlight"><div class="seo-big">5-10K</div><div class="seo-label">هدفنا</div><div class="seo-sub">زيارة عضوية شهرية في السنة الأولى</div></div>
+    </div>
+    <div class="source">المصدر: Ahrefs Site Explorer - مارس 2026</div>
+  </div>
+</section>
+
+<!-- ════════ PHASE 7 & 8 ════════ -->
+<section>
+  <div class="container">
+    <div class="phase-header">
+      <h3>المرحلة 7 و8 - الإعلانات المدفوعة وإنتاج الفيديو</h3>
+    </div>
+    <div class="two-cols" style="margin-bottom:32px;">
+      <div>
+        <h4 style="font-size:17px;font-weight:700;color:var(--red);margin-bottom:14px;">الإعلانات المدفوعة</h4>
+        <div class="step-row"><div class="step-dot"></div><div><div class="step-title">Google Ads</div><div class="step-desc">كلمات مفتاحية عالية النية الشرائية</div></div></div>
+        <div class="step-row"><div class="step-dot"></div><div><div class="step-title">Meta Ads (Instagram/Facebook)</div><div class="step-desc">استهداف الشباب ومحبي القهوة</div></div></div>
+        <div class="step-row"><div class="step-dot"></div><div><div class="step-title">TikTok Ads</div><div class="step-desc">فيديو قصير + Spark Ads</div></div></div>
+        <div class="step-row"><div class="step-dot"></div><div><div class="step-title">Snapchat Ads</div><div class="step-desc">الشريحة السعودية الأكبر</div></div></div>
+      </div>
+      <div>
+        <h4 style="font-size:17px;font-weight:700;color:var(--red);margin-bottom:14px;">إنتاج الفيديو (جلسات دورية)</h4>
+        <p style="font-size:15px;font-weight:600;color:var(--medium);margin-bottom:16px;">بلاك نايت حققت 177 مليون مشاهدة بالمحتوى المرئي.</p>
+        <div class="video-grid">
+          <div class="video-card"><div class="video-num">01</div><div><div class="video-title">فيديو تعريفي بالعلامة</div><div class="video-desc">60-90 ثانية</div></div></div>
+          <div class="video-card"><div class="video-num">02</div><div><div class="video-title">فيديوهات المنتجات</div><div class="video-desc">لكل منتج رئيسي</div></div></div>
+          <div class="video-card"><div class="video-num">03</div><div><div class="video-title">سلسلة "رحلة حبة القهوة"</div><div class="video-desc">تعليمية تثقيفية</div></div></div>
+          <div class="video-card"><div class="video-num">04</div><div><div class="video-title">فيديوهات موسمية</div><div class="video-desc">رمضان، اليوم الوطني، يوم التأسيس</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ TIMELINE ════════ -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>الجدول الزمني - خارطة 6 أشهر</h2>
+      <span class="red-accent"></span>
+    </div>
+    <div class="two-cols">
+      <div class="timeline" style="padding-right:50px;">
+        <div class="timeline-item"><div class="timeline-month">الشهر 1</div><div class="timeline-title">استراتيجية + تسمية</div><div class="timeline-desc">اسم تجاري + استراتيجية + دليل نبرة التواصل</div></div>
+        <div class="timeline-item"><div class="timeline-month">الشهر 2</div><div class="timeline-title">الهوية البصرية</div><div class="timeline-desc">شعار + ألوان + تغليف + Brand Guidelines</div></div>
+        <div class="timeline-item"><div class="timeline-month">الشهر 3</div><div class="timeline-title">المتجر الإلكتروني</div><div class="timeline-desc">متجر جاهز على Salla/Zid + تصوير منتجات</div></div>
+        <div class="timeline-item"><div class="timeline-month">الشهر 3-6</div><div class="timeline-title">التواصل + المحتوى</div><div class="timeline-desc">حسابات مفعّلة + تقويم + أول 30 منشور</div></div>
+        <div class="timeline-item"><div class="timeline-title">SEO + محتوى</div><div class="timeline-desc">5+ مقالات + تحسين تقني</div></div>
+        <div class="timeline-item"><div class="timeline-title">إعلانات + فيديو</div><div class="timeline-desc">حملات Google/Meta/TikTok + فيديو تعريفي</div></div>
+      </div>
+      <div>
+        <h3 style="font-size:22px;font-weight:700;color:var(--red);margin-bottom:20px;">مواسم رئيسية</h3>
+        <div class="seasons-grid">
+          <div class="season-card"><div class="season-dot"></div><div class="season-name">رمضان</div><div class="season-desc">ارتفاع 63% في المبيعات</div></div>
+          <div class="season-card"><div class="season-dot"></div><div class="season-name">اليوم الوطني</div><div class="season-desc">هوية سعودية + عروض</div></div>
+          <div class="season-card"><div class="season-dot"></div><div class="season-name">الصيف</div><div class="season-desc">Cold Brew + مشروبات باردة</div></div>
+          <div class="season-card"><div class="season-dot"></div><div class="season-name">يوم التأسيس</div><div class="season-desc">فرصة تسويقية موسمية</div></div>
+          <div class="season-card"><div class="season-dot"></div><div class="season-name">الشتاء</div><div class="season-desc">ذروة القهوة الساخنة</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ WHY BRANDOLOGY ════════ -->
+<section>
+  <div class="container">
+    <div class="section-header" style="text-align:center;">
+      <h2>لماذا Brandology؟</h2>
+      <span class="red-accent" style="margin:14px auto 0;"></span>
+    </div>
+    <div style="max-width:700px;margin:0 auto;">
+      <div class="why-item"><div class="why-num">1</div><div><div class="why-title">نفهم السوق السعودي بعمق</div><div class="why-desc">بخبرة السنوات وتجارب كبار العملاء</div></div></div>
+      <div class="why-item"><div class="why-num">2</div><div><div class="why-title">نبني من الصفر</div><div class="why-desc">خبرة في تأسيس علامات تجارية من مرحلة الفكرة حتى الإطلاق والنمو.</div></div></div>
+      <div class="why-item"><div class="why-num">3</div><div><div class="why-title">نجمع بين الإبداع والبيانات</div><div class="why-desc">لا نصمم لأن التصميم جميل - بل لأن البيانات تقول إن هذا ما يبحث عنه جمهورك.</div></div></div>
+      <div class="why-item" style="border:none;"><div class="why-num">4</div><div><div class="why-title">فريق متكامل تحت سقف واحد</div><div class="why-desc">استراتيجية + هوية + تطوير + محتوى + SEO + إعلانات</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CTA ════════ -->
+<div class="cta-section">
+  <div class="container">
+    <h2>الخطوة التالية</h2>
+    <div class="cta-sub">جلسة اكتشاف مجانية</div>
+    <p style="font-size:16px;opacity:0.8;margin-bottom:28px;">نقترح جلسة عمل مدتها ساعة نناقش فيها:</p>
+    <div style="max-width:700px;">
+      <div class="cta-item"><div class="cta-num">1</div><div><div class="cta-title">رؤيتك للمشروع</div><div class="cta-desc">ما الذي تتخيله؟ ما القيم التي تريد أن تمثلها علامتك؟</div></div></div>
+      <div class="cta-item"><div class="cta-num">2</div><div><div class="cta-title">نموذج العمل</div><div class="cta-desc">هل تبدأ بالتحميص أم بالتنسيق مع محامص قائمة نبيع منتجاتها في متجرنا؟ بأي منتجات نبدأ؟</div></div></div>
+      <div class="cta-item"><div class="cta-num">3</div><div><div class="cta-title">الميزانية والجدول الزمني</div><div class="cta-desc">تحديد الأولويات بناء على الموارد المتاحة</div></div></div>
+      <div class="cta-item"><div class="cta-num">4</div><div><div class="cta-title">عرض مالي مفصّل</div><div class="cta-desc">بناء على ما نتفق عليه في الجلسة</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ FOOTER ════════ -->
+<footer>
+  <strong>Brandology</strong> | التسويق الرقمي وبناء العلامات التجارية<br>
+  <span style="opacity:0.5;font-size:13px;">مارس 2026 - السعودية</span>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.section-header, .stats-grid, .stat-card, .table-wrap, .insight-box, .cards-grid, .card, .gap-card, .two-cols, .pillar, .seo-compare, .timeline, .seasons-grid, .why-item, .cta-item, .roadmap-grid, .roadmap-grid-2, .roadmap-card, .video-grid, .phase-header, .phase-desc, .case-stats, .reasons-grid, .social-row, .step-row, .about-text, .source, .video-card, .season-card').forEach(el => {
+  el.classList.add('reveal');
+  observer.observe(el);
+});
+
+// Stagger children
+document.querySelectorAll('.stats-grid, .cards-grid, .case-stats, .reasons-grid, .seo-compare, .roadmap-grid, .roadmap-grid-2, .video-grid, .seasons-grid').forEach(grid => {
+  Array.from(grid.children).forEach((child, i) => {
+    child.style.transitionDelay = (i * 0.08) + 's';
+  });
+});
+
+// Animated counter
+function animateCounter(el, target, suffix = '') {
+  const duration = 1200;
+  const start = performance.now();
+  const isFloat = String(target).includes('.');
+
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = isFloat ? (target * eased).toFixed(2) : Math.floor(target * eased);
+    el.textContent = Number(current).toLocaleString() + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.animated) {
+      entry.target.dataset.animated = 'true';
+      const text = entry.target.textContent.trim();
+
+      // Parse the number and suffix
+      const match = text.match(/^([\d,.]+)(.*)/);
+      if (match) {
+        const num = parseFloat(match[1].replace(/,/g, ''));
+        const suffix = match[2];
+        if (!isNaN(num) && num > 0) {
+          animateCounter(entry.target, num, suffix);
+        }
+      }
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat-number, .big, .seo-big').forEach(el => {
+  counterObserver.observe(el);
+});
+</script>
+
+</body>
+</html>
