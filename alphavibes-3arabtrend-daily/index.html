@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alpha Vibes – Daily Sales Tracker</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #0f1117; color: #e0e0e0; min-height: 100vh; }
+    .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 24px 32px; border-bottom: 1px solid #2a2a4a; }
+    .header h1 { font-size: 22px; font-weight: 600; color: #fff; }
+    .header .subtitle { font-size: 13px; color: #888; margin-top: 4px; }
+    .header .last-updated { font-size: 12px; color: #6c6cff; margin-top: 6px; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+    .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; margin-bottom: 28px; }
+    .kpi-card { background: #1a1b26; border: 1px solid #2a2a4a; border-radius: 12px; padding: 16px; text-align: center; }
+    .kpi-card .label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #777; margin-bottom: 6px; }
+    .kpi-card .value { font-size: 26px; font-weight: 700; }
+    .kpi-card .sub { font-size: 11px; color: #666; margin-top: 4px; }
+    .green { color: #4ade80; } .blue { color: #60a5fa; } .red { color: #f87171; } .yellow { color: #fbbf24; } .purple { color: #a78bfa; } .cyan { color: #22d3ee; }
+
+    .chart-section { background: #1a1b26; border: 1px solid #2a2a4a; border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+    .chart-section h2 { font-size: 15px; font-weight: 600; color: #ccc; margin-bottom: 16px; }
+    .chart-container { position: relative; height: 260px; }
+
+    .table-section { background: #1a1b26; border: 1px solid #2a2a4a; border-radius: 12px; overflow: hidden; margin-bottom: 24px; }
+    .table-section h2 { font-size: 15px; font-weight: 600; color: #ccc; padding: 18px 20px 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead th { background: #12121c; padding: 10px 14px; text-align: left; color: #999; font-weight: 500; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; border-bottom: 1px solid #2a2a4a; white-space: nowrap; }
+    tbody td { padding: 10px 14px; border-bottom: 1px solid #1e1e30; white-space: nowrap; }
+    tbody tr:hover { background: #1e1e35; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 500; }
+    .badge-green { background: #064e3b; color: #6ee7b7; }
+    .badge-blue { background: #1e3a5f; color: #93c5fd; }
+    .badge-red { background: #4c1d1d; color: #fca5a5; }
+    .badge-yellow { background: #4a3f1a; color: #fde68a; }
+    .notes-cell { max-width: 220px; overflow: hidden; text-overflow: ellipsis; color: #888; font-size: 12px; }
+    .source-tag { display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 10px; background: #2a2a4a; color: #aaa; }
+
+    .tabs { display: flex; gap: 0; margin-bottom: 0; border-bottom: 1px solid #2a2a4a; padding: 0 20px; }
+    .tab { padding: 12px 20px; font-size: 13px; color: #777; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; }
+    .tab.active { color: #e0e0e0; border-bottom-color: #6c6cff; }
+    .tab:hover { color: #bbb; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    @media (max-width: 768px) {
+      .container { padding: 12px; }
+      .kpi-row { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .chart-container { height: 200px; }
+      table { font-size: 11px; }
+      thead th, tbody td { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Alpha Vibes – Daily Sales Tracker</h1>
+    <div class="subtitle">3arabtrend.com &middot; WooCommerce Order Tracking</div>
+    <div class="last-updated" id="lastUpdated"></div>
+  </div>
+  <div class="container">
+    <div class="kpi-row" id="kpiRow"></div>
+
+    <div class="chart-section">
+      <h2>Daily Orders</h2>
+      <div class="chart-container"><canvas id="ordersChart"></canvas></div>
+    </div>
+
+    <div class="chart-section">
+      <h2>Order Status Breakdown</h2>
+      <div class="chart-container"><canvas id="statusChart"></canvas></div>
+    </div>
+
+    <div class="table-section">
+      <div class="tabs">
+        <div class="tab active" data-tab="daily">Daily Summary</div>
+        <div class="tab" data-tab="orders">Order Log</div>
+      </div>
+      <div class="tab-content active" id="tab-daily">
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Completed</th>
+                <th>Processing</th>
+                <th>Cancelled</th>
+                <th>On Hold</th>
+                <th>Revenue (EGP)</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody id="dailyBody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="tab-content" id="tab-orders">
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Status</th>
+                <th>Total (EGP)</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody id="ordersBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Tabs
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+      });
+    });
+
+    fetch('data.json')
+      .then(r => r.json())
+      .then(data => render(data))
+      .catch(e => {
+        document.querySelector('.container').innerHTML = '<p style="color:#f87171;padding:40px;text-align:center;">Failed to load data.json — ' + e.message + '</p>';
+      });
+
+    function render(data) {
+      const days = data.daily;
+      const orders = data.orders || [];
+      document.getElementById('lastUpdated').textContent = 'Last updated: ' + data.lastUpdated;
+
+      // KPIs
+      const totOrders = days.reduce((s, d) => s + d.totalOrders, 0);
+      const totCompleted = days.reduce((s, d) => s + d.completed, 0);
+      const totCancelled = days.reduce((s, d) => s + d.cancelled, 0);
+      const totProcessing = days.reduce((s, d) => s + d.processing, 0);
+      const totOnHold = days.reduce((s, d) => s + d.onHold, 0);
+      const totRevenue = days.reduce((s, d) => s + d.revenue, 0);
+      const cancelRate = totOrders > 0 ? Math.round((totCancelled / totOrders) * 100) : 0;
+
+      const kpis = [
+        { label: 'Total Orders', value: totOrders, cls: 'purple', sub: days.length + ' days tracked' },
+        { label: 'Revenue', value: 'EGP ' + totRevenue.toLocaleString(), cls: 'cyan', sub: 'Completed orders only' },
+        { label: 'Completed', value: totCompleted, cls: 'green', sub: totOrders > 0 ? Math.round((totCompleted/totOrders)*100) + '% rate' : '' },
+        { label: 'Cancelled', value: totCancelled, cls: 'red', sub: cancelRate + '% cancel rate' },
+        { label: 'Processing', value: totProcessing, cls: 'blue', sub: '' },
+        { label: 'On Hold', value: totOnHold, cls: 'yellow', sub: '' },
+      ];
+      document.getElementById('kpiRow').innerHTML = kpis.map(k =>
+        `<div class="kpi-card"><div class="label">${k.label}</div><div class="value ${k.cls}">${k.value}</div>${k.sub ? `<div class="sub">${k.sub}</div>` : ''}</div>`
+      ).join('');
+
+      // Labels
+      const labels = days.map(d => {
+        const dt = new Date(d.date + 'T00:00:00');
+        return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      });
+
+      // Orders bar chart
+      new Chart(document.getElementById('ordersChart'), {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Total Orders',
+            data: days.map(d => d.totalOrders),
+            backgroundColor: '#6c6cff',
+            borderRadius: 6,
+            barPercentage: 0.6,
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { beginAtZero: true, ticks: { color: '#666', stepSize: 1 }, grid: { color: '#1e1e30' } },
+            x: { ticks: { color: '#888' }, grid: { display: false } }
+          }
+        }
+      });
+
+      // Status stacked chart
+      new Chart(document.getElementById('statusChart'), {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [
+            { label: 'Completed', data: days.map(d => d.completed), backgroundColor: '#4ade80', borderRadius: 4 },
+            { label: 'Processing', data: days.map(d => d.processing), backgroundColor: '#60a5fa', borderRadius: 4 },
+            { label: 'Cancelled', data: days.map(d => d.cancelled), backgroundColor: '#f87171', borderRadius: 4 },
+            { label: 'On Hold', data: days.map(d => d.onHold), backgroundColor: '#fbbf24', borderRadius: 4 },
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { labels: { color: '#aaa', boxWidth: 12, padding: 16 } } },
+          scales: {
+            y: { stacked: true, beginAtZero: true, ticks: { color: '#666', stepSize: 1 }, grid: { color: '#1e1e30' } },
+            x: { stacked: true, ticks: { color: '#888' }, grid: { display: false } }
+          }
+        }
+      });
+
+      // Daily summary table (newest first)
+      document.getElementById('dailyBody').innerHTML = days.slice().reverse().map(d => {
+        const dt = new Date(d.date + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+        return `<tr>
+          <td>${dt}</td>
+          <td><strong>${d.totalOrders}</strong></td>
+          <td>${d.completed ? `<span class="badge badge-green">${d.completed}</span>` : '–'}</td>
+          <td>${d.processing ? `<span class="badge badge-blue">${d.processing}</span>` : '–'}</td>
+          <td>${d.cancelled ? `<span class="badge badge-red">${d.cancelled}</span>` : '–'}</td>
+          <td>${d.onHold ? `<span class="badge badge-yellow">${d.onHold}</span>` : '–'}</td>
+          <td>${d.revenue > 0 ? d.revenue.toLocaleString() : '–'}</td>
+          <td class="notes-cell">${d.notes || '–'}</td>
+        </tr>`;
+      }).join('');
+
+      // Order log table (newest first)
+      const statusBadge = (s) => {
+        const map = { 'Completed': 'badge-green', 'Processing': 'badge-blue', 'Cancelled': 'badge-red', 'On Hold': 'badge-yellow' };
+        return `<span class="badge ${map[s] || ''}">${s}</span>`;
+      };
+      document.getElementById('ordersBody').innerHTML = orders.slice().reverse().map(o => {
+        const dt = new Date(o.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        return `<tr>
+          <td><strong>${o.id}</strong></td>
+          <td>${dt}</td>
+          <td>${o.customer}</td>
+          <td>${statusBadge(o.status)}</td>
+          <td>${o.total.toLocaleString()}</td>
+          <td><span class="source-tag">${o.source}</span></td>
+        </tr>`;
+      }).join('');
+    }
+  </script>
+</body>
+</html>
