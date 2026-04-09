@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تقرير معمل الثقة | مارس 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #E31E24;
+  --yellow: #FFC107;
+  --black: #1A1A1A;
+  --dark: #2D2D2D;
+  --gray: #6B7280;
+  --muted: #9CA3AF;
+  --border: #E5E7EB;
+  --bg: #FAFAFA;
+  --white: #FFFFFF;
+  --green: #22C55E;
+  --green-bg: #F0FDF4;
+  --red-soft: #EF4444;
+  --red-bg: #FEF2F2;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Baloo Bhaijaan 2',system-ui,sans-serif;
+  background:var(--bg);color:var(--black);
+  direction:rtl;-webkit-font-smoothing:antialiased;line-height:1.6;
+}
+
+/* ─── Cover ─── */
+.cover{
+  background:var(--black);min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:80px;position:relative;overflow:hidden;
+}
+.cover::before{content:'';position:absolute;top:0;right:0;left:0;height:5px;background:var(--red)}
+.cover-dot{position:absolute;top:100px;left:80px;width:40px;height:40px;border-radius:50%;background:var(--yellow);opacity:.8}
+.cover h1{font-size:clamp(44px,7vw,76px);font-weight:800;color:var(--white);line-height:1.15;margin-bottom:16px}
+.cover .sub{font-size:24px;font-weight:500;color:var(--muted);margin-bottom:56px}
+.cover .line{width:160px;height:3px;background:var(--red);margin-bottom:56px}
+.cover .brand{margin-top:auto}
+.cover .brand b{font-size:18px;color:var(--white);display:block}
+.cover .brand span{font-size:13px;color:var(--muted)}
+
+/* ─── Shared ─── */
+.w{max-width:1060px;margin:0 auto;padding:0 32px}
+section{padding:72px 0}
+section+section{border-top:1px solid var(--border)}
+.tag{font-size:12px;font-weight:700;color:var(--red);letter-spacing:1.5px;margin-bottom:6px}
+.heading{font-size:32px;font-weight:800;color:var(--black);margin-bottom:6px}
+.desc{font-size:17px;color:var(--gray);margin-bottom:40px}
+
+/* ─── Metrics ─── */
+.mg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px}
+.mg.two{grid-template-columns:1fr 1fr}
+.mc{
+  background:var(--white);border-radius:14px;padding:28px 32px;
+  box-shadow:0 1px 2px rgba(0,0,0,.04);position:relative;overflow:hidden;
+}
+.mc::after{content:'';position:absolute;top:0;right:0;left:0;height:3px;background:var(--red)}
+.mc.y::after{background:var(--yellow)}
+.mc.g::after{background:var(--green)}
+.mc.d::after{background:var(--red-soft)}
+.mc .lbl{font-size:14px;color:var(--gray);font-weight:600;margin-bottom:4px}
+.mc .val{font-size:44px;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}
+.mc .ch{
+  display:inline-block;font-size:14px;font-weight:700;
+  padding:2px 10px;border-radius:6px;margin-top:6px;
+}
+.mc .ch.up{color:var(--green);background:var(--green-bg)}
+.mc .ch.dn{color:var(--red-soft);background:var(--red-bg)}
+.mc .prev{font-size:13px;color:var(--muted);margin-top:4px}
+
+/* ─── Charts ─── */
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.cc{background:var(--white);border-radius:14px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.cc img{width:100%;display:block}
+.cc .cap{padding:16px 24px;border-top:1px solid var(--border)}
+.cc .cap h3{font-size:16px;font-weight:700;margin-bottom:2px}
+.cc .cap p{font-size:13px;color:var(--gray);line-height:1.6}
+
+/* ─── Geo ─── */
+.geo{display:flex;flex-direction:column;gap:14px}
+.gi{display:grid;grid-template-columns:110px 1fr 56px;align-items:center;gap:12px}
+.gi .cn{font-size:15px;font-weight:700;color:var(--dark);text-align:right}
+.bar-t{height:32px;background:#F3F4F6;border-radius:6px;overflow:hidden}
+.bar-f{height:100%;border-radius:6px}
+.gi .pct{font-size:18px;font-weight:800;text-align:left;direction:ltr;font-variant-numeric:tabular-nums}
+
+/* ─── Gender ─── */
+.gr{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px}
+.gc{
+  background:var(--white);border-radius:14px;padding:36px;text-align:center;
+  box-shadow:0 1px 2px rgba(0,0,0,.04);position:relative;overflow:hidden;
+}
+.gc::after{content:'';position:absolute;top:0;right:0;left:0;height:3px}
+.gc.m::after{background:var(--red)}
+.gc.f::after{background:var(--yellow)}
+.gc .pv{font-size:56px;font-weight:800;line-height:1;margin-bottom:4px;font-variant-numeric:tabular-nums}
+.gc.m .pv{color:var(--red)}
+.gc.f .pv{color:var(--yellow)}
+.gc .gl{font-size:20px;font-weight:700;color:var(--dark)}
+.gb{margin-top:20px;height:6px;background:#F3F4F6;border-radius:3px;overflow:hidden}
+.gb div{height:100%;border-radius:3px}
+.at{display:flex;gap:16px;justify-content:center}
+.atg{
+  background:var(--white);border-radius:12px;padding:16px 36px;text-align:center;
+  box-shadow:0 1px 2px rgba(0,0,0,.04);position:relative;overflow:hidden;
+}
+.atg::before{content:'';position:absolute;top:0;right:0;left:0;height:3px}
+.atg:nth-child(1)::before{background:var(--red)}
+.atg:nth-child(2)::before{background:var(--yellow)}
+.atg .rng{font-size:28px;font-weight:800;direction:ltr;font-variant-numeric:tabular-nums}
+.atg .al{font-size:13px;color:var(--gray)}
+
+/* ─── Recs ─── */
+.recs{display:flex;flex-direction:column;gap:16px}
+.rc{
+  background:var(--white);border-radius:14px;padding:28px 32px;
+  box-shadow:0 1px 2px rgba(0,0,0,.04);
+  display:grid;grid-template-columns:1fr 56px;gap:20px;align-items:start;
+  position:relative;overflow:hidden;
+}
+.rc::after{content:'';position:absolute;top:0;left:0;width:3px;height:100%}
+.rc.rg::after{background:var(--green)}
+.rc.rr::after{background:var(--red)}
+.rc.ry::after{background:var(--yellow)}
+.rn{font-size:36px;font-weight:800;line-height:1;text-align:center;direction:ltr;font-variant-numeric:tabular-nums}
+.rg .rn{color:var(--green)}.rr .rn{color:var(--red)}.ry .rn{color:var(--yellow)}
+.rb h3{font-size:18px;font-weight:700;margin-bottom:4px}
+.rb p{font-size:15px;color:var(--gray);line-height:1.6}
+
+/* ─── Footer ─── */
+.footer{
+  background:var(--black);padding:56px 0;text-align:center;position:relative;
+}
+.footer::before{content:'';position:absolute;top:0;right:0;left:0;height:3px;background:var(--red)}
+.footer b{font-size:32px;color:var(--white);display:block}
+.footer .ft{font-size:14px;color:var(--muted);display:block;margin-top:4px}
+.footer .thx{font-size:22px;color:var(--white);margin-top:28px}
+
+@media(max-width:768px){
+  .cover{padding:40px 24px}.w{padding:0 20px}
+  .mg,.cg,.gr{grid-template-columns:1fr}
+  .mg.two{grid-template-columns:1fr}
+  .gi{grid-template-columns:80px 1fr 48px}
+  .at{flex-direction:column;align-items:stretch}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ COVER ═══ -->
+<div class="cover">
+  <div class="cover-dot"></div>
+  <h1>تقرير معمل الثقة</h1>
+  <div class="sub">تقرير الأداء الرقمي | مارس 2026</div>
+  <div class="line"></div>
+  <div class="brand">
+    <b>Brandology</b>
+    <span>Branding it well</span>
+  </div>
+</div>
+
+<!-- ═══ METRICS ═══ -->
+<section>
+<div class="w">
+  <div class="tag">الملخص التنفيذي</div>
+  <div class="heading">أداء مارس 2026</div>
+  <div class="desc">مقارنة بشهر فبراير 2026 على منصة Meta</div>
+
+  <div class="mg">
+    <div class="mc">
+      <div class="lbl">المشاهدات</div>
+      <div class="val">121.9K</div>
+      <div class="ch up">+7.1%</div>
+      <div class="prev">فبراير: 102.7K</div>
+    </div>
+    <div class="mc g">
+      <div class="lbl">المتابعون الجدد</div>
+      <div class="val">19</div>
+      <div class="ch up">+58.3%</div>
+      <div class="prev">فبراير: 11</div>
+    </div>
+    <div class="mc y">
+      <div class="lbl">نقرات الروابط</div>
+      <div class="val">811</div>
+      <div class="ch up">+12.8%</div>
+      <div class="prev">فبراير: 719</div>
+    </div>
+  </div>
+  <div class="mg two">
+    <div class="mc d">
+      <div class="lbl">زيارات الصفحة</div>
+      <div class="val">774</div>
+      <div class="ch dn">-17.7%</div>
+      <div class="prev">فبراير: 870</div>
+    </div>
+    <div class="mc d">
+      <div class="lbl">الرسائل</div>
+      <div class="val">0</div>
+      <div class="ch dn">-100%</div>
+      <div class="prev">فبراير: 2</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ CHARTS ═══ -->
+<section>
+<div class="w">
+  <div class="tag">تفاصيل الأداء</div>
+  <div class="heading">الرسوم البيانية</div>
+  <div class="desc">بيانات Meta Business Suite لشهر مارس</div>
+
+  <div class="cg">
+    <div class="cc">
+      <img src="slide_images/slide_3.png" alt="المشاهدات">
+      <div class="cap">
+        <h3>المشاهدات</h3>
+        <p>121.9 الف مشاهدة. ذروة الأداء بين 20 و 22 مارس بما يقارب 8 الاف مشاهدة يوميا.</p>
+      </div>
+    </div>
+    <div class="cc">
+      <img src="slide_images/slide_4.png" alt="زيارات الصفحة">
+      <div class="cap">
+        <h3>زيارات الصفحة</h3>
+        <p>774 زيارة خلال الشهر. فرصة لتحويل المشاهدات المرتفعة الى زيارات عبر دعوات اجراء اوضح.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cg">
+    <div class="cc">
+      <img src="slide_images/slide_5.png" alt="المتابعون">
+      <div class="cap">
+        <h3>المتابعون الجدد</h3>
+        <p>19 متابع جديد بنمو 58.3%. ذروة المتابعات تتوافق مع ذروة المشاهدات حول 21 و 28 مارس.</p>
+      </div>
+    </div>
+    <div class="cc">
+      <img src="slide_images/slide_6.png" alt="أفضل منشور">
+      <div class="cap">
+        <h3>أفضل منشور</h3>
+        <p>حملة رمضان "صيامك فرصة ذهبية" لفحص السكر التراكمي حققت 113 مشاهدة وتجاوزت متوسط الأداء.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ GEOGRAPHY ═══ -->
+<section>
+<div class="w">
+  <div class="tag">التوزيع الجغرافي</div>
+  <div class="heading">أبرز المدن</div>
+  <div class="desc">توزيع الجمهور حسب المدن الرئيسية</div>
+
+  <div class="geo">
+    <div class="gi">
+      <div class="cn">اسطنبول، تركيا</div>
+      <div class="bar-t"><div class="bar-f" style="width:100%;background:var(--red)"></div></div>
+      <div class="pct">51.1%</div>
+    </div>
+    <div class="gi">
+      <div class="cn">طرابلس، ليبيا</div>
+      <div class="bar-t"><div class="bar-f" style="width:9.4%;background:var(--yellow)"></div></div>
+      <div class="pct">4.8%</div>
+    </div>
+    <div class="gi">
+      <div class="cn">بغداد، العراق</div>
+      <div class="bar-t"><div class="bar-f" style="width:7.6%;background:var(--yellow)"></div></div>
+      <div class="pct">3.9%</div>
+    </div>
+    <div class="gi">
+      <div class="cn">دمشق، سوريا</div>
+      <div class="bar-t"><div class="bar-f" style="width:4.1%;background:var(--yellow)"></div></div>
+      <div class="pct">2.1%</div>
+    </div>
+    <div class="gi">
+      <div class="cn">القاهرة، مصر</div>
+      <div class="bar-t"><div class="bar-f" style="width:3.1%;background:var(--yellow)"></div></div>
+      <div class="pct">1.6%</div>
+    </div>
+    <div class="gi">
+      <div class="cn">حلب، سوريا</div>
+      <div class="bar-t"><div class="bar-f" style="width:2.7%;background:#D1D5DB"></div></div>
+      <div class="pct">1.4%</div>
+    </div>
+    <div class="gi">
+      <div class="cn">عمان، الاردن</div>
+      <div class="bar-t"><div class="bar-f" style="width:2.3%;background:#D1D5DB"></div></div>
+      <div class="pct">1.2%</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ DEMOGRAPHICS ═══ -->
+<section>
+<div class="w">
+  <div class="tag">خصائص الجمهور</div>
+  <div class="heading">الجنس والفئة العمرية</div>
+  <div class="desc">إجمالي المتابعين: 2,030</div>
+
+  <div class="gr">
+    <div class="gc m">
+      <div class="pv">60.7%</div>
+      <div class="gl">ذكور</div>
+      <div class="gb"><div style="width:60.7%;background:var(--red)"></div></div>
+    </div>
+    <div class="gc f">
+      <div class="pv">39.3%</div>
+      <div class="gl">اناث</div>
+      <div class="gb"><div style="width:39.3%;background:var(--yellow)"></div></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-bottom:20px">
+    <div class="tag">الفئات العمرية الأساسية</div>
+  </div>
+  <div class="at">
+    <div class="atg"><div class="rng">25 - 34</div><div class="al">الفئة الأولى</div></div>
+    <div class="atg"><div class="rng">35 - 44</div><div class="al">الفئة الثانية</div></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ NEXT STEPS ═══ -->
+<section>
+<div class="w">
+  <div class="tag">خطة التطوير</div>
+  <div class="heading">الخطوات القادمة</div>
+  <div class="desc">البناء على نتائج مارس لتحقيق نمو اكبر في ابريل</div>
+
+  <div class="recs">
+    <div class="rc rg">
+      <div class="rb">
+        <h3>البناء على نجاح حملات رمضان</h3>
+        <p>حملة "صيامك فرصة ذهبية" تجاوزت المتوسط. نطور سلسلة محتوى صحي موسمي مشابه يربط خدمات المعمل بالمناسبات والمواسم القادمة.</p>
+      </div>
+      <div class="rn">01</div>
+    </div>
+
+    <div class="rc rr">
+      <div class="rb">
+        <h3>تحويل المشاهدات الى زيارات وحجوزات</h3>
+        <p>مع 121.9 الف مشاهدة نضيف دعوات اجراء واضحة في كل منشور مثل "احجز فحصك الان" و "زوروا صفحتنا" لتحويل الاهتمام الى خطوات فعلية.</p>
+      </div>
+      <div class="rn">02</div>
+    </div>
+
+    <div class="rc ry">
+      <div class="rb">
+        <h3>إطلاق حملة رسائل مباشرة</h3>
+        <p>فتح قناة تواصل مباشر مع الجمهور عبر محتوى تفاعلي: استشارات صحية سريعة عبر الرسائل وعروض حصرية لمن يتواصل مباشرة.</p>
+      </div>
+      <div class="rn">03</div>
+    </div>
+
+    <div class="rc rr">
+      <div class="rb">
+        <h3>محتوى مخصص لجمهور اسطنبول</h3>
+        <p>51.1% من الجمهور في اسطنبول. نستثمر هذا التركز بمحتوى يخاطب الجالية العربية هناك ونستكشف إمكانية محتوى ثنائي اللغة.</p>
+      </div>
+      <div class="rn">04</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<div class="footer">
+  <div class="w">
+    <b>Brandology</b>
+    <span class="ft">Branding it well</span>
+    <div class="thx">شكرا لثقتكم</div>
+    <span class="ft" style="margin-top:8px;display:block">تقرير الأداء الرقمي | معمل الثقة | مارس 2026</span>
+  </div>
+</div>
+
+</body>
+</html>
