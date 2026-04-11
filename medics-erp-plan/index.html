@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خطة تطبيق نظام ERP - جمعية الإغاثة الطبية الدولية | Brandology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #e20511;
+  --yellow: #ffcc11;
+  --gray: #bcc6cc;
+  --dark: #1c050a;
+  --dark-red: #6d1114;
+  --white: #ffffff;
+  --light: #f7f8f9;
+  --card-shadow: 0 2px 20px rgba(28,5,10,0.07);
+  --radius: 14px;
+  --transition: .3s ease;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Baloo Bhaijaan 2', sans-serif;
+  background: var(--light);
+  color: var(--dark);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--dark);
+  padding: 0 24px;
+  display: flex; align-items: center; gap: 8px;
+  height: 52px;
+  overflow-x: auto;
+  white-space: nowrap;
+  border-bottom: 3px solid var(--red);
+}
+.nav a {
+  color: var(--gray);
+  text-decoration: none;
+  font-size: .85rem;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+.nav a:hover, .nav a.active { color: var(--white); background: var(--dark-red); }
+.nav .brand-nav { color: var(--red); font-weight: 700; font-size: 1rem; margin-left: 16px; }
+.nav .print-btn {
+  margin-right: auto;
+  background: var(--red);
+  color: white;
+  border: none;
+  padding: 6px 18px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: .85rem;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.nav .print-btn:hover { background: var(--dark-red); }
+
+/* ── LAYOUT ── */
+.section { padding: 60px 24px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.section-label {
+  display: inline-block;
+  background: var(--red);
+  color: white;
+  font-size: .8rem;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  letter-spacing: .5px;
+}
+.section-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.section-subtitle {
+  font-size: 1.05rem;
+  color: #666;
+  margin-bottom: 36px;
+  font-weight: 400;
+}
+.section-dark { background: var(--dark); color: var(--white); }
+.section-dark .section-title { color: var(--white); }
+.section-dark .section-subtitle { color: var(--gray); }
+
+/* ── COVER ── */
+.cover {
+  min-height: 100vh;
+  background: var(--dark);
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 40px 24px;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -100px; left: -100px;
+  width: 400px; height: 400px;
+  background: var(--red);
+  border-radius: 50%;
+  opacity: .08;
+}
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; right: -80px;
+  width: 300px; height: 300px;
+  background: var(--yellow);
+  border-radius: 50%;
+  opacity: .06;
+}
+.cover-content { position: relative; z-index: 1; }
+.cover-brand {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.cover-brand .br { color: var(--red); }
+.cover-brand .ol { color: var(--white); }
+.cover-collab {
+  font-size: 1rem;
+  color: var(--gray);
+  margin-bottom: 48px;
+  font-weight: 500;
+}
+.cover-sun {
+  display: inline-block;
+  width: 18px; height: 18px;
+  background: var(--yellow);
+  border-radius: 50%;
+  margin-bottom: -2px;
+  margin-left: 4px;
+}
+.cover h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+.cover h1 span { color: var(--red); }
+.cover .tagline {
+  font-size: 1.15rem;
+  color: var(--gray);
+  margin-bottom: 48px;
+  font-weight: 400;
+}
+.cover-meta {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  font-size: .85rem;
+  color: #888;
+}
+.cover-meta span { display: flex; align-items: center; gap: 6px; }
+.cover-divider {
+  width: 80px;
+  height: 4px;
+  background: var(--red);
+  margin: 0 auto 48px;
+  border-radius: 2px;
+}
+.cover-client {
+  font-size: 1.2rem;
+  color: var(--yellow);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+/* ── CARDS ── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid #eee;
+  transition: var(--transition);
+}
+.card:hover { box-shadow: 0 6px 30px rgba(28,5,10,0.1); transform: translateY(-2px); }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+@media (max-width: 900px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+.card-icon {
+  width: 48px; height: 48px;
+  background: var(--red);
+  color: white;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+.card-icon.yellow { background: var(--yellow); color: var(--dark); }
+.card-icon.dark { background: var(--dark); }
+.card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+.card-text { font-size: .95rem; color: #555; line-height: 1.7; }
+.card-text ul { padding-right: 18px; margin-top: 6px; }
+.card-text li { margin-bottom: 4px; }
+
+/* ── SCOPE ITEM ── */
+.scope-item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  background: white;
+  padding: 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  border: 1px solid #eee;
+  border-right: 4px solid var(--red);
+}
+.scope-num {
+  flex-shrink: 0;
+  width: 44px; height: 44px;
+  background: var(--red);
+  color: white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+.scope-body h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+.scope-body p { font-size: .93rem; color: #555; margin-bottom: 4px; }
+.scope-body .en { font-size: .8rem; color: #999; font-style: italic; }
+
+/* ── MODULE CARD ── */
+.module-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid #eee;
+  border-top: 4px solid var(--red);
+  transition: var(--transition);
+}
+.module-card:hover { border-top-color: var(--yellow); }
+.module-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+.module-card .en { font-size: .8rem; color: #999; margin-bottom: 12px; display: block; }
+.module-card ul { padding-right: 16px; font-size: .9rem; color: #555; }
+.module-card li { margin-bottom: 3px; }
+.cross-cutting {
+  background: var(--dark);
+  color: white;
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-top: 20px;
+}
+.cross-cutting h3 { color: var(--yellow); margin-bottom: 12px; }
+.cross-badge {
+  display: inline-block;
+  background: var(--dark-red);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: .85rem;
+  font-weight: 600;
+  margin: 4px;
+}
+
+/* ── PHASE ── */
+.phase {
+  margin-bottom: 32px;
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  border: 1px solid #eee;
+  overflow: hidden;
+}
+.phase-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 28px;
+  background: var(--dark);
+  color: white;
+}
+.phase-num {
+  flex-shrink: 0;
+  width: 52px; height: 52px;
+  background: var(--red);
+  color: white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+.phase-header h3 { font-size: 1.2rem; font-weight: 700; }
+.phase-header .dur {
+  margin-right: auto;
+  background: var(--yellow);
+  color: var(--dark);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: .8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.phase-body { padding: 28px; }
+.phase-body h4 {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--red);
+  margin-bottom: 8px;
+  margin-top: 18px;
+}
+.phase-body h4:first-child { margin-top: 0; }
+.phase-body ul { padding-right: 18px; font-size: .93rem; color: #444; }
+.phase-body li { margin-bottom: 4px; }
+.phase-body .objective {
+  background: #fff8e1;
+  border-right: 3px solid var(--yellow);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: .95rem;
+  margin-bottom: 16px;
+  color: #555;
+}
+
+/* ── GANTT ── */
+.gantt-wrapper { overflow-x: auto; margin-top: 24px; }
+.gantt {
+  display: grid;
+  grid-template-columns: 200px repeat(34, 1fr);
+  gap: 2px;
+  min-width: 900px;
+  font-size: .75rem;
+}
+.gantt-header {
+  background: var(--dark);
+  color: white;
+  padding: 8px 6px;
+  text-align: center;
+  font-weight: 600;
+  font-size: .7rem;
+}
+.gantt-label {
+  background: white;
+  padding: 10px 12px;
+  font-weight: 600;
+  font-size: .8rem;
+  display: flex;
+  align-items: center;
+  border: 1px solid #eee;
+}
+.gantt-cell {
+  background: white;
+  border: 1px solid #f0f0f0;
+  min-height: 40px;
+}
+.gantt-cell.active-1 { background: var(--red); }
+.gantt-cell.active-2 { background: #ff6b35; }
+.gantt-cell.active-3 { background: var(--yellow); }
+.gantt-cell.active-4 { background: #4caf50; }
+.gantt-cell.active-5 { background: #2196f3; }
+.gantt-cell.active-6 { background: #9c27b0; }
+.gantt-cell.active-7 { background: var(--gray); }
+.gantt-cell.overlap { opacity: .6; }
+.gantt-milestone {
+  background: var(--dark) !important;
+  position: relative;
+}
+
+/* ── BRANCH ── */
+.branch-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid #eee;
+  text-align: center;
+}
+.branch-card.hq { border: 2px solid var(--red); }
+.branch-flag { font-size: 2.5rem; margin-bottom: 8px; }
+.branch-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+.branch-card .priority {
+  display: inline-block;
+  padding: 2px 12px;
+  border-radius: 12px;
+  font-size: .75rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.priority-1 { background: var(--red); color: white; }
+.priority-2 { background: var(--yellow); color: var(--dark); }
+.priority-3 { background: var(--gray); color: var(--dark); }
+.branch-card .details { font-size: .85rem; color: #666; text-align: right; }
+.branch-card .details dt { font-weight: 600; color: var(--dark); margin-top: 8px; }
+
+/* ── TEAM ── */
+.team-group {
+  margin-bottom: 24px;
+}
+.team-group-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 12px 20px;
+  border-radius: 10px 10px 0 0;
+  color: white;
+}
+.team-group-title.brand { background: var(--red); }
+.team-group-title.client { background: var(--dark); }
+.team-group-title.vendor { background: var(--dark-red); }
+.team-roles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  padding: 16px;
+  background: white;
+  border-radius: 0 0 10px 10px;
+  border: 1px solid #eee;
+  border-top: none;
+}
+.role-card {
+  padding: 14px;
+  background: var(--light);
+  border-radius: 8px;
+  border-right: 3px solid var(--red);
+}
+.role-card h4 { font-size: .95rem; font-weight: 700; margin-bottom: 2px; }
+.role-card .en-role { font-size: .75rem; color: #999; }
+.role-card p { font-size: .8rem; color: #666; margin-top: 6px; }
+
+/* ── TABLE ── */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .9rem;
+  background: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+.data-table th {
+  background: var(--dark);
+  color: white;
+  padding: 14px 16px;
+  font-weight: 600;
+  text-align: right;
+}
+.data-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: top;
+}
+.data-table tr:hover td { background: #fafafa; }
+.data-table .total-row { background: var(--dark); color: white; font-weight: 700; }
+.data-table .total-row td { border: none; }
+
+.badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-size: .78rem;
+  font-weight: 700;
+}
+.badge-high { background: #ffebee; color: var(--red); }
+.badge-med { background: #fff8e1; color: #e65100; }
+.badge-low { background: #e8f5e9; color: #2e7d32; }
+
+/* ── KPI ── */
+.kpi-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  box-shadow: var(--card-shadow);
+  border: 1px solid #eee;
+}
+.kpi-icon { font-size: 2rem; margin-bottom: 8px; }
+.kpi-value { font-size: 1.8rem; font-weight: 800; color: var(--red); }
+.kpi-label { font-size: .85rem; color: #777; margin-top: 4px; }
+
+/* ── BUDGET ── */
+.budget-bar {
+  display: flex;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 36px;
+  margin: 24px 0;
+}
+.budget-bar div {
+  display: flex; align-items: center; justify-content: center;
+  font-size: .7rem; font-weight: 700; color: white;
+}
+
+/* ── NEXT STEPS ── */
+.step-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  margin-bottom: 20px;
+}
+.step-num {
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  background: var(--yellow);
+  color: var(--dark);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+.step-item h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+.step-item p { font-size: .9rem; color: #555; }
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--dark);
+  color: #888;
+  padding: 32px 24px;
+  text-align: center;
+  font-size: .85rem;
+}
+.footer .brand-f { color: var(--red); font-weight: 700; }
+
+/* ── PRINT ── */
+@media print {
+  .nav, .print-btn { display: none !important; }
+  .cover { min-height: auto; padding: 60px 24px; page-break-after: always; }
+  .section { padding: 30px 0; page-break-inside: avoid; }
+  .phase, .card, .module-card, .scope-item { box-shadow: none; border: 1px solid #ddd; }
+  .phase { page-break-inside: avoid; }
+  body { background: white; font-size: 14px; }
+  .gantt-wrapper { overflow: visible; }
+  .gantt { min-width: auto; font-size: .65rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════ NAV ════════════ -->
+<nav class="nav">
+  <span class="brand-nav">B</span>
+  <a href="#summary">الملخص</a>
+  <a href="#client">العميل</a>
+  <a href="#scope">النطاق</a>
+  <a href="#modules">الوحدات</a>
+  <a href="#phases">المراحل</a>
+  <a href="#timeline">الجدول</a>
+  <a href="#branches">الفروع</a>
+  <a href="#team">الفريق</a>
+  <a href="#risks">المخاطر</a>
+  <a href="#kpis">الأداء</a>
+  <a href="#budget">الميزانية</a>
+  <a href="#next">التالي</a>
+  <button class="print-btn" onclick="window.print()">طباعة PDF</button>
+</nav>
+
+<!-- ════════════ COVER ════════════ -->
+<section class="cover" id="cover">
+  <div class="cover-content">
+    <div class="cover-brand">
+      <span class="br">Brand</span><span class="ol">ology</span><span class="cover-sun"></span>
+    </div>
+    <div class="cover-collab">Branding it well</div>
+
+    <div class="cover-divider"></div>
+
+    <div class="cover-client">جمعية الإغاثة الطبية الدولية</div>
+    <div class="cover-collab" style="margin-bottom:32px;">Medics World Wide</div>
+
+    <h1>خطة تطبيق نظام<br><span>الإدارة الإلكترونية (ERP)</span></h1>
+    <p class="tagline">خارطة طريق شاملة للتحول الرقمي على مستوى المؤسسة</p>
+
+    <div class="cover-meta">
+      <span>سري ومحفوظ</span>
+      <span>النسخة 1.0</span>
+      <span>2026</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ EXECUTIVE SUMMARY ════════════ -->
+<section class="section" id="summary">
+  <div class="container">
+    <span class="section-label">01</span>
+    <h2 class="section-title">الملخص التنفيذي</h2>
+    <p class="section-subtitle">نظرة شاملة على المشروع وأهدافه ونطاقه</p>
+
+    <div class="grid-4">
+      <div class="card">
+        <div class="card-icon">1</div>
+        <div class="card-title">المشروع</div>
+        <div class="card-text">تحويل جميع العمليات الإدارية والمالية والبرامجية لجمعية الإغاثة الطبية الدولية إلى نظام إدارة إلكتروني متكامل يربط 6 فروع في 6 دول.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon yellow">2</div>
+        <div class="card-title">النطاق</div>
+        <div class="card-text">يشمل 6 أقسام رئيسية: الموارد البشرية، الإدارة المالية، تنمية الموارد والتسويق، الإعلام، الأرشيف، والمشاريع والبرامج، بالإضافة إلى خدمات مشتركة.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon dark">3</div>
+        <div class="card-title">المدة</div>
+        <div class="card-text">~34 أسبوعا تقديريا (8.5 أشهر) من الاكتشاف حتى انتهاء فترة الدعم، مع تشغيل فعلي متوقع حول الأسبوع 26 واستراتيجية نشر تدريجي تبدأ من المقر الرئيسي. المدة النهائية تعتمد على المزود والمنصة المختارة.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">4</div>
+        <div class="card-title">المنهجية</div>
+        <div class="card-text">نهج تدريجي (Phased Rollout) عبر 7 مراحل واضحة، مع إشراك مستمر لأصحاب المصلحة ومراجعات دورية عند نهاية كل مرحلة.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ CLIENT UNDERSTANDING ════════════ -->
+<section class="section section-dark" id="client">
+  <div class="container">
+    <span class="section-label">02</span>
+    <h2 class="section-title">فهم العميل والسياق</h2>
+    <p class="section-subtitle">من هي جمعية الإغاثة الطبية الدولية ولماذا يُعد هذا المشروع ضرورة استراتيجية</p>
+
+    <div class="grid-2" style="margin-bottom:32px;">
+      <div class="card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">
+        <div class="card-title" style="color:var(--yellow);">عن الجمعية</div>
+        <div class="card-text" style="color:var(--gray);">
+          جمعية الإغاثة الطبية الدولية (Medics World Wide) هي منظمة إنسانية دولية تعمل في مجال الإغاثة الطبية والتنمية الصحية. تعمل عبر 6 فروع في بيئات متنوعة، تتراوح بين مكاتب مستقرة ومناطق نزاع نشطة، مما يفرض تحديات فريدة على أي نظام إدارة إلكتروني.
+        </div>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">
+        <div class="card-title" style="color:var(--yellow);">لماذا الآن؟</div>
+        <div class="card-text" style="color:var(--gray);">
+          <ul style="padding-right:16px;">
+            <li>الاعتماد الكبير على العمليات اليدوية والورقية</li>
+            <li>صعوبة التنسيق والرقابة عبر 6 دول</li>
+            <li>غياب نظام اعتماد إلكتروني للإجراءات</li>
+            <li>تحديات في الأرشفة والبحث واسترجاع الوثائق</li>
+            <li>صعوبة إعداد التقارير الدورية للجهات المانحة</li>
+            <li>الحاجة إلى حوكمة شفافة وسهولة اتخاذ القرار</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="color:var(--yellow);font-size:1.2rem;margin-bottom:16px;">التواجد الجغرافي - 6 فروع نشطة</h3>
+    <div class="grid-3">
+      <div class="card" style="background:rgba(226,5,17,0.15);border-color:var(--red);text-align:center;">
+        <div class="branch-flag">🇹🇷</div>
+        <div class="card-title" style="color:var(--white);">تركيا (المقر الرئيسي)</div>
+        <div style="color:var(--gray);font-size:.85rem;">إسطنبول - مركز العمليات والقرار</div>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);text-align:center;">
+        <div class="branch-flag">🇮🇩</div>
+        <div class="card-title" style="color:var(--white);">إندونيسيا</div>
+        <div style="color:var(--gray);font-size:.85rem;">فرع نشط - اختلاف زمني كبير</div>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);text-align:center;">
+        <div class="branch-flag">🇪🇬</div>
+        <div class="card-title" style="color:var(--white);">مصر</div>
+        <div style="color:var(--gray);font-size:.85rem;">فرع نشط</div>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);text-align:center;">
+        <div class="branch-flag">🇵🇸</div>
+        <div class="card-title" style="color:var(--white);">غزة</div>
+        <div style="color:var(--gray);font-size:.85rem;">منطقة نزاع - تحديات اتصال وبنية تحتية</div>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);text-align:center;">
+        <div class="branch-flag">🇸🇾</div>
+        <div class="card-title" style="color:var(--white);">سوريا</div>
+        <div style="color:var(--gray);font-size:.85rem;">ظروف أمنية متغيرة</div>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);text-align:center;">
+        <div class="branch-flag">🇸🇩</div>
+        <div class="card-title" style="color:var(--white);">السودان</div>
+        <div style="color:var(--gray);font-size:.85rem;">ظروف أمنية وانقطاعات اتصال</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ PROJECT SCOPE ════════════ -->
+<section class="section" id="scope">
+  <div class="container">
+    <span class="section-label">03</span>
+    <h2 class="section-title">نطاق المشروع</h2>
+    <p class="section-subtitle">9 محاور أساسية تغطي دورة الحياة الكاملة للتحول الرقمي، بناء على متطلبات الجمعية</p>
+
+    <div class="scope-item">
+      <div class="scope-num">1</div>
+      <div class="scope-body">
+        <h3>إدارة مشروع التحول الإلكتروني</h3>
+        <span class="en">ERP Project Management</span>
+        <p>تخطيط المشروع الشامل، إدارة المراحل والمعالم، الجدول الزمني التفصيلي، إدارة المخاطر والتبعيات، والتنسيق بين جميع الأطراف (الجمعية، Brandology، المطور). يشمل تقارير أسبوعية ولجنة توجيهية كل أسبوعين.</p>
+      </div>
+    </div>
+
+    <div class="scope-item">
+      <div class="scope-num">2</div>
+      <div class="scope-body">
+        <h3>تأسيس قسم نظم المعلومات</h3>
+        <span class="en">IT/MIS Department Establishment</span>
+        <p>تصميم الهيكل التنظيمي لقسم نظم المعلومات، إعداد الأوصاف الوظيفية (مدير النظام، فني دعم)، وضع خطة التوظيف أو التأهيل الداخلي، وتحديد السياسات والإجراءات التشغيلية للقسم لضمان استدامة النظام بعد الإطلاق.</p>
+      </div>
+    </div>
+
+    <div class="scope-item">
+      <div class="scope-num">3</div>
+      <div class="scope-body">
+        <h3>تحليل العمليات والاحتياجات</h3>
+        <span class="en">Business Process Analysis &amp; Requirements Gathering</span>
+        <p>دراسة الواقع الحالي للعمليات الإدارية والمالية والموارد البشرية والمشاريع عبر جميع الأقسام والفروع. تحديد الاحتياج الفعلي من حيث: شكل النظام (Web/Cloud)، الصلاحيات، التقارير، قابلية التوسع، الأرشفة، التنبيهات والإشعارات، وسير الإجراءات.</p>
+      </div>
+    </div>
+
+    <div class="scope-item">
+      <div class="scope-num">4</div>
+      <div class="scope-body">
+        <h3>اختيار المطور والمنصة المناسبة</h3>
+        <span class="en">Platform Selection &amp; Vendor Evaluation</span>
+        <p>تقييم الخيارات المتاحة: نظام جاهز مع تعديلات (مثل Odoo، ERPNext) أو نظام مطور خصيصا للجمعية. وضع معايير تقييم مرجحة (التكلفة، الدعم العربي، المرونة، قابلية التوسع)، إجراء عروض تجريبية، واتخاذ قرار الاختيار بمشاركة الجمعية.</p>
+      </div>
+    </div>
+
+    <div class="scope-item">
+      <div class="scope-num">5</div>
+      <div class="scope-body">
+        <h3>التنفيذ والتشغيل التجريبي</h3>
+        <span class="en">Implementation &amp; Pilot Phase</span>
+        <p>تهيئة النظام وتخصيصه حسب متطلبات كل قسم، تطوير سير الإجراءات والواجهات، ترحيل البيانات من الأنظمة الحالية، والتشغيل التجريبي في المقر الرئيسي (تركيا) قبل التوسع التدريجي لبقية الفروع.</p>
+      </div>
+    </div>
+
+    <div class="scope-item">
+      <div class="scope-num">6</div>
+      <div class="scope-body">
+        <h3>التدريب وبناء القدرات</h3>
+        <span class="en">Training &amp; Capacity Building</span>
+        <p>برنامج تدريب متكامل يشمل: تدريب المدربين (Train-the-Trainer)، تدريب المستخدمين حسب القسم والدور، تدريب فريق IT الداخلي على إدارة النظام، إعداد أدلة استخدام عربية واضحة، وتسجيلات فيديو مرجعية. نقل المعرفة الكامل للفريق الداخلي.</p>
+      </div>
+    </div>
+
+    <div class="scope-item">
+      <div class="scope-num">7</div>
+      <div class="scope-body">
+        <h3>الاعتماد الإلكتروني وسير الإجراءات</h3>
+        <span class="en">Electronic Approval &amp; Workflow Automation</span>
+        <p>تصميم وتنفيذ مسارات اعتماد إلكتروني رسمي لجميع الإجراءات (موافقات، توقيعات، مسارات اعتماد متعددة المستويات). تتبع كامل لجميع الإجراءات مع سجل تدقيق (Audit Trail)، وتنبيهات وإشعارات إلكترونية آلية مع قواعد تصعيد.</p>
+      </div>
+    </div>
+
+    <div class="scope-item">
+      <div class="scope-num">8</div>
+      <div class="scope-body">
+        <h3>الأرشفة الإلكترونية وإدارة الوثائق</h3>
+        <span class="en">Document Management &amp; Archiving System</span>
+        <p>بناء نظام أرشفة مركزي وآمن يشمل: ربط الوثائق بالمعاملات والمشاريع والمانحين، محرك بحث متقدم واسترجاع سريع، تصنيف وترقيم تلقائي، صلاحيات وصول متدرجة حسب الدور، ودعم المسح الضوئي للوثائق الورقية الحالية.</p>
+      </div>
+    </div>
+
+    <div class="scope-item">
+      <div class="scope-num">9</div>
+      <div class="scope-body">
+        <h3>الدعم الفني والاستدامة</h3>
+        <span class="en">Support, Maintenance &amp; Sustainability</span>
+        <p>فترة دعم فني مكثف (8 أسابيع بعد الإطلاق) تشمل: معالجة الأخطاء والمشكلات الطارئة، تحسين الأداء بناء على الاستخدام الفعلي، التحديثات والصيانة الدورية. إعداد خطة استدامة طويلة الأمد يديرها قسم نظم المعلومات الداخلي.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ MODULES ════════════ -->
+<section class="section" id="modules">
+  <div class="container">
+    <span class="section-label">04</span>
+    <h2 class="section-title">خريطة وحدات النظام</h2>
+    <p class="section-subtitle">6 وحدات رئيسية تغطي أقسام الجمعية، مع خدمات مشتركة عابرة للأقسام</p>
+
+    <div class="grid-2">
+
+      <div class="module-card">
+        <h3>الموارد البشرية</h3>
+        <span class="en">Human Resources (HRMS)</span>
+        <ul>
+          <li>قاعدة بيانات موظفين موحدة عبر 6 دول</li>
+          <li>إدارة العقود المتنوعة (دوام كامل، جزئي، متطوعين، استشاريين)</li>
+          <li>نظام حضور وانصراف إلكتروني</li>
+          <li>إدارة الإجازات والسياسات حسب البلد</li>
+          <li>نظام رواتب متعدد العملات (ليرة تركية، روبية، جنيه، شيكل...)</li>
+          <li>تقييم الأداء الدوري</li>
+          <li>التوظيف وتتبع الطلبات</li>
+          <li>ملفات موظفين إلكترونية (وثائق، شهادات، عقود)</li>
+          <li>إجراءات نهاية الخدمة الإلكترونية</li>
+        </ul>
+      </div>
+
+      <div class="module-card">
+        <h3>الإدارة المالية</h3>
+        <span class="en">Financial Management</span>
+        <ul>
+          <li>دليل حسابات موحد (Chart of Accounts)</li>
+          <li>إدارة ميزانيات حسب المشروع / الفرع / الجهة المانحة</li>
+          <li>تتبع المصروفات والموافقات الإلكترونية</li>
+          <li>إدارة المشتريات (طلبات شراء، أوامر شراء، فواتير)</li>
+          <li>إدارة الأصول الثابتة</li>
+          <li>تقارير مالية داخلية وتقارير مخصصة للمانحين</li>
+          <li>سجل تدقيق كامل (Audit Trail)</li>
+          <li>تسويات بنكية</li>
+          <li>دعم كامل لتعدد العملات</li>
+        </ul>
+      </div>
+
+      <div class="module-card">
+        <h3>تنمية الموارد المالية والتسويق</h3>
+        <span class="en">Donor Relations &amp; Marketing</span>
+        <ul>
+          <li>إدارة علاقات المانحين (Donor CRM)</li>
+          <li>تتبع حملات جمع التبرعات</li>
+          <li>إدارة المنح والمقترحات (Grant Management)</li>
+          <li>تتبع دورة حياة المنحة (من التقديم حتى الإغلاق)</li>
+          <li>تتبع التزامات المانحين وشروطهم</li>
+          <li>إدارة حملات تسويقية</li>
+          <li>تتبع ميزانيات التسويق والحملات</li>
+          <li>تقارير دورية مخصصة لكل مانح</li>
+        </ul>
+      </div>
+
+      <div class="module-card">
+        <h3>الإعلام والعلاقات الإعلامية</h3>
+        <span class="en">Media &amp; Public Relations</span>
+        <ul>
+          <li>إدارة المحتوى الإعلامي (نصوص، صور، فيديو)</li>
+          <li>قاعدة بيانات وسائل الإعلام والصحفيين</li>
+          <li>تتبع التغطيات الإعلامية (Media Monitoring)</li>
+          <li>تنسيق المؤتمرات والفعاليات الإعلامية</li>
+          <li>أرشفة المحتوى الإعلامي</li>
+          <li>جدولة ونشر المحتوى عبر القنوات</li>
+          <li>تتبع ميزانية الأنشطة الإعلامية</li>
+          <li>إدارة الاتصال في حالات الأزمات</li>
+        </ul>
+      </div>
+
+      <div class="module-card">
+        <h3>الأرشيف وإدارة الوثائق</h3>
+        <span class="en">Archive &amp; Document Management (DMS)</span>
+        <ul>
+          <li>نظام أرشفة مركزي (تحويل ورقي ← رقمي)</li>
+          <li>تصنيف وترقيم تلقائي للوثائق</li>
+          <li>محرك بحث متقدم واسترجاع فوري</li>
+          <li>صلاحيات وصول متدرجة حسب الدور</li>
+          <li>ربط الوثائق بالمشاريع والمعاملات والمانحين</li>
+          <li>سياسات احتفاظ بالوثائق (Retention Policy)</li>
+          <li>دعم المسح الضوئي (Scanning)</li>
+          <li>تتبع إصدارات المستندات</li>
+        </ul>
+      </div>
+
+      <div class="module-card">
+        <h3>المشاريع والبرامج</h3>
+        <span class="en">Projects &amp; Programs Management</span>
+        <ul>
+          <li>إدارة دورة حياة المشروع (من التخطيط حتى الإغلاق)</li>
+          <li>تتبع المستفيدين (Beneficiary Tracking)</li>
+          <li>متابعة وتقييم (M&amp;E - Monitoring &amp; Evaluation)</li>
+          <li>مؤشرات أداء (KPIs) لكل مشروع</li>
+          <li>ربط الميزانية بالمشاريع والأنشطة</li>
+          <li>تقارير تقدم المشاريع</li>
+          <li>إدارة مخاطر المشاريع</li>
+          <li>لوحات معلومات تفاعلية (Dashboards)</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="cross-cutting">
+      <h3>الخدمات المشتركة عبر جميع الأقسام</h3>
+      <div>
+        <span class="cross-badge">سير الإجراءات والاعتمادات - Workflows</span>
+        <span class="cross-badge">التقارير ولوحات المعلومات - Reporting</span>
+        <span class="cross-badge">التنبيهات والإشعارات - Notifications</span>
+        <span class="cross-badge">إدارة الصلاحيات - Access Control</span>
+        <span class="cross-badge">سجل التدقيق - Audit Trail</span>
+        <span class="cross-badge">الدعم متعدد اللغات - Multi-language</span>
+        <span class="cross-badge">الدعم متعدد العملات - Multi-currency</span>
+        <span class="cross-badge">الدعم متعدد الفروع - Multi-branch</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ PHASES ════════════ -->
+<section class="section section-dark" id="phases">
+  <div class="container">
+    <span class="section-label">05</span>
+    <h2 class="section-title">مراحل المشروع التفصيلية</h2>
+    <p class="section-subtitle">7 مراحل متسلسلة مقترحة مع مخرجات واضحة ومسؤوليات محددة لكل طرف - المدد تقديرية وتتحدد نهائيا مع المزود</p>
+
+    <!-- Phase 1 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">1</div>
+        <h3>الاكتشاف والتوافق</h3>
+        <span class="dur">أسبوعان تقريبا (الأسبوع 1-2 مقترح)</span>
+      </div>
+      <div class="phase-body">
+        <div class="objective">تأسيس فهم واضح لرؤية الجمعية الاستراتيجية، وتوثيق الوضع الراهن ونقاط الضعف، وتحديد معايير النجاح والقيود قبل الانطلاق في التحليل التفصيلي.</div>
+        <h4>الأنشطة الرئيسية</h4>
+        <ul>
+          <li>اجتماع انطلاق مع الراعي التنفيذي (أ. عماد عمر) لفهم الرؤية والأهداف الاستراتيجية</li>
+          <li>جلسات تعريفية مع مديري الأقسام الستة لفهم طبيعة العمل وتحدياته</li>
+          <li>تقييم أولي للأنظمة الحالية والأدوات المستخدمة في كل قسم</li>
+          <li>تحديد القيود: الميزانية، الجدول الزمني، المتطلبات التنظيمية، البنية التحتية في كل فرع</li>
+          <li>توزيع استبيان تقييم الاحتياجات (ERP Assessment Workbook) على جميع الأقسام والفروع</li>
+          <li>تحديد معايير النجاح القابلة للقياس والعائد المتوقع</li>
+        </ul>
+        <h4>المخرجات</h4>
+        <ul>
+          <li>ميثاق المشروع (Project Charter) معتمد</li>
+          <li>قائمة أصحاب المصلحة ومصفوفة RACI</li>
+          <li>تقرير التقييم الأولي للوضع الراهن</li>
+          <li>خطة التواصل والحوكمة</li>
+        </ul>
+        <h4>مسؤوليات الجمعية</h4>
+        <ul>
+          <li>تخصيص وقت المدير التنفيذي ومديري الأقسام للاجتماعات</li>
+          <li>توفير المستندات الحالية (هيكل تنظيمي، سياسات، تقارير نموذجية، دليل حسابات)</li>
+          <li>تعيين منسق داخلي كنقطة اتصال رئيسية</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">2</div>
+        <h3>تحليل المتطلبات ووثيقة BRD</h3>
+        <span class="dur">4 أسابيع تقديرية (الأسبوع 3-6 مقترح)</span>
+      </div>
+      <div class="phase-body">
+        <div class="objective">توثيق تفصيلي لجميع العمليات الحالية والمطلوبة عبر الأقسام الستة، وإنتاج وثيقة متطلبات الأعمال (BRD) الشاملة التي ستكون مرجعا ملزما لجميع الأطراف.</div>
+        <h4>الأنشطة الرئيسية</h4>
+        <ul>
+          <li>مقابلات معمقة مع كل قسم: الموارد البشرية، الإدارة المالية، تنمية الموارد والتسويق، الإعلام، الأرشيف، المشاريع والبرامج</li>
+          <li>ورش عمل لرسم العمليات الحالية (As-Is) وتصميم العمليات المستقبلية (To-Be)</li>
+          <li>تحليل فجوات بين الواقع الحالي والحالة المطلوبة (Gap Analysis)</li>
+          <li>توثيق سير الإجراءات والاعتمادات: من يبدأ، من يعتمد (مستوى 1، 2، نهائي)، الطريقة الحالية</li>
+          <li>تقييم البنية التحتية في كل فرع (جودة الإنترنت، الأجهزة، الخوادم) - عن بعد حيث يتعذر الزيارة</li>
+          <li>مراجعة متطلبات التقارير الداخلية وتقارير المانحين</li>
+          <li>تصنيف المتطلبات حسب الأولوية (MoSCoW: Must, Should, Could, Won't)</li>
+        </ul>
+        <h4>المخرجات</h4>
+        <ul>
+          <li>وثيقة متطلبات الأعمال (BRD) الشاملة - معتمدة من جميع الأطراف</li>
+          <li>خرائط سير العمليات الحالية والمستقبلية (Process Maps) لكل قسم</li>
+          <li>مصفوفة المتطلبات مع الأولويات</li>
+          <li>تقرير تحليل الفجوات</li>
+          <li>تقرير البنية التحتية لكل فرع</li>
+        </ul>
+        <h4>مسؤوليات الجمعية</h4>
+        <ul>
+          <li>تعيين ممثل من كل قسم كنقطة اتصال (6 ممثلين)</li>
+          <li>تعبئة استبيان التقييم (Assessment Workbook) بالكامل وبدقة</li>
+          <li>توفير نماذج فعلية من المستندات والتقارير والنماذج المستخدمة</li>
+          <li>حضور ورش العمل والمقابلات حسب الجدول المتفق عليه</li>
+          <li>مراجعة واعتماد وثيقة BRD خلال أسبوع من تسليم المسودة</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">3</div>
+        <h3>اختيار المنصة وتأسيس قسم نظم المعلومات</h3>
+        <span class="dur">3 أسابيع تقديرية (الأسبوع 5-7 مقترح) *تداخل جزئي</span>
+      </div>
+      <div class="phase-body">
+        <div class="objective">اختيار المنصة التقنية الأنسب لاحتياجات الجمعية ضمن الميزانية المتاحة، والبدء بتأسيس قسم نظم المعلومات الداخلي الذي سيتولى تشغيل النظام وصيانته مستقبلا.</div>
+        <h4>اختيار المنصة</h4>
+        <ul>
+          <li>تحليل الخيارات: نظام جاهز مع تعديلات (مثل Odoo، ERPNext) مقابل نظام مطور خصيصا</li>
+          <li>وضع معايير تقييم مرجحة: التكلفة الكلية، الدعم العربي والـ RTL، المرونة والتخصيص، قابلية التوسع، المجتمع والدعم الفني، العمل في بيئات محدودة الاتصال</li>
+          <li>طلب عروض من 3-5 مطورين/مزودين</li>
+          <li>تنظيم عروض تجريبية (Demo) لأفضل الخيارات</li>
+          <li>إعداد تقرير مقارنة مرجحة مع توصية واضحة</li>
+        </ul>
+        <h4>تأسيس قسم نظم المعلومات</h4>
+        <ul>
+          <li>تصميم الهيكل التنظيمي للقسم (مدير نظام + فني دعم كحد أدنى)</li>
+          <li>إعداد الأوصاف الوظيفية التفصيلية</li>
+          <li>وضع سياسات وإجراءات تشغيل القسم</li>
+          <li>خطة التوظيف أو تأهيل كوادر حالية</li>
+        </ul>
+        <h4>المخرجات</h4>
+        <ul>
+          <li>تقرير تقييم المنصات (مقارنة مرجحة مع تبرير)</li>
+          <li>قرار اختيار المنصة - معتمد من الراعي التنفيذي</li>
+          <li>عقد مع المطور/المزود المختار</li>
+          <li>هيكل قسم نظم المعلومات والأوصاف الوظيفية</li>
+          <li>خطة التوظيف/التأهيل</li>
+        </ul>
+        <h4>مسؤوليات الجمعية</h4>
+        <ul>
+          <li>حضور العروض التجريبية للمنصات المرشحة</li>
+          <li>اتخاذ قرار الاختيار ضمن الإطار الزمني المحدد</li>
+          <li>الموافقة على هيكل قسم IT والبدء بعملية التوظيف</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Phase 4 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">4</div>
+        <h3>التصميم والتهيئة والتطوير</h3>
+        <span class="dur">12 أسبوعا تقديريا (الأسبوع 8-19 مقترح) - يعتمد على المزود</span>
+      </div>
+      <div class="phase-body">
+        <div class="objective">بناء النظام وتهيئته وتخصيصه حسب متطلبات كل قسم. المنهجية المقترحة: 6 دورات تطوير (Sprints) بمدة أسبوعين لكل دورة، مع عروض توضيحية في نهاية كل دورة. عدد الدورات ومدتها يتحدد نهائيا مع المزود.</div>
+        <h4>الدورة 1-2 (مقترح: الأسبوع 8-11): التأسيس والوحدات الأساسية</h4>
+        <ul>
+          <li>إعداد بيئة التطوير والخوادم السحابية</li>
+          <li>تثبيت النظام والإعداد الأساسي (اللغة العربية، المناطق الزمنية، العملات)</li>
+          <li>إعداد الهيكل التنظيمي والوحدات الإدارية في النظام</li>
+          <li>تهيئة وحدة الموارد البشرية (بيانات الموظفين، العقود، الإجازات)</li>
+          <li>تهيئة وحدة الإدارة المالية (دليل الحسابات، الميزانيات)</li>
+          <li>إعداد نظام الصلاحيات والأدوار</li>
+        </ul>
+        <h4>الدورة 3-4 (مقترح: الأسبوع 12-15): وحدات العمليات</h4>
+        <ul>
+          <li>تهيئة وحدة المشاريع والبرامج (دورة حياة المشروع، المستفيدين، M&E)</li>
+          <li>تهيئة وحدة تنمية الموارد المالية (CRM المانحين، إدارة المنح)</li>
+          <li>بناء سير الإجراءات والاعتمادات الإلكترونية</li>
+          <li>تهيئة نظام الرواتب متعدد العملات</li>
+          <li>إعداد قوالب التقارير (داخلية + تقارير المانحين)</li>
+        </ul>
+        <h4>الدورة 5-6 (مقترح: الأسبوع 16-19): التكامل والتحسين</h4>
+        <ul>
+          <li>تهيئة وحدة الإعلام والعلاقات الإعلامية</li>
+          <li>تهيئة نظام الأرشفة وإدارة الوثائق</li>
+          <li>ترحيل البيانات من الأنظمة الحالية (Excel، ملفات، قواعد بيانات)</li>
+          <li>بناء لوحات المعلومات التفاعلية (Dashboards)</li>
+          <li>التكاملات مع الأنظمة الخارجية (البريد الإلكتروني، التخزين السحابي)</li>
+          <li>اختبارات أولية شاملة ومعالجة الملاحظات</li>
+        </ul>
+        <h4>المخرجات (نهاية كل دورة)</h4>
+        <ul>
+          <li>عرض توضيحي للوظائف المنجزة أمام ممثلي الأقسام</li>
+          <li>تقرير تقدم أسبوعي</li>
+          <li>النظام مهيأ ومختبر مبدئيا بنهاية المرحلة</li>
+        </ul>
+        <h4>مسؤوليات الجمعية</h4>
+        <ul>
+          <li>تعيين مستخدم رئيسي (Super User) من كل قسم للتنسيق والاختبار</li>
+          <li>توفير البيانات اللازمة للترحيل بالصيغ المطلوبة</li>
+          <li>حضور العروض التوضيحية نهاية كل دورة وتقديم ملاحظات خلال 3 أيام</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Phase 5 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">5</div>
+        <h3>الاختبار وضمان الجودة</h3>
+        <span class="dur">3 أسابيع تقديرية (الأسبوع 20-22 مقترح)</span>
+      </div>
+      <div class="phase-body">
+        <div class="objective">ضمان أن النظام يعمل بشكل صحيح وموثوق ويلبي جميع المتطلبات المعتمدة في وثيقة BRD، قبل الانتقال إلى التدريب والإطلاق.</div>
+        <h4>أنواع الاختبار</h4>
+        <ul>
+          <li><strong>اختبار الوحدات (Unit Testing)</strong> - فريق التطوير: اختبار كل وظيفة بشكل مستقل</li>
+          <li><strong>اختبار التكامل (Integration Testing)</strong> - فريق ضمان الجودة: اختبار تدفق البيانات بين الوحدات</li>
+          <li><strong>اختبار قبول المستخدم (UAT)</strong> - ممثلو الأقسام: اختبار سيناريوهات العمل الحقيقية</li>
+          <li><strong>اختبار الأداء</strong> - فريق تقني: اختبار سرعة الاستجابة مع عدد مستخدمين متزامنين</li>
+          <li><strong>اختبار الأمان</strong> - فريق تقني: فحص الصلاحيات والتشفير وحماية البيانات</li>
+        </ul>
+        <h4>معايير القبول للانتقال إلى الإطلاق</h4>
+        <ul>
+          <li>صفر أخطاء حرجة (Critical) أو عالية (High)</li>
+          <li>موافقة UAT مكتوبة من ممثل كل قسم</li>
+          <li>التحقق من صحة البيانات المرحّلة ودقتها</li>
+          <li>اجتياز اختبارات الأمان والصلاحيات</li>
+        </ul>
+        <h4>المخرجات</h4>
+        <ul>
+          <li>تقرير نتائج الاختبار الشامل</li>
+          <li>سجل الأخطاء وحالة معالجتها</li>
+          <li>شهادات اعتماد UAT موقعة من ممثلي الأقسام</li>
+          <li>قرار الموافقة على الإطلاق (Go/No-Go)</li>
+        </ul>
+        <h4>مسؤوليات الجمعية</h4>
+        <ul>
+          <li>تخصيص وقت ممثلي الأقسام (2-3 ساعات يوميا) لاختبار UAT</li>
+          <li>إعداد سيناريوهات اختبار واقعية ببيانات حقيقية</li>
+          <li>الإبلاغ الفوري عن المشكلات والملاحظات</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Phase 6 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">6</div>
+        <h3>التدريب والإطلاق</h3>
+        <span class="dur">4 أسابيع تقديرية (الأسبوع 23-26 مقترح)</span>
+      </div>
+      <div class="phase-body">
+        <div class="objective">تأهيل جميع المستخدمين لاستخدام النظام بكفاءة، وتشغيل النظام تدريجيا بدءا من المقر الرئيسي ثم التوسع للفروع.</div>
+        <h4>مرحلة التدريب (مقترح: الأسبوع 23-24)</h4>
+        <ul>
+          <li>تدريب المدربين (Train-the-Trainer): تأهيل مستخدم رئيسي من كل قسم ليكون مرجعا لزملائه</li>
+          <li>تدريب المستخدمين حسب القسم والدور: جلسات مخصصة لكل قسم تركز على وظائفه</li>
+          <li>تدريب فريق IT الداخلي: إدارة النظام، الصيانة الأساسية، معالجة المشكلات الشائعة</li>
+          <li>إعداد أدلة استخدام عربية واضحة ومصورة لكل وحدة</li>
+          <li>تسجيل فيديوهات تدريبية مرجعية</li>
+        </ul>
+        <h4>الإطلاق التجريبي (Pilot) - متوقع حول الأسبوع 25</h4>
+        <ul>
+          <li>تشغيل النظام في المقر الرئيسي (تركيا) فقط</li>
+          <li>متابعة مكثفة ومعالجة فورية لأي مشكلات</li>
+          <li>جمع ملاحظات المستخدمين الأوائل وإجراء التعديلات اللازمة</li>
+        </ul>
+        <h4>التوسع التدريجي - متوقع حول الأسبوع 26</h4>
+        <ul>
+          <li>إطلاق في الفروع ذات الأولوية الثانية (إندونيسيا، مصر)</li>
+          <li>إطلاق في فروع مناطق النزاع (غزة، سوريا، السودان) مع مراعاة ظروف الاتصال</li>
+          <li>دعم مباشر عن بعد لكل فرع خلال الأسبوع الأول من التشغيل</li>
+        </ul>
+        <h4>المخرجات</h4>
+        <ul>
+          <li>أدلة استخدام مطبوعة/رقمية لكل وحدة</li>
+          <li>تسجيلات فيديو تدريبية</li>
+          <li>شهادات إتمام التدريب</li>
+          <li>النظام يعمل في جميع الفروع</li>
+        </ul>
+        <h4>مسؤوليات الجمعية</h4>
+        <ul>
+          <li>تخصيص أوقات التدريب لجميع الموظفين المعنيين</li>
+          <li>تعيين مدرب داخلي ونقطة اتصال في كل فرع</li>
+          <li>توفير بيئة تدريب مناسبة (قاعة، أجهزة، اتصال)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Phase 7 -->
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">7</div>
+        <h3>الدعم والاستدامة</h3>
+        <span class="dur">8 أسابيع تقديرية (الأسبوع 27-34 مقترح)</span>
+      </div>
+      <div class="phase-body">
+        <div class="objective">ضمان استقرار النظام بعد الإطلاق ونقل المعرفة الكامل لفريق الجمعية الداخلي لضمان الاستدامة طويلة الأمد.</div>
+        <h4>فترة الرعاية المكثفة (Hyper-care) - مقترح: الأسبوع 27-30</h4>
+        <ul>
+          <li>تواجد يومي لفريق الدعم (عن بعد + حضوري حسب الحاجة)</li>
+          <li>معالجة فورية للأخطاء والمشكلات الطارئة</li>
+          <li>مراقبة أداء النظام واستقراره</li>
+          <li>جلسات أسبوعية مع ممثلي الأقسام لجمع الملاحظات</li>
+        </ul>
+        <h4>الدعم العادي ونقل المعرفة - مقترح: الأسبوع 31-34</h4>
+        <ul>
+          <li>تحسين الأداء بناء على أنماط الاستخدام الفعلي</li>
+          <li>تدريب تكميلي للمستخدمين حسب الحاجة</li>
+          <li>نقل المعرفة النهائي لقسم IT الداخلي</li>
+          <li>تسليم وثائق التشغيل والصيانة الكاملة</li>
+          <li>إعداد خطة الاستدامة والتطوير المستقبلي</li>
+        </ul>
+        <h4>المخرجات</h4>
+        <ul>
+          <li>تقرير ما بعد الإطلاق (Post-Launch Report)</li>
+          <li>خطة الاستدامة طويلة الأمد</li>
+          <li>وثائق نقل المعرفة الكاملة (تقنية + تشغيلية)</li>
+          <li>شهادة إغلاق المشروع</li>
+        </ul>
+        <h4>مسؤوليات الجمعية</h4>
+        <ul>
+          <li>تفعيل قسم IT الداخلي بكامل طاقته</li>
+          <li>الإبلاغ الفوري والموثق عن أي مشكلات</li>
+          <li>متابعة تبني المستخدمين وحل مقاومة التغيير داخليا</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ TIMELINE ════════════ -->
+<section class="section" id="timeline">
+  <div class="container">
+    <span class="section-label">06</span>
+    <h2 class="section-title">الجدول الزمني والمعالم الرئيسية</h2>
+    <p class="section-subtitle">نظرة شاملة على التوزيع المقترح للمراحل عبر ~34 أسبوعا تقديريا - المدد النهائية تتحدد بالتنسيق مع المزود</p>
+
+    <div class="gantt-wrapper">
+      <table class="data-table" style="font-size:.8rem;">
+        <thead>
+          <tr>
+            <th style="min-width:180px;">المرحلة</th>
+            <th>الأسابيع (تقديري)</th>
+            <th>المدة (تقديرية)</th>
+            <th>المعلم الرئيسي</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:var(--red);">1.</strong> الاكتشاف والتوافق</td>
+            <td>1 - 2</td>
+            <td>أسبوعان</td>
+            <td>اعتماد ميثاق المشروع</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--red);">2.</strong> تحليل المتطلبات و BRD</td>
+            <td>3 - 6</td>
+            <td>4 أسابيع</td>
+            <td>اعتماد وثيقة BRD</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--red);">3.</strong> اختيار المنصة + تأسيس IT</td>
+            <td>5 - 7</td>
+            <td>3 أسابيع *</td>
+            <td>توقيع عقد المطور + هيكل IT</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--red);">4.</strong> التصميم والتهيئة والتطوير</td>
+            <td>8 - 19</td>
+            <td>12 أسبوعا</td>
+            <td>النظام جاهز للاختبار</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--red);">5.</strong> الاختبار وضمان الجودة</td>
+            <td>20 - 22</td>
+            <td>3 أسابيع</td>
+            <td>قرار Go/No-Go</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--red);">6.</strong> التدريب والإطلاق</td>
+            <td>23 - 26</td>
+            <td>4 أسابيع</td>
+            <td style="color:var(--red);font-weight:700;">الإطلاق الفعلي (Go-Live) &#9733;</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--red);">7.</strong> الدعم والاستدامة</td>
+            <td>27 - 34</td>
+            <td>8 أسابيع</td>
+            <td>إغلاق المشروع ونقل المعرفة</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:16px;font-size:.85rem;color:#888;">
+      * المرحلة 3 تتداخل جزئيا مع نهاية المرحلة 2 (الأسبوعان 5-6 مشتركان) لتوفير الوقت.
+      <br>المدة الإجمالية التقديرية: ~34 أسبوعا (حوالي 8.5 أشهر). الإطلاق المتوقع حول الأسبوع 26 (حوالي 6.5 أشهر).
+      <br><strong>ملاحظة:</strong> جميع المدد الواردة تقديرية وتمثل أفضل تقدير بناء على مشاريع مماثلة. المدد النهائية ستُحدد بالتنسيق مع المطور/المزود المختار.
+    </div>
+
+    <div style="margin-top:24px;padding:20px;background:white;border-radius:var(--radius);border-right:4px solid var(--yellow);box-shadow:var(--card-shadow);">
+      <strong style="color:var(--dark);">استراتيجية النشر التدريجي:</strong>
+      <div style="font-size:.9rem;color:#555;margin-top:8px;">
+        المرحلة الأولى (متوقع حول الأسبوع 25): تشغيل تجريبي في <strong>تركيا (المقر الرئيسي)</strong> فقط
+        &nbsp;→&nbsp;
+        المرحلة الثانية (متوقع حول الأسبوع 26): توسيع إلى <strong>إندونيسيا + مصر</strong>
+        &nbsp;→&nbsp;
+        المرحلة الثالثة (يعتمد على الاستقرار والظروف): توسيع إلى <strong>غزة + سوريا + السودان</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ BRANCHES ════════════ -->
+<section class="section section-dark" id="branches">
+  <div class="container">
+    <span class="section-label">07</span>
+    <h2 class="section-title">استراتيجية الفروع</h2>
+    <p class="section-subtitle">خطة نشر مخصصة لكل فرع تراعي الظروف المحلية والتحديات الخاصة</p>
+
+    <div class="grid-3">
+      <div class="branch-card hq">
+        <div class="branch-flag">🇹🇷</div>
+        <h3>تركيا - إسطنبول</h3>
+        <span class="priority priority-1">أولوية 1 - النشر الأول</span>
+        <dl class="details">
+          <dt>الدور</dt><dd>المقر الرئيسي ومركز القرار</dd>
+          <dt>النشر</dt><dd>متوقع: الأسبوع 25 (تجريبي) → 26 (كامل)</dd>
+          <dt>اللغة</dt><dd>عربي + تركي</dd>
+          <dt>الاعتبارات</dt><dd>بيئة مستقرة، يُستخدم كبيئة اختبار أولى</dd>
+        </dl>
+      </div>
+
+      <div class="branch-card">
+        <div class="branch-flag">🇮🇩</div>
+        <h3>إندونيسيا</h3>
+        <span class="priority priority-2">أولوية 2</span>
+        <dl class="details">
+          <dt>النشر</dt><dd>متوقع: الأسبوع 26</dd>
+          <dt>اللغة</dt><dd>عربي + إنجليزي</dd>
+          <dt>التحديات</dt><dd>فرق زمني كبير (UTC+7)، التدريب يتم عن بعد</dd>
+          <dt>التخفيف</dt><dd>جلسات تدريب في أوقات متوافقة، أدلة فيديو</dd>
+        </dl>
+      </div>
+
+      <div class="branch-card">
+        <div class="branch-flag">🇪🇬</div>
+        <h3>مصر</h3>
+        <span class="priority priority-2">أولوية 2</span>
+        <dl class="details">
+          <dt>النشر</dt><dd>متوقع: الأسبوع 26</dd>
+          <dt>اللغة</dt><dd>عربي</dd>
+          <dt>التحديات</dt><dd>متطلبات تنظيمية محلية محتملة</dd>
+          <dt>التخفيف</dt><dd>مراجعة المتطلبات القانونية في مرحلة التحليل</dd>
+        </dl>
+      </div>
+
+      <div class="branch-card">
+        <div class="branch-flag">🇵🇸</div>
+        <h3>غزة</h3>
+        <span class="priority priority-3">أولوية 3 - ظروف خاصة</span>
+        <dl class="details">
+          <dt>النشر</dt><dd>يعتمد على استقرار النظام والظروف الميدانية</dd>
+          <dt>اللغة</dt><dd>عربي</dd>
+          <dt>التحديات</dt><dd>انقطاعات اتصال متكررة، ظروف أمنية، بنية تحتية محدودة</dd>
+          <dt>التخفيف</dt><dd>وضع عمل بدون اتصال (Offline Mode)، مزامنة تلقائية عند توفر الاتصال، واجهة خفيفة تعمل على اتصال بطيء</dd>
+        </dl>
+      </div>
+
+      <div class="branch-card">
+        <div class="branch-flag">🇸🇾</div>
+        <h3>سوريا</h3>
+        <span class="priority priority-3">أولوية 3 - ظروف خاصة</span>
+        <dl class="details">
+          <dt>النشر</dt><dd>يعتمد على استقرار النظام والظروف الميدانية</dd>
+          <dt>اللغة</dt><dd>عربي</dd>
+          <dt>التحديات</dt><dd>ظروف أمنية متغيرة، صعوبة الوصول</dd>
+          <dt>التخفيف</dt><dd>تدريب عن بعد، وضع Offline، مرونة في جدول النشر</dd>
+        </dl>
+      </div>
+
+      <div class="branch-card">
+        <div class="branch-flag">🇸🇩</div>
+        <h3>السودان</h3>
+        <span class="priority priority-3">أولوية 3 - ظروف خاصة</span>
+        <dl class="details">
+          <dt>النشر</dt><dd>يعتمد على استقرار النظام والظروف الميدانية</dd>
+          <dt>اللغة</dt><dd>عربي</dd>
+          <dt>التحديات</dt><dd>ظروف أمنية، انقطاعات كهرباء واتصال</dd>
+          <dt>التخفيف</dt><dd>وضع Offline، مزامنة دورية، واجهة خفيفة، خطة طوارئ بديلة</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ TEAM ════════════ -->
+<section class="section" id="team">
+  <div class="container">
+    <span class="section-label">08</span>
+    <h2 class="section-title">هيكل فريق المشروع</h2>
+    <p class="section-subtitle">ثلاثة أطراف تعمل بتنسيق تام: Brandology (إدارة المشروع)، الجمعية (الراعي والمستخدمون)، المطور (التنفيذ التقني)</p>
+
+    <div class="team-group">
+      <div class="team-group-title brand">Brandology - إدارة المشروع</div>
+      <div class="team-roles">
+        <div class="role-card">
+          <h4>مدير المشروع</h4>
+          <span class="en-role">Project Manager</span>
+          <p>المسؤولية الشاملة عن التسليم والمخاطر والجدول الزمني والتواصل بين جميع الأطراف. كامل التفرغ طوال مدة المشروع.</p>
+        </div>
+        <div class="role-card">
+          <h4>محلل الأعمال</h4>
+          <span class="en-role">Business Analyst</span>
+          <p>توثيق المتطلبات، إعداد وثيقة BRD، رسم العمليات، تقييم المنصات. مشارك في المراحل 1-3 بشكل رئيسي.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-group">
+      <div class="team-group-title client">جمعية الإغاثة الطبية الدولية</div>
+      <div class="team-roles">
+        <div class="role-card" style="border-right-color:var(--dark);">
+          <h4>الراعي التنفيذي</h4>
+          <span class="en-role">Executive Sponsor</span>
+          <p>صاحب صلاحية الميزانية واتخاذ القرارات الاستراتيجية وحل التصعيدات.</p>
+        </div>
+        <div class="role-card" style="border-right-color:var(--dark);">
+          <h4>المنسق الداخلي</h4>
+          <span class="en-role">Internal Coordinator</span>
+          <p>نقطة الاتصال الرئيسية مع Brandology، ينسق بين الأقسام والفروع.</p>
+        </div>
+        <div class="role-card" style="border-right-color:var(--dark);">
+          <h4>ممثلو الأقسام (6)</h4>
+          <span class="en-role">Department Representatives</span>
+          <p>ممثل من كل قسم: يوفر المتطلبات، يشارك في UAT، يتولى التدريب الداخلي.</p>
+        </div>
+        <div class="role-card" style="border-right-color:var(--dark);">
+          <h4>فريق IT الداخلي</h4>
+          <span class="en-role">Internal IT Team (new)</span>
+          <p>يتم تأسيسه في المرحلة 3. مسؤول عن تشغيل وصيانة النظام بعد الإطلاق.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-group">
+      <div class="team-group-title vendor">المطور / مزود المنصة (يُحدد في المرحلة 3)</div>
+      <div class="team-roles">
+        <div class="role-card" style="border-right-color:var(--dark-red);">
+          <h4>مهندس الحلول</h4>
+          <span class="en-role">Solution Architect</span>
+          <p>التصميم التقني والتكامل وقرارات البنية.</p>
+        </div>
+        <div class="role-card" style="border-right-color:var(--dark-red);">
+          <h4>فريق التطوير</h4>
+          <span class="en-role">Development Team</span>
+          <p>التهيئة والتخصيص والتطوير وترحيل البيانات.</p>
+        </div>
+        <div class="role-card" style="border-right-color:var(--dark-red);">
+          <h4>أخصائي ضمان الجودة</h4>
+          <span class="en-role">QA Specialist</span>
+          <p>خطة الاختبار، إدارة العيوب، موافقة الإطلاق.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;padding:20px;background:white;border-radius:var(--radius);box-shadow:var(--card-shadow);border-right:4px solid var(--yellow);font-size:.9rem;color:#555;">
+      <strong style="color:var(--dark);">آلية الحوكمة:</strong>
+      لجنة توجيهية كل أسبوعين (الراعي التنفيذي + مدير المشروع) &nbsp;|&nbsp;
+      تقرير مدير المشروع الأسبوعي &nbsp;|&nbsp;
+      اجتماع يومي قصير (15 دقيقة) خلال مرحلة التطوير &nbsp;|&nbsp;
+      مراجعة عند نهاية كل مرحلة (Gate Review)
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ RISKS ════════════ -->
+<section class="section section-dark" id="risks">
+  <div class="container">
+    <span class="section-label">09</span>
+    <h2 class="section-title">إدارة المخاطر</h2>
+    <p class="section-subtitle">تحليل المخاطر الرئيسية الخاصة بمنظمة إنسانية دولية تعمل في مناطق نزاع، مع استراتيجيات التخفيف</p>
+
+    <div style="overflow-x:auto;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:25%;">المخاطرة</th>
+            <th style="width:10%;">التأثير</th>
+            <th style="width:10%;">الاحتمال</th>
+            <th style="width:55%;">استراتيجية التخفيف</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>ظروف أمنية في مناطق النزاع</strong><br><span style="font-size:.8rem;color:#999;">(غزة، سوريا، السودان)</span></td>
+            <td><span class="badge badge-high">عال</span></td>
+            <td><span class="badge badge-high">عال</span></td>
+            <td>تصميم النظام للعمل مع انقطاعات الاتصال (Offline Mode مع مزامنة). نشر متأخر ومرن لهذه الفروع. خطة طوارئ بديلة لكل فرع.</td>
+          </tr>
+          <tr>
+            <td><strong>مقاومة تبني المستخدمين</strong><br><span style="font-size:.8rem;color:#999;">الانتقال من ورقي/يدوي إلى إلكتروني</span></td>
+            <td><span class="badge badge-med">متوسط</span></td>
+            <td><span class="badge badge-high">عال</span></td>
+            <td>إشراك ممثلي الأقسام من المرحلة الأولى. تدريب تدريجي ومتكرر. تعيين "سفراء تغيير" داخليين. دعم الإدارة التنفيذية للتبني.</td>
+          </tr>
+          <tr>
+            <td><strong>توسع النطاق غير المخطط</strong><br><span style="font-size:.8rem;color:#999;">Scope Creep</span></td>
+            <td><span class="badge badge-high">عال</span></td>
+            <td><span class="badge badge-high">عال</span></td>
+            <td>وثيقة BRD معتمدة كمرجع ملزم. إجراء رسمي للتحكم بالتغيير (Change Control) يتطلب موافقة اللجنة التوجيهية. تصنيف MoSCoW صارم.</td>
+          </tr>
+          <tr>
+            <td><strong>قيود الميزانية</strong><br><span style="font-size:.8rem;color:#999;">تجاوز التكلفة المتاحة</span></td>
+            <td><span class="badge badge-high">عال</span></td>
+            <td><span class="badge badge-med">متوسط</span></td>
+            <td>أولوية صارمة للمتطلبات (Must vs Should vs Could). مراجعة مالية شهرية. احتياطي طوارئ 10%. تفضيل حلول مفتوحة المصدر لتقليل تكاليف التراخيص.</td>
+          </tr>
+          <tr>
+            <td><strong>ضعف البنية التحتية في بعض الفروع</strong><br><span style="font-size:.8rem;color:#999;">إنترنت ضعيف، أجهزة قديمة</span></td>
+            <td><span class="badge badge-med">متوسط</span></td>
+            <td><span class="badge badge-high">عال</span></td>
+            <td>نظام سحابي بواجهة خفيفة تعمل على اتصال بطيء. وضع Offline للعمليات الأساسية. تقييم مسبق للبنية التحتية في كل فرع وتحديث الأجهزة حسب الحاجة.</td>
+          </tr>
+          <tr>
+            <td><strong>تأخر في تقديم البيانات والمستندات</strong><br><span style="font-size:.8rem;color:#999;">من الأقسام والفروع</span></td>
+            <td><span class="badge badge-med">متوسط</span></td>
+            <td><span class="badge badge-high">عال</span></td>
+            <td>مواعيد نهائية واضحة ومتفق عليها. متابعة أسبوعية من المنسق الداخلي. تصعيد للراعي التنفيذي عند التأخر أكثر من أسبوع.</td>
+          </tr>
+          <tr>
+            <td><strong>تعقيد التعامل مع عملات وتنظيمات متعددة</strong><br><span style="font-size:.8rem;color:#999;">6 دول بأنظمة مختلفة</span></td>
+            <td><span class="badge badge-med">متوسط</span></td>
+            <td><span class="badge badge-med">متوسط</span></td>
+            <td>تحليل مسبق لمتطلبات كل دولة (ضرائب، عملة، تنظيمات) في مرحلة المتطلبات. اختيار منصة تدعم Multi-currency و Multi-entity أصلا.</td>
+          </tr>
+          <tr>
+            <td><strong>فقدان موارد رئيسية</strong><br><span style="font-size:.8rem;color:#999;">استقالة مدير قسم أو فني</span></td>
+            <td><span class="badge badge-med">متوسط</span></td>
+            <td><span class="badge badge-low">منخفض</span></td>
+            <td>توثيق شامل لجميع المعارف والقرارات. تدريب متقاطع (Cross-training). عدم الاعتماد على شخص واحد في أي دور حرج.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ KPIs ════════════ -->
+<section class="section" id="kpis">
+  <div class="container">
+    <span class="section-label">10</span>
+    <h2 class="section-title">مؤشرات الأداء والنجاح</h2>
+    <p class="section-subtitle">معايير قابلة للقياس لتقييم نجاح المشروع خلال تنفيذه وبعد الإطلاق</p>
+
+    <div class="grid-3">
+      <div class="kpi-card">
+        <div class="kpi-icon">&#128197;</div>
+        <div class="kpi-value">&#8804; 10%</div>
+        <div class="kpi-label">انحراف عن الجدول الزمني<br>عن المعالم المتفق عليها</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">&#128176;</div>
+        <div class="kpi-value">100%</div>
+        <div class="kpi-label">الالتزام بالميزانية<br>ضمن الميزانية المعتمدة</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">&#9989;</div>
+        <div class="kpi-value">&#8805; 90%</div>
+        <div class="kpi-label">نسبة اجتياز UAT<br>حالات الاختبار الناجحة</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">&#128101;</div>
+        <div class="kpi-value">&#8805; 80%</div>
+        <div class="kpi-label">تبني المستخدمين<br>استخدام نشط خلال 60 يوما</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">&#128190;</div>
+        <div class="kpi-value">&#8805; 98%</div>
+        <div class="kpi-label">دقة البيانات المرحّلة<br>من الأنظمة الحالية</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">&#128736;</div>
+        <div class="kpi-value">0</div>
+        <div class="kpi-label">أخطاء حرجة بعد الإطلاق<br>خلال أول 30 يوما</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ BUDGET ════════════ -->
+<section class="section section-dark" id="budget">
+  <div class="container">
+    <span class="section-label">11</span>
+    <h2 class="section-title">الإطار المالي</h2>
+    <p class="section-subtitle">التوزيع التقديري للاستثمار حسب محاور المشروع - الأرقام تقديرية وقابلة للتعديل</p>
+
+    <div style="overflow-x:auto;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>البند</th>
+            <th>النطاق التقديري</th>
+            <th>النسبة</th>
+            <th>ملاحظات</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>إدارة المشروع</strong><br><span style="font-size:.8rem;color:#999;">PM + محلل أعمال</span></td>
+            <td>$18,000 - $22,000</td>
+            <td>~22%</td>
+            <td>طوال مدة المشروع (~34 أسبوعا تقديريا)</td>
+          </tr>
+          <tr>
+            <td><strong>التحليل والاستشارات</strong><br><span style="font-size:.8rem;color:#999;">المراحل 1-3</span></td>
+            <td>$8,000 - $12,000</td>
+            <td>~11%</td>
+            <td>يشمل تقييم المنصات وإعداد BRD وتأسيس قسم IT</td>
+          </tr>
+          <tr>
+            <td><strong>تراخيص المنصة والبنية التحتية</strong><br><span style="font-size:.8rem;color:#999;">السنة الأولى</span></td>
+            <td>$3,000 - $6,000</td>
+            <td>~5%</td>
+            <td>يعتمد على المنصة المختارة (مفتوحة المصدر = تكلفة أقل)</td>
+          </tr>
+          <tr>
+            <td><strong>التطوير والتخصيص</strong><br><span style="font-size:.8rem;color:#999;">المرحلة 4</span></td>
+            <td>$25,000 - $30,000</td>
+            <td>~30%</td>
+            <td>تهيئة 6 وحدات + سير إجراءات + تقارير + تكاملات</td>
+          </tr>
+          <tr>
+            <td><strong>ترحيل البيانات</strong></td>
+            <td>$4,000 - $6,000</td>
+            <td>~5%</td>
+            <td>تنظيف وتحويل وترحيل البيانات من الأنظمة الحالية</td>
+          </tr>
+          <tr>
+            <td><strong>التدريب وبناء القدرات</strong><br><span style="font-size:.8rem;color:#999;">المرحلة 6</span></td>
+            <td>$5,000 - $8,000</td>
+            <td>~7%</td>
+            <td>تدريب المدربين + تدريب المستخدمين + أدلة + فيديوهات</td>
+          </tr>
+          <tr>
+            <td><strong>الدعم الفني بعد الإطلاق</strong><br><span style="font-size:.8rem;color:#999;">المرحلة 7</span></td>
+            <td>$5,000 - $7,000</td>
+            <td>~7%</td>
+            <td>8 أسابيع دعم مكثف + نقل معرفة</td>
+          </tr>
+          <tr>
+            <td><strong>احتياطي طوارئ</strong></td>
+            <td>$7,000 - $9,000</td>
+            <td>~10%</td>
+            <td>للتعامل مع المتغيرات غير المتوقعة</td>
+          </tr>
+          <tr class="total-row">
+            <td><strong>الإجمالي التقديري</strong></td>
+            <td><strong>$75,000 - $100,000</strong></td>
+            <td><strong>100%</strong></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:20px;font-size:.85rem;color:var(--gray);">
+      <strong style="color:var(--yellow);">ملاحظات مهمة:</strong>
+      <ul style="padding-right:18px;margin-top:6px;">
+        <li>الأرقام تقديرية أولية وتُحدد بدقة بعد اعتماد وثيقة المتطلبات (BRD) واختيار المنصة</li>
+        <li>تفضيل المنصات مفتوحة المصدر (Odoo Community، ERPNext) يقلل تكاليف التراخيص بشكل كبير</li>
+        <li>آلية الدفع: على دفعات مرتبطة بمعالم محددة (Milestone-based payments)</li>
+        <li>لا تشمل التقديرات: تكاليف الأجهزة الجديدة (إن لزمت)، أو رواتب فريق IT الداخلي</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ NEXT STEPS ════════════ -->
+<section class="section" id="next">
+  <div class="container">
+    <span class="section-label">12</span>
+    <h2 class="section-title">الخطوات التالية</h2>
+    <p class="section-subtitle">4 إجراءات فورية للانطلاق في المشروع</p>
+
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div>
+        <h3>الاتفاق على ميثاق المشروع ونموذج الحوكمة</h3>
+        <p>مراجعة هذه الخطة واعتمادها، والاتفاق على هيكل الحوكمة (اللجنة التوجيهية، آلية التقارير، إجراء التحكم بالتغيير). توقيع اتفاقية السرية وعقد المشروع.</p>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div>
+        <h3>جدولة اجتماع الاكتشاف مع الراعي التنفيذي</h3>
+        <p>تحديد موعد اجتماع الانطلاق الرسمي مع أ. عماد عمر ومديري الأقسام الرئيسيين. هذا الاجتماع يمثل البداية الفعلية للمرحلة الأولى.</p>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div>
+        <h3>تأكيد فريق المشروع وممثلي الأقسام</h3>
+        <p>تعيين منسق داخلي كنقطة اتصال رئيسية، وتسمية ممثل من كل قسم من الأقسام الستة (الموارد البشرية، الإدارة المالية، تنمية الموارد والتسويق، الإعلام، الأرشيف، المشاريع والبرامج).</p>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div>
+        <h3>البدء بتعبئة استبيان تقييم الاحتياجات</h3>
+        <p>توزيع استبيان تقييم الاحتياجات (ERP Assessment Workbook) على جميع الأقسام والفروع، مع تحديد موعد نهائي للتسليم خلال أسبوعين من توزيعه. جودة هذه المدخلات تحدد جودة وثيقة المتطلبات.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;text-align:center;padding:40px;background:white;border-radius:var(--radius);box-shadow:var(--card-shadow);">
+      <div style="font-size:1.6rem;font-weight:800;color:var(--dark);margin-bottom:8px;">نتطلع للعمل معكم في هذا التحول</div>
+      <div style="font-size:1rem;color:#777;margin-bottom:20px;">فريق Brandology جاهز للانطلاق فور اعتماد الخطة</div>
+      <div style="display:inline-flex;align-items:center;gap:8px;">
+        <span style="color:var(--red);font-weight:800;font-size:1.3rem;">Brand</span><span style="color:var(--dark);font-weight:800;font-size:1.3rem;">ology</span>
+        <span style="display:inline-block;width:12px;height:12px;background:var(--yellow);border-radius:50%;"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer class="footer">
+  <div class="container">
+    <span class="brand-f">Brandology</span> &copy; 2026 - جميع الحقوق محفوظة
+    <br>
+    <span style="font-size:.8rem;">سري ومحفوظ - لا يجوز توزيع هذه الوثيقة أو نسخها دون إذن خطي مسبق</span>
+  </div>
+</footer>
+
+<script>
+// Smooth scroll for nav links
+document.querySelectorAll('.nav a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+// Highlight active nav link on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav a[href^="#"]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+</body>
+</html>
