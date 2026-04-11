@@ -51,7 +51,18 @@ body {
   flex-shrink: 0;
 }
 .nav a:hover, .nav a.active { color: var(--white); background: var(--dark-red); }
-.nav .brand-nav { color: var(--red); font-weight: 700; font-size: 1rem; margin-left: 16px; }
+.nav .brand-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 16px;
+  padding: 4px 10px;
+  background: rgba(255,255,255,0.96);
+  border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+  flex-shrink: 0;
+}
+.nav .brand-nav img { display: block; width: 72px; height: auto; }
 
 /* ── LAYOUT ── */
 .section { padding: 60px 24px; }
@@ -114,25 +125,24 @@ body {
 }
 .cover-content { position: relative; z-index: 1; }
 .cover-brand {
-  font-size: 2.2rem;
-  font-weight: 800;
-  margin-bottom: 4px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
 }
-.cover-brand .br { color: var(--red); }
-.cover-brand .ol { color: var(--white); }
+.cover-brand img {
+  display: block;
+  width: min(260px, 72vw);
+  height: auto;
+  background: rgba(255,255,255,0.96);
+  border-radius: 28px;
+  padding: 18px 22px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+}
 .cover-collab {
   font-size: 1rem;
   color: var(--gray);
   margin-bottom: 48px;
   font-weight: 500;
-}
-.cover-sun {
-  display: inline-block;
-  width: 18px; height: 18px;
-  background: var(--yellow);
-  border-radius: 50%;
-  margin-bottom: -2px;
-  margin-left: 4px;
 }
 .cover h1 {
   font-size: 2.8rem;
@@ -477,19 +487,6 @@ body {
 .kpi-value { font-size: 1.8rem; font-weight: 800; color: var(--red); }
 .kpi-label { font-size: .85rem; color: #777; margin-top: 4px; }
 
-/* ── BUDGET ── */
-.budget-bar {
-  display: flex;
-  border-radius: 8px;
-  overflow: hidden;
-  height: 36px;
-  margin: 24px 0;
-}
-.budget-bar div {
-  display: flex; align-items: center; justify-content: center;
-  font-size: .7rem; font-weight: 700; color: white;
-}
-
 /* ── NEXT STEPS ── */
 .step-item {
   display: flex; gap: 16px; align-items: flex-start;
@@ -516,7 +513,21 @@ body {
   text-align: center;
   font-size: .85rem;
 }
-.footer .brand-f { color: var(--red); font-weight: 700; }
+.cta-logo {
+  display: block;
+  width: 150px;
+  height: auto;
+  margin: 0 auto;
+}
+.footer-logo {
+  display: block;
+  width: 140px;
+  height: auto;
+  margin: 0 auto 12px;
+  background: rgba(255,255,255,0.96);
+  border-radius: 20px;
+  padding: 12px 18px;
+}
 
 /* ── PRINT ── */
 @media print {
@@ -535,7 +546,7 @@ body {
 
 <!-- ════════════ NAV ════════════ -->
 <nav class="nav">
-  <span class="brand-nav">B</span>
+  <span class="brand-nav"><img src="assets/brandology-logo.png" alt="Brandology logo"></span>
   <a href="#summary">الملخص</a>
   <a href="#client">العميل</a>
   <a href="#scope">النطاق</a>
@@ -546,7 +557,6 @@ body {
   <a href="#team">الفريق</a>
   <a href="#risks">المخاطر</a>
   <a href="#kpis">الأداء</a>
-  <a href="#budget">الميزانية</a>
   <a href="#next">التالي</a>
 </nav>
 
@@ -554,7 +564,7 @@ body {
 <section class="cover" id="cover">
   <div class="cover-content">
     <div class="cover-brand">
-      <span class="br">Brand</span><span class="ol">ology</span><span class="cover-sun"></span>
+      <img src="assets/brandology-logo.png" alt="Brandology logo">
     </div>
     <div class="cover-collab">Branding it well</div>
 
@@ -1537,98 +1547,10 @@ body {
   </div>
 </section>
 
-<!-- ════════════ BUDGET ════════════ -->
-<section class="section section-dark" id="budget">
-  <div class="container">
-    <span class="section-label">11</span>
-    <h2 class="section-title">الإطار المالي</h2>
-    <p class="section-subtitle">التوزيع التقديري للاستثمار حسب محاور المشروع - الأرقام تقديرية وقابلة للتعديل</p>
-
-    <div style="overflow-x:auto;">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>البند</th>
-            <th>النطاق التقديري</th>
-            <th>النسبة</th>
-            <th>ملاحظات</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>إدارة المشروع</strong><br><span style="font-size:.8rem;color:#999;">PM + محلل أعمال</span></td>
-            <td>$18,000 - $22,000</td>
-            <td>~22%</td>
-            <td>طوال مدة المشروع (~34 أسبوعا تقديريا)</td>
-          </tr>
-          <tr>
-            <td><strong>التحليل والاستشارات</strong><br><span style="font-size:.8rem;color:#999;">المراحل 1-3</span></td>
-            <td>$8,000 - $12,000</td>
-            <td>~11%</td>
-            <td>يشمل تقييم المنصات وإعداد BRD وتأسيس قسم IT</td>
-          </tr>
-          <tr>
-            <td><strong>تراخيص المنصة والبنية التحتية</strong><br><span style="font-size:.8rem;color:#999;">السنة الأولى</span></td>
-            <td>$3,000 - $6,000</td>
-            <td>~5%</td>
-            <td>يعتمد على المنصة المختارة (مفتوحة المصدر = تكلفة أقل)</td>
-          </tr>
-          <tr>
-            <td><strong>التطوير والتخصيص</strong><br><span style="font-size:.8rem;color:#999;">المرحلة 4</span></td>
-            <td>$25,000 - $30,000</td>
-            <td>~30%</td>
-            <td>تهيئة 6 وحدات + سير إجراءات + تقارير + تكاملات</td>
-          </tr>
-          <tr>
-            <td><strong>ترحيل البيانات</strong></td>
-            <td>$4,000 - $6,000</td>
-            <td>~5%</td>
-            <td>تنظيف وتحويل وترحيل البيانات من الأنظمة الحالية</td>
-          </tr>
-          <tr>
-            <td><strong>التدريب وبناء القدرات</strong><br><span style="font-size:.8rem;color:#999;">المرحلة 6</span></td>
-            <td>$5,000 - $8,000</td>
-            <td>~7%</td>
-            <td>تدريب المدربين + تدريب المستخدمين + أدلة + فيديوهات</td>
-          </tr>
-          <tr>
-            <td><strong>الدعم الفني بعد الإطلاق</strong><br><span style="font-size:.8rem;color:#999;">المرحلة 7</span></td>
-            <td>$5,000 - $7,000</td>
-            <td>~7%</td>
-            <td>8 أسابيع دعم مكثف + نقل معرفة</td>
-          </tr>
-          <tr>
-            <td><strong>احتياطي طوارئ</strong></td>
-            <td>$7,000 - $9,000</td>
-            <td>~10%</td>
-            <td>للتعامل مع المتغيرات غير المتوقعة</td>
-          </tr>
-          <tr class="total-row">
-            <td><strong>الإجمالي التقديري</strong></td>
-            <td><strong>$75,000 - $100,000</strong></td>
-            <td><strong>100%</strong></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div style="margin-top:20px;font-size:.85rem;color:var(--gray);">
-      <strong style="color:var(--yellow);">ملاحظات مهمة:</strong>
-      <ul style="padding-right:18px;margin-top:6px;">
-        <li>الأرقام تقديرية أولية وتُحدد بدقة بعد اعتماد وثيقة المتطلبات (BRD) واختيار المنصة</li>
-        <li>تفضيل المنصات مفتوحة المصدر (Odoo Community، ERPNext) يقلل تكاليف التراخيص بشكل كبير</li>
-        <li>آلية الدفع: على دفعات مرتبطة بمعالم محددة (Milestone-based payments)</li>
-        <li>لا تشمل التقديرات: تكاليف الأجهزة الجديدة (إن لزمت)، أو رواتب فريق IT الداخلي</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
 <!-- ════════════ NEXT STEPS ════════════ -->
 <section class="section" id="next">
   <div class="container">
-    <span class="section-label">12</span>
+    <span class="section-label">11</span>
     <h2 class="section-title">الخطوات التالية</h2>
     <p class="section-subtitle">4 إجراءات فورية للانطلاق في المشروع</p>
 
@@ -1667,10 +1589,7 @@ body {
     <div style="margin-top:40px;text-align:center;padding:40px;background:white;border-radius:var(--radius);box-shadow:var(--card-shadow);">
       <div style="font-size:1.6rem;font-weight:800;color:var(--dark);margin-bottom:8px;">نتطلع للعمل معكم في هذا التحول</div>
       <div style="font-size:1rem;color:#777;margin-bottom:20px;">فريق Brandology جاهز للانطلاق فور اعتماد الخطة</div>
-      <div style="display:inline-flex;align-items:center;gap:8px;">
-        <span style="color:var(--red);font-weight:800;font-size:1.3rem;">Brand</span><span style="color:var(--dark);font-weight:800;font-size:1.3rem;">ology</span>
-        <span style="display:inline-block;width:12px;height:12px;background:var(--yellow);border-radius:50%;"></span>
-      </div>
+      <img class="cta-logo" src="assets/brandology-logo.png" alt="Brandology logo">
     </div>
   </div>
 </section>
@@ -1678,7 +1597,8 @@ body {
 <!-- ════════════ FOOTER ════════════ -->
 <footer class="footer">
   <div class="container">
-    <span class="brand-f">Brandology</span> &copy; 2026 - جميع الحقوق محفوظة
+    <img class="footer-logo" src="assets/brandology-logo.png" alt="Brandology logo">
+    &copy; 2026 - جميع الحقوق محفوظة
     <br>
     <span style="font-size:.8rem;">سري ومحفوظ - لا يجوز توزيع هذه الوثيقة أو نسخها دون إذن خطي مسبق</span>
   </div>
