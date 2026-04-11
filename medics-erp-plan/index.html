@@ -52,20 +52,6 @@ body {
 }
 .nav a:hover, .nav a.active { color: var(--white); background: var(--dark-red); }
 .nav .brand-nav { color: var(--red); font-weight: 700; font-size: 1rem; margin-left: 16px; }
-.nav .print-btn {
-  margin-right: auto;
-  background: var(--red);
-  color: white;
-  border: none;
-  padding: 6px 18px;
-  border-radius: 6px;
-  font-family: inherit;
-  font-size: .85rem;
-  font-weight: 600;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-.nav .print-btn:hover { background: var(--dark-red); }
 
 /* ── LAYOUT ── */
 .section { padding: 60px 24px; }
@@ -533,7 +519,7 @@ body {
 
 /* ── PRINT ── */
 @media print {
-  .nav, .print-btn { display: none !important; }
+  .nav { display: none !important; }
   .cover { min-height: auto; padding: 60px 24px; page-break-after: always; }
   .section { padding: 30px 0; page-break-inside: avoid; }
   .phase, .card, .module-card, .scope-item { box-shadow: none; border: 1px solid #ddd; }
@@ -561,7 +547,6 @@ body {
   <a href="#kpis">الأداء</a>
   <a href="#budget">الميزانية</a>
   <a href="#next">التالي</a>
-  <button class="print-btn" onclick="window.print()">طباعة PDF</button>
 </nav>
 
 <!-- ════════════ COVER ════════════ -->
