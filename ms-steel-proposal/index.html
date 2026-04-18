@@ -237,12 +237,148 @@
   }
   .quote strong { color: var(--brand); font-style: normal; font-weight: 700; }
 
+  /* ── Market section ── */
+  .market-hero {
+    background: linear-gradient(135deg, var(--ink) 0%, var(--steel) 100%);
+    color: var(--white);
+    padding: 72px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .market-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(60deg, rgba(212,160,23,0.04) 0 1px, transparent 1px 32px),
+      repeating-linear-gradient(-60deg, rgba(147,38,142,0.06) 0 1px, transparent 1px 32px);
+    pointer-events: none;
+  }
+  .market-hero .wrap { position: relative; z-index: 1; }
+  .market-hero .eyebrow { color: var(--accent); }
+  .market-hero .h2 { color: var(--white); }
+  .market-hero .h2 em { color: var(--accent); }
+  .market-hero .sub { color: rgba(255,255,255,0.7); }
+
+  .market-kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 40px;
+  }
+  .kpi {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 24px 22px;
+    backdrop-filter: blur(6px);
+    transition: transform 0.25s, border-color 0.25s;
+  }
+  .kpi:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .kpi .num {
+    font-size: 34px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1.1;
+    margin-bottom: 6px;
+    font-variant-numeric: tabular-nums;
+    direction: ltr;
+    text-align: right;
+  }
+  .kpi .lbl { font-size: 13px; color: rgba(255,255,255,0.75); font-weight: 600; line-height: 1.6; }
+
+  /* ── Segments ── */
+  .segments {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .seg {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 28px 26px;
+    position: relative;
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+  .seg:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,0.07); }
+  .seg .seg-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .seg .seg-tag {
+    background: var(--bg-soft);
+    color: var(--brand);
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 100px;
+    letter-spacing: 1px;
+  }
+  .seg h3 { font-size: 19px; font-weight: 700; margin-bottom: 10px; }
+  .seg p { font-size: 15px; color: var(--muted); line-height: 1.75; }
+  .seg .examples { margin-top: 14px; font-size: 14px; color: var(--ink-soft); }
+  .seg .examples b { color: var(--brand); font-weight: 700; }
+
+  /* ── Competitor read ── */
+  .comp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 8px;
+  }
+  .comp-col {
+    border-radius: 14px;
+    padding: 28px 26px;
+  }
+  .comp-col.does {
+    background: #eefbf3;
+    border: 1px solid #c7ecd4;
+  }
+  .comp-col.gap {
+    background: #fef3f4;
+    border: 1px solid #f4c8ce;
+  }
+  .comp-col h4 {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .comp-col.does h4 { color: #178a43; }
+  .comp-col.gap h4 { color: #b42a3c; }
+  .comp-col ul { list-style: none; padding: 0; }
+  .comp-col li {
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 8px 0 8px 0;
+    padding-right: 22px;
+    position: relative;
+    color: var(--ink-soft);
+    border-bottom: 1px dashed rgba(0,0,0,0.06);
+  }
+  .comp-col li:last-child { border-bottom: none; }
+  .comp-col li::before {
+    content: '';
+    position: absolute;
+    right: 0; top: 16px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+  .comp-col.does li::before { background: #22c55e; }
+  .comp-col.gap li::before { background: #ef4444; }
+
   /* ── Responsive ── */
   @media (max-width: 820px) {
     section { padding: 64px 0; }
     .about-grid { grid-template-columns: 1fr; gap: 32px; }
     .cover { padding: 60px 24px; }
     .wrap { padding: 0 22px; }
+    .segments, .comp-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -394,7 +530,150 @@
   </div>
 </section>
 
-<!-- الأجزاء التالية: تحليل السوق، هوية العلامة، الخطة الرقمية، المحتوى، خارطة الطريق، الاستثمار، الخطوات التالية -->
+<!-- ═══════════════════ MARKET (SYRIA / IDLIB) ═══════════════════ -->
+<section class="market-hero">
+  <div class="wrap">
+    <span class="eyebrow">قراءة السوق</span>
+    <h2 class="h2">سوريا 2026 · <em>نافذة إعادة التشكّل</em></h2>
+    <p class="sub">
+      بعد مرحلة التحوّل السياسي، يدخل السوق السوري دورةَ إعمارٍ تستمرّ لسنوات.
+      هذه اللحظة نادرة: مَن يُرسّخ اسمه الآن يَصعب إزاحته لاحقاً.
+    </p>
+
+    <div class="market-kpis">
+      <div class="kpi">
+        <div class="num">+15–20%</div>
+        <div class="lbl">نموّ سنوي متوقّع في الطلب العالمي على ديكور الليزر المعدني حتى 2030</div>
+      </div>
+      <div class="kpi">
+        <div class="num">#1</div>
+        <div class="lbl">سوريا تتصدّر إنتاج قِيَم قِطاع الليزر (غير صمامات الليزر) في المنطقة</div>
+      </div>
+      <div class="kpi">
+        <div class="num">+70%</div>
+        <div class="lbl">من قرارات شراء الديكور المنزلي في المنطقة تبدأ من فيسبوك / إنستغرام</div>
+      </div>
+      <div class="kpi">
+        <div class="num">5 سنوات</div>
+        <div class="lbl">نافذة «أوّلية العلامة» قبل دخول منافسين أكبر من تركيا ومصر</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ MARKET SEGMENTS ═══════════════════ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">شرائح السوق</span>
+    <h2 class="h2">أين <em>يوجد الطلب</em> بالضبط؟</h2>
+    <p class="sub">
+      حدّدنا أربع شرائح قابلة للاستهداف داخل سوريا — ترتّبت حسب
+      سرعة الدوران، هامش الربح، وقابلية التصوير والنشر.
+    </p>
+
+    <div class="segments">
+      <div class="seg">
+        <div class="seg-head">
+          <span class="seg-tag">شريحة ١</span>
+        </div>
+        <h3>البيت السوري المُعاد تأهيله</h3>
+        <p>
+          آيات قرآنية، لوحات بسم الله، ساعات جدارية فنية، أرقام منازل،
+          فواصل أقواس. متوسّط السعر ودوران سريع.
+        </p>
+        <div class="examples">
+          <b>المدخل:</b> فيسبوك + إنستغرام · محتوى عاطفي · عروض الأعياد والمناسبات.
+        </div>
+      </div>
+
+      <div class="seg">
+        <div class="seg-head">
+          <span class="seg-tag">شريحة ٢</span>
+        </div>
+        <h3>المقاهي والمطاعم والمحلات</h3>
+        <p>
+          شعارات معدنية مقطوعة بالليزر، قوائم طعام ثلاثية الأبعاد،
+          فواصل، علامات واجهات. تذاكر شراء أعلى بكثير.
+        </p>
+        <div class="examples">
+          <b>المدخل:</b> بيع مباشر B2B · معرض أعمال موثّق · شراكة مع مصمّمي الديكور.
+        </div>
+      </div>
+
+      <div class="seg">
+        <div class="seg-head">
+          <span class="seg-tag">شريحة ٣</span>
+        </div>
+        <h3>المساجد والأوقاف والجمعيات</h3>
+        <p>
+          لوحات قرآنية كبيرة، أبواب زخرفية، ألواح محاريب، أسماء الله الحسنى.
+          دفعات عالية، طلبات موسمية (رمضان، الأعياد، افتتاح المساجد).
+        </p>
+        <div class="examples">
+          <b>المدخل:</b> علاقات مباشرة · كتالوج PDF مُخصّص · زيارات ميدانية مع عيّنات.
+        </div>
+      </div>
+
+      <div class="seg">
+        <div class="seg-head">
+          <span class="seg-tag">شريحة ٤</span>
+        </div>
+        <h3>الهدايا والمناسبات والتخصيص</h3>
+        <p>
+          لوحات أسماء للعائلات، هدايا زفاف، شعارات سيارات مخصّصة،
+          تذكارات. هامش مرتفع لكل قطعة، دورة إنتاج قصيرة.
+        </p>
+        <div class="examples">
+          <b>المدخل:</b> متجر إلكتروني مصغّر · تيك توك / ريلز · إعلانات موجّهة.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ COMPETITOR READ ═══════════════════ -->
+<section class="alt">
+  <div class="wrap">
+    <span class="eyebrow">المنافس الذي أرسلتموه</span>
+    <h2 class="h2">ما الذي يفعلونه <em>جيّداً</em>؟ وأين الفرصة لتجاوزهم؟</h2>
+    <p class="sub">
+      حلّلنا النموذج الذي شاركتموه (شركة تعمل في المجال ذاته وتعتمد
+      على التسويق بالمحتوى). هذا ما رأيناه:
+    </p>
+
+    <div class="comp-grid">
+      <div class="comp-col does">
+        <h4>يفعلونه بذكاء</h4>
+        <ul>
+          <li>يصوّرون مرحلة الإنتاج داخل الورشة — الليزر، الشرر، خروج القطعة.</li>
+          <li>يعتمدون فيديوهات قصيرة (Reels) بموسيقى هادئة وبدون كلام.</li>
+          <li>يُظهرون القطعة في بيئتها النهائية (جدار، واجهة، مقهى).</li>
+          <li>يستخدمون تعليقات العملاء كمحتوى (Testimonial / Unboxing).</li>
+          <li>تنسيق بصري ثابت: خلفية واحدة، إضاءة واحدة، إطار موحّد.</li>
+        </ul>
+      </div>
+
+      <div class="comp-col gap">
+        <h4>فرص لتجاوزهم</h4>
+        <ul>
+          <li>لا يروون «قصّة الحِرفي» — الشخص خلف الماكينة لا يظهر أبداً.</li>
+          <li>محتواهم معروض، لا تعليمي — لا يجيبون على أسئلة يبحث عنها الزبون.</li>
+          <li>لا موقع إلكتروني فعلي · الاعتماد كلياً على السوشال.</li>
+          <li>لا نظام أسعار شفاف · كل تسعيرة عبر المحادثة الخاصة.</li>
+          <li>لا هوية بصرية موحّدة · الشعار يتغيّر بين منشور وآخر.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="quote">
+      المنافس يبيع «قِطعاً معدنية مصوّرة جيداً». الفرصة هي أن تبيعوا أنتم
+      <strong>«علامة سورية تصنع قطعاً تحمل معنى»</strong> — بهوية ثابتة،
+      موقع رسمي، قصّة حِرفي، ومنهجية أسعار واضحة.
+    </div>
+  </div>
+</section>
+
+<!-- الأجزاء التالية: هوية العلامة، الخطة الرقمية، المحتوى، خارطة الطريق، الاستثمار، الخطوات التالية -->
 
 </body>
 </html>
