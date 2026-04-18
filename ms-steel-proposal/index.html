@@ -540,7 +540,11 @@
   .sw.a { background: #0e0e10; }
   .sw.b { background: #C19A3A; color: #1a1a1a; }
   .sw.c { background: #f5f1ea; color: #4a3a20; }
-  .sw.d { background: #2d2d2d; }
+  .sw.d {
+    background:
+      linear-gradient(135deg, #d8dce0 0%, #a8adb3 40%, #c8ccd0 70%, #8a8f95 100%);
+    color: #2a2a2a;
+  }
 
   .type-demo .tp {
     padding: 16px 0;
@@ -1731,15 +1735,23 @@
       <div class="vis-card">
         <h4>لوحة الألوان المقترحة</h4>
         <div class="palette">
-          <div class="sw a"><code>#0E0E10</code><b>الفحم</b></div>
-          <div class="sw b"><code>#C19A3A</code><b>الذهب</b></div>
-          <div class="sw c"><code>#F5F1EA</code><b>الورق</b></div>
-          <div class="sw d"><code>#2D2D2D</code><b>الفولاذ</b></div>
+          <div class="sw a"><code>#0E0E10</code><b>الفحم · أساسي</b></div>
+          <div class="sw b"><code>#C19A3A</code><b>الذهب · أساسي</b></div>
+          <div class="sw c"><code>#F5F1EA</code><b>الورق · ثانوي</b></div>
+          <div class="sw d"><code>Silver</code><b>الفضّة · المادّة</b></div>
         </div>
         <p style="font-size:14px;color:var(--muted);margin-top:16px;line-height:1.8;">
-          الفحم للقوة، الذهب للقيمة والتراث الإسلامي، الورق للدفء والأصالة،
-          والفولاذ كإشارة بصرية إلى المنتج. هذه ليست ألوان Brandology الترويجية —
-          بل اللوحة الخاصة بعلامتكم أنتم.
+          <strong style="color:var(--ink);">لماذا لا تتصدّر الفضّة الهوية رغم أنّ المنتج فضّي اللون؟</strong>
+          لأنّ كلّ ورشة معادن في العالم تستخدم الفضّي — فهو لونُ الفئة لا لونُ
+          العلامة. الفضّة تبقى داخل المنظومة، لكن <strong style="color:var(--ink);">كـ«لون المادّة»
+          لا كلون الشعار</strong>: تهيمن على صور المنتج، خلفيات المعرض،
+          اللمسات المعدنية في التغليف والشعار. أمّا العلامة نفسها فتقوم على
+          الفحم (قوة ورسوخ) والذهب (قيمة وتراث) — لتمنح الفضّة البارد دفئاً
+          يجعل القطعة تبدو ثمينة، لا صناعية.
+        </p>
+        <p style="font-size:13px;color:var(--muted);margin-top:12px;line-height:1.75;font-style:italic;">
+          قِس هذا على Apple: منتجاتها ألومنيوم فضّي، لكنّ هويّتها أبيض وأسود.
+          الفضّي هو مادّة المنتج، لا لغة العلامة.
         </p>
       </div>
 
