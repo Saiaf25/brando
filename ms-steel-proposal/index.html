@@ -372,13 +372,237 @@
   .comp-col.does li::before { background: #22c55e; }
   .comp-col.gap li::before { background: #ef4444; }
 
+  /* ── Brand identity ── */
+  .names-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 8px;
+  }
+  .name-card {
+    background: var(--white);
+    border: 1.5px solid var(--line);
+    border-radius: 18px;
+    padding: 32px 28px;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    overflow: hidden;
+  }
+  .name-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(147,38,142,0.12);
+    border-color: var(--brand);
+  }
+  .name-card.pick {
+    border-color: var(--brand);
+    background: linear-gradient(180deg, #fff 0%, #fbf5fb 100%);
+  }
+  .name-card.pick::before {
+    content: 'توصيتنا';
+    position: absolute;
+    top: 18px; left: 18px;
+    background: var(--brand);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 800;
+    padding: 5px 12px;
+    border-radius: 100px;
+    letter-spacing: 1.5px;
+  }
+  .name-ar {
+    font-family: 'Amiri', serif;
+    font-size: 64px;
+    font-weight: 700;
+    color: var(--brand);
+    line-height: 1;
+    margin-bottom: 4px;
+    letter-spacing: -2px;
+  }
+  .name-en {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--muted);
+    letter-spacing: 4px;
+    margin-bottom: 18px;
+    direction: ltr;
+    text-align: right;
+  }
+  .name-meaning {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed rgba(0,0,0,0.08);
+  }
+  .name-meaning b { color: var(--brand); font-weight: 700; }
+  .name-props { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .name-props .row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .name-props .row span.dot {
+    flex-shrink: 0;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    margin-top: 8px;
+    background: var(--brand);
+  }
+
+  /* ── Positioning statement ── */
+  .positioning {
+    background: linear-gradient(135deg, var(--brand) 0%, var(--burgundy) 100%);
+    color: var(--white);
+    border-radius: 22px;
+    padding: 56px 48px;
+    margin-top: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .positioning::before {
+    content: '"';
+    position: absolute;
+    top: -30px; right: 30px;
+    font-size: 220px;
+    font-family: 'Amiri', serif;
+    color: rgba(255,255,255,0.08);
+    line-height: 1;
+  }
+  .positioning h3 {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+  }
+  .positioning p {
+    font-size: clamp(20px, 2.3vw, 28px);
+    font-weight: 600;
+    line-height: 1.7;
+    max-width: 900px;
+    position: relative;
+    z-index: 1;
+  }
+  .positioning p em { font-style: normal; color: var(--accent); font-weight: 700; }
+
+  /* ── Visual direction ── */
+  .visual-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 24px;
+    margin-top: 8px;
+  }
+  .vis-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 32px 28px;
+  }
+  .vis-card h4 {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--brand);
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+  }
+  .palette {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .sw {
+    border-radius: 12px;
+    padding: 20px 12px 14px;
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 700;
+    min-height: 96px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .sw b { font-size: 14px; display: block; letter-spacing: 0.5px; }
+  .sw code {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    opacity: 0.8;
+    direction: ltr;
+    display: block;
+    margin-top: 2px;
+  }
+  .sw.a { background: #0e0e10; }
+  .sw.b { background: #c19a3a; color: #1a1a1a; }
+  .sw.c { background: #f5f1ea; color: #4a3a20; }
+  .sw.d { background: #2d2d2d; }
+
+  .type-demo .tp {
+    padding: 16px 0;
+    border-bottom: 1px dashed rgba(0,0,0,0.08);
+  }
+  .type-demo .tp:last-child { border-bottom: none; }
+  .type-demo .tp .t-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .type-demo .tp .t-sample-ar {
+    font-family: 'Amiri', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .type-demo .tp .t-sample-body {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 18px;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  /* ── Tone of voice ── */
+  .tone-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .tone-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 24px 22px;
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+  .tone-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,0.06); }
+  .tone-card .t-pair {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+  .tone-card .t-yes { color: #178a43; }
+  .tone-card .t-no { color: #b42a3c; text-decoration: line-through; opacity: 0.65; }
+  .tone-card .t-arrow { color: var(--muted); font-weight: 900; }
+  .tone-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
   /* ── Responsive ── */
   @media (max-width: 820px) {
     section { padding: 64px 0; }
     .about-grid { grid-template-columns: 1fr; gap: 32px; }
     .cover { padding: 60px 24px; }
     .wrap { padding: 0 22px; }
-    .segments, .comp-grid { grid-template-columns: 1fr; }
+    .segments, .comp-grid, .names-grid, .visual-grid { grid-template-columns: 1fr; }
+    .positioning { padding: 40px 28px; }
+    .palette { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 </head>
@@ -673,7 +897,211 @@
   </div>
 </section>
 
-<!-- الأجزاء التالية: هوية العلامة، الخطة الرقمية، المحتوى، خارطة الطريق، الاستثمار، الخطوات التالية -->
+<!-- ═══════════════════ BRAND NAMING ═══════════════════ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">هوية العلامة · ١</span>
+    <h2 class="h2">الاسم · <em>قلب العلامة</em></h2>
+    <p class="sub">
+      اقترحتم «MD Steel / MD Metal» كبديلين عن «MS Steel». الفكرة وراءهما
+      ممتازة (Modern Design)، لكن «MD» بالإنجليزية تعني طبيباً — والتباس
+      معنى الاسم في السوق خسارة تسويقية. قبل أن نقرّر، ندرس ثلاث عائلات أسماء:
+    </p>
+
+    <div class="names-grid">
+
+      <div class="name-card pick">
+        <div class="name-ar">نَقْش</div>
+        <div class="name-en">NAQSH</div>
+        <div class="name-meaning">
+          «النَقش» في العربية هو <b>الزخرفة، الحفر، والرسم على المعدن</b> —
+          أي الفعل نفسه الذي يقوم به مصنعكم. اسم من كلمة واحدة، عربي خالص،
+          سهل النطق لكل عميل سوري، وقصير يصلح للشعار.
+        </div>
+        <div class="name-props">
+          <div class="row"><span class="dot"></span>يصف الحِرفة ذاتها، لا مجرد المادة.</div>
+          <div class="row"><span class="dot"></span>متاح كنطاق: naqsh.sy / naqsh.co</div>
+          <div class="row"><span class="dot"></span>يعمل بـ <b>LTR</b> وبـ <b>RTL</b> بنفس القوة.</div>
+          <div class="row"><span class="dot"></span>قابل للتمدّد: «نَقش للأعمال»، «نَقش بيت»، «نَقش عود».</div>
+        </div>
+      </div>
+
+      <div class="name-card">
+        <div class="name-ar">حِرَف</div>
+        <div class="name-en">HIRAF</div>
+        <div class="name-meaning">
+          «حِرَف» جمع حِرفة — يضع العلامة في موقع <b>بيتِ صناعةٍ يدوية أصيلة</b>،
+          لا مجرّد مصنع قطع. اسم عاطفي، يناسب شريحة البيوت والمساجد،
+          ويروي قصّة الحِرفي خلف الماكينة.
+        </div>
+        <div class="name-props">
+          <div class="row"><span class="dot"></span>إحساس محليّ تراثي قوي.</div>
+          <div class="row"><span class="dot"></span>مناسب لخطاب «العودة للأصل» في سوريا 2026.</div>
+          <div class="row"><span class="dot"></span>قد يضيق لاحقاً إذا توسّعتم خارج الحِرفية.</div>
+          <div class="row"><span class="dot"></span>النطاق الإنجليزي مطلوب من كثيرين عالمياً.</div>
+        </div>
+      </div>
+
+      <div class="name-card">
+        <div class="name-ar">مَدَار</div>
+        <div class="name-en">MEDAR</div>
+        <div class="name-meaning">
+          يحافظ على فكرة «MD» التي طرحتموها، لكن بمعنى عربي قوي:
+          <b>المَدار = المحور، المسار، المرجع</b>. يضع العلامة في موقع
+          «مرجع الديكور المعدني في سوريا».
+        </div>
+        <div class="name-props">
+          <div class="row"><span class="dot"></span>يحفظ الفكرة الأصلية (MD) بمعنى سليم.</div>
+          <div class="row"><span class="dot"></span>يصلح للتوسع لقطاعات أخرى (مَدار للإنشاءات).</div>
+          <div class="row"><span class="dot"></span>يحتاج شرحاً بصرياً أكثر في البداية.</div>
+          <div class="row"><span class="dot"></span>يحمل طموحاً «مرجعياً» — مناسب لخطة خمسية.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="quote">
+      <strong>توصيتنا:</strong> «نَقش» لأنه يصف الحِرفة ذاتها، قصير، عربي،
+      ومفهوم في كل لهجة سورية. الاسم ليس قراراً لغوياً فقط — هو الأساس
+      الذي سنبني عليه الشعار، اللوحة اللونية، ونبرة الصوت.
+      <br><br>
+      الاختيار النهائي لكم، ونحن مستعدّون للذهاب مع أيٍّ من الثلاثة.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ POSITIONING ═══════════════════ -->
+<section class="alt">
+  <div class="wrap">
+    <span class="eyebrow">هوية العلامة · ٢</span>
+    <h2 class="h2">الموقع · <em>ماذا نمثّل في ذهن العميل؟</em></h2>
+    <p class="sub">
+      جملة الموقع (Positioning Statement) هي البوصلة الداخلية التي
+      تُحاكم كلّ قرار تسويقي عليها لاحقاً — اسم المنتج، لون الإعلان،
+      أسلوب الرد على العميل.
+    </p>
+
+    <div class="positioning">
+      <h3>POSITIONING STATEMENT</h3>
+      <p>
+        لـ<em>البيت السوري</em> الذي يعيد بناء ذاكرته بعد سنواتٍ من الحرب،
+        <em>نَقش</em> هو بيتُ التصميم المعدني الذي يحوِّل الفولاذ إلى
+        <em>أثرٍ يُورَّث</em> — بأيدي حِرفيّين من إدلب، بدقّة ليزرٍ حديثة،
+        وبلغةٍ بصرية تحترم التراث وتتجاوزه.
+      </p>
+    </div>
+
+    <div class="quote" style="margin-top:28px;">
+      <strong>لماذا هذه الجملة؟</strong> لأنها تُجيب على أربعة أسئلة في آنٍ واحد:
+      <b>مَن الجمهور؟</b> (البيت السوري) · <b>ما القِيمة العاطفية؟</b> (استعادة الذاكرة)
+      · <b>ما الفارق الوظيفي؟</b> (أثر يُورَّث، لا سلعة) · <b>ما المصداقية؟</b>
+      (حِرفيّون من إدلب + ليزر حديث).
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ VISUAL DIRECTION ═══════════════════ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">هوية العلامة · ٣</span>
+    <h2 class="h2">التوجّه البصري · <em>كيف نبدو؟</em></h2>
+    <p class="sub">
+      القطعة المعدنية نفسها رمادية متعدّدة التدرّجات. لذلك تبتعد
+      الهوية عن المعدن لفضاءٍ أدفأ وأثمن: أسودٌ عميق + ذهبٌ مشغول +
+      بيج ورقي يذكّر بورق الحِرفيين.
+    </p>
+
+    <div class="visual-grid">
+      <div class="vis-card">
+        <h4>لوحة الألوان المقترحة</h4>
+        <div class="palette">
+          <div class="sw a"><code>#0E0E10</code><b>الفحم</b></div>
+          <div class="sw b"><code>#C19A3A</code><b>الذهب</b></div>
+          <div class="sw c"><code>#F5F1EA</code><b>الورق</b></div>
+          <div class="sw d"><code>#2D2D2D</code><b>الفولاذ</b></div>
+        </div>
+        <p style="font-size:14px;color:var(--muted);margin-top:16px;line-height:1.8;">
+          الفحم للقوة، الذهب للقيمة والتراث الإسلامي، الورق للدفء والأصالة،
+          والفولاذ كإشارة بصرية إلى المنتج. هذه ليست ألوان Brandology الترويجية —
+          بل اللوحة الخاصة بعلامتكم أنتم.
+        </p>
+      </div>
+
+      <div class="vis-card type-demo">
+        <h4>عائلة الخطوط</h4>
+        <div class="tp">
+          <div class="t-label">للعنوان · Amiri</div>
+          <div class="t-sample-ar">نَقش · أثرٌ يُورَّث</div>
+        </div>
+        <div class="tp">
+          <div class="t-label">للنصوص · Baloo Bhaijaan 2</div>
+          <div class="t-sample-body">قطعة معدنية تُحاكي ذاكرة بيتك.</div>
+        </div>
+        <div class="tp">
+          <div class="t-label">للإنجليزية · Inter / Manrope</div>
+          <div class="t-sample-body" style="font-family:Inter,system-ui;direction:ltr;text-align:right;">
+            NAQSH · Crafted in Idlib
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:14px;color:var(--muted);margin-top:24px;line-height:1.8;">
+      ملاحظة: التصميم التفصيلي للشعار والأيقونات والأنماط البصرية الثانوية
+      يُبنى في المرحلة الأولى من المشروع (Brand Identity Sprint)، بعد إقرار
+      الاسم والموقع. هذه العيّنات لتوجيه الحوار، لا كتسليم نهائي.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════ TONE OF VOICE ═══════════════════ -->
+<section class="alt">
+  <div class="wrap">
+    <span class="eyebrow">هوية العلامة · ٤</span>
+    <h2 class="h2">نبرة الصوت · <em>كيف نتحدّث؟</em></h2>
+    <p class="sub">
+      لغةُ المنشور، الرد، والإعلان يجب أن تصدر من شخصية واحدة متّسقة.
+      نقترح أن تكون شخصية «نَقش» قريبةً من الحِرفي المتقن — لا البائع المتحمّس.
+    </p>
+
+    <div class="tone-grid">
+      <div class="tone-card">
+        <div class="t-pair">
+          <span class="t-yes">هادئة واثقة</span>
+          <span class="t-arrow">←</span>
+          <span class="t-no">صاخبة مُبالِغة</span>
+        </div>
+        <p>«قطعة تبقى» — لا «أقوى عرض في السوق!!».</p>
+      </div>
+      <div class="tone-card">
+        <div class="t-pair">
+          <span class="t-yes">تشرح الحِرفة</span>
+          <span class="t-arrow">←</span>
+          <span class="t-no">تعلن السعر فقط</span>
+        </div>
+        <p>نُري كيف تُقطَع القطعة، لا كم تكلّف.</p>
+      </div>
+      <div class="tone-card">
+        <div class="t-pair">
+          <span class="t-yes">سورية محلّية</span>
+          <span class="t-arrow">←</span>
+          <span class="t-no">فصحى جامدة</span>
+        </div>
+        <p>فصحى ميسّرة مع كلمات شامية دافئة عند المناسبة.</p>
+      </div>
+      <div class="tone-card">
+        <div class="t-pair">
+          <span class="t-yes">تحترم الدين</span>
+          <span class="t-arrow">←</span>
+          <span class="t-no">تستخدمه أداةَ ترويج</span>
+        </div>
+        <p>الآيات والأسماء الحسنى تُعرض، لا تُستخدم ككليك-بايت.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- الأجزاء التالية: الخطة الرقمية، المحتوى، خارطة الطريق، الاستثمار، الخطوات التالية -->
 
 </body>
 </html>
