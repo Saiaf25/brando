@@ -594,6 +594,166 @@
   .tone-card .t-arrow { color: var(--muted); font-weight: 900; }
   .tone-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
 
+  /* ── Digital ecosystem ── */
+  .eco {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .eco-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 28px 26px;
+    position: relative;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .eco-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(0,0,0,0.07); }
+  .eco-card.span-6 { grid-column: span 6; }
+  .eco-card.span-4 { grid-column: span 4; }
+  .eco-card.span-3 { grid-column: span 3; }
+  .eco-card.span-12 { grid-column: span 12; }
+
+  .eco-card.hero-card {
+    background: linear-gradient(135deg, var(--brand) 0%, var(--burgundy) 100%);
+    color: var(--white);
+    border: none;
+  }
+  .eco-card.hero-card h3 { color: var(--white); }
+  .eco-card.hero-card .eco-role { color: rgba(255,255,255,0.7); }
+  .eco-card.hero-card p { color: rgba(255,255,255,0.9); }
+
+  .eco-card .eco-role {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--brand);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .eco-card h3 {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -0.3px;
+  }
+  .eco-card p {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin-bottom: 14px;
+  }
+  .eco-card ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+  }
+  .eco-card li {
+    font-size: 14px;
+    line-height: 1.6;
+    padding-right: 18px;
+    position: relative;
+    color: var(--ink-soft);
+  }
+  .eco-card.hero-card li { color: rgba(255,255,255,0.9); }
+  .eco-card li::before {
+    content: '';
+    position: absolute;
+    right: 0; top: 9px;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  /* ── Sitemap / website map ── */
+  .sitemap {
+    margin-top: 36px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 36px 32px;
+  }
+  .sitemap h4 {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--brand);
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+  .sitemap-tree {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+  }
+  .page-box {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 16px;
+    position: relative;
+  }
+  .page-box.home {
+    background: linear-gradient(135deg, var(--brand), var(--burgundy));
+    color: var(--white);
+    border: none;
+  }
+  .page-box .p-slug {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    opacity: 0.6;
+    direction: ltr;
+    text-align: right;
+    margin-bottom: 4px;
+  }
+  .page-box .p-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .page-box .p-desc { font-size: 13px; opacity: 0.75; line-height: 1.5; }
+
+  /* ── Ads funnel ── */
+  .funnel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .fn {
+    border-radius: 14px;
+    padding: 28px 24px;
+    border: 1px solid var(--line);
+    background: var(--white);
+    position: relative;
+  }
+  .fn::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; left: 0;
+    height: 4px;
+    border-radius: 14px 14px 0 0;
+  }
+  .fn.tof::before { background: #60a5fa; }
+  .fn.mof::before { background: var(--accent); }
+  .fn.bof::before { background: var(--brand); }
+  .fn .stage {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .fn.tof .stage { color: #3b82f6; }
+  .fn.mof .stage { color: #c19a3a; }
+  .fn.bof .stage { color: var(--brand); }
+  .fn h4 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+  .fn p { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 12px; }
+  .fn .fn-goal {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink);
+    padding: 8px 12px;
+    background: var(--bg);
+    border-radius: 8px;
+    display: inline-block;
+  }
+
   /* ── Responsive ── */
   @media (max-width: 820px) {
     section { padding: 64px 0; }
@@ -603,6 +763,9 @@
     .segments, .comp-grid, .names-grid, .visual-grid { grid-template-columns: 1fr; }
     .positioning { padding: 40px 28px; }
     .palette { grid-template-columns: repeat(2, 1fr); }
+    .eco { grid-template-columns: 1fr; }
+    .eco-card.span-6, .eco-card.span-4, .eco-card.span-3, .eco-card.span-12 { grid-column: span 1; }
+    .funnel { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -1101,7 +1264,196 @@
   </div>
 </section>
 
-<!-- الأجزاء التالية: الخطة الرقمية، المحتوى، خارطة الطريق، الاستثمار، الخطوات التالية -->
+<!-- ═══════════════════ DIGITAL ECOSYSTEM ═══════════════════ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">الحضور الرقمي · ١</span>
+    <h2 class="h2">المنظومة الرقمية · <em>كل قناة لها دور واحد</em></h2>
+    <p class="sub">
+      كثيرون يفتحون كلّ حسابٍ ممكن ويتوقّفون بعد شهرين. نحن نبدأ بأربع
+      قنوات فقط، كلّ واحدة لها وظيفة محدّدة — ونتوسّع بعد إثبات النموذج.
+    </p>
+
+    <div class="eco">
+
+      <div class="eco-card hero-card span-6">
+        <div class="eco-role">المركز الرسمي</div>
+        <h3>الموقع الإلكتروني · naqsh.sy</h3>
+        <p>
+          بيتُ العلامة. كل قناة أخرى ترسل العميل هنا ليرى المعرض الكامل،
+          الأسعار الإرشادية، ويطلب قطعته المخصّصة. متاحٌ بالعربية والإنجليزية.
+        </p>
+        <ul>
+          <li>معرض أعمال مفصّل مع تصنيفات (بيت · مسجد · مقهى · هدايا).</li>
+          <li>نموذج طلب سعر ذكي يُحوَّل مباشرة إلى واتساب الأعمال.</li>
+          <li>صفحة قصّة الحِرفي وسرديّة «صُنع في إدلب».</li>
+          <li>تهيئة SEO كاملة بكلمات مثل «لوحات قرآنية معدنية سوريا».</li>
+        </ul>
+      </div>
+
+      <div class="eco-card span-6">
+        <div class="eco-role">واجهة البيع اليومية</div>
+        <h3>إنستغرام · @naqsh.sy</h3>
+        <p>
+          القناة الأبرز بصرياً لعرض القطعة النهائية ولقطات الورشة.
+          المعرض هنا يجب أن يبدو كمتحفٍ صغير — بإطار بصري موحّد.
+        </p>
+        <ul>
+          <li>٤ منشورات + ٣ ريلز + ٥ ستوريز أسبوعياً.</li>
+          <li>تبويب «متجر» مرتبط بكتالوج فيسبوك.</li>
+          <li>Highlights ثابتة: القطع · الورشة · العملاء · الأسعار.</li>
+          <li>عناوين عربية قصيرة مع Hashtags سورية محلّية.</li>
+        </ul>
+      </div>
+
+      <div class="eco-card span-4">
+        <div class="eco-role">الوصول الجماهيري</div>
+        <h3>فيسبوك · Naqsh Steel</h3>
+        <p>
+          القناة الأقوى لاختراق الأسواق المحلّية في سوريا — خصوصاً
+          للفئات العمرية +30 والتجّار B2B.
+        </p>
+        <ul>
+          <li>صفحة أعمال + متجر + مراجعات.</li>
+          <li>بثّ مباشر شهري من الورشة.</li>
+          <li>مجموعة خاصة لعملاء المشاريع الكبيرة.</li>
+        </ul>
+      </div>
+
+      <div class="eco-card span-4">
+        <div class="eco-role">محرّك الانتشار</div>
+        <h3>تيك توك · @naqsh.sy</h3>
+        <p>
+          خطّ بصري واحد فقط: «كيف تُصنع القطعة». فيديوهات 15-30 ثانية
+          تُظهر الليزر يقصّ المعدن — محتوى فائق الانتشار.
+        </p>
+        <ul>
+          <li>٣-٥ فيديوهات أسبوعياً.</li>
+          <li>موسيقى هادئة + نصّ عربي بسيط.</li>
+          <li>لا مبيعات مباشرة — فقط جَذب وتحويل إلى إنستغرام.</li>
+        </ul>
+      </div>
+
+      <div class="eco-card span-4">
+        <div class="eco-role">قناة التحويل</div>
+        <h3>واتساب الأعمال · Business</h3>
+        <p>
+          أهمّ قناةٍ تجارية في سوريا. كل زر «اطلب الآن» يصبّ هنا،
+          مع كتالوج منظّم وردود آلية للأسئلة المتكرّرة.
+        </p>
+        <ul>
+          <li>كتالوج بأسعار البدء وصور عالية الدقة.</li>
+          <li>قوائم بث للعروض والإصدارات الجديدة.</li>
+          <li>رسائل ترحيب وأسئلة شائعة آلية.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- ── Sitemap ── -->
+    <div class="sitemap">
+      <h4>خريطة الموقع الإلكتروني (Phase 1)</h4>
+      <div class="sitemap-tree">
+        <div class="page-box home">
+          <div class="p-slug">/</div>
+          <div class="p-name">الرئيسية</div>
+          <div class="p-desc">قصّة العلامة + أحدث القطع.</div>
+        </div>
+        <div class="page-box">
+          <div class="p-slug">/gallery</div>
+          <div class="p-name">المعرض</div>
+          <div class="p-desc">أعمالنا بالصور والفئات.</div>
+        </div>
+        <div class="page-box">
+          <div class="p-slug">/custom</div>
+          <div class="p-name">طلب مخصّص</div>
+          <div class="p-desc">نموذج يحوّل لواتساب.</div>
+        </div>
+        <div class="page-box">
+          <div class="p-slug">/segments/home</div>
+          <div class="p-name">للبيت</div>
+          <div class="p-desc">قطع منزلية وآيات قرآنية.</div>
+        </div>
+        <div class="page-box">
+          <div class="p-slug">/segments/mosques</div>
+          <div class="p-name">للمساجد</div>
+          <div class="p-desc">مشاريع دينية وأوقاف.</div>
+        </div>
+        <div class="page-box">
+          <div class="p-slug">/segments/business</div>
+          <div class="p-name">للمحلات والمقاهي</div>
+          <div class="p-desc">شعارات وواجهات.</div>
+        </div>
+        <div class="page-box">
+          <div class="p-slug">/story</div>
+          <div class="p-name">قصّتنا</div>
+          <div class="p-desc">الحِرفي والورشة في إدلب.</div>
+        </div>
+        <div class="page-box">
+          <div class="p-slug">/contact</div>
+          <div class="p-name">تواصل</div>
+          <div class="p-desc">واتساب · هاتف · موقع.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ ADS FUNNEL ═══════════════════ -->
+<section class="alt">
+  <div class="wrap">
+    <span class="eyebrow">الحضور الرقمي · ٢</span>
+    <h2 class="h2">الإعلانات المدفوعة · <em>ثلاث طبقات</em></h2>
+    <p class="sub">
+      لن نبدأ بالإعلانات قبل وجود موقع وحسابات احترافية. ولن نشتري
+      جمهوراً على حساب الأساس. المسار ثلاث طبقات متسلسلة:
+    </p>
+
+    <div class="funnel">
+      <div class="fn tof">
+        <div class="stage">TOP · الوعي</div>
+        <h4>يرَونكم لأول مرة</h4>
+        <p>
+          فيديوهات ليزر قصيرة + لقطات ورشة + قصّة الحِرفي. الإعلان لا يبيع،
+          يُعرّف فقط. يُستهدف: سوريون داخل سوريا، 25-55 سنة، اهتمامات
+          (ديكور، بيوت، مساجد).
+        </p>
+        <div class="fn-goal">KPI: Reach + Video Views</div>
+      </div>
+
+      <div class="fn mof">
+        <div class="stage">MIDDLE · التفكير</div>
+        <h4>يتذكّرونكم ويفكّرون</h4>
+        <p>
+          إعادة استهداف (Retargeting) لمن تفاعل مع الفيديوهات. المحتوى
+          هنا تعليمي: «كيف تختار لوحة لبيتك؟» · «الفرق بين الحديد المقصوص
+          بالليزر والبلازما».
+        </p>
+        <div class="fn-goal">KPI: Engagement + Website Visits</div>
+      </div>
+
+      <div class="fn bof">
+        <div class="stage">BOTTOM · الشراء</div>
+        <h4>يطلبون</h4>
+        <p>
+          عروض مباشرة لزوار الموقع الذين لم يطلبوا بعد: «قطعة بسم الله
+          بسعر الإطلاق»، خصم خاص لمشاريع المساجد، باقة شعارات لأصحاب
+          المقاهي.
+        </p>
+        <div class="fn-goal">KPI: WhatsApp Leads + Orders</div>
+      </div>
+    </div>
+
+    <div class="quote" style="margin-top:28px;">
+      <strong>الميزانية في الشهر الأول منخفضة جداً عن عمد</strong> — هدفها
+      اختبار الرسائل، لا شراء المبيعات. نُضاعف الميزانية عندما يثبت رقم
+      «تكلفة الطلب» أنه مُربح. هذا هو الفرق بين «إعلان» و«قناة نمو».
+    </div>
+  </div>
+</section>
+
+<!-- الأجزاء التالية: المحتوى، خارطة الطريق، الاستثمار، الخطوات التالية -->
 
 </body>
 </html>
