@@ -1030,6 +1030,268 @@
   .phase.p3 .deliv::before { color: #8a6d14; }
   .phase.p4 .deliv::before { color: #178a43; }
 
+  /* ── Investment packages ── */
+  .packs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+    align-items: stretch;
+  }
+  .pack {
+    background: var(--white);
+    border: 1.5px solid var(--line);
+    border-radius: 20px;
+    padding: 36px 30px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  }
+  .pack:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+  .pack.featured {
+    background: linear-gradient(180deg, #fff 0%, #fbf5fb 100%);
+    border-color: var(--brand);
+    box-shadow: 0 14px 36px rgba(147,38,142,0.12);
+  }
+  .pack.featured::before {
+    content: 'الأنسب لكم';
+    position: absolute;
+    top: -14px;
+    right: 30px;
+    background: linear-gradient(135deg, var(--brand), var(--burgundy));
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 800;
+    padding: 6px 16px;
+    border-radius: 100px;
+    letter-spacing: 2px;
+    box-shadow: 0 6px 16px rgba(147,38,142,0.3);
+  }
+  .pack .pack-tag {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--muted);
+    letter-spacing: 2.5px;
+    margin-bottom: 10px;
+  }
+  .pack.featured .pack-tag { color: var(--brand); }
+  .pack h3 {
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+  }
+  .pack .pack-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px dashed rgba(0,0,0,0.08);
+  }
+  .pack ul {
+    list-style: none;
+    padding: 0;
+    flex: 1;
+    display: grid;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .pack li {
+    position: relative;
+    padding-right: 24px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .pack li::before {
+    content: '';
+    position: absolute;
+    right: 0; top: 9px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--brand);
+  }
+  .pack.featured li::before { background: var(--burgundy); }
+  .pack li.muted { color: var(--muted); }
+  .pack li.muted::before { background: var(--line); }
+  .pack .pack-foot {
+    padding-top: 20px;
+    border-top: 1px dashed rgba(0,0,0,0.08);
+  }
+  .pack .pack-duration {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .pack .pack-price-note {
+    font-size: 13px;
+    color: var(--ink);
+    font-weight: 700;
+    line-height: 1.6;
+  }
+
+  /* ── Scope in/out ── */
+  .scope-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 36px;
+  }
+  .scope-col {
+    border-radius: 16px;
+    padding: 28px 28px;
+  }
+  .scope-col.inc {
+    background: #f0fdf4;
+    border: 1px solid #c7ecd4;
+  }
+  .scope-col.exc {
+    background: var(--bg);
+    border: 1px solid var(--line);
+  }
+  .scope-col h4 {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .scope-col.inc h4 { color: #178a43; }
+  .scope-col.exc h4 { color: var(--muted); }
+  .scope-col ul { list-style: none; padding: 0; display: grid; gap: 8px; }
+  .scope-col li {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    padding-right: 22px;
+    position: relative;
+  }
+  .scope-col.inc li::before {
+    content: '+';
+    position: absolute;
+    right: 0; top: 0;
+    color: #178a43;
+    font-weight: 900;
+    font-size: 16px;
+  }
+  .scope-col.exc li::before {
+    content: '—';
+    position: absolute;
+    right: 0; top: 0;
+    color: var(--muted);
+    font-weight: 900;
+    font-size: 16px;
+  }
+
+  /* ── Closing / Next steps ── */
+  .next-steps {
+    background: linear-gradient(135deg, #1a0a1a 0%, var(--brand-dark) 55%, var(--brand) 100%);
+    color: var(--white);
+    padding: 88px 0 72px;
+    position: relative;
+    overflow: hidden;
+  }
+  .next-steps::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(212,160,23,0.12) 0%, transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(147,66,84,0.25) 0%, transparent 45%);
+    pointer-events: none;
+  }
+  .next-steps .wrap { position: relative; z-index: 1; }
+  .next-steps .eyebrow { color: var(--accent); }
+  .next-steps .h2 { color: var(--white); }
+  .next-steps .h2 em { color: var(--accent); }
+  .next-steps .sub { color: rgba(255,255,255,0.75); }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .step-box {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 28px 26px;
+    backdrop-filter: blur(6px);
+    transition: transform 0.25s, border-color 0.25s;
+  }
+  .step-box:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .step-box .sb-num {
+    width: 36px; height: 36px;
+    background: var(--accent);
+    color: var(--ink);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900;
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  .step-box h4 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+  .step-box p { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.75; }
+
+  .cta-card {
+    margin-top: 48px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 20px;
+    padding: 40px 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    flex-wrap: wrap;
+    backdrop-filter: blur(6px);
+  }
+  .cta-card h3 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    color: var(--white);
+  }
+  .cta-card p { color: rgba(255,255,255,0.7); font-size: 15px; }
+  .cta-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn.primary {
+    background: var(--accent);
+    color: var(--ink);
+    box-shadow: 0 8px 20px rgba(212,160,23,0.3);
+  }
+  .btn.primary:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(212,160,23,0.4); }
+  .btn.ghost {
+    background: transparent;
+    color: var(--white);
+    border: 1.5px solid rgba(255,255,255,0.35);
+  }
+  .btn.ghost:hover { border-color: var(--white); }
+
+  /* ── Footer ── */
+  .footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.7);
+    padding: 40px 0;
+    text-align: center;
+    font-size: 14px;
+  }
+  .footer b { color: var(--white); letter-spacing: 2px; font-size: 15px; }
+  .footer .small { font-size: 12px; opacity: 0.5; margin-top: 6px; }
+
   /* ── Responsive ── */
   @media (max-width: 820px) {
     section { padding: 64px 0; }
@@ -1051,6 +1313,9 @@
     .phase { padding-right: 52px; }
     .timeline::before { right: 18px; }
     .phase::before { right: 10px; }
+    .packs, .scope-grid, .steps-grid { grid-template-columns: 1fr; }
+    .cta-card { padding: 28px 24px; flex-direction: column; align-items: stretch; text-align: center; }
+    .cta-buttons { justify-content: center; }
   }
 </style>
 </head>
@@ -2100,7 +2365,175 @@
   </div>
 </section>
 
-<!-- الأجزاء التالية: الاستثمار، الخطوات التالية -->
+<!-- ═══════════════════ INVESTMENT PACKAGES ═══════════════════ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">إطار الاستثمار</span>
+    <h2 class="h2">ثلاثة <em>مستويات تعاون</em></h2>
+    <p class="sub">
+      يختلف حجم الاستثمار حسب السرعة التي تريدون بها دخول السوق. كلّ
+      مستوى قائمٌ بذاته — لكنه يبني على الذي قبله. الأرقام النهائية
+      تُحدَّد بعد اجتماع الاستكشاف.
+    </p>
+
+    <div class="packs">
+
+      <div class="pack">
+        <div class="pack-tag">الباقة الأولى</div>
+        <h3>الأساس</h3>
+        <p class="pack-desc">
+          تأسيس الهوية فقط، لمَن يريد أن يمتلك علامةً بصرية موحّدة
+          قبل الانطلاق الرقمي الكامل.
+        </p>
+        <ul>
+          <li>اسم، موقع تسويقي، ورسالة العلامة.</li>
+          <li>دليل هوية بصرية كامل.</li>
+          <li>شعار بعدّة صِيَغ + أيقونات.</li>
+          <li>لوحة ألوان وعائلة خطوط.</li>
+          <li>١٠ قوالب منشورات.</li>
+          <li>كتالوج PDF للمنتجات.</li>
+          <li class="muted">بدون موقع إلكتروني.</li>
+          <li class="muted">بدون إدارة سوشال.</li>
+        </ul>
+        <div class="pack-foot">
+          <div class="pack-duration">المدّة: ٤-٦ أسابيع</div>
+          <div class="pack-price-note">التسعير حسب النطاق · يُناقَش في الاجتماع الأول</div>
+        </div>
+      </div>
+
+      <div class="pack featured">
+        <div class="pack-tag">الباقة الثانية</div>
+        <h3>الإطلاق الكامل</h3>
+        <p class="pack-desc">
+          كلُّ ما في «الأساس» + الحضور الرقمي الكامل: موقع، إعداد
+          القنوات، محتوى الإطلاق، وأول حملة إعلانية.
+        </p>
+        <ul>
+          <li>كل ما في باقة «الأساس».</li>
+          <li>موقع إلكتروني ثنائي اللغة (٨ صفحات).</li>
+          <li>إعداد احترافي لـ Instagram + Facebook + TikTok.</li>
+          <li>إعداد واتساب الأعمال + كتالوج.</li>
+          <li>أول ٣٠ قطعة محتوى منتَجة ومُنشَرة.</li>
+          <li>حملة إطلاق إعلانية Meta + تيك توك.</li>
+          <li>تدريب فريقكم الداخلي على التصوير اليومي.</li>
+          <li>تقرير أداء الشهر الأول.</li>
+        </ul>
+        <div class="pack-foot">
+          <div class="pack-duration">المدّة: ٩٠ يوماً</div>
+          <div class="pack-price-note">الباقة الموصى بها · نطاق العمل الذي رسمناه في هذا المستند</div>
+        </div>
+      </div>
+
+      <div class="pack">
+        <div class="pack-tag">الباقة الثالثة</div>
+        <h3>النموّ المُدار</h3>
+        <p class="pack-desc">
+          كلُّ ما في «الإطلاق الكامل» + استمرارية الإدارة والنموّ
+          لـ ٦-١٢ شهراً تالية، بأهداف مبيعات شهرية.
+        </p>
+        <ul>
+          <li>كل ما في باقة «الإطلاق الكامل».</li>
+          <li>إدارة شهرية كاملة للقنوات الرقمية.</li>
+          <li>إنتاج ٣٠-٤٠ قطعة محتوى شهرياً.</li>
+          <li>إدارة ميزانية إعلانية متزايدة.</li>
+          <li>تقارير أداء شهرية مُفصّلة.</li>
+          <li>مدير حساب مخصّص وجلسة شهرية.</li>
+          <li>فتح قناة B2B للمشاريع الكبيرة.</li>
+          <li>اختبار أسواق خارجية.</li>
+        </ul>
+        <div class="pack-foot">
+          <div class="pack-duration">المدّة: ٦-١٢ شهراً</div>
+          <div class="pack-price-note">الأنسب للمصانع الجاهزة للنموّ السريع داخل وخارج سوريا</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Scope in / out ── -->
+    <div class="scope-grid">
+      <div class="scope-col inc">
+        <h4>ما يشمله التعاون</h4>
+        <ul>
+          <li>استراتيجية، تصميم، إنتاج محتوى، تسويق، إعلانات.</li>
+          <li>اجتماعات أسبوعية لمتابعة التقدّم.</li>
+          <li>ملكية كاملة للأصول لكم (شعار، موقع، محتوى).</li>
+          <li>تدريب فريقكم للاستقلال الذاتي التدريجي.</li>
+          <li>ضمانات زمنية واضحة لكل مرحلة.</li>
+        </ul>
+      </div>
+      <div class="scope-col exc">
+        <h4>ما لا يشمله (يُحسَب منفصلاً)</h4>
+        <ul>
+          <li>ميزانية الإعلانات المدفوعة نفسها.</li>
+          <li>تصوير احترافي ميداني بمعدّات خاصة (اختياري).</li>
+          <li>رسوم تسجيل العلامة التجارية القانوني.</li>
+          <li>استضافة ونطاق الموقع (سنوياً).</li>
+          <li>منتجات خارج نطاق الهوية (تغليف ومطبوعات).</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ NEXT STEPS / CTA ═══════════════════ -->
+<section class="next-steps">
+  <div class="wrap">
+    <span class="eyebrow">الخطوات التالية</span>
+    <h2 class="h2">كيف <em>نبدأ</em>؟</h2>
+    <p class="sub">
+      لا نطلب منكم قراراً الآن. نطلب اجتماعاً واحداً مدّته ٤٥ دقيقة،
+      نفهم فيه التفاصيل ونعود لكم بعرضٍ نهائي بالأرقام خلال ٣ أيام.
+    </p>
+
+    <div class="steps-grid">
+      <div class="step-box">
+        <div class="sb-num">١</div>
+        <h4>اجتماع استكشاف</h4>
+        <p>
+          جلسة ٤٥ دقيقة عبر الفيديو. نستمع إلى تفاصيل المصنع، الأهداف
+          الحقيقية، والميزانية المتاحة. لا التزام أبداً.
+        </p>
+      </div>
+      <div class="step-box">
+        <div class="sb-num">٢</div>
+        <h4>عرض نهائي مُفصَّل</h4>
+        <p>
+          خلال ٣ أيام من الاجتماع، نرسل عرضاً بالأرقام والجدولة
+          الزمنية والنطاق الدقيق. قابل للتعديل بعد المراجعة.
+        </p>
+      </div>
+      <div class="step-box">
+        <div class="sb-num">٣</div>
+        <h4>البداية في أسبوع</h4>
+        <p>
+          بعد الموافقة على العرض، نبدأ خلال ٧ أيام. المرحلة الأولى
+          تنطلق فور توقيع اتفاقية التعاون.
+        </p>
+      </div>
+    </div>
+
+    <div class="cta-card">
+      <div>
+        <h3>جاهزون لنقاش التفاصيل؟</h3>
+        <p>فريق Brandology سيعود إليكم خلال ٢٤ ساعة لتحديد موعد الاجتماع.</p>
+      </div>
+      <div class="cta-buttons">
+        <a href="https://wa.me/966000000000" class="btn primary">حجز اجتماع استكشاف</a>
+        <a href="mailto:hello@brandology.co" class="btn ghost">مراسلة عبر البريد</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <b>BRANDOLOGY</b>
+    <div>إسطنبول · الرياض · يخدم السوق السوري</div>
+    <div class="small">عرض تعاون مبدئي · أبريل ٢٠٢٦ · مُعَدّ لـ م. أحمد سيد</div>
+  </div>
+</footer>
 
 </body>
 </html>
