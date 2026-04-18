@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>عرض تعاون لبناء علامة تجارية في سوق الديكور المعدني السوري | Brandology</title>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Kufi+Arabic:wght@400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --brand: #E31E24;
@@ -29,7 +29,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: 'Baloo Bhaijaan 2', system-ui, sans-serif;
+    font-family: 'Calibri', 'Carlito', 'Segoe UI', 'Noto Kufi Arabic', system-ui, sans-serif;
     background: var(--white);
     color: var(--ink);
     direction: rtl;
@@ -73,8 +73,8 @@
   .cover-brand {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    padding: 10px 22px;
+    gap: 14px;
+    padding: 12px 24px 12px 18px;
     border: 1.5px solid rgba(255,255,255,0.35);
     border-radius: 100px;
     font-weight: 700;
@@ -82,14 +82,12 @@
     letter-spacing: 2px;
     margin-bottom: 44px;
     backdrop-filter: blur(6px);
-    background: rgba(255,255,255,0.04);
+    background: rgba(255,255,255,0.06);
   }
-  .cover-brand::before {
-    content: '';
-    width: 8px; height: 8px;
-    background: var(--accent);
-    border-radius: 50%;
-    box-shadow: 0 0 12px var(--accent);
+  .cover-brand img {
+    height: 28px;
+    width: auto;
+    display: block;
   }
 
   .cover h1 {
@@ -566,7 +564,7 @@
     line-height: 1.4;
   }
   .type-demo .tp .t-sample-body {
-    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-family: 'Calibri', 'Carlito', 'Segoe UI', 'Noto Kufi Arabic', sans-serif;
     font-size: 18px;
     color: var(--ink-soft);
     font-weight: 500;
@@ -1292,11 +1290,19 @@
   .footer {
     background: var(--ink);
     color: rgba(255,255,255,0.7);
-    padding: 40px 0;
+    padding: 48px 0;
     text-align: center;
     font-size: 14px;
   }
-  .footer b { color: var(--white); letter-spacing: 2px; font-size: 15px; }
+  .footer img.footer-logo {
+    height: 44px;
+    width: auto;
+    display: block;
+    margin: 0 auto 14px;
+    filter: brightness(0) invert(1);
+    opacity: 0.95;
+  }
+  .footer b { color: var(--white); letter-spacing: 2px; font-size: 15px; display: block; }
   .footer .small { font-size: 12px; opacity: 0.5; margin-top: 6px; }
 
   /* ── Responsive ── */
@@ -1331,16 +1337,19 @@
 <!-- ═══════════════════ COVER ═══════════════════ -->
 <header class="cover">
   <div class="cover-inner">
-    <div class="cover-brand">BRANDOLOGY</div>
+    <div class="cover-brand">
+      <img src="assets/brandology-logo.png" alt="Brandology">
+      <span>BRANDOLOGY</span>
+    </div>
     <h1>من ورشة في إدلب إلى <em>علامة سورية</em> يعرفها كل بيت.</h1>
     <p class="lede">
       عرضٌ تعاوني لبناء هوية علامتكم التجارية، صياغة استراتيجية التسويق،
-      وتأسيس حضوركم الرقمي من الصفر،في سوق الديكور المعدني وفن الليزر داخل سوريا.
+      وتأسيس حضوركم الرقمي من الصفر، في سوق الديكور المعدني وفن الليزر داخل سوريا.
     </p>
     <div class="cover-meta">
       <div class="m-item">
         <div class="m-label">مُعَدّ لـ</div>
-        <div class="m-value">م. أحمد سيد · مصنع إدلب</div>
+        <div class="m-value">فريق الورشة · إدلب</div>
       </div>
       <div class="m-item">
         <div class="m-label">من</div>
@@ -1409,7 +1418,7 @@
 
     <div class="quote">
       نحن لا نبيع «تصميم شعار» ولا «إدارة صفحات». نحن نبني منظومةً
-      تجعل العميل السوري يختاركم قبل أن يسأل عن السعر،لأن الاسم، البصر،
+      تجعل العميل السوري يختاركم قبل أن يسأل عن السعر، لأن الاسم، الهوية البصرية،
       والمحتوى قد سبقوا العرض التجاري إلى عقله. <strong>فريق Brandology</strong>
     </div>
   </div>
@@ -1426,27 +1435,29 @@
 
     <div class="brief-grid">
       <div class="brief-card">
-        <div class="ic">١</div>
+        <div class="ic">1</div>
         <h3>منتَجٌ قوي · هويّة غائبة</h3>
         <p>
           لديكم مصنعٌ فعلي في إدلب، ومنتجات قصٍّ بالليزر بجودة عالية
           (تُحَفٌ إسلامية، قطع ديكور، ساعات، طاولات، شعارات مركبات).
-          لكن الاسم الحالي «MS Steel» لا يعكس هذه القيمة.
+          ما زالت العلامة بلا اسمٍ رسميّ بعد، والأسماء المتداولة حالياً
+          («MS Steel»، «MD Steel»، «MD Metal») كلّها مقترحات مبدئية
+          تحتاج قراراً استراتيجياً.
         </p>
       </div>
 
       <div class="brief-card">
-        <div class="ic">٢</div>
+        <div class="ic">2</div>
         <h3>حضور رقمي من الصفر</h3>
         <p>
           لا موقع، لا قنوات اجتماعية احترافية، لا هوية بصرية موحّدة.
           العميل السوري اليوم يبحث عن قِطع زينة ومنتجات معدنية عبر
-          فيسبوك وإنستغرام أولاً،قبل أن يسأل عن العنوان.
+          فيسبوك وإنستغرام أولاً، قبل أن يسأل عن العنوان.
         </p>
       </div>
 
       <div class="brief-card">
-        <div class="ic">٣</div>
+        <div class="ic">3</div>
         <h3>سوقٌ سوري يتشكّل حالياً</h3>
         <p>
           مرحلة ما بعد 2024 في سوريا فرصةٌ نادرة: إعادة إعمار بيوت،
@@ -1456,18 +1467,18 @@
       </div>
 
       <div class="brief-card">
-        <div class="ic">٤</div>
+        <div class="ic">4</div>
         <h3>التسويق بالمحتوى كمنهج</h3>
         <p>
           شاركتم نموذجاً لشركة منافسة تعتمد على التسويق بالمحتوى.
-          هذا التوجّه صحيح،فمصنعكم بذاته «استوديو محتوى»: كلّ قطعة
+          هذا التوجّه صحيح، فمصنعكم بذاته «استوديو محتوى»: كلّ قطعة
           تخرج من الليزر هي فيديو محتمل، وكل تصميم قصّة قابلة للنشر.
         </p>
       </div>
     </div>
 
     <div class="quote">
-      المشكلة الحقيقية ليست «أننا نحتاج اسماً جديداً»،بل أنّ المصنع
+      المشكلة الحقيقية ليست «أننا نحتاج اسماً جديداً»، بل أنّ المصنع
       يُنتج فنّاً، والسوق يتعامل معه كحدادة. مهمّتنا أن ننقل الإدراك من
       <strong>«ورشة معادن»</strong> إلى <strong>«بيت تصميم سوري»</strong>.
     </div>
@@ -1511,14 +1522,14 @@
     <span class="eyebrow">شرائح السوق</span>
     <h2 class="h2">أين <em>يوجد الطلب</em> بالضبط؟</h2>
     <p class="sub">
-      حدّدنا أربع شرائح قابلة للاستهداف داخل سوريا،ترتّبت حسب
+      حدّدنا أربع شرائح قابلة للاستهداف داخل سوريا، ترتّبت حسب
       سرعة الدوران، هامش الربح، وقابلية التصوير والنشر.
     </p>
 
     <div class="segments">
       <div class="seg">
         <div class="seg-head">
-          <span class="seg-tag">شريحة ١</span>
+          <span class="seg-tag">شريحة 1</span>
         </div>
         <h3>البيت السوري المُعاد تأهيله</h3>
         <p>
@@ -1532,12 +1543,12 @@
 
       <div class="seg">
         <div class="seg-head">
-          <span class="seg-tag">شريحة ٢</span>
+          <span class="seg-tag">شريحة 2</span>
         </div>
         <h3>المقاهي والمطاعم والمحلات</h3>
         <p>
           شعارات معدنية مقطوعة بالليزر، قوائم طعام ثلاثية الأبعاد،
-          فواصل، علامات واجهات. تذاكر شراء أعلى بكثير.
+          فواصل، علامات واجهات. متوسّط قيمة الطلب أعلى بكثير.
         </p>
         <div class="examples">
           <b>المدخل:</b> بيع مباشر B2B · معرض أعمال موثّق · شراكة مع مصمّمي الديكور.
@@ -1546,7 +1557,7 @@
 
       <div class="seg">
         <div class="seg-head">
-          <span class="seg-tag">شريحة ٣</span>
+          <span class="seg-tag">شريحة 3</span>
         </div>
         <h3>المساجد والأوقاف والجمعيات</h3>
         <p>
@@ -1560,7 +1571,7 @@
 
       <div class="seg">
         <div class="seg-head">
-          <span class="seg-tag">شريحة ٤</span>
+          <span class="seg-tag">شريحة 4</span>
         </div>
         <h3>الهدايا والمناسبات والتخصيص</h3>
         <p>
@@ -1589,7 +1600,7 @@
       <div class="comp-col does">
         <h4>يفعلونه بذكاء</h4>
         <ul>
-          <li>يصوّرون مرحلة الإنتاج داخل الورشة،الليزر، الشرر، خروج القطعة.</li>
+          <li>يصوّرون مرحلة الإنتاج داخل الورشة، الليزر، الشرر، خروج القطعة.</li>
           <li>يعتمدون فيديوهات قصيرة (Reels) بموسيقى هادئة وبدون كلام.</li>
           <li>يُظهرون القطعة في بيئتها النهائية (جدار، واجهة، مقهى).</li>
           <li>يستخدمون تعليقات العملاء كمحتوى (Testimonial / Unboxing).</li>
@@ -1600,8 +1611,8 @@
       <div class="comp-col gap">
         <h4>فرص لتجاوزهم</h4>
         <ul>
-          <li>لا يروون «قصّة الحِرفي»،الشخص خلف الماكينة لا يظهر أبداً.</li>
-          <li>محتواهم معروض، لا تعليمي،لا يجيبون على أسئلة يبحث عنها الزبون.</li>
+          <li>لا يروون «قصّة الحِرفي»، الشخص خلف الماكينة لا يظهر أبداً.</li>
+          <li>محتواهم معروض، لا تعليمي، لا يجيبون على أسئلة يبحث عنها الزبون.</li>
           <li>لا موقع إلكتروني فعلي · الاعتماد كلياً على السوشال.</li>
           <li>لا نظام أسعار شفاف · كل تسعيرة عبر المحادثة الخاصة.</li>
           <li>لا هوية بصرية موحّدة · الشعار يتغيّر بين منشور وآخر.</li>
@@ -1611,7 +1622,7 @@
 
     <div class="quote">
       المنافس يبيع «قِطعاً معدنية مصوّرة جيداً». الفرصة هي أن تبيعوا أنتم
-      <strong>«علامة سورية تصنع قطعاً تحمل معنى»</strong>،بهوية ثابتة،
+      <strong>«علامة سورية تصنع قطعاً تحمل معنى»</strong>، بهوية ثابتة،
       موقع رسمي، قصّة حِرفي، ومنهجية أسعار واضحة.
     </div>
   </div>
@@ -1620,12 +1631,13 @@
 <!-- ═══════════════════ BRAND NAMING ═══════════════════ -->
 <section>
   <div class="wrap">
-    <span class="eyebrow">هوية العلامة · ١</span>
+    <span class="eyebrow">هوية العلامة · 1</span>
     <h2 class="h2">الاسم · <em>قلب العلامة</em></h2>
     <p class="sub">
-      اقترحتم «MD Steel / MD Metal» كبديلين عن «MS Steel». الفكرة وراءهما
-      ممتازة (Modern Design)، لكن «MD» بالإنجليزية تعني طبيباً،والتباس
-      معنى الاسم في السوق خسارة تسويقية. قبل أن نقرّر، ندرس ثلاث عائلات أسماء:
+      من بين الأسماء التي طُرحت حتى الآن («MS Steel»، «MD Steel»،
+      «MD Metal»)، الفكرة وراء «MD» ممتازة (Modern Design)، لكن «MD»
+      بالإنجليزية تعني طبيباً، والتباس معنى الاسم في السوق خسارة
+      تسويقية. لذلك نقترح ثلاث عائلات أسماء جديدة لدراستها قبل القرار النهائي:
     </p>
 
     <div class="names-grid">
@@ -1650,7 +1662,7 @@
         <div class="name-ar">حِرَف</div>
         <div class="name-en">HIRAF</div>
         <div class="name-meaning">
-          «حِرَف» جمع حِرفة،يضع العلامة في موقع <b>بيتِ صناعةٍ يدوية أصيلة</b>،
+          «حِرَف» جمع حِرفة، يضع العلامة في موقع <b>بيتِ صناعةٍ يدوية أصيلة</b>،
           لا مجرّد مصنع قطع. اسم عاطفي، يناسب شريحة البيوت والمساجد،
           ويروي قصّة الحِرفي خلف الماكينة.
         </div>
@@ -1674,7 +1686,7 @@
           <div class="row"><span class="dot"></span>يحفظ الفكرة الأصلية (MD) بمعنى سليم.</div>
           <div class="row"><span class="dot"></span>يصلح للتوسع لقطاعات أخرى (مَدار للإنشاءات).</div>
           <div class="row"><span class="dot"></span>يحتاج شرحاً بصرياً أكثر في البداية.</div>
-          <div class="row"><span class="dot"></span>يحمل طموحاً «مرجعياً»،مناسب لخطة خمسية.</div>
+          <div class="row"><span class="dot"></span>يحمل طموحاً «مرجعياً»، مناسب لخطة خمسية.</div>
         </div>
       </div>
 
@@ -1682,7 +1694,7 @@
 
     <div class="quote">
       <strong>توصيتنا:</strong> «نَقش» لأنه يصف الحِرفة ذاتها، قصير، عربي،
-      ومفهوم في كل لهجة سورية. الاسم ليس قراراً لغوياً فقط،هو الأساس
+      ومفهوم في كل لهجة سورية. الاسم ليس قراراً لغوياً فقط، هو الأساس
       الذي سنبني عليه الشعار، اللوحة اللونية، ونبرة الصوت.
       <br><br>
       الاختيار النهائي لكم، ونحن مستعدّون للذهاب مع أيٍّ من الثلاثة.
@@ -1693,11 +1705,11 @@
 <!-- ═══════════════════ POSITIONING ═══════════════════ -->
 <section class="alt">
   <div class="wrap">
-    <span class="eyebrow">هوية العلامة · ٢</span>
+    <span class="eyebrow">هوية العلامة · 2</span>
     <h2 class="h2">الموقع · <em>ماذا نمثّل في ذهن العميل؟</em></h2>
     <p class="sub">
       جملة الموقع (Positioning Statement) هي البوصلة الداخلية التي
-      تُحاكم كلّ قرار تسويقي عليها لاحقاً،اسم المنتج، لون الإعلان،
+      تُقاس عليها كلّ القرارات التسويقية لاحقاً: اسم المنتج، لون الإعلان،
       أسلوب الرد على العميل.
     </p>
 
@@ -1706,7 +1718,7 @@
       <p>
         لـ<em>البيت السوري</em> الذي يعيد بناء ذاكرته بعد سنواتٍ من الحرب،
         <em>نَقش</em> هو بيتُ التصميم المعدني الذي يحوِّل الفولاذ إلى
-        <em>أثرٍ يُورَّث</em>،بأيدي حِرفيّين من إدلب، بدقّة ليزرٍ حديثة،
+        <em>أثرٍ يُورَّث</em>، بأيدي حِرفيّين من إدلب، بدقّة ليزرٍ حديثة،
         وبلغةٍ بصرية تحترم التراث وتتجاوزه.
       </p>
     </div>
@@ -1723,7 +1735,7 @@
 <!-- ═══════════════════ VISUAL DIRECTION ═══════════════════ -->
 <section>
   <div class="wrap">
-    <span class="eyebrow">هوية العلامة · ٣</span>
+    <span class="eyebrow">هوية العلامة · 3</span>
     <h2 class="h2">التوجّه البصري · <em>كيف نبدو؟</em></h2>
     <p class="sub">
       القطعة المعدنية نفسها رمادية متعدّدة التدرّجات. لذلك تبتعد
@@ -1742,11 +1754,11 @@
         </div>
         <p style="font-size:14px;color:var(--muted);margin-top:16px;line-height:1.8;">
           <strong style="color:var(--ink);">لماذا لا تتصدّر الفضّة الهوية رغم أنّ المنتج فضّي اللون؟</strong>
-          لأنّ كلّ ورشة معادن في العالم تستخدم الفضّي،فهو لونُ الفئة لا لونُ
+          لأنّ كلّ ورشة معادن في العالم تستخدم الفضّي، فهو لونُ الفئة لا لونُ
           العلامة. الفضّة تبقى داخل المنظومة، لكن <strong style="color:var(--ink);">كـ«لون المادّة»
           لا كلون الشعار</strong>: تهيمن على صور المنتج، خلفيات المعرض،
           اللمسات المعدنية في التغليف والشعار. أمّا العلامة نفسها فتقوم على
-          الفحم (قوة ورسوخ) والذهب (قيمة وتراث)،لتمنح الفضّة البارد دفئاً
+          الفحم (قوة ورسوخ) والذهب (قيمة وتراث)، لتمنح الفضّة البارد دفئاً
           يجعل القطعة تبدو ثمينة، لا صناعية.
         </p>
         <p style="font-size:13px;color:var(--muted);margin-top:12px;line-height:1.75;font-style:italic;">
@@ -1766,8 +1778,8 @@
           <div class="t-sample-body">قطعة معدنية تُحاكي ذاكرة بيتك.</div>
         </div>
         <div class="tp">
-          <div class="t-label">للإنجليزية · Inter / Manrope</div>
-          <div class="t-sample-body" style="font-family:Inter,system-ui;direction:ltr;text-align:right;">
+          <div class="t-label">للإنجليزية · Lora</div>
+          <div class="t-sample-body" style="font-family:'Lora',Georgia,serif;direction:ltr;text-align:right;">
             NAQSH · Crafted in Idlib
           </div>
         </div>
@@ -1785,11 +1797,11 @@
 <!-- ═══════════════════ TONE OF VOICE ═══════════════════ -->
 <section class="alt">
   <div class="wrap">
-    <span class="eyebrow">هوية العلامة · ٤</span>
+    <span class="eyebrow">هوية العلامة · 4</span>
     <h2 class="h2">نبرة الصوت · <em>كيف نتحدّث؟</em></h2>
     <p class="sub">
       لغةُ المنشور، الرد، والإعلان يجب أن تصدر من شخصية واحدة متّسقة.
-      نقترح أن تكون شخصية «نَقش» قريبةً من الحِرفي المتقن،لا البائع المتحمّس.
+      نقترح أن تكون شخصية «نَقش» قريبةً من الحِرفي المتقن، لا البائع المتحمّس.
     </p>
 
     <div class="tone-grid">
@@ -1799,7 +1811,7 @@
           <span class="t-arrow">←</span>
           <span class="t-no">صاخبة مُبالِغة</span>
         </div>
-        <p>«قطعة تبقى»،لا «أقوى عرض في السوق!!».</p>
+        <p>«قطعة تبقى»، لا «أقوى عرض في السوق!!».</p>
       </div>
       <div class="tone-card">
         <div class="t-pair">
@@ -1832,11 +1844,11 @@
 <!-- ═══════════════════ DIGITAL ECOSYSTEM ═══════════════════ -->
 <section>
   <div class="wrap">
-    <span class="eyebrow">الحضور الرقمي · ١</span>
+    <span class="eyebrow">الحضور الرقمي · 1</span>
     <h2 class="h2">المنظومة الرقمية · <em>كل قناة لها دور واحد</em></h2>
     <p class="sub">
       كثيرون يفتحون كلّ حسابٍ ممكن ويتوقّفون بعد شهرين. نحن نبدأ بأربع
-      قنوات فقط، كلّ واحدة لها وظيفة محدّدة،ونتوسّع بعد إثبات النموذج.
+      قنوات فقط، كلّ واحدة لها وظيفة محدّدة، ونتوسّع بعد إثبات النموذج.
     </p>
 
     <div class="eco">
@@ -1852,7 +1864,7 @@
           <li>معرض أعمال مفصّل مع تصنيفات (بيت · مسجد · مقهى · هدايا).</li>
           <li>نموذج طلب سعر ذكي يُحوَّل مباشرة إلى واتساب الأعمال.</li>
           <li>صفحة قصّة الحِرفي وسرديّة «صُنع في إدلب».</li>
-          <li>تهيئة SEO كاملة بكلمات مثل «لوحات قرآنية معدنية سوريا».</li>
+          <li>تهيئة SEO كاملة بكلمات مثل «زخارف معدنية».</li>
         </ul>
       </div>
 
@@ -1861,10 +1873,10 @@
         <h3>إنستغرام · @naqsh.sy</h3>
         <p>
           القناة الأبرز بصرياً لعرض القطعة النهائية ولقطات الورشة.
-          المعرض هنا يجب أن يبدو كمتحفٍ صغير،بإطار بصري موحّد.
+          المعرض هنا يجب أن يبدو كمتحفٍ صغير، بإطار بصري موحّد.
         </p>
         <ul>
-          <li>٤ منشورات + ٣ ريلز + ٥ ستوريز أسبوعياً.</li>
+          <li>3 منشورات + 2 ريلز + ستوريز يومية أسبوعياً.</li>
           <li>تبويب «متجر» مرتبط بكتالوج فيسبوك.</li>
           <li>Highlights ثابتة: القطع · الورشة · العملاء · الأسعار.</li>
           <li>عناوين عربية قصيرة مع Hashtags سورية محلّية.</li>
@@ -1875,7 +1887,7 @@
         <div class="eco-role">الوصول الجماهيري</div>
         <h3>فيسبوك · Naqsh Steel</h3>
         <p>
-          القناة الأقوى لاختراق الأسواق المحلّية في سوريا،خصوصاً
+          القناة الأقوى لاختراق الأسواق المحلّية في سوريا، خصوصاً
           للفئات العمرية +30 والتجّار B2B.
         </p>
         <ul>
@@ -1890,12 +1902,12 @@
         <h3>تيك توك · @naqsh.sy</h3>
         <p>
           خطّ بصري واحد فقط: «كيف تُصنع القطعة». فيديوهات 15-30 ثانية
-          تُظهر الليزر يقصّ المعدن،محتوى فائق الانتشار.
+          تُظهر الليزر يقصّ المعدن، محتوى فائق الانتشار.
         </p>
         <ul>
-          <li>٣-٥ فيديوهات أسبوعياً.</li>
+          <li>فيديوهان كحدّ أقصى أسبوعياً.</li>
           <li>موسيقى هادئة + نصّ عربي بسيط.</li>
-          <li>لا مبيعات مباشرة،فقط جَذب وتحويل إلى إنستغرام.</li>
+          <li>لا مبيعات مباشرة، فقط جَذب وتحويل إلى إنستغرام.</li>
         </ul>
       </div>
 
@@ -1968,7 +1980,7 @@
 <!-- ═══════════════════ ADS FUNNEL ═══════════════════ -->
 <section class="alt">
   <div class="wrap">
-    <span class="eyebrow">الحضور الرقمي · ٢</span>
+    <span class="eyebrow">الحضور الرقمي · 2</span>
     <h2 class="h2">الإعلانات المدفوعة · <em>ثلاث طبقات</em></h2>
     <p class="sub">
       لن نبدأ بالإعلانات قبل وجود موقع وحسابات احترافية. ولن نشتري
@@ -2011,7 +2023,7 @@
     </div>
 
     <div class="quote" style="margin-top:28px;">
-      <strong>الميزانية في الشهر الأول منخفضة جداً عن عمد</strong>،هدفها
+      <strong>الميزانية في الشهر الأول منخفضة جداً عن عمد</strong>، هدفها
       اختبار الرسائل، لا شراء المبيعات. نُضاعف الميزانية عندما يثبت رقم
       «تكلفة الطلب» أنه مُربح. هذا هو الفرق بين «إعلان» و«قناة نمو».
     </div>
@@ -2021,7 +2033,7 @@
 <!-- ═══════════════════ CONTENT PILLARS ═══════════════════ -->
 <section>
   <div class="wrap">
-    <span class="eyebrow">استراتيجية المحتوى · ١</span>
+    <span class="eyebrow">استراتيجية المحتوى · 1</span>
     <h2 class="h2">أربعة <em>أعمدة محتوى</em> فقط</h2>
     <p class="sub">
       كلّ منشور نكتبه يجب أن يقع تحت أحد هذه الأعمدة. لا محتوى عشوائي،
@@ -2032,18 +2044,18 @@
 
       <div class="pillar p1">
         <div class="p-num">01</div>
-        <div class="p-share">٤٠٪ من المحتوى</div>
+        <div class="p-share">40٪ من المحتوى</div>
         <h4>الحِرفة تُصنَع</h4>
         <p>
           لقطات الليزر وهو يقطع، خروج القطعة، لحظة تركيبها على الجدار.
-          بدون كلام، بصوت الماكينة فقط،أقوى محتوى يمكن إنتاجه.
+          بدون كلام، بصوت الماكينة فقط، أقوى محتوى يمكن إنتاجه.
         </p>
-        <div class="p-ex">مثال: «٣٠ ثانية · من صفيحة خام إلى آية على جدار».</div>
+        <div class="p-ex">مثال: «30 ثانية · من صفيحة خام إلى آية على جدار».</div>
       </div>
 
       <div class="pillar p2">
         <div class="p-num">02</div>
-        <div class="p-share">٢٥٪ من المحتوى</div>
+        <div class="p-share">25٪ من المحتوى</div>
         <h4>القطعة في بيتها</h4>
         <p>
           صور احترافية للقطع النهائية في بيئة فعلية: جدار بيت، مدخل مسجد،
@@ -2054,23 +2066,23 @@
 
       <div class="pillar p3">
         <div class="p-num">03</div>
-        <div class="p-share">٢٠٪ من المحتوى</div>
+        <div class="p-share">20٪ من المحتوى</div>
         <h4>اعرف وتعلّم</h4>
         <p>
           محتوى تعليمي يُجيب على أسئلة العميل قبل أن يسأل:
-          «كيف أقيس مساحة لوحة جدارية؟» · «ما الفرق بين سمك ٢مم و٣مم؟»
+          «كيف أقيس مساحة لوحة جدارية؟» · «ما الفرق بين سمك 2مم و3مم؟»
           يبني الثقة ويحسّن SEO.
         </p>
-        <div class="p-ex">مثال: كاروسيل ٦ شرائح · «٥ أخطاء في اختيار لوحة بسم الله».</div>
+        <div class="p-ex">مثال: كاروسيل 6 شرائح · «5 أخطاء في اختيار لوحة بسم الله».</div>
       </div>
 
       <div class="pillar p4">
         <div class="p-num">04</div>
-        <div class="p-share">١٥٪ من المحتوى</div>
+        <div class="p-share">15٪ من المحتوى</div>
         <h4>الإنسان خلف القطعة</h4>
         <p>
           وجه الحِرفي، ورشة إدلب، قصّة تسليم، شكر عميل. هذا العمود يصنع
-          الارتباط العاطفي،وهو ما لا يستطيع أي منافس سرقته.
+          الارتباط العاطفي، وهو ما لا يستطيع أي منافس سرقته.
         </p>
         <div class="p-ex">مثال: «أبو محمد · عشر سنوات مع الليزر».</div>
       </div>
@@ -2078,153 +2090,46 @@
     </div>
 
     <div class="quote">
-      لاحظوا أنّ <strong>٦٠٪ من المحتوى بلا بيع مباشر</strong>،هذا سرّ
+      لاحظوا أنّ <strong>60٪ من المحتوى بلا بيع مباشر</strong>، هذا سرّ
       التسويق بالمحتوى. الجمهور لا يتابع من يبيع له كلّ يوم؛ يتابع من
       يعلّمه ويُعجبه، ثم يشتري منه حين يحتاج.
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════ WEEKLY CALENDAR ═══════════════════ -->
+<!-- ═══════════════════ PRODUCTION WORKFLOW ═══════════════════ -->
 <section class="alt">
   <div class="wrap">
-    <span class="eyebrow">استراتيجية المحتوى · ٢</span>
-    <h2 class="h2">الجدول <em>الأسبوعي</em> · نموذج مبدئي</h2>
-    <p class="sub">
-      خطة إيقاعٍ يومية قابلة للتنفيذ بفريق صغير. التكرار الأسبوعي يبني
-      الثقة عند الخوارزمية وعند الجمهور معاً.
-    </p>
-
-    <div class="cal">
-      <div class="cal-head">جدول المحتوى الأسبوعي · ٧ أيام</div>
-      <div class="cal-grid">
-
-        <div class="day">السبت</div>
-        <div>
-          <span class="pill a">Reel</span>
-          <div class="content">فيديو ليزر ٣٠ ثانية (العمود ١).</div>
-        </div>
-        <div>
-          <span class="pill c">Stories</span>
-          <div class="content">٣ ستوريز ورشة + استبيان.</div>
-        </div>
-        <div>
-          <span class="pill d">WA</span>
-          <div class="content">بث عرض الأسبوع.</div>
-        </div>
-
-        <div class="day">الأحد</div>
-        <div>
-          <span class="pill b">Post</span>
-          <div class="content">قطعة نهائية في بيت فعلي (العمود ٢).</div>
-        </div>
-        <div>
-          <span class="pill c">Stories</span>
-          <div class="content">تعليقات عملاء + screenshot.</div>
-        </div>
-        <div></div>
-
-        <div class="day">الإثنين</div>
-        <div>
-          <span class="pill c">Carousel</span>
-          <div class="content">كاروسيل تعليمي (العمود ٣).</div>
-        </div>
-        <div>
-          <span class="pill c">Stories</span>
-          <div class="content">سؤال للجمهور + ردود.</div>
-        </div>
-        <div></div>
-
-        <div class="day">الثلاثاء</div>
-        <div>
-          <span class="pill a">Reel</span>
-          <div class="content">تيك توك + إنستغرام: لقطة ورشة.</div>
-        </div>
-        <div>
-          <span class="pill c">Stories</span>
-          <div class="content">خلف الكواليس اليومي.</div>
-        </div>
-        <div></div>
-
-        <div class="day">الأربعاء</div>
-        <div>
-          <span class="pill d">Post</span>
-          <div class="content">قصّة حِرفي / وجه إنساني (العمود ٤).</div>
-        </div>
-        <div>
-          <span class="pill c">Stories</span>
-          <div class="content">لقطة تسليم + شكر.</div>
-        </div>
-        <div></div>
-
-        <div class="day">الخميس</div>
-        <div>
-          <span class="pill a">Reel</span>
-          <div class="content">فيديو قبل/بعد لمشروع.</div>
-        </div>
-        <div>
-          <span class="pill c">Stories</span>
-          <div class="content">استطلاع أفضل تصميم.</div>
-        </div>
-        <div>
-          <span class="pill d">WA</span>
-          <div class="content">رسالة تذكير بالطلبات.</div>
-        </div>
-
-        <div class="day">الجمعة</div>
-        <div>
-          <span class="pill b">Post</span>
-          <div class="content">لوحة قرآنية / روحانية (العمود ٢).</div>
-        </div>
-        <div>
-          <span class="pill c">Stories</span>
-          <div class="content">دعاء + لقطة هادئة.</div>
-        </div>
-        <div></div>
-
-      </div>
-    </div>
-
-    <p style="font-size:14px;color:var(--muted);margin-top:20px;line-height:1.8;">
-      <strong>المجموع الأسبوعي:</strong> ٧ منشورات رئيسية + ٥ ريلز/فيديو + ٢٠+ ستوري
-      + ٣ بثوث واتساب. يُنتج من جلسة تصوير واحدة أسبوعياً في الورشة (نموذج batch).
-    </p>
-  </div>
-</section>
-
-<!-- ═══════════════════ PRODUCTION WORKFLOW ═══════════════════ -->
-<section>
-  <div class="wrap">
-    <span class="eyebrow">استراتيجية المحتوى · ٣</span>
+    <span class="eyebrow">استراتيجية المحتوى · 2</span>
     <h2 class="h2">المصنع <em>استوديو محتوى</em></h2>
     <p class="sub">
-      لا نحتاج استوديو تصوير خارجي،مصنعكم هو الاستوديو. ما نحتاجه هو
+      لا نحتاج استوديو تصوير خارجي، مصنعكم هو الاستوديو. ما نحتاجه هو
       نظامٌ يحوّل يوم إنتاج عادياً إلى مكتبة محتوى لشهر كامل.
     </p>
 
     <div class="workflow">
       <div class="step">
-        <div class="step-num">١</div>
+        <div class="step-num">1</div>
         <h5>يوم تصوير أسبوعي</h5>
         <p>
-          جلسة ٣-٤ ساعات أسبوعياً في الورشة، تُغطّي كل القطع التي دخلت
+          جلسة 3-4 ساعات أسبوعياً في الورشة، تُغطّي كل القطع التي دخلت
           الإنتاج ذلك الأسبوع. هاتفٌ بمثبّت + إضاءة بسيطة كافيان للبداية.
         </p>
         <div class="step-out">المخرَج: مواد خام</div>
       </div>
 
       <div class="step">
-        <div class="step-num">٢</div>
+        <div class="step-num">2</div>
         <h5>معالجة + تحرير</h5>
         <p>
           قصّ الفيديوهات، إضافة الموسيقى والنصوص العربية بإطار بصري موحّد
-          مسبق الإعداد. ٦-٨ فيديوهات جاهزة من كل جلسة.
+          مسبق الإعداد. فيديوهان جاهزان من كل جلسة.
         </p>
         <div class="step-out">المخرَج: محتوى جاهز</div>
       </div>
 
       <div class="step">
-        <div class="step-num">٣</div>
+        <div class="step-num">3</div>
         <h5>جدولة ونشر</h5>
         <p>
           ترفع على Meta Business Suite + تطبيق جدولة لتيك توك. الجدول
@@ -2234,7 +2139,7 @@
       </div>
 
       <div class="step">
-        <div class="step-num">٤</div>
+        <div class="step-num">4</div>
         <h5>قراءة الأرقام</h5>
         <p>
           تقرير شهري بسيط: أي فيديو انتشر؟ أي عمود محتوى جلب طلبات؟
@@ -2246,8 +2151,8 @@
 
     <div class="quote">
       <strong>المفتاح:</strong> المحتوى لا يُنتَج «عند الحاجة»؛ يُنتَج
-      بنظام. ساعتان أسبوعياً مخصّصتان للتصوير = ٣٠ قطعة محتوى شهرياً
-      = حضور يبدو أكبر بعشر مرّات من الحجم الفعلي.
+      بنظام. ساعتان أسبوعياً مخصّصتان للتصوير = نحو 12 قطعة محتوى شهرياً
+      = حضور منتظم يبني الثقة دون إرهاق الفريق.
     </div>
   </div>
 </section>
@@ -2256,10 +2161,10 @@
 <section class="alt">
   <div class="wrap">
     <span class="eyebrow">خارطة الطريق</span>
-    <h2 class="h2">من الاجتماع الأول إلى <em>علامة تعمل</em> · ٩٠ يوماً</h2>
+    <h2 class="h2">من الاجتماع الأول إلى <em>علامة تعمل</em> · 90 يوماً</h2>
     <p class="sub">
-      لا نؤمن بالخطط المدّتها سنة. نبني في مراحل قصيرة، كل مرحلة تنتهي
-      بمخرجٍ ملموس يستخدمه المصنع فوراً،حتى لو توقّفنا لأي سبب.
+      لا نؤمن بالخطط التي تمتدّ سنةً كاملة. نبني في مراحل قصيرة، كل مرحلة تنتهي
+      بمخرجٍ ملموس يستخدمه المصنع فوراً، حتى لو توقّفنا لأي سبب.
     </p>
 
     <div class="timeline">
@@ -2268,10 +2173,10 @@
         <div class="phase-card">
           <div class="phase-head">
             <div class="phase-title">
-              <div class="phase-num">المرحلة ١</div>
+              <div class="phase-num">المرحلة 1</div>
               <h3>اكتشاف وتأسيس</h3>
             </div>
-            <div class="phase-duration">الأسبوعان ١-٢</div>
+            <div class="phase-duration">الأسبوعان 1-2</div>
           </div>
           <div class="phase-body">
             <p>
@@ -2294,10 +2199,10 @@
         <div class="phase-card">
           <div class="phase-head">
             <div class="phase-title">
-              <div class="phase-num">المرحلة ٢</div>
+              <div class="phase-num">المرحلة 2</div>
               <h3>بناء الهوية والأصول</h3>
             </div>
-            <div class="phase-duration">الأسابيع ٣-٦</div>
+            <div class="phase-duration">الأسابيع 3-6</div>
           </div>
           <div class="phase-body">
             <p>
@@ -2309,7 +2214,7 @@
               <div class="deliv">دليل هوية بصرية (Brand Guidelines) كامل</div>
               <div class="deliv">شعار بعدّة صِيَغ + أيقونة التطبيق</div>
               <div class="deliv">موقع إلكتروني ثنائي اللغة جاهز</div>
-              <div class="deliv">١٠ قوالب منشورات جاهزة للإنتاج</div>
+              <div class="deliv">10 قوالب منشورات جاهزة للإنتاج</div>
               <div class="deliv">كتالوج PDF للمنتجات</div>
               <div class="deliv">إعداد واتساب الأعمال + كتالوجه</div>
             </div>
@@ -2321,10 +2226,10 @@
         <div class="phase-card">
           <div class="phase-head">
             <div class="phase-title">
-              <div class="phase-num">المرحلة ٣</div>
+              <div class="phase-num">المرحلة 3</div>
               <h3>الإطلاق الرقمي</h3>
             </div>
-            <div class="phase-duration">الأسابيع ٧-٩</div>
+            <div class="phase-duration">الأسابيع 7-9</div>
           </div>
           <div class="phase-body">
             <p>
@@ -2334,7 +2239,7 @@
             </p>
             <div class="phase-deliverables">
               <div class="deliv">حملة إطلاق متعدّدة القنوات</div>
-              <div class="deliv">أول ٣٠ قطعة محتوى منشورة</div>
+              <div class="deliv">أول 12 قطعة محتوى منشورة</div>
               <div class="deliv">حملة إعلانات Meta تجريبية</div>
               <div class="deliv">بثّ مباشر افتتاحي من الورشة</div>
               <div class="deliv">قائمة بريدية لأوائل العملاء</div>
@@ -2347,10 +2252,10 @@
         <div class="phase-card">
           <div class="phase-head">
             <div class="phase-title">
-              <div class="phase-num">المرحلة ٤</div>
+              <div class="phase-num">المرحلة 4</div>
               <h3>التشغيل والنموّ</h3>
             </div>
-            <div class="phase-duration">الأسابيع ١٠-١٣+</div>
+            <div class="phase-duration">الأسابيع 10-13+</div>
           </div>
           <div class="phase-body">
             <p>
@@ -2372,10 +2277,10 @@
     </div>
 
     <div class="quote" style="margin-top:36px;">
-      <strong>لماذا ٩٠ يوماً تحديداً؟</strong> لأنها المدّة التي تكفي لبناء
+      <strong>لماذا 90 يوماً تحديداً؟</strong> لأنها المدّة التي تكفي لبناء
       الأساس الكامل مع إطلاقٍ حقيقي، ولا تطول لدرجة أن تفقد فيها الشركة
-      زخمها. بعد اليوم الـ ٩٠، نكون قد غادرنا دور «البناء» ودخلنا دور
-      «التحسين المستمر»،وهو دور يمكنكم قيادته داخلياً إن أردتم.
+      زخمها. بعد اليوم الـ 90، نكون قد غادرنا دور «البناء» ودخلنا دور
+      «التحسين المستمر»، وهو دور يمكنكم قيادته داخلياً إن أردتم.
     </div>
   </div>
 </section>
@@ -2387,7 +2292,7 @@
     <h2 class="h2">ثلاثة <em>مستويات تعاون</em></h2>
     <p class="sub">
       يختلف حجم الاستثمار حسب السرعة التي تريدون بها دخول السوق. كلّ
-      مستوى قائمٌ بذاته،لكنه يبني على الذي قبله. الأرقام النهائية
+      مستوى قائمٌ بذاته، لكنه يبني على الذي قبله. الأرقام النهائية
       تُحدَّد بعد اجتماع الاستكشاف.
     </p>
 
@@ -2405,13 +2310,13 @@
           <li>دليل هوية بصرية كامل.</li>
           <li>شعار بعدّة صِيَغ + أيقونات.</li>
           <li>لوحة ألوان وعائلة خطوط.</li>
-          <li>١٠ قوالب منشورات.</li>
+          <li>10 قوالب منشورات.</li>
           <li>كتالوج PDF للمنتجات.</li>
           <li class="muted">بدون موقع إلكتروني.</li>
           <li class="muted">بدون إدارة سوشال.</li>
         </ul>
         <div class="pack-foot">
-          <div class="pack-duration">المدّة: ٤-٦ أسابيع</div>
+          <div class="pack-duration">المدّة: 4-6 أسابيع</div>
           <div class="pack-price-note">التسعير حسب النطاق · يُناقَش في الاجتماع الأول</div>
         </div>
       </div>
@@ -2425,16 +2330,16 @@
         </p>
         <ul>
           <li>كل ما في باقة «الأساس».</li>
-          <li>موقع إلكتروني ثنائي اللغة (٨ صفحات).</li>
+          <li>موقع إلكتروني ثنائي اللغة (8 صفحات).</li>
           <li>إعداد احترافي لـ Instagram + Facebook + TikTok.</li>
           <li>إعداد واتساب الأعمال + كتالوج.</li>
-          <li>أول ٣٠ قطعة محتوى منتَجة ومُنشَرة.</li>
+          <li>أول 12 قطعة محتوى منتَجة ومنشورة.</li>
           <li>حملة إطلاق إعلانية Meta + تيك توك.</li>
           <li>تدريب فريقكم الداخلي على التصوير اليومي.</li>
           <li>تقرير أداء الشهر الأول.</li>
         </ul>
         <div class="pack-foot">
-          <div class="pack-duration">المدّة: ٩٠ يوماً</div>
+          <div class="pack-duration">المدّة: 90 يوماً</div>
           <div class="pack-price-note">الباقة الموصى بها · نطاق العمل الذي رسمناه في هذا المستند</div>
         </div>
       </div>
@@ -2444,12 +2349,12 @@
         <h3>النموّ المُدار</h3>
         <p class="pack-desc">
           كلُّ ما في «الإطلاق الكامل» + استمرارية الإدارة والنموّ
-          لـ ٦-١٢ شهراً تالية، بأهداف مبيعات شهرية.
+          لـ 6-12 شهراً تالية، بأهداف مبيعات شهرية.
         </p>
         <ul>
           <li>كل ما في باقة «الإطلاق الكامل».</li>
           <li>إدارة شهرية كاملة للقنوات الرقمية.</li>
-          <li>إنتاج ٣٠-٤٠ قطعة محتوى شهرياً.</li>
+          <li>إنتاج 12 قطعة محتوى شهرياً (فيديوهان أسبوعياً + محتوى داعم).</li>
           <li>إدارة ميزانية إعلانية متزايدة.</li>
           <li>تقارير أداء شهرية مُفصّلة.</li>
           <li>مدير حساب مخصّص وجلسة شهرية.</li>
@@ -2457,7 +2362,7 @@
           <li>اختبار أسواق خارجية.</li>
         </ul>
         <div class="pack-foot">
-          <div class="pack-duration">المدّة: ٦-١٢ شهراً</div>
+          <div class="pack-duration">المدّة: 6-12 شهراً</div>
           <div class="pack-price-note">الأنسب للمصانع الجاهزة للنموّ السريع داخل وخارج سوريا</div>
         </div>
       </div>
@@ -2497,32 +2402,32 @@
     <span class="eyebrow">الخطوات التالية</span>
     <h2 class="h2">كيف <em>نبدأ</em>؟</h2>
     <p class="sub">
-      لا نطلب منكم قراراً الآن. نطلب اجتماعاً واحداً مدّته ٤٥ دقيقة،
-      نفهم فيه التفاصيل ونعود لكم بعرضٍ نهائي بالأرقام خلال ٣ أيام.
+      لا نطلب منكم قراراً الآن. نطلب اجتماعاً واحداً مدّته 45 دقيقة،
+      نفهم فيه التفاصيل ونعود لكم بعرضٍ نهائي بالأرقام خلال 3 أيام.
     </p>
 
     <div class="steps-grid">
       <div class="step-box">
-        <div class="sb-num">١</div>
+        <div class="sb-num">1</div>
         <h4>اجتماع استكشاف</h4>
         <p>
-          جلسة ٤٥ دقيقة عبر الفيديو. نستمع إلى تفاصيل المصنع، الأهداف
+          جلسة 45 دقيقة عبر الفيديو. نستمع إلى تفاصيل المصنع، الأهداف
           الحقيقية، والميزانية المتاحة. لا التزام أبداً.
         </p>
       </div>
       <div class="step-box">
-        <div class="sb-num">٢</div>
+        <div class="sb-num">2</div>
         <h4>عرض نهائي مُفصَّل</h4>
         <p>
-          خلال ٣ أيام من الاجتماع، نرسل عرضاً بالأرقام والجدولة
+          خلال 3 أيام من الاجتماع، نرسل عرضاً بالأرقام والجدولة
           الزمنية والنطاق الدقيق. قابل للتعديل بعد المراجعة.
         </p>
       </div>
       <div class="step-box">
-        <div class="sb-num">٣</div>
+        <div class="sb-num">3</div>
         <h4>البداية في أسبوع</h4>
         <p>
-          بعد الموافقة على العرض، نبدأ خلال ٧ أيام. المرحلة الأولى
+          بعد الموافقة على العرض، نبدأ خلال 7 أيام. المرحلة الأولى
           تنطلق فور توقيع اتفاقية التعاون.
         </p>
       </div>
@@ -2531,11 +2436,11 @@
     <div class="cta-card">
       <div>
         <h3>جاهزون لنقاش التفاصيل؟</h3>
-        <p>فريق Brandology سيعود إليكم خلال ٢٤ ساعة لتحديد موعد الاجتماع.</p>
+        <p>فريق Brandology سيعود إليكم خلال 24 ساعة لتحديد موعد الاجتماع.</p>
       </div>
       <div class="cta-buttons">
-        <a href="https://wa.me/966000000000" class="btn primary">حجز اجتماع استكشاف</a>
-        <a href="mailto:hello@brandology.co" class="btn ghost">مراسلة عبر البريد</a>
+        <a href="https://wa.me/905513971893" class="btn primary">تواصل عبر واتساب</a>
+        <a href="tel:+905513971893" class="btn ghost" style="direction:ltr;">+90 551 397 18 93</a>
       </div>
     </div>
   </div>
@@ -2544,9 +2449,10 @@
 <!-- ═══════════════════ FOOTER ═══════════════════ -->
 <footer class="footer">
   <div class="wrap">
+    <img src="assets/brandology-logo.png" alt="Brandology" class="footer-logo">
     <b>BRANDOLOGY</b>
     <div>إسطنبول · الرياض · يخدم السوق السوري</div>
-    <div class="small">عرض تعاون مبدئي · أبريل ٢٠٢٦ · مُعَدّ لـ م. أحمد سيد</div>
+    <div class="small">عرض تعاون مبدئي · أبريل 2026 · مُعَدّ لفريق الورشة</div>
   </div>
 </footer>
 
