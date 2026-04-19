@@ -1336,13 +1336,77 @@
     font-size: 13px;
     color: var(--muted);
     font-weight: 600;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
   }
   .pack .pack-price-note {
     font-size: 13px;
     color: var(--ink);
     font-weight: 700;
     line-height: 1.6;
+  }
+  .pack .pack-price {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--brand);
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    direction: ltr;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .pack .pack-price span {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0;
+    display: block;
+    margin-top: 4px;
+    direction: rtl;
+    text-align: right;
+  }
+  .pack .pack-price-breakdown {
+    background: rgba(255,193,7,0.08);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 4px;
+  }
+  .pack .pbr-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    padding: 5px 0;
+    border-bottom: 1px dashed rgba(0,0,0,0.08);
+  }
+  .pack .pbr-row:last-of-type { border-bottom: none; }
+  .pack .pbr-row b {
+    color: var(--ink);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    direction: ltr;
+  }
+  .pack .pbr-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    margin-top: 8px;
+    padding-top: 10px;
+    border-top: 2px solid var(--brand);
+  }
+  .pack .pbr-total span {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--ink);
+  }
+  .pack .pbr-total b {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--brand);
+    font-variant-numeric: tabular-nums;
+    direction: ltr;
   }
 
   /* ── Scope in/out ── */
@@ -2591,22 +2655,23 @@
         <div class="pack-tag">الباقة الأولى</div>
         <h3>باقة التأسيس</h3>
         <p class="pack-desc">
-          تأسيس الهوية فقط، لمَن يريد أن يمتلك علامةً بصرية موحّدة
-          قبل الانطلاق الرقمي الكامل.
+          تأسيس الهوية والحضور الأساسي، لمَن يريد أن يمتلك علامةً بصرية
+          موحّدة وقنوات اجتماعية جاهزة قبل الانطلاق الإعلاني الكامل.
         </p>
         <ul>
-          <li>اسم، موقع تسويقي، ورسالة العلامة.</li>
+          <li>اسم، تموضع تسويقي، ورسالة العلامة.</li>
           <li>دليل هوية بصرية كامل.</li>
           <li>شعار بعدّة صِيَغ + أيقونات.</li>
           <li>لوحة ألوان وعائلة خطوط.</li>
           <li>10 قوالب منشورات.</li>
           <li>كتالوج PDF للمنتجات.</li>
+          <li>إعداد احترافي لـ Instagram + Facebook + TikTok.</li>
           <li class="muted">بدون موقع إلكتروني.</li>
-          <li class="muted">بدون إدارة سوشال.</li>
+          <li class="muted">بدون إدارة محتوى شهرية.</li>
         </ul>
         <div class="pack-foot">
           <div class="pack-duration">المدّة: 4-6 أسابيع</div>
-          <div class="pack-price-note">التسعير حسب النطاق · يُناقَش في الاجتماع الأول</div>
+          <div class="pack-price">$1,000 <span>USD · مرّة واحدة</span></div>
         </div>
       </div>
 
@@ -2614,22 +2679,26 @@
         <div class="pack-tag">الباقة الثانية</div>
         <h3>باقة التفعيل</h3>
         <p class="pack-desc">
-          كلُّ ما في «باقة التأسيس» + الحضور الرقمي الكامل: موقع، إعداد
-          القنوات، محتوى الإطلاق، وأول حملة إعلانية.
+          كلُّ ما في «باقة التأسيس» + موقع إلكتروني كامل، أساس محتوى
+          المنصات، وأول حملة إعلانية ممتدّة لشهر.
         </p>
         <ul>
           <li>كل ما في «باقة التأسيس».</li>
           <li>موقع إلكتروني ثنائي اللغة (8 صفحات).</li>
-          <li>إعداد احترافي لـ Instagram + Facebook + TikTok.</li>
           <li>إعداد واتساب الأعمال + كتالوج.</li>
           <li>أول 12 قطعة محتوى منتَجة ومنشورة.</li>
-          <li>حملة إطلاق إعلانية Meta + تيك توك.</li>
+          <li>حملة إعلانية Meta + تيك توك لمدّة شهر.</li>
           <li>تدريب فريقكم الداخلي على التصوير اليومي.</li>
           <li>تقرير أداء الشهر الأول.</li>
         </ul>
         <div class="pack-foot">
-          <div class="pack-duration">المدّة: 90 يوماً</div>
-          <div class="pack-price-note">الباقة الموصى بها · نطاق العمل الذي رسمناه في هذا المستند</div>
+          <div class="pack-duration">المدّة: 60 يوماً · الباقة الموصى بها</div>
+          <div class="pack-price-breakdown">
+            <div class="pbr-row"><span>الهوية البصرية</span><b>$750</b></div>
+            <div class="pbr-row"><span>الموقع الإلكتروني</span><b>$750</b></div>
+            <div class="pbr-row"><span>أساس المنصات + حملة إعلانية (شهر)</span><b>$750</b></div>
+            <div class="pbr-total"><span>الإجمالي</span><b>$2,250</b></div>
+          </div>
         </div>
       </div>
 
