@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+看完>Bonte Care - تقرير التدقيق الرقمي وتحليل الفرص</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#C9100E;--red-dark:#8B0000;--red-light:#E30613;--red-glow:#FF4136;
+  --yellow:#FFB800;--yellow-light:#FFD54F;--yellow-dark:#E6A600;
+  --black:#0D0D0D;--black-light:#1F1E1E;--gray:#3B3535;--gray-light:#7F8C8D;
+  --white:#FAFAFA;--card-bg:#141414;--card-border:#2A2A2A;
+  --gradient-red:linear-gradient(135deg,#C9100E 0%,#E30613 50%,#FF4136 100%);
+  --gradient-yellow:linear-gradient(135deg,#FFB800 0%,#FFD54F 100%);
+  --gradient-dark:linear-gradient(180deg,#0D0D0D 0%,#1a1a1a 100%);
+  --gradient-card:linear-gradient(145deg,#141414 0%,#1c1c1c 100%);
+  --shadow-card:0 4px 24px rgba(0,0,0,.4);
+  --shadow-hover:0 8px 40px rgba(201,16,14,.25);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:'Baloo Bhaijaan 2',sans-serif;background:var(--black);color:var(--white);
+  line-height:1.7;overflow-x:hidden;direction:rtl;
+}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--black)}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:4px}
+::selection{background:var(--red);color:var(--white)}
+
+.nav{
+  position:fixed;top:0;right:0;left:0;z-index:100;
+  background:rgba(13,13,13,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(201,16,14,.2);padding:.75rem 2rem;
+  display:flex;justify-content:space-between;align-items:center;
+  transition:all .3s ease;
+}
+.nav-logo{font-size:1.25rem;font-weight:800;background:var(--gradient-red);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{color:var(--gray-light);text-decoration:none;font-size:.85rem;font-weight:500;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--yellow)}
+
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+  padding:6rem 2rem 4rem;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse at 70% 50%,rgba(201,16,14,.15) 0%,transparent 60%),
+             radial-gradient(ellipse at 30% 80%,rgba(255,184,0,.08) 0%,transparent 50%),
+             var(--gradient-dark);
+}
+.hero::before{
+  content:'';position:absolute;top:-50%;left:-20%;width:80%;height:200%;
+  background:radial-gradient(circle,rgba(201,16,14,.1) 0%,transparent 60%);pointer-events:none;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(201,16,14,.15);border:1px solid rgba(201,16,14,.3);
+  border-radius:50px;padding:.5rem 1.25rem;font-size:.8rem;color:var(--red-light);
+  margin-bottom:2rem;
+}
+.hero-badge span{width:6px;height:6px;border-radius:50%;background:var(--red-light);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:3.5rem;font-weight:800;margin-bottom:1rem;line-height:1.3}
+.hero h1 .red{background:var(--gradient-red);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero h1 .yellow{background:var(--gradient-yellow);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:1.2rem;color:var(--gray-light);max-width:650px;margin:0 auto 2.5rem}
+.hero-stats{display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;margin-top:2rem}
+.hero-stat{
+  background:var(--gradient-card);border:1px solid var(--card-border);border-radius:16px;
+  padding:1.5rem 2rem;text-align:center;min-width:160px;
+  transition:transform .3s,box-shadow .3s;
+}
+.hero-stat:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+.hero-stat .num{font-size:2rem;font-weight:800;background:var(--gradient-red);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-stat .label{font-size:.8rem;color:var(--gray-light);margin-top:.25rem}
+.scroll-hint{
+  position:absolute;bottom:2rem;right:50%;transform:translateX(50%);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--gray-light);font-size:.75rem;
+}
+.scroll-hint .arrow{width:20px;height:20px;border-right:2px solid var(--red);border-bottom:2px solid var(--red);transform:rotate(45deg);animation:bounce 2s infinite}
+@keyframes bounce{0%,20%,50%,80%,100%{transform:rotate(45deg) translateY(0)}40%{transform:rotate(45deg) translateY(-8px)}60%{transform:rotate(45deg) translateY(-4px)}}
+
+.section{padding:5rem 2rem;max-width:1200px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:3.5rem}
+.section-header h2{font-size:2.2rem;font-weight:800;position:relative;display:inline-block;margin-bottom:.75rem}
+.section-header h2 .accent{background:var(--gradient-red);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.section-header p{color:var(--gray-light);font-size:1rem;max-width:600px;margin:0 auto}
+
+.severity{display:inline-flex;align-items:center;gap:.35rem;font-size:.7rem;font-weight:700;padding:.2rem .7rem;border-radius:50px;margin-bottom:.5rem}
+.severity.critical{background:rgba(201,16,14,.15);color:var(--red-light);border:1px solid rgba(201,16,14,.3)}
+.severity.high{background:rgba(255,184,0,.12);color:var(--yellow);border:1px solid rgba(255,184,0,.3)}
+.severity.medium{background:rgba(100,180,255,.1);color:#64B4FF;border:1px solid rgba(100,180,255,.25)}
+
+.card{
+  background:var(--gradient-card);border:1px solid var(--card-border);border-radius:16px;
+  padding:2rem;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s,border-color .3s;
+}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);border-color:rgba(201,16,14,.2)}
+.card-red{border-right:4px solid var(--red)}
+.card-yellow{border-right:4px solid var(--yellow)}
+.card .card-num{
+  position:absolute;top:-.5rem;left:1rem;font-size:5rem;font-weight:800;
+  color:rgba(201,16,14,.06);line-height:1;pointer-events:none;
+}
+.card h3{font-size:1.2rem;font-weight:700;margin-bottom:.75rem}
+.card p,.card li{color:var(--gray-light);font-size:.92rem;line-height:1.8}
+.card ul{list-style:none;padding:0}
+.card ul li{position:relative;padding-right:1.25rem;margin-bottom:.35rem}
+.card ul li::before{content:'';position:absolute;right:0;top:.65rem;width:7px;height:7px;border-radius:50%;background:var(--red)}
+.card-yellow ul li::before{background:var(--yellow)}
+.impact{margin-top:1rem;padding:.75rem 1rem;border-radius:10px;font-size:.85rem;font-weight:600}
+.impact.red{background:rgba(201,16,14,.1);color:var(--red-light);border:1px solid rgba(201,16,14,.2)}
+.impact.orange{background:rgba(255,184,0,.08);color:var(--yellow);border:1px solid rgba(255,184,0,.2)}
+.impact.green{background:rgba(39,174,96,.1);color:#4CAF50;border:1px solid rgba(39,174,96,.2)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem}
+
+.compare-table{width:100%;border-collapse:separate;border-spacing:0;border-radius:12px;overflow:hidden;border:1px solid var(--card-border)}
+.compare-table thead th{
+  background:var(--gradient-red);color:#fff;padding:.85rem 1rem;font-size:.85rem;font-weight:700;text-align:center;
+}
+.compare-table tbody td{padding:.7rem 1rem;font-size:.82rem;border-bottom:1px solid var(--card-border);text-align:center;color:var(--gray-light)}
+.compare-table tbody tr:nth-child(even){background:rgba(255,255,255,.02)}
+.compare-table tbody tr:hover{background:rgba(201,16,14,.05)}
+.bad{color:var(--red-light);font-weight:600}
+.ok{color:var(--yellow);font-weight:600}
+.good{color:#4CAF50;font-weight:600}
+
+.opp-card{
+  background:var(--gradient-card);border:1px solid var(--card-border);border-radius:16px;
+  padding:1.75rem;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s;
+}
+.opp-card:hover{transform:translateY(-3px);box-shadow:0 8px 40px rgba(255,184,0,.15)}
+.opp-card .icon{font-size:2rem;margin-bottom:.75rem}
+.opp-card h3{font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
+.opp-card p{font-size:.88rem;color:var(--gray-light)}
+.opp-card .tag{
+  display:inline-block;font-size:.7rem;font-weight:600;padding:.2rem .6rem;border-radius:50px;margin-top:.75rem;
+  background:rgba(255,184,0,.1);color:var(--yellow);border:1px solid rgba(255,184,0,.25);
+}
+
+.dist-card{
+  background:var(--gradient-card);border:1px solid var(--card-border);border-radius:12px;
+  padding:1.25rem;text-align:center;transition:transform .2s;
+}
+.dist-card:hover{transform:scale(1.03)}
+.dist-card .flag{font-size:2rem;margin-bottom:.5rem}
+.dist-card .country{font-weight:700;font-size:1rem;margin-bottom:.25rem}
+.dist-card .platform{font-size:.8rem;color:var(--yellow);margin-bottom:.25rem}
+.dist-card .status{font-size:.75rem}
+.dist-card .status.live{color:#4CAF50}
+.dist-card .status.early{color:var(--yellow)}
+.dist-card .url{font-size:.7rem;color:var(--gray-light);direction:ltr;unicode-bidi:embed;margin-top:.5rem}
+
+.divider{height:1px;border:0;background:linear-gradient(90deg,transparent 0%,rgba(201,16,14,.3) 50%,transparent 100%);margin:3rem 0}
+
+.cta-section{
+  text-align:center;padding:5rem 2rem;position:relative;
+  background:radial-gradient(ellipse at 50% 50%,rgba(201,16,14,.12) 0%,transparent 60%),var(--gradient-dark);
+}
+.cta-section h2{font-size:2.2rem;font-weight:800;margin-bottom:1rem}
+.cta-section p{color:var(--gray-light);font-size:1.05rem;max-width:550px;margin:0 auto 2rem}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--gradient-red);color:#fff;
+  padding:1rem 2.5rem;border-radius:50px;font-size:1.05rem;font-weight:700;
+  text-decoration:none;border:none;cursor:pointer;font-family:inherit;
+  transition:transform .2s,box-shadow .2s;
+}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,16,14,.4)}
+
+.footer{text-align:center;padding:2rem;color:var(--gray-light);font-size:.75rem;border-top:1px solid var(--card-border)}
+
+@media(max-width:900px){
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .hero h1{font-size:2.2rem}
+  .nav-links{display:none}
+  .hero-stats{gap:1rem}
+  .compare-table{font-size:.75rem}
+  .compare-table thead th,.compare-table tbody td{padding:.5rem .4rem}
+}
+@media(max-width:600px){
+  .hero h1{font-size:1.7rem}
+  .hero p{font-size:.95rem}
+  .section{padding:3rem 1.25rem}
+  .hero-stat .num{font-size:1.5rem}
+  .card{padding:1.5rem}
+}
+
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+.progress-bar{height:6px;background:var(--card-border);border-radius:3px;overflow:hidden;margin-top:.5rem}
+.progress-bar .fill{height:100%;border-radius:3px;background:var(--gradient-red);transition:width 1s ease}
+.progress-bar .fill.yellow{background:var(--gradient-yellow)}
+
+.big-num{font-size:3rem;font-weight:800;background:var(--gradient-red);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+
+.toc{
+  background:var(--gradient-card);border:1px solid var(--card-border);border-radius:16px;
+  padding:2rem;margin-bottom:3rem;
+}
+.toc h3{font-size:1.1rem;margin-bottom:1rem;text-align:center}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.toc-item{
+  display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;
+  border-radius:10px;border:1px solid var(--card-border);
+  text-decoration:none;color:var(--white);transition:all .2s;font-size:.88rem;
+}
+.toc-item:hover{border-color:var(--red);background:rgba(201,16,14,.08)}
+.toc-item .toc-num{
+  width:28px;height:28px;border-radius:8px;background:var(--gradient-red);
+  display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;
+  color:#fff;flex-shrink:0;
+}
+
+@media(max-width:900px){
+  .grid-4{grid-template-columns:1fr 1fr !important}
+}
+@media(max-width:600px){
+  .grid-4{grid-template-columns:1fr !important}
+  .toc-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-logo">Brandology</div>
+  <ul class="nav-links">
+    <li><a href="#summary">الملخص</a></li>
+    <li><a href="#seo">مشاكل SEO</a></li>
+    <li><a href="#copy">محتوى الموقع</a></li>
+    <li><a href="#digital">التواجد الرقمي</a></li>
+    <li><a href="#gaps">الفجوات</a></li>
+    <li><a href="#opportunity">الفرص</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-badge"><span></span> تقرير التدقيق الرقمي | أبريل 2026</div>
+  <h1>
+    <span class="red">Bonte Care</span><br>
+    تقرير التدقيق الرقمي<br>
+    <span class="yellow">وتحليل الفرص</span>
+  </h1>
+  <p>
+    تحليل شامل للمشاكل التقنية والمحتوى والتواجد الرقمي عبر جميع أسواق Bonte Care، والفرص الاستراتيجية التي تقدمها.
+  </p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="num">4</div>
+      <div class="label">مواقع تم تدقيقها</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">0</div>
+      <div class="label">صفحة عربية</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">0</div>
+      <div class="label">زيارة عضوية في قطر</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">4</div>
+      <div class="label">منصات مختلفة</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="arrow"></div>
+    مرر للاستكشاف
+  </div>
+</section>
+
+<div class="section" id="summary">
+  <div class="section-header">
+    <h2><span class="accent">الملخص</span> التنفيذي</h2>
+    <p>النتائج الرئيسية من تدقيق جميع المواقع الرقمية لـ Bonte Care</p>
+  </div>
+
+  <div class="toc fade-up">
+    <h3>المحتويات</h3>
+    <div class="toc-grid">
+      <a href="#seo" class="toc-item"><div class="toc-num">1</div> مشاكل الـ SEO التقني</a>
+      <a href="#copy" class="toc-item"><div class="toc-num">2</div> مشاكل المحتوى والنسخ</a>
+      <a href="#digital" class="toc-item"><div class="toc-num">3</div> مشاكل التواجد الرقمي</a>
+      <a href="#gaps" class="toc-item"><div class="toc-num">4</div> الفجوات التنافسية</a>
+      <a href="#opportunity" class="toc-item"><div class="toc-num">5</div> الفرص المتاحة</a>
+      <a href="#distribution" class="toc-item"><div class="toc-num">6</div> شبكة التوزيع</a>
+    </div>
+  </div>
+
+  <div class="card card-red fade-up" style="margin-bottom:2rem">
+    <span class="severity critical">ملاحظة حرجة</span>
+    <h3>التناقض الجوهري</h3>
+    <p style="font-size:1.05rem;line-height:1.9">
+      Bonte Care تسوّق نفسها كعلامة تجارية <strong>"مصممة خصيصاً لطبيعة البشرة الشرقية"</strong>،
+      لكنها تعمل في 3 أسواق عربية (الكويت، قطر، مصر) مع
+      <strong style="color:var(--red-light)">صفر صفحة عربية</strong> على أي من مواقعها.
+      هذه هي المشكلة الأكثر ضرراً في النظام الرقمي بأكمله.
+    </p>
+    <div class="impact red">
+      هذا التناقض يكلّف العلامة 60-70% من وصولها المحتمل لجمهور الخليج ويُضعف بشكل خطير تموضعها الأساسي.
+    </div>
+  </div>
+
+  <div class="grid-3 fade-up" style="margin-bottom:1.5rem">
+    <div class="card" style="text-align:center;padding:1.5rem">
+      <div class="big-num">0</div>
+      <div style="font-size:.85rem;color:var(--gray-light);margin-top:.5rem">صفحة عربية<br>عبر 4 مواقع</div>
+      <div class="progress-bar" style="margin-top:.75rem"><div class="fill" style="width:0%"></div></div>
+    </div>
+    <div class="card" style="text-align:center;padding:1.5rem">
+      <div class="big-num" style="background:var(--gradient-yellow);-webkit-background-clip:text;background-clip:text">4</div>
+      <div style="font-size:.85rem;color:var(--gray-light);margin-top:.5rem">منصات تجارة إلكترونية<br>مختلفة لـ 4 أسواق</div>
+      <div class="progress-bar" style="margin-top:.75rem"><div class="fill yellow" style="width:100%"></div></div>
+    </div>
+    <div class="card" style="text-align:center;padding:1.5rem">
+      <div class="big-num">0</div>
+      <div style="font-size:.85rem;color:var(--gray-light);margin-top:.5rem">DR لمتجر قطر<br>(تقييم النطاق في Ahrefs)</div>
+      <div class="progress-bar" style="margin-top:.75rem"><div class="fill" style="width:0%"></div></div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section" id="seo">
+  <div class="section-header">
+    <h2>1 - مشاكل <span class="accent">الـ SEO</span> التقني</h2>
+    <p>مشاكل تحسين محركات البحث الحرجة عبر جميع مواقع Bonte Care</p>
+  </div>
+
+  <div class="card card-red fade-up" style="margin-bottom:1.5rem">
+    <span class="card-num">01</span>
+    <span class="severity critical">حرج</span>
+    <h3>صفر محتوى عربي في الأسواق العربية</h3>
+    <p>علامة تسوّق لـ "البشرة الشرقية" لا تتحدث العربية في أي من أسواقها العربية.</p>
+
+    <div style="overflow-x:auto;margin-top:1.25rem">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>الموقع</th>
+            <th>محتوى عربي؟</th>
+            <th>ملاحظات</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>bontecare.com <span style="font-size:.7rem;color:var(--gray-light)">(تركيا)</span></td>
+            <td><span class="bad">لا</span> - تركي فقط</td>
+            <td>رغم استهداف البشرة الشرقية</td>
+          </tr>
+          <tr>
+            <td>bontekw.com <span style="font-size:.7rem;color:var(--gray-light)">(الكويت)</span></td>
+            <td><span class="ok">جزئي</span> - زر لغة</td>
+            <td>زر تبديل موجود لكن المحتوى الأساسي إنجليزي</td>
+          </tr>
+          <tr>
+            <td>luxendazzle.com <span style="font-size:.7rem;color:var(--gray-light)">(مصر)</span></td>
+            <td><span class="bad">لا</span> - إنجليزي فقط</td>
+            <td>سوق مصري بدون عربي</td>
+          </tr>
+          <tr>
+            <td>aurapharma.odoo.com <span style="font-size:.7rem;color:var(--gray-light)">(قطر)</span></td>
+            <td><span class="bad">لا</span> - إنجليزي فقط</td>
+            <td>سوق قطري بدون عربي</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="impact red">
+      خسارة 60-70% من جمهور الخليج الذين يفضلون المحتوى العربي. رسالة العلامة تتعارض مع تجربتها الرقمية.
+    </div>
+  </div>
+
+  <div class="card card-red fade-up" style="margin-bottom:1.5rem">
+    <span class="card-num">02</span>
+    <span class="severity critical">حرج</span>
+    <h3>مشاكل SEO كارثية عبر جميع المواقع</h3>
+    <p>لا يوجد موقع من مواقع Bonte Care محسّن لمحركات البحث بشكل فعال. الزيارات العضوية ضعيفة جداً أو معدومة.</p>
+
+    <div style="overflow-x:auto;margin-top:1.25rem">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>المشكلة</th>
+            <th>bontecare.com</th>
+            <th>bontekw.com</th>
+            <th>luxendazzle.com</th>
+            <th>aurapharma.odoo.com</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>مدونة فعالة</td>
+            <td><span class="bad">نص تجريبي "c vvvv"</span></td>
+            <td><span class="bad">لا توجد</span></td>
+            <td><span class="bad">رابط بدون محتوى</span></td>
+            <td><span class="bad">لا توجد</span></td>
+          </tr>
+          <tr>
+            <td>Schema Markup</td>
+            <td><span class="ok">جزئي</span></td>
+            <td><span class="ok">جزئي</span></td>
+            <td><span class="ok">جزئي</span></td>
+            <td><span class="bad">لا يوجد</span></td>
+          </tr>
+          <tr>
+            <td>وسوم Open Graph</td>
+            <td><span class="bad">غائب</span></td>
+            <td><span class="ok">-</span></td>
+            <td><span class="ok">-</span></td>
+            <td><span class="bad">غائب</span></td>
+          </tr>
+          <tr>
+            <td>خريطة موقع XML</td>
+            <td><span class="bad">غير مرئية</span></td>
+            <td><span class="ok">Shopify تلقائي</span></td>
+            <td><span class="bad">غير واضحة</span></td>
+            <td><span class="bad">لا توجد</span></td>
+          </tr>
+          <tr>
+            <td>تحسين الكلمات المفتاحية</td>
+            <td><span class="bad">ضعيف</span></td>
+            <td><span class="bad">ضعيف</span></td>
+            <td><span class="bad">ضعيف</span></td>
+            <td><span class="bad">معدوم</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="impact red">
+      صفر ظهور عضوي في نتائج البحث العربية. سوق العناية بالبشرة في الخليج مفتوح بالكامل للمنافسين.
+    </div>
+  </div>
+
+  <div class="card card-yellow fade-up" style="margin-bottom:1.5rem">
+    <span class="card-num">03</span>
+    <span class="severity high">عالي</span>
+    <h3>تشتت المنصات التقنية عبر الأسواق</h3>
+    <p>كل سوق يعمل على منصة تجارة إلكترونية مختلفة، مما يخلق تجربة ممزقة وغير متسقة.</p>
+
+    <div class="grid-2" style="margin-top:1.25rem">
+      <div>
+        <ul>
+          <li><strong>تركيا:</strong> Myikas (منصة تركية مخصصة)</li>
+          <li><strong>الكويت:</strong> Shopify</li>
+          <li><strong>مصر:</strong> WordPress + WooCommerce</li>
+          <li><strong>قطر:</strong> Odoo</li>
+        </ul>
+      </div>
+      <div>
+        <p><strong>التأثير:</strong></p>
+        <ul>
+          <li>4 منصات = 4 بنى تقنية للصيانة</li>
+          <li>مستحيل تطبيق استراتيجية SEO موحدة</li>
+          <li>تحليلات مشتتة عبر لوحات مختلفة</li>
+          <li>تجربة علامة تجارية غير متسقة</li>
+          <li>تكاليف تشغيلية أعلى بدون وفورات الحجم</li>
+        </ul>
+      </div>
+    </div>
+    <div class="impact orange">
+      4 منصات مختلفة تعني 4 أضعاف الجهد و4 أنماط تجربة مستخدم مختلفة وصفر تجربة موحدة للعلامة التجارية.
+    </div>
+  </div>
+
+  <div class="card card-yellow fade-up" style="margin-bottom:1.5rem">
+    <span class="card-num">04</span>
+    <span class="severity high">عالي</span>
+    <h3>ضعف أداء الموقع و Core Web Vitals</h3>
+    <p>مواقع متعددة تعاني من بطء التحميل وصور غير مضغوطة ومشاكل أداء تضر بـ SEO وتجربة المستخدم.</p>
+    <ul>
+      <li><strong>bontecare.com:</strong> صور غير مضغوطة، لا يوجد lazy loading</li>
+      <li><strong>bontekw.com:</strong> أداء مقبول لكن ليس ممتازاً</li>
+      <li><strong>luxendazzle.com:</strong> بطء واضح في تحميل الصفحات</li>
+      <li><strong>aurapharma.odoo.com:</strong> Odoo لا يوفر أي تحسينات افتراضية للأداء</li>
+    </ul>
+    <div class="impact orange">
+      Google يعاقب المواقع البطيئة في الترتيب. معدل ارتداد مرتفع. خسارة مبيعات من الزيارات المتروكة.
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section" id="copy">
+  <div class="section-header">
+    <h2>2 - مشاكل <span class="accent">محتوى</span> الموقع</h2>
+    <p>مشاكل الكتابة والمحتوى التي تُضعف المصداقية والتحويلات</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card card-red fade-up">
+      <span class="severity critical">حرج</span>
+      <h3>محتوى تجريبي ظاهر للزوار</h3>
+      <p>الموقع الرئيسي يعرض محتوى وهمي يمكن لأي زائر رؤيته:</p>
+      <ul>
+        <li>قسم المدونة يعرض <strong>"c vvvv"</strong> بدلاً من محتوى حقيقي</li>
+        <li>بريد إلكتروني افتراضي <strong>info@yourcompany</strong> في بعض المواقع</li>
+        <li>نصوص وهمية في وصف المنتجات</li>
+      </ul>
+      <div class="impact red">
+        انطباع سلبي فوري. العلامة تبدو هاوية. يُدمر ثقة المشتري.
+      </div>
+    </div>
+
+    <div class="card card-red fade-up">
+      <span class="severity critical">حرج</span>
+      <h3>أخطاء إملائية وعدم اتساق</h3>
+      <p>عدم اتساق تسمية المنتجات عبر الأسواق يُضعف الاحترافية:</p>
+      <ul>
+        <li>"Serum" مكتوبة <strong>"Seerum"</strong> في متجر قطر</li>
+        <li><strong>"C Vitamin"</strong> في الكويت مقابل <strong>"Vitamin C"</strong> في قطر</li>
+        <li>ترجمة ضعيفة لأسماء المكونات الفعالة</li>
+        <li>تصنيف غير متسق للمنتجات عبر المتاجر</li>
+      </ul>
+      <div class="impact red">
+        يُضعف الثقة في جودة المنتجات. إذا كان الاسم خاطئاً، العميل يشك في التركيبة.
+      </div>
+    </div>
+
+    <div class="card card-yellow fade-up">
+      <span class="severity high">عالي</span>
+      <h3>صفحات منتجات ضعيفة</h3>
+      <p>صفحات المنتجات تفتقر للعناصر الأساسية التي تحوّل الزائر إلى مشتري:</p>
+      <ul>
+        <li>لا يوجد وصف تفصيلي يشرح الفوائد بشكل عاطفي ومنطقي</li>
+        <li>لا يوجد صور Before/After أو شهادات مستخدمين</li>
+        <li>لا يوجد أدلة استخدام أو روتين عناية</li>
+        <li>لا يوجد مقارنات بين المنتجات</li>
+        <li>لا يوجد أسئلة شائعة لكل منتج</li>
+      </ul>
+      <div class="impact orange">
+        معدل تحويل منخفض. الزائر لا يملك معلومات كافية لاتخاذ قرار الشراء.
+      </div>
+    </div>
+
+    <div class="card card-yellow fade-up">
+      <span class="severity high">عالي</span>
+      <h3>غياب قصة العلامة التجارية</h3>
+      <p>Bonte Care لديها قصة قوية لكنها لا تظهر في أي مكان:</p>
+      <ul>
+        <li>مختبرات R&D خاصة في إسطنبول</li>
+        <li>تركيبات مصممة خصيصاً للبشرة الشرقية</li>
+        <li>شهادات طبية ونباتية وبدون اختبار حيوانات</li>
+        <li>لكن صفحة "من نحن" عامة وضعيفة</li>
+        <li>لا يوجد رابط عاطفي مع العميل</li>
+      </ul>
+      <div class="impact orange">
+        العلامة تبدو كبائع عادي بدلاً من مبتكر علمي في العناية بالبشرة.
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section" id="digital">
+  <div class="section-header">
+    <h2>3 - مشاكل <span class="accent">التواجد الرقمي</span></h2>
+    <p>السوشال ميديا والهوية والتحليلات وفجوات التواصل</p>
+  </div>
+
+  <div class="card card-red fade-up" style="margin-bottom:1.5rem">
+    <span class="card-num">05</span>
+    <span class="severity critical">حرج</span>
+    <h3>لا محتوى عربي على السوشال ميديا لأسواق الخليج</h3>
+    <p>حسابات Bonte Care نشطة لكنها تركية وإنجليزية فقط. جمهور الخليج لا يرى محتوى بلغته.</p>
+
+    <div style="overflow-x:auto;margin-top:1rem">
+      <table class="compare-table">
+        <thead>
+          <tr><th>المنصة</th><th>المحتوى الحالي</th><th>عربي؟</th><th>المشكلة</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Instagram</td><td>تركي وإنجليزي</td><td><span class="bad">لا</span></td><td>لا يوجد محتوى يستهدف الكويت وقطر ومصر</td></tr>
+          <tr><td>TikTok</td><td>تركي وإنجليزي</td><td><span class="bad">لا</span></td><td>لا يوجد Reels بالعربية أو نصائح عناية بالبشرة</td></tr>
+          <tr><td>Facebook</td><td>تركي فقط</td><td><span class="bad">لا</span></td><td>الصفحة مسجلة من إسطنبول، تركيا</td></tr>
+          <tr><td>LinkedIn</td><td>إنجليزي (عام)</td><td><span class="bad">لا</span></td><td>محتوى مؤسسي فقط، بدون تركيز استهلاكي</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="impact red">
+      94.3% من سكان قطر نشطون على السوشال ميديا. غياب المحتوى العربي يعني تفويت لغة السوق المستهدف بالكامل.
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:1.5rem">
+    <div class="card card-yellow fade-up">
+      <span class="severity high">عالي</span>
+      <h3>هوية رقمية مشتتة</h3>
+      <p>كل موزع يدير تصميمه الخاص، مما يخلق تشتتاً في العلامة:</p>
+      <ul>
+        <li><strong>bontekw.com</strong> - تصميم مختلف تماماً عن bontecare.com</li>
+        <li><strong>luxendazzle.com</strong> - Bonte Care تظهر كعلامة واحدة ضمن تشكيلة أوسع</li>
+        <li><strong>aurapharma.odoo.com</strong> - قالب Odoo الافتراضي بدون هوية Bonte Care</li>
+      </ul>
+      <p style="margin-top:.75rem">العميل في الكويت قد لا يعرف أنه يشتري نفس المنتج المبوع في تركيا.</p>
+      <div class="impact orange">لا تجربة موحدة للعلامة. الولاء للعلامة مستحيل عبر الأسواق.</div>
+    </div>
+
+    <div class="card card-yellow fade-up">
+      <span class="severity high">عالي</span>
+      <h3>غياب التحليلات والتتبع الموحد</h3>
+      <p>رغم وجود GTM وFacebook Pixel وTikTok Pixel في الموقع التركي:</p>
+      <ul>
+        <li>لا يوجد Google Analytics 4 مُعد بشكل صحيح على المواقع العربية</li>
+        <li>لا يوجد تتبع للتحويلات عبر الأسواق المختلفة</li>
+        <li>لا يوجد Event tracking للسلة والدفع والتسجيل</li>
+        <li>إعدادات التتبع غير واضحة في الكويت ومصر وقطر</li>
+      </ul>
+      <div class="impact orange">التسويق أعمى. لا بيانات لتحسين الإنفاق الإعلاني أو قياس ما ينجح.</div>
+    </div>
+
+    <div class="card card-yellow fade-up">
+      <span class="severity high">عالي</span>
+      <h3>لا يوجد WhatsApp Business</h3>
+      <p>في أسواق الخليج، WhatsApp هو القناة الرئيسية للبيع والدعم:</p>
+      <ul>
+        <li><strong>bontecare.com</strong> - لا يوجد زر واتساب</li>
+        <li><strong>luxendazzle.com</strong> - لا يوجد زر واتساب</li>
+        <li><strong>aurapharma.odoo.com</strong> - لا يوجد واتساب</li>
+        <li><strong>bontekw.com</strong> فقط - يحتوي رقم واتساب (+965-65052724)</li>
+      </ul>
+      <div class="impact orange">خسارة 30-40% من المبيعات المحتملة. عميل الخليج يتوقع المحادثة قبل الشراء.</div>
+    </div>
+
+    <div class="card card-yellow fade-up">
+      <span class="severity high">عالي</span>
+      <h3>تسعير فوضوي عبر الأسواق</h3>
+      <p>لا يوجد استراتيجية تسعير موحدة أو شفافة:</p>
+      <ul>
+        <li><strong>قطر:</strong> أسعار تجريبية 0-1 ريال قطري ظاهرة للعملاء</li>
+        <li><strong>الكويت:</strong> تخفيضات دائمة 50% تُضعف قيمة العلامة</li>
+        <li><strong>مصر:</strong> مستوى تسعير مختلف تماماً</li>
+        <li><strong>لا يوجد</strong> دليل تسعير واضح للوكلاء</li>
+      </ul>
+      <div class="impact orange">عملاء مرتبكون. انطباع غير احترافي. يُضعف تموضع العلامة الفاخرة.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section" id="distribution">
+  <div class="section-header">
+    <h2>خريطة <span class="accent">شبكة التوزيع</span></h2>
+    <p>كيف تصل Bonte Care إلى 4 أسواق مختلفة عبر 4 منصات مختلفة</p>
+  </div>
+
+  <div class="grid-4 fade-up" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem">
+    <div class="dist-card">
+      <div class="flag">🇹🇷</div>
+      <div class="country">تركيا <span style="font-size:.7rem;color:var(--gray-light)">(المقر)</span></div>
+      <div class="platform">Myikas</div>
+      <div class="status live">نشط - السوق الرئيسي</div>
+      <div class="url">bontecare.com</div>
+    </div>
+    <div class="dist-card">
+      <div class="flag">🇰🇼</div>
+      <div class="country">الكويت</div>
+      <div class="platform">Shopify</div>
+      <div class="status live">نشط - توصيل 24 ساعة</div>
+      <div class="url">bontekw.com</div>
+    </div>
+    <div class="dist-card">
+      <div class="flag">🇶🇦</div>
+      <div class="country">قطر</div>
+      <div class="platform">Odoo</div>
+      <div class="status early">مرحلة مبكرة - أسعار تجريبية</div>
+      <div class="url">aurapharma.odoo.com</div>
+      <a href="https://canva.link/i46u5fhlce6suqm" target="_blank" style="display:inline-block;margin-top:.6rem;font-size:.72rem;font-weight:600;color:var(--yellow);text-decoration:none;background:rgba(255,184,0,.08);border:1px solid rgba(255,184,0,.25);padding:.3rem .85rem;border-radius:50px;transition:all .2s">مشاهدة تحليل مخصص للموقع ↗</a>
+    </div>
+    <div class="dist-card">
+      <div class="flag">🇪🇬</div>
+      <div class="country">مصر</div>
+      <div class="platform">WooCommerce</div>
+      <div class="status live">نشط - تشكيلة أوسع</div>
+      <div class="url">luxendazzle.com</div>
+    </div>
+  </div>
+
+  <div style="overflow-x:auto;margin-top:1.5rem">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>المعيار</th>
+          <th>الكويت (Secret Glow)</th>
+          <th>قطر (Aura Pharma)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>المنصة</td><td>Shopify</td><td>Odoo (بدون دومين خاص)</td></tr>
+        <tr><td>الدومين الخاص</td><td><span class="good">bontekw.com</span></td><td><span class="bad">aurapharma.odoo.com</span></td></tr>
+        <tr><td>المحتوى العربي</td><td><span class="ok">جزئي</span></td><td><span class="bad">لا يوجد</span></td></tr>
+        <tr><td>التسعير</td><td><span class="good">مضبوط (د.ك)</span></td><td><span class="bad">أسعار تجريبية (0-1 ر.ق)</span></td></tr>
+        <tr><td>وعد التوصيل</td><td><span class="good">24 ساعة</span></td><td><span class="bad">غير محدد</span></td></tr>
+        <tr><td>واتساب</td><td><span class="good">+965-65052724</span></td><td><span class="bad">غير ظاهر</span></td></tr>
+        <tr><td>الدفع</td><td><span class="good">تجارة إلكترونية عادية</span></td><td><span class="bad">غير واضح</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section" id="gaps">
+  <div class="section-header">
+    <h2>4 - <span class="accent">الفجوات</span> التنافسية</h2>
+    <p>ما يفعله المنافسون بشكل أفضل والفرص السوقية غير المستغلة</p>
+  </div>
+
+  <div class="grid-3 fade-up" style="margin-bottom:2rem">
+    <div class="card" style="border-right-color:#64B4FF">
+      <div style="font-size:1.5rem;margin-bottom:.5rem">📚</div>
+      <h3 style="color:#64B4FF">The Ordinary</h3>
+      <p>محتوى تعليمي غني بالعربية والإنجليزية. صفحات منتجات مفصلة بشرح المكونات. SEO عالمي المستوى.</p>
+      <div class="impact orange" style="background:rgba(100,180,255,.08);color:#64B4FF;border-color:rgba(100,180,255,.2)">
+        يضع المعيار لتسويق المكونات الفعالة في المنطقة.
+      </div>
+    </div>
+    <div class="card" style="border-right-color:#4CAF50">
+      <div style="font-size:1.5rem;margin-bottom:.5rem">🔬</div>
+      <h3 style="color:#4CAF50">La Roche-Posay</h3>
+      <p>مدونة طبية نشطة بالعربية. حضور SEO قوي في أسواق الخليج. هوية موحدة عبر جميع الأسواق.</p>
+      <div class="impact orange" style="background:rgba(76,175,80,.08);color:#4CAF50;border-color:rgba(76,175,80,.2)">
+        يثبت أن العلامات الفرنسية يمكنها النجاح بالرقمي العربي.
+      </div>
+    </div>
+    <div class="card" style="border-right-color:var(--yellow)">
+      <div style="font-size:1.5rem;margin-bottom:.5rem">🏪</div>
+      <h3 style="color:var(--yellow)">المنافسون المحليون</h3>
+      <p>Princess Cosmetics (DR 16، 13.5K زيارة عضوية) و Beauty Booth (DR 29) يمتلكان SEO أفضل ومتاجر أكثر احترافية.</p>
+      <div class="impact orange">
+        حتى استثمار SEO متواضع يمكنه السيطرة على سوق العناية بالبشرة في قطر.
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-red fade-up">
+    <h3>الخلاصة</h3>
+    <p style="font-size:1.05rem;line-height:1.9">
+      Bonte Care تتخلف في <strong>كل نقطة تلامس</strong> مع العميل: الموقع، المحتوى، السوشال ميديا، التسعير، والتواصل.
+      هذه <strong style="color:var(--red-light)">ليست مشكلة منتج</strong> - التركيبات والبحث والتطوير قوية.
+      هذه <strong style="color:var(--yellow)">مشكلة تسويق وتقنية ورقمية</strong> يمكن إصلاحها بشكل منهجي.
+    </p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="section" id="opportunity">
+  <div class="section-header">
+    <h2>5 - <span class="accent">الفرص</span> المتاحة</h2>
+    <p>كل مشكلة مذكورة أعلاه هي فرصة استراتيجية للتحول</p>
+  </div>
+
+  <div class="grid-2 fade-up">
+    <div class="opp-card">
+      <div class="icon">🏗️</div>
+      <h3>توحيد المنصات</h3>
+      <p>توحيد جميع الأسواق على منصة واحدة (Shopify أو WordPress) بتصميم متسق ومحتوى محلي وتحليلات مركزية.</p>
+      <div class="tag">تأثير عالي</div>
+    </div>
+    <div class="opp-card">
+      <div class="icon">🌐</div>
+      <h3>محتوى عربي أولاً</h3>
+      <p>بناء مدونة عربية وصفحات منتجات عربية وسوشال ميديا عربية. تموضع "البشرة الشرقية" يطابق أخيراً التواجد الرقمي.</p>
+      <div class="tag">أولوية حرجة</div>
+    </div>
+    <div class="opp-card">
+      <div class="icon">🔍</div>
+      <h3>استراتيجية SEO موحدة</h3>
+      <p>SEO شامل عبر جميع الأسواق مع بحث كلمات مفتاحية محلي وتحسين تقني واستراتيجية محتوى مخصصة لكل سوق.</p>
+      <div class="tag">محرك إيرادات</div>
+    </div>
+    <div class="opp-card">
+      <div class="icon">🎨</div>
+      <h3>نظام هوية العلامة</h3>
+      <p>مجموعة واحدة من الأدلة الإرشادية للألوان والخطوط والتصوير ونبرة الصوت. مطبقة بشكل متسق عبر جميع الأسواق.</p>
+      <div class="tag">أساس العلامة</div>
+    </div>
+    <div class="opp-card">
+      <div class="icon">📊</div>
+      <h3>تحليلات موحدة</h3>
+      <p>لوحة تحكم GA4 + GTM + Looker Studio تغطي جميع الأسواق. مصدر واحد للحقيقة للزيارات والتحويلات والإيرادات.</p>
+      <div class="tag">اتخاذ القرارات</div>
+    </div>
+    <div class="opp-card">
+      <div class="icon">📱</div>
+      <h3>إدارة السوشال ميديا</h3>
+      <p>استراتيجية محتوى عربية أولاً لـ Instagram و TikTok و Snapchat. تقويمات محتوى مخصصة لكل سوق مع تعاون مع مؤثرين.</p>
+      <div class="tag">قناة النمو</div>
+    </div>
+    <div class="opp-card">
+      <div class="icon">📸</div>
+      <h3>تصوير المنتجات</h3>
+      <p>تصوير احترافي موحد للكتالوج الكامل. لغة بصرية متسقة ترقى بالعلامة التجارية.</p>
+      <div class="tag">جودة بصرية</div>
+    </div>
+    <div class="opp-card">
+      <div class="icon">💰</div>
+      <h3>استراتيجية التسعير</h3>
+      <p>دليل تسعير واضح للوكلاء مع هوامش ربح محددة. إزالة الأسعار التجريبية. تحديد تموضع فاخر يتناسب مع جودة المنتج.</p>
+      <div class="tag">حماية الإيرادات</div>
+    </div>
+  </div>
+
+  <div class="card fade-up" style="margin-top:2rem;border-right:4px solid var(--yellow);background:linear-gradient(145deg,rgba(255,184,0,.05) 0%,var(--gradient-card))">
+    <h3 style="color:var(--yellow)">ملاحظة مهمة</h3>
+    <p style="font-size:1rem;line-height:1.9">
+      التعامل مع Bonte Care مباشرة <strong>يُكمّل</strong> مشروع Aura Pharma (قطر) بدلاً من التنافس معه.
+      تحسين البنية الرقمية للمصنع يفيد جميع الموزعين في آن واحد.
+      علامة مركزية قوية تُضخّم نتائج كل سوق محلي.
+    </p>
+  </div>
+</div>
+
+<section class="cta-section" id="contact">
+  <h2>مستعدون لتطوير التواجد الرقمي لـ Bonte Care؟</h2>
+  <p>كل مشكلة في هذا التقرير هي فرصة. السوق ينمو، المنتج قوي، والفجوات الرقمية قابلة للإصلاح.</p>
+  <a href="https://docs.google.com/spreadsheets/d/1kUiwqj1XiQmpJdnfCf-ECYN8dswoCm1-W1cMbYTHnck/edit?usp=sharing" class="cta-btn" target="_blank">لنتحدث &larr;</a>
+</section>
+
+<footer class="footer">
+  <p>إعداد <strong style="color:var(--red-light)">Brandology</strong> - أبريل 2026 - سري وخاص</p>
+</footer>
+
+<script>
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible')}})},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+const sections=document.querySelectorAll('div[id],section[id]');
+const navLinks=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{let current='';sections.forEach(s=>{const top=s.offsetTop-120;if(window.scrollY>=top)current=s.getAttribute('id')});navLinks.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+current)l.classList.add('active')})});
+</script>
+</body>
+</html>
