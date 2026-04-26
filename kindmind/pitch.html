@@ -1,0 +1,4228 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>براندولوجي × KindMind · عرض الخدمات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --red: #C9100E;
+    --red-dark: #8E0A09;
+    --ink: #0F1419;
+    --ink-2: #3A3F47;
+    --muted: #6B7280;
+    --paper: #FAFAF7;
+    --paper-2: #F0EEE8;
+    --card: #FFFFFF;
+    --line: #E5E2D9;
+    --accent: #F5B301;
+    --teal: #0F766E;
+    --green: #0E7C3A;
+    --yellow: #F59E0B;
+    --kind-sage: #8BA888;
+    --kind-cream: #F2EADF;
+    --kind-navy: #1E2A3A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    background: #1a1a1a;
+    color: var(--ink);
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body.print-mode { overflow: auto; }
+
+  .deck {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--paper);
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    padding: 56px 72px;
+  }
+
+  .slide.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Make non-cover/close slides flex columns so we can balance vertical space */
+  .slide:not(.slide-cover):not(.slide-close) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Main content blocks center vertically when there's extra room.
+     auto-margin computes to 0 when content overflows, so it's safe everywhere. */
+  .slide:not(.slide-cover):not(.slide-close):not(.market-winners-slide) > .winner-grid,
+  .slide:not(.slide-cover):not(.slide-close):not(.market-winners-slide) > .audience-grid,
+  .slide:not(.slide-cover):not(.slide-close):not(.market-winners-slide) > .roadmap-wrap,
+  .slide:not(.slide-cover):not(.slide-close):not(.market-winners-slide) > .service-layout,
+  .slide:not(.slide-cover):not(.slide-close):not(.market-winners-slide) > .adv-grid,
+  .slide:not(.slide-cover):not(.slide-close):not(.market-winners-slide) > .kw-split,
+  .slide:not(.slide-cover):not(.slide-close):not(.market-winners-slide) > .winner-actions,
+  .slide:not(.slide-cover):not(.slide-close):not(.market-winners-slide) > .gap-grid,
+  .slide:not(.slide-cover):not(.slide-close):not(.market-winners-slide) > .digital-grid,
+  .slide:not(.slide-cover):not(.slide-close):not(.market-winners-slide) > .position-hero,
+  .slide:not(.slide-cover):not(.slide-close):not(.market-winners-slide) > .comp-grid,
+  .slide:not(.slide-cover):not(.slide-close):not(.market-winners-slide) > .exec-grid,
+  .slide:not(.slide-cover):not(.slide-close):not(.market-winners-slide) > .market-wrap,
+  .slide.appendix-card > .winner-panel-grid,
+  .slide:not(.slide-cover):not(.slide-close):not(.market-winners-slide) > .appendix-toc,
+  .slide:not(.slide-cover):not(.slide-close):not(.market-winners-slide) > .cac-math-row {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  /* Trailing accent banners stick to the bottom (override the bottom auto) */
+  .slide:not(.slide-cover):not(.slide-close) > .gap-banner,
+  .slide:not(.slide-cover):not(.slide-close) > .position-footer,
+  .slide:not(.slide-cover):not(.slide-close) > .comp-note,
+  .slide:not(.slide-cover):not(.slide-close) > .exec-stats {
+    margin-top: auto;
+    margin-bottom: 0;
+  }
+  /* When a banner exists, the preceding content block doesn't get bottom auto */
+  .slide:not(.slide-cover):not(.slide-close):has(.gap-banner) > *,
+  .slide:not(.slide-cover):not(.slide-close):has(.position-footer) > *,
+  .slide:not(.slide-cover):not(.slide-close):has(.comp-note) > *,
+  .slide:not(.slide-cover):not(.slide-close):has(.exec-stats) > * {
+    margin-bottom: 0;
+  }
+  .slide:not(.slide-cover):not(.slide-close):has(.gap-banner) > .gap-banner,
+  .slide:not(.slide-cover):not(.slide-close):has(.position-footer) > .position-footer,
+  .slide:not(.slide-cover):not(.slide-close):has(.comp-note) > .comp-note,
+  .slide:not(.slide-cover):not(.slide-close):has(.exec-stats) > .exec-stats {
+    margin-top: auto;
+  }
+
+  /* Competitor identity block: logo + meta line, sits before slide title */
+  .competitor-id {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+    padding: 14px 18px;
+    background: #fff;
+    border-radius: 14px;
+    width: fit-content;
+    box-shadow:
+      0 1px 2px rgba(15,20,25,0.04),
+      0 8px 22px -16px rgba(15,20,25,0.10);
+  }
+  .competitor-id .competitor-logo {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
+  .competitor-id .competitor-meta {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 13px;
+    color: var(--ink-2);
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+  }
+  .competitor-id .competitor-meta strong {
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .competitor-id.global-set {
+    gap: 12px;
+    padding: 12px 16px;
+  }
+  .competitor-id.global-set .global-badges {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .competitor-id.global-set .global-badges span {
+    background: var(--paper-2);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+  }
+
+  /* Slide chrome: fixed-height bar at top of every slide */
+  .slide-num {
+    position: absolute;
+    bottom: 24px;
+    left: 64px;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-weight: 500;
+    opacity: 0.7;
+  }
+
+  .slide-brand {
+    position: absolute;
+    top: 22px;
+    left: 64px;
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+
+  .slide-tag {
+    position: absolute;
+    top: 22px;
+    right: 64px;
+    font-size: 10px;
+    color: var(--red);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+
+  /* Bump content top-padding so eyebrow always clears the chrome bar */
+  .slide:not(.slide-cover):not(.slide-close) {
+    padding-top: 64px;
+  }
+  .market-winners-slide,
+  .winner-chapter {
+    padding-top: 56px;
+  }
+
+  /* Navigation */
+  .nav {
+    position: fixed;
+    bottom: 24px;
+    right: 50%;
+    transform: translateX(50%);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    z-index: 100;
+    background: rgba(255,255,255,0.95);
+    padding: 10px 16px;
+    border-radius: 100px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+
+  .nav button {
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--ink);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    transition: background 0.2s;
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+  }
+  .nav button:hover { background: var(--paper-2); }
+  .nav .counter { font-family: 'Baloo Bhaijaan 2', sans-serif; font-size: 13px; color: var(--ink-2); font-weight: 600; min-width: 60px; text-align: center; direction: ltr; }
+
+  .progress {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: rgba(0,0,0,0.08);
+    z-index: 99;
+  }
+  .progress-bar { height: 100%; background: var(--red); transition: width 0.35s ease; }
+
+  /* ============ SLIDE 1: COVER ============ */
+  .slide-cover {
+    background: linear-gradient(135deg, #1E2A3A 0%, #0F1419 100%);
+    color: #fff;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cover-grid-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .cover-wrap {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 80px;
+  }
+
+  .cover-handshake {
+    display: inline-flex;
+    align-items: center;
+    gap: 28px;
+    padding: 14px 32px;
+    border-radius: 200px;
+    background: #fff;
+    margin-bottom: 48px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  }
+
+  .cover-mark {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+  }
+  .cover-mark img {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
+  .cover-mark .b { color: var(--red); }
+  .cover-cross {
+    color: rgba(15, 20, 25, 0.35);
+    font-size: 22px;
+    font-weight: 300;
+  }
+
+  .cover-title {
+    font-size: 92px;
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+  .cover-title .red { color: var(--red); }
+  .cover-sub {
+    font-size: 22px;
+    color: rgba(255,255,255,0.7);
+    font-weight: 400;
+    max-width: 720px;
+    margin: 0 auto 40px;
+    line-height: 1.5;
+  }
+
+  .cover-meta {
+    display: inline-flex;
+    gap: 40px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+  }
+  .cover-meta > div { text-align: center; }
+  .cover-meta .label { font-size: 11px; letter-spacing: 0.2em; color: rgba(255,255,255,0.5); text-transform: uppercase; margin-bottom: 6px; }
+  .cover-meta .value { font-size: 15px; font-weight: 600; }
+
+  /* ============ Standard section title ============ */
+  .eyebrow {
+    display: inline-block;
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--red);
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    background: rgba(201,16,14,0.08);
+    border-radius: 4px;
+    margin-bottom: 24px;
+  }
+
+  h1.slide-title {
+    font-size: 46px;
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 8px 0 22px;
+    padding-bottom: 6px;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  h1.slide-title .red { color: var(--red); }
+
+  .slide-subtitle {
+    font-size: 17px;
+    color: var(--ink-2);
+    max-width: 820px;
+    line-height: 1.7;
+    font-weight: 400;
+    margin: 0 0 36px;
+    text-wrap: pretty;
+  }
+
+  /* ============ SLIDE 2: Executive summary ============ */
+  .exec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 24px;
+  }
+
+  .exec-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 28px 32px;
+    position: relative;
+  }
+  .exec-card::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 24px;
+    width: 3px;
+    height: 36px;
+    background: var(--red);
+    border-radius: 3px 0 0 3px;
+  }
+  .exec-card h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+    letter-spacing: -0.005em;
+  }
+  .exec-card p {
+    font-size: 15px;
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+
+  .exec-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .exec-stat {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 14px;
+    padding: 20px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .exec-stat.accent { background: var(--red); }
+  .exec-stat .big {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 8px;
+    font-variant-numeric: tabular-nums;
+  }
+  .exec-stat .caption {
+    font-size: 13px;
+    opacity: 0.85;
+    line-height: 1.4;
+  }
+
+  /* ============ Market slide ============ */
+  .market-wrap {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 40px;
+    margin-top: 8px;
+  }
+
+  .market-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .market-stat {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px;
+    position: relative;
+  }
+  .market-stat .num {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--red);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .market-stat .num .unit { font-size: 18px; color: var(--ink-2); font-weight: 600; }
+  .market-stat .label {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.4;
+  }
+  .market-stat .src {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  .market-side {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 16px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .market-side h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+  .market-side ul {
+    list-style: none;
+    padding: 0;
+  }
+  .market-side li {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .market-side li:last-child { border-bottom: none; }
+  .market-side li::before {
+    content: '▸';
+    color: var(--red);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* ============ Demand gap slide ============ */
+  .gap-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-top: 8px;
+  }
+  .gap-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .gap-card .big-num {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--red);
+    letter-spacing: -0.03em;
+    margin-bottom: 14px;
+  }
+  .gap-card .big-num .small { font-size: 36px; }
+  .gap-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .gap-card p {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  .gap-card .src {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 14px;
+    letter-spacing: 0.05em;
+  }
+
+  .gap-banner {
+    margin-top: 28px;
+    padding: 20px 28px;
+    background: linear-gradient(90deg, var(--red) 0%, var(--red-dark) 100%);
+    color: #fff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .gap-banner .icon {
+    font-size: 32px;
+    line-height: 1;
+  }
+  .gap-banner .text {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  /* ============ Digital landscape slide ============ */
+  .digital-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .country-block {
+    background: #fff;
+    border-radius: 18px;
+    padding: 22px 22px;
+    box-shadow:
+      0 1px 2px rgba(15,20,25,0.04),
+      0 12px 32px -18px rgba(15,20,25,0.12);
+    display: flex;
+    flex-direction: column;
+  }
+  .country-block.primary {
+    background: linear-gradient(180deg, #FFF9F9 0%, #FFFFFF 100%);
+    box-shadow:
+      0 1px 2px rgba(201,16,14,0.08),
+      0 14px 36px -18px rgba(201,16,14,0.22);
+    position: relative;
+  }
+  .country-block.primary::before {
+    content: 'الأولوية';
+    position: absolute;
+    top: -10px;
+    right: 18px;
+    background: var(--red);
+    color: #fff;
+    padding: 3px 12px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+  }
+  .country-block.primary .country-head h3 {
+    color: var(--red);
+  }
+  .country-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(15,20,25,0.06);
+    margin-bottom: 18px;
+  }
+  .country-head .flag {
+    font-size: 36px;
+    line-height: 1;
+  }
+  .country-head h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+    margin-bottom: 4px;
+  }
+  .country-head .pop {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .platforms-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex: 1;
+  }
+  .platform-card {
+    padding: 12px 14px;
+    background: var(--paper-2);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .platform-card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .platform-card .platform-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .platform-card .platform-stat {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--red);
+    font-variant-numeric: tabular-nums;
+  }
+  .platform-bar {
+    height: 5px;
+    background: rgba(15,20,25,0.08);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+  }
+  .platform-bar .fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--red) 0%, var(--red-dark) 100%);
+    border-radius: 3px;
+  }
+  .platform-hint {
+    font-size: 12px;
+    color: var(--ink-2);
+    line-height: 1.4;
+  }
+
+  /* ============ KindMind position slide ============ */
+  .position-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: stretch;
+  }
+  .position-left {
+    background: #FBE8E7;
+    border: 2px solid var(--red);
+    border-radius: 18px;
+    padding: 32px;
+    position: relative;
+  }
+  .position-left::before {
+    content: 'الوضع الحالي';
+    position: absolute;
+    top: -12px;
+    right: 24px;
+    background: var(--red);
+    color: #fff;
+    padding: 4px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 20px;
+  }
+  .position-left h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .metric-line {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(201,16,14,0.15);
+    font-size: 15px;
+    align-items: center;
+  }
+  .metric-line:last-child { border-bottom: none; }
+  .metric-line .mlabel { color: var(--ink-2); }
+  .metric-line .mval {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--red);
+    direction: ltr;
+  }
+
+  .position-right {
+    background: #E6F4EA;
+    border: 2px solid var(--green);
+    border-radius: 18px;
+    padding: 32px;
+    position: relative;
+  }
+  .position-right::before {
+    content: 'الأعلى زيارات في القطاع (عرب ثيرابي)';
+    position: absolute;
+    top: -12px;
+    right: 24px;
+    background: var(--green);
+    color: #fff;
+    padding: 4px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 20px;
+  }
+  .position-right h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .position-right .metric-line { border-bottom: 1px solid rgba(14,124,58,0.15); }
+  .position-right .mval { color: var(--green); }
+
+  .position-footer {
+    margin-top: 24px;
+    padding: 18px 24px;
+    background: var(--ink);
+    color: #fff;
+    border-radius: 12px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .position-footer strong { color: var(--accent); font-weight: 700; }
+
+  /* ============ Competitors grid slide ============ */
+  .comp-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .comp-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px;
+    position: relative;
+    transition: transform 0.2s;
+  }
+  .comp-card.highlight {
+    border-color: var(--red);
+    background: #FFF9F9;
+  }
+  .comp-card.kindmind {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+  .comp-card .rank {
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    direction: ltr;
+    letter-spacing: 0.04em;
+  }
+  .comp-card.kindmind .rank { color: rgba(255,255,255,0.5); }
+  .comp-logo-wrap {
+    height: 40px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .comp-logo {
+    height: 100%;
+    max-width: 65%;
+    width: auto;
+    object-fit: contain;
+    object-position: right center;
+    display: block;
+  }
+  .comp-card.kindmind .comp-logo-wrap {
+    background: #fff;
+    border-radius: 8px;
+    padding: 4px 10px;
+    align-self: flex-start;
+    align-items: center;
+    width: fit-content;
+  }
+  .comp-logo-fallback {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 14px;
+    direction: ltr;
+  }
+  .comp-card.kindmind .comp-logo-fallback {
+    color: rgba(255,255,255,0.92);
+  }
+  .comp-card .cname {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 4px;
+    direction: ltr;
+    text-align: right;
+  }
+  .comp-card.kindmind .cname { color: #fff; }
+  .comp-card .country {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .comp-card.kindmind .country { color: rgba(255,255,255,0.6); }
+  .comp-metric-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    font-size: 12px;
+    padding: 4px 0;
+    color: var(--ink-2);
+    align-items: center;
+  }
+  .comp-card.kindmind .comp-metric-row { color: rgba(255,255,255,0.85); }
+  .comp-metric-row .n {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-weight: 700;
+    color: var(--ink);
+    direction: ltr;
+  }
+  .comp-card.kindmind .comp-metric-row .n { color: #fff; }
+
+  .comp-note {
+    margin-top: 20px;
+    padding: 14px 20px;
+    background: var(--paper-2);
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--ink-2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .comp-note::before { content: 'ⓘ'; color: var(--red); font-size: 16px; }
+
+  /* ============ Chart slide ============ */
+  .chart-wrap {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 28px;
+    height: calc(100% - 200px);
+    margin-top: 8px;
+    position: relative;
+  }
+  .chart-canvas-wrap {
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+  .chart-legend-note {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 12px;
+    letter-spacing: 0.03em;
+  }
+
+  /* ============ MARKET WINNERS LESSONS.POLISHED ============ */
+  /* Softer slide backdrop to signal "chapter" without adding noise */
+  .market-winners-slide,
+  .winner-chapter {
+    overflow-y: auto;
+    padding: 40px 64px 32px;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(201,16,14,0.025), transparent 70%),
+      var(--paper);
+  }
+  /* Compact title scale on competitor deep-dive slides so everything fits */
+  .winner-chapter .slide-title,
+  .market-winners-slide .slide-title {
+    font-size: 36px;
+    line-height: 1.3;
+    margin: 6px 0 16px;
+    padding-bottom: 4px;
+  }
+  .winner-chapter .slide-subtitle,
+  .market-winners-slide .slide-subtitle {
+    font-size: 15px;
+    line-height: 1.65;
+    max-width: 920px;
+    margin: 0 0 22px;
+  }
+  .winner-chapter .eyebrow,
+  .market-winners-slide .eyebrow {
+    margin-bottom: 16px;
+  }
+  /* Compact competitor-id pill within winner-chapter */
+  .winner-chapter .competitor-id {
+    padding: 8px 14px;
+    margin: 0 0 14px;
+    gap: 12px;
+  }
+  .winner-chapter .competitor-id .competitor-logo {
+    height: 26px;
+  }
+  .winner-chapter .competitor-id .competitor-meta {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+  .winner-chapter .competitor-id .competitor-meta strong {
+    font-size: 13px;
+  }
+  /* Compact panel grid */
+  .winner-chapter .winner-panel-grid {
+    gap: 14px;
+    margin-top: 6px;
+  }
+  .winner-chapter .winner-panel {
+    padding: 20px 22px;
+    border-radius: 16px;
+  }
+  .winner-chapter .winner-panel h3,
+  .winner-chapter .winner-panel h4 {
+    font-size: 17px;
+    margin-bottom: 8px;
+  }
+  .winner-chapter .winner-panel p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .winner-chapter .winner-panel .kicker {
+    margin-bottom: 8px;
+  }
+  /* Compact proof strip */
+  .winner-chapter .winner-proof-strip {
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .winner-chapter .winner-proof {
+    padding: 14px 18px;
+    border-radius: 12px;
+  }
+  .winner-chapter .winner-proof .num {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+  .winner-chapter .winner-proof .label {
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  /* Compact big-callout */
+  .winner-chapter .winner-big-callout {
+    padding: 22px 28px;
+    margin-top: 16px;
+    border-radius: 18px;
+  }
+  .winner-chapter .winner-big-callout h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+  .winner-chapter .winner-big-callout p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  /* Compact source line */
+  .winner-chapter .winner-source-line {
+    margin-top: 12px;
+    padding: 10px 16px 0;
+    font-size: 10px;
+    line-height: 1.4;
+  }
+
+  /* === Topline (thesis + rulebook) === */
+  .winner-topline {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 22px;
+    margin-bottom: 28px;
+  }
+  .winner-thesis,
+  .winner-rulebook {
+    border-radius: 20px;
+    padding: 30px 34px;
+    box-shadow:
+      0 1px 2px rgba(15,20,25,0.04),
+      0 14px 36px -18px rgba(15,20,25,0.14);
+  }
+  .winner-thesis {
+    background: linear-gradient(180deg, #1E2A3A 0%, #0F1419 100%);
+    color: #fff;
+  }
+  .winner-rulebook {
+    background: #fff;
+  }
+  .winner-thesis h3,
+  .winner-rulebook h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    line-height: 1.28;
+    text-wrap: balance;
+    letter-spacing: -0.005em;
+  }
+  .winner-thesis p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.78);
+    text-wrap: pretty;
+  }
+  .winner-rulebook p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+  .winner-rulebook ol {
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: rulebook;
+  }
+  .winner-rulebook li {
+    counter-increment: rulebook;
+    position: relative;
+    padding: 9px 36px 9px 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+  .winner-rulebook li::before {
+    content: counter(rulebook);
+    position: absolute;
+    right: 0;
+    top: 9px;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--paper-2);
+    color: var(--red);
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .winner-rulebook strong { color: var(--ink); font-weight: 700; }
+
+  /* === Two-card grid (Arab Therapy + O7, Copy/Avoid) === */
+  .winner-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    margin-bottom: 24px;
+  }
+  .winner-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px 32px;
+    box-shadow:
+      0 1px 2px rgba(15,20,25,0.04),
+      0 14px 36px -18px rgba(15,20,25,0.12);
+    transition: box-shadow 0.24s cubic-bezier(0.2, 0, 0, 1);
+  }
+  .winner-card.primary {
+    background: linear-gradient(180deg, #FFF9F9 0%, #FFFFFF 100%);
+    box-shadow:
+      0 1px 2px rgba(201,16,14,0.08),
+      0 14px 36px -18px rgba(201,16,14,0.22);
+  }
+  .winner-name {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(15,20,25,0.06);
+    margin-bottom: 18px;
+  }
+  .winner-name h4 {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    direction: ltr;
+    text-align: right;
+    letter-spacing: -0.005em;
+  }
+  .winner-name span {
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    font-weight: 500;
+  }
+  .winner-card dl {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 12px 16px;
+  }
+  .winner-card dt {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding-top: 3px;
+  }
+  .winner-card dd {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+  .winner-card dd strong { color: var(--ink); font-weight: 700; }
+
+  /* === Sources footer variants === */
+  .winner-source {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(15,20,25,0.06);
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    direction: ltr;
+    text-align: right;
+    line-height: 1.55;
+  }
+  .winner-source a {
+    color: var(--red);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  /* === Pattern grid (slide 10: 6 winning patterns) === */
+  .deep-pattern-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+  .deep-pattern-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 24px 24px 22px;
+    box-shadow:
+      0 1px 2px rgba(15,20,25,0.04),
+      0 10px 28px -18px rgba(15,20,25,0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .deep-pattern-card .tag {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 0.16em;
+    direction: ltr;
+    text-transform: uppercase;
+  }
+  .deep-pattern-card h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+    text-wrap: balance;
+    letter-spacing: -0.005em;
+  }
+  .deep-pattern-card p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    text-wrap: pretty;
+    flex-grow: 1;
+  }
+  .deep-pattern-card .lesson {
+    position: relative;
+    margin-top: 6px;
+    padding: 14px 14px 12px;
+    background: #FFF7ED;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .deep-pattern-card .lesson::before {
+    content: 'درس';
+    position: absolute;
+    top: -9px;
+    right: 14px;
+    background: var(--accent);
+    color: var(--ink);
+    padding: 2px 10px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+  }
+
+  /* === Matrix (slide 15: 6-row × 4-col comparison) === */
+  .deep-matrix {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    box-shadow:
+      0 1px 2px rgba(15,20,25,0.04),
+      0 14px 36px -18px rgba(15,20,25,0.12);
+  }
+  .deep-matrix-row {
+    display: grid;
+    grid-template-columns: 0.55fr 1.1fr 1.1fr 1.25fr;
+    gap: 0;
+  }
+  .deep-matrix-row + .deep-matrix-row {
+    border-top: 1px solid rgba(15,20,25,0.06);
+  }
+  .deep-matrix-row:not(.head):nth-child(odd) {
+    background: rgba(15,20,25,0.015);
+  }
+  .deep-matrix-row.head {
+    background: linear-gradient(180deg, #1E2A3A 0%, #0F1419 100%);
+    color: #fff;
+  }
+  .deep-matrix-row > div {
+    padding: 16px 20px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+  .deep-matrix-row > div + div {
+    border-right: 1px solid rgba(15,20,25,0.05);
+  }
+  .deep-matrix-row.head > div {
+    padding: 14px 20px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .deep-matrix-row.head > div + div {
+    border-right-color: rgba(255,255,255,0.08);
+  }
+  .deep-matrix-row .player {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-weight: 800;
+    color: var(--ink);
+    direction: ltr;
+    text-align: right;
+    font-size: 14px;
+    letter-spacing: -0.01em;
+  }
+  .deep-matrix-row.head .player { color: #fff; }
+  .deep-matrix-row strong { color: var(--ink); font-weight: 700; }
+
+  /* === Two-up insight notes === */
+  .deep-market-note {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  .deep-market-note > div {
+    background: var(--paper-2);
+    border-radius: 16px;
+    padding: 24px 26px;
+  }
+  .deep-market-note h4 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.3;
+    text-wrap: balance;
+    letter-spacing: -0.005em;
+  }
+  .deep-market-note p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+
+  /* === Action grid (slide 17) === */
+  .winner-actions {
+    background: var(--paper-2);
+    border-radius: 20px;
+    padding: 30px 32px;
+  }
+  .winner-actions h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 22px;
+    line-height: 1.3;
+    text-wrap: balance;
+    letter-spacing: -0.005em;
+  }
+  .action-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .action-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px 18px;
+    box-shadow:
+      0 1px 2px rgba(15,20,25,0.04),
+      0 8px 22px -16px rgba(15,20,25,0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .action-card .step {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--red);
+    direction: ltr;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+  }
+  .action-card h4 {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--ink);
+    text-wrap: balance;
+    letter-spacing: -0.005em;
+  }
+  .action-card p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+
+  /* === Warning callout === */
+  .winner-warning {
+    margin-top: 18px;
+    background: #FFF5F5;
+    color: var(--ink-2);
+    border-radius: 14px;
+    padding: 18px 24px 18px 64px;
+    font-size: 14px;
+    line-height: 1.7;
+    text-wrap: pretty;
+    position: relative;
+  }
+  [dir="rtl"] .winner-warning {
+    padding: 18px 64px 18px 24px;
+  }
+  .winner-warning::before {
+    content: '!';
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--red);
+    color: #fff;
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .winner-warning strong { color: var(--red); font-weight: 700; }
+
+  /* === Panel trio (slides 11, 12, 14) === */
+  .winner-panel-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 8px;
+  }
+  .winner-panel-grid.two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .winner-panel {
+    background: #fff;
+    border-radius: 18px;
+    padding: 28px 30px;
+    box-shadow:
+      0 1px 2px rgba(15,20,25,0.04),
+      0 12px 32px -18px rgba(15,20,25,0.12);
+  }
+  .winner-panel.dark {
+    background: linear-gradient(180deg, #1E2A3A 0%, #0F1419 100%);
+    color: #fff;
+    box-shadow:
+      0 1px 2px rgba(15,20,25,0.15),
+      0 14px 36px -18px rgba(15,20,25,0.38);
+  }
+  .winner-panel.tint {
+    background: linear-gradient(180deg, #FFF9F9 0%, #FFFFFF 100%);
+    box-shadow:
+      0 1px 2px rgba(201,16,14,0.06),
+      0 12px 32px -18px rgba(201,16,14,0.2);
+  }
+  .winner-panel .kicker {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--red);
+    direction: ltr;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .winner-panel.dark .kicker { color: var(--accent); }
+  .winner-panel h3,
+  .winner-panel h4 {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 12px;
+    text-wrap: balance;
+    letter-spacing: -0.005em;
+  }
+  .winner-panel.dark h3,
+  .winner-panel.dark h4 { color: #fff; }
+  .winner-panel p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+  .winner-panel.dark p { color: rgba(255,255,255,0.8); }
+  .winner-panel ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+  }
+  .winner-panel li {
+    position: relative;
+    padding: 5px 16px 5px 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+  .winner-panel.dark li { color: rgba(255,255,255,0.8); }
+  .winner-panel li::before {
+    content: '›';
+    position: absolute;
+    right: 0;
+    top: 4px;
+    color: var(--red);
+    font-weight: 800;
+  }
+  .winner-panel.dark li::before { color: var(--accent); }
+
+  /* === Proof stat strip === */
+  .winner-proof-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 22px;
+  }
+  .winner-proof {
+    background: var(--paper-2);
+    border-radius: 14px;
+    padding: 20px 22px;
+  }
+  .winner-proof .num {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--red);
+    direction: ltr;
+    line-height: 1;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .winner-proof .label {
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  /* === Horizontal 5-step flow === */
+  .winner-flow {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin-top: 16px;
+  }
+  .winner-flow .step-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 22px 20px;
+    box-shadow:
+      0 1px 2px rgba(15,20,25,0.04),
+      0 8px 22px -16px rgba(15,20,25,0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 168px;
+  }
+  .winner-flow .step-num {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--red);
+    direction: ltr;
+    letter-spacing: 0.1em;
+    font-variant-numeric: tabular-nums;
+  }
+  .winner-flow h4 {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--ink);
+    text-wrap: balance;
+    letter-spacing: -0.005em;
+  }
+  .winner-flow p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+
+  /* === Sources footer line === */
+  .winner-source-line {
+    margin-top: 20px;
+    padding: 14px 20px 0;
+    border-top: 1px solid rgba(15,20,25,0.06);
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    direction: ltr;
+    line-height: 1.55;
+    letter-spacing: 0.02em;
+  }
+
+  /* === Big dark callout (slide 11 closer) === */
+  .winner-big-callout {
+    background: linear-gradient(135deg, #1E2A3A 0%, #0F1419 100%);
+    color: #fff;
+    border-radius: 22px;
+    padding: 34px 38px;
+    margin-top: 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      0 1px 2px rgba(15,20,25,0.15),
+      0 22px 52px -28px rgba(15,20,25,0.45);
+  }
+  .winner-big-callout::before {
+    content: '';
+    position: absolute;
+    top: -30%; right: -10%;
+    width: 260px; height: 260px;
+    background: var(--red);
+    border-radius: 50%;
+    opacity: 0.22;
+    filter: blur(70px);
+    pointer-events: none;
+  }
+  .winner-big-callout h3 {
+    position: relative;
+    font-size: 24px;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+  }
+  .winner-big-callout p {
+    position: relative;
+    color: rgba(255,255,255,0.82);
+    font-size: 15px;
+    line-height: 1.7;
+    text-wrap: pretty;
+  }
+
+  /* ============ Keywords slide ============ */
+  .kw-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 8px;
+  }
+  .kw-split.kw-three {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .kw-split.kw-three .kw-block h3 { font-size: 16px; }
+  .kw-split.kw-three .kw-head,
+  .kw-split.kw-three .kw-row {
+    grid-template-columns: 2.2fr 0.6fr 0.6fr;
+    padding: 8px 12px;
+    gap: 8px;
+    font-size: 12px;
+  }
+  .kw-split.kw-three .kw-row .kw-term { font-size: 12px; }
+  .kw-split.kw-three .kw-row .kw-vol,
+  .kw-split.kw-three .kw-row .kw-cpc,
+  .kw-split.kw-three .kw-row .kw-kd { font-size: 11px; }
+  .kw-block .country-chip[class*="DIASPORA"],
+  .kw-block h3 .country-chip:not([class~="SA"]):not([class~="EG"]) {
+    background: var(--red);
+  }
+  .kw-block h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--ink);
+  }
+  .kw-block .country-chip {
+    background: var(--ink);
+    color: #fff;
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  .kw-table {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .kw-head,
+  .kw-row {
+    display: grid;
+    grid-template-columns: 1.8fr 0.7fr 0.7fr;
+    align-items: center;
+    padding: 10px 16px;
+    gap: 10px;
+    font-size: 13px;
+  }
+  .kw-head > div:last-child,
+  .kw-row .kw-cpc { display: none; }
+  .kw-head {
+    background: var(--paper-2);
+    color: var(--ink-2);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+  }
+  .kw-head > div { text-align: center; }
+  .kw-head > div:first-child { text-align: right; }
+  .kw-row {
+    border-top: 1px solid var(--line);
+  }
+  .kw-row .kw-term { color: var(--ink); font-weight: 500; text-align: right; }
+  .kw-row .kw-vol, .kw-row .kw-kd, .kw-row .kw-cpc {
+    text-align: center;
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-weight: 600;
+    direction: ltr;
+  }
+  .kd-easy { background: rgba(14,124,58,0.14); color: var(--green); padding: 2px 8px; border-radius: 12px; font-size: 11px; }
+  .kd-med { background: rgba(245,158,11,0.18); color: #B45309; padding: 2px 8px; border-radius: 12px; font-size: 11px; }
+  .kd-hard { background: rgba(201,16,14,0.12); color: var(--red); padding: 2px 8px; border-radius: 12px; font-size: 11px; }
+
+  /* ============ Audience segments slide ============ */
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .aud-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .aud-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 100%; height: 5px;
+    background: var(--accent);
+  }
+  .aud-card.a2::before { background: var(--teal); }
+  .aud-card.a3::before { background: var(--red); }
+  .aud-card.a4::before { background: var(--green); }
+  .aud-card.a5::before { background: var(--kind-navy); }
+
+  .aud-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    background: var(--paper-2);
+    margin-bottom: 12px;
+  }
+  .aud-card h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .aud-card .age {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+    direction: ltr;
+    text-align: right;
+  }
+  .aud-card ul {
+    list-style: none;
+    padding: 0;
+  }
+  .aud-card ul li {
+    font-size: 12px;
+    color: var(--ink-2);
+    line-height: 1.5;
+    padding: 4px 0 4px 0;
+    padding-right: 14px;
+    position: relative;
+  }
+  .aud-card ul li::before {
+    content: '•';
+    color: var(--red);
+    position: absolute;
+    right: 0;
+    font-weight: 700;
+  }
+  .aud-channels {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .aud-channels span {
+    font-size: 10px;
+    background: var(--paper-2);
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-weight: 600;
+    color: var(--ink-2);
+  }
+
+  /* ============ Roadmap slide ============ */
+  .roadmap-wrap {
+    margin-top: 8px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+    position: relative;
+  }
+  .roadmap-wrap::before {
+    content: '';
+    position: absolute;
+    top: 32px;
+    left: 5%;
+    right: 5%;
+    height: 2px;
+    background: var(--line);
+    z-index: 0;
+  }
+
+  .phase-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .phase-dot {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--red);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    margin: 0 auto 14px;
+    box-shadow: 0 0 0 5px var(--paper);
+  }
+  .phase-card h4 {
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+  .phase-card .phase-time {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+    direction: ltr;
+  }
+  .phase-card ul {
+    list-style: none;
+    padding: 0;
+  }
+  .phase-card li {
+    font-size: 12px;
+    color: var(--ink-2);
+    line-height: 1.5;
+    padding: 3px 0;
+    padding-right: 12px;
+    position: relative;
+  }
+  .phase-card li::before {
+    content: '›';
+    color: var(--red);
+    position: absolute;
+    right: 0;
+    font-weight: 800;
+  }
+  .phase-card .phase-scope {
+    font-size: 11px;
+    line-height: 1.45;
+    color: var(--ink);
+    background: var(--paper-2);
+    border-radius: 10px;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .parallel-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 14px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: var(--ink-2);
+    width: fit-content;
+  }
+  .parallel-note strong { color: var(--red); }
+
+  /* ============ Service detail slide ============ */
+  .service-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 32px;
+    margin-top: 8px;
+    align-items: start;
+  }
+  .service-hero {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 20px;
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-hero::before {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: -60px;
+    width: 220px; height: 220px;
+    background: var(--red);
+    border-radius: 50%;
+    opacity: 0.3;
+    filter: blur(40px);
+  }
+  .service-hero .phase-num {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .service-hero h3 {
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .service-hero p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 18px;
+  }
+  .service-hero .kpi-pill {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    font-size: 13px;
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-weight: 600;
+  }
+  .service-deliverables {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .deliv-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px;
+    position: relative;
+  }
+  .deliv-card .num {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 11px;
+    color: var(--red);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    direction: ltr;
+    text-align: right;
+  }
+  .deliv-card h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-top: 4px;
+    margin-bottom: 8px;
+  }
+  .deliv-card p {
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+
+  /* ============ Advantages slide ============ */
+  .adv-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 8px;
+  }
+  .adv-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+  }
+  .adv-num {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    direction: ltr;
+  }
+  .adv-card h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .adv-card p {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+  .adv-card .highlight-num {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-weight: 700;
+    color: var(--red);
+  }
+
+  /* ============ CAC × LTV math slide ============ */
+  .cac-inputs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+  .cac-stat {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px 20px;
+    box-shadow: 0 1px 2px rgba(15,20,25,0.04), 0 8px 24px -16px rgba(15,20,25,0.10);
+    text-align: center;
+  }
+  .cac-stat.goal {
+    background: linear-gradient(180deg, #1E2A3A 0%, #0F1419 100%);
+    color: #fff;
+  }
+  .cac-num {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--red);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .cac-stat.goal .cac-num { color: var(--accent); }
+  .cac-label {
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.4;
+  }
+  .cac-stat.goal .cac-label { color: rgba(255,255,255,0.85); }
+  .cac-note {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .cac-stat.goal .cac-note { color: rgba(255,255,255,0.55); }
+
+  .cac-math-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .cac-math-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 22px 26px;
+    box-shadow: 0 1px 2px rgba(15,20,25,0.04), 0 12px 32px -18px rgba(15,20,25,0.12);
+  }
+  .cac-math-card.highlight {
+    background: linear-gradient(180deg, #FFF9F9 0%, #FFFFFF 100%);
+  }
+  .cac-card-tag {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 14px;
+  }
+  .cac-equation { margin-bottom: 12px; }
+  .cac-step {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(15,20,25,0.08);
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .cac-step:last-child { border-bottom: none; }
+  .cac-step-label {
+    font-weight: 500;
+    color: var(--ink-2);
+    flex: 1;
+    line-height: 1.4;
+  }
+  .cac-step-result {
+    font-weight: 800;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+    text-align: left;
+    direction: ltr;
+    white-space: nowrap;
+  }
+  .cac-step-result.red { color: var(--red); }
+  .cac-eq {
+    background: var(--paper-2);
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-left: 6px;
+    color: var(--ink-2);
+    font-weight: 700;
+    font-size: 12px;
+  }
+  .cac-gap {
+    background: rgba(201,16,14,0.08);
+    color: var(--ink);
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    text-align: center;
+  }
+  .cac-gap strong { color: var(--red); }
+  .cac-levers {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .cac-levers li {
+    position: relative;
+    padding: 8px 18px 8px 0;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .cac-levers li::before {
+    content: '✓';
+    position: absolute;
+    right: 0;
+    top: 8px;
+    color: var(--green);
+    font-weight: 700;
+  }
+  .cac-levers li strong { color: var(--ink); font-weight: 700; }
+
+  /* ============ Appendix table-of-contents slide ============ */
+  .appendix-toc {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .appendix-toc-item {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 14px 22px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 1px 2px rgba(15,20,25,0.04), 0 8px 24px -16px rgba(15,20,25,0.10);
+  }
+  .appendix-toc-item .toc-num {
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--red);
+    background: var(--paper-2);
+    padding: 6px 12px;
+    border-radius: 8px;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    direction: ltr;
+  }
+  .appendix-toc-item .toc-text {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  .appendix-toc-item .toc-text strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  /* ============ Closing slide ============ */
+  .slide-close {
+    background: linear-gradient(135deg, #1E2A3A 0%, #C9100E 100%);
+    color: #fff;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .slide-close .wrap { padding: 80px; position: relative; z-index: 2; }
+  .slide-close h1 {
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+  .slide-close .lead {
+    font-size: 20px;
+    color: rgba(255,255,255,0.85);
+    max-width: 700px;
+    margin: 0 auto 40px;
+    line-height: 1.5;
+  }
+  .slide-close .contacts {
+    display: inline-flex;
+    gap: 40px;
+    padding: 24px 40px;
+    background: rgba(0,0,0,0.25);
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.15);
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    backdrop-filter: blur(10px);
+  }
+  .slide-close .contacts > div { text-align: center; }
+  .slide-close .contacts .label { font-size: 11px; letter-spacing: 0.2em; opacity: 0.6; text-transform: uppercase; margin-bottom: 4px; }
+  .slide-close .contacts .val { font-size: 15px; font-weight: 600; }
+
+  /* table of contents */
+  .toc { position: fixed; bottom: 24px; left: 24px; z-index: 100; }
+  .toc-btn {
+    background: rgba(255,255,255,0.95);
+    border: 1px solid var(--line);
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .toc-panel {
+    position: absolute;
+    bottom: 52px;
+    left: 0;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px;
+    width: 320px;
+    max-height: 70vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    display: none;
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+  }
+  .toc-panel.open { display: block; }
+  .toc-panel .ti {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .toc-panel .ti:hover { background: var(--paper-2); }
+  .toc-panel .ti.active { background: var(--red); color: #fff; }
+  .toc-panel .ti .tn { font-family: 'Baloo Bhaijaan 2', sans-serif; font-weight: 700; direction: ltr; text-align: left; }
+
+  /* print */
+  @media print {
+    body { background: #fff; overflow: visible; }
+    .deck { width: 100%; height: auto; }
+    .slide {
+      position: relative;
+      inset: auto;
+      width: 100%;
+      height: 100vh;
+      min-height: 100vh;
+      page-break-after: always;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+    .market-winners-slide,
+    .winner-chapter {
+      height: auto;
+      min-height: 100vh;
+      overflow: visible;
+    }
+    .nav, .toc, .progress { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+
+<div class="deck" id="deck">
+
+  <!-- ============ SLIDE 1: COVER ============ -->
+  <section class="slide slide-cover active" data-slide="1" data-title="الغلاف">
+    <div class="cover-grid-bg"></div>
+    <div class="cover-wrap">
+      <div class="cover-handshake">
+        <div class="cover-mark"><img src="assets/logos/brandolgy-02.png" alt="Brandology"></div>
+        <div class="cover-cross">×</div>
+        <div class="cover-mark kindmind-mark"><img src="assets/logos/kindmind.webp" alt="KindMind"></div>
+      </div>
+      <div class="cover-title">من <span class="red">صفر</span> إلى المنافسة<br/>خطة 12 شهراً لـ KindMind</div>
+      <div class="cover-sub">عرض أولي لما نفهمه عن وضعكم التسويقي الحالي وجمهوركم وتشخيص مشكلاتكم ونقاط قوة منافسيكم والخطوات التي نقترح العمل عليها لتأسيس ماكينة التسويق التي تزيد إيراداتكم ونموكم.</div>
+      <div class="cover-meta">
+        <div>
+          <div class="label">Client</div>
+          <div class="value">KindMind</div>
+        </div>
+        <div>
+          <div class="label">Prepared By</div>
+          <div class="value">Brandology</div>
+        </div>
+        <div>
+          <div class="label">Date</div>
+          <div class="value">April 2026</div>
+        </div>
+        <div>
+          <div class="label">Markets</div>
+          <div class="value">Diaspora · Gulf · Egypt</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 2: EXECUTIVE SUMMARY ============ -->
+  <section class="slide" data-slide="2" data-title="الملخص التنفيذي">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">الملخص التنفيذي</div>
+    <span class="eyebrow">ملخص تنفيذي</span>
+    <h1 class="slide-title">أنتم في مرحلة النمو. <span class="red">هذا ما نفعله.</span></h1>
+    <div class="slide-subtitle">لديكم 12 معالجاً مرخّصاً، فريق يخدم بثلاث لغات (عربي/إنجليزي/فرنسي حسب المعالج)، وموقع بلغتين (عربي/إنجليزي). شريحتكم الأولى: العرب في الشتات (أمريكا وكندا وفرنسا). الفجوة: لا تظهرون على Google، ولا حركة عضوية. هذا ما نُصلحه في 12 شهراً.</div>
+
+    <div class="exec-grid">
+      <div class="exec-card">
+        <h3>ما لديكم اليوم</h3>
+        <p>موقع بلغتين (عربي/إنجليزي). 12 معالجاً مرخّصاً يخدمون بثلاث لغات (عربي/إنجليزي/فرنسي حسب المعالج). أربع خدمات: فردي، زوجي، مراهقين، إرشاد أبوي. جلسات CBT و MBSR. 5 قنوات اجتماعية.</p>
+      </div>
+      <div class="exec-card">
+        <h3>ما نبنيه معكم</h3>
+        <p><strong>نبدأ بالجالية العربية في أمريكا وكندا وفرنسا</strong> (شريحتكم الأولى، LTV الأعلى)، ثم نوسّع للخليج ومصر. ستة مسارات: SEO تقني، محتوى عربي بإشراف معالج، إعلانات Google و Meta و TikTok، يوتيوب شهري، مطابقة المستخدم بالمعالج، اختبار A/B لصفحة الحجز.</p>
+      </div>
+    </div>
+
+    <div class="exec-stats">
+      <div class="exec-stat accent">
+        <div class="big">$365.7M</div>
+        <div class="caption">سوق الصحة النفسية السعودي بحلول 2032</div>
+      </div>
+      <div class="exec-stat">
+        <div class="big">16.7%</div>
+        <div class="caption">نمو سنوي لتطبيقات الصحة النفسية في السعودية ومصر</div>
+      </div>
+      <div class="exec-stat">
+        <div class="big">80%</div>
+        <div class="caption">من حالات الصحة النفسية في الخليج لا تُشخَّص</div>
+      </div>
+      <div class="exec-stat">
+        <div class="big">5×</div>
+        <div class="caption">جلسات الاستشارة الافتراضية ضربت 5 أضعاف بعد الجائحة</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 3: MARKET OPPORTUNITY ============ -->
+  <section class="slide" data-slide="3" data-title="فرصة السوق">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">فرصة السوق</div>
+    <span class="eyebrow">الفرصة</span>
+    <h1 class="slide-title">السوق ينمو. <span class="red">الطلب يسبق العرض.</span></h1>
+    <div class="slide-subtitle">ثلاث دول تستثمر في الصحة النفسية الرقمية، وشتات عربي يبحث عن معالج يفهم سياقه. ميزانيات حكومية مرصودة، طلب قائم، ومنافسة محدودة على الشريحة الأقوى شرائياً.</div>
+
+    <div class="market-wrap">
+      <div class="market-stats">
+        <div class="market-stat">
+          <div class="num">$365.7<span class="unit">M</span></div>
+          <div class="label">سوق الصحة النفسية السعودي بحلول 2032 · نمو 6.12% سنوياً</div>
+          <div class="src">IMARC Group, 2024</div>
+        </div>
+        <div class="market-stat">
+          <div class="num">$310.7<span class="unit">M</span></div>
+          <div class="label">تطبيقات الصحة النفسية السعودية بحلول 2030 · نمو 16.7% سنوياً</div>
+          <div class="src">Insights10, 2024</div>
+        </div>
+        <div class="market-stat">
+          <div class="num">$18.3<span class="unit">B</span></div>
+          <div class="label">الصحة الرقمية السعودية بحلول 2032 · نمو 22.6% سنوياً</div>
+          <div class="src">Grand View Research</div>
+        </div>
+        <div class="market-stat">
+          <div class="num">$51.17<span class="unit">M</span></div>
+          <div class="label">تطبيقات الصحة النفسية المصرية بحلول 2030 · نمو 16.7% سنوياً</div>
+          <div class="src">Insights10, 2024</div>
+        </div>
+      </div>
+      <div class="market-side">
+        <h3>محرّكات الطلب</h3>
+        <ul>
+          <li><strong>الشتات العربي:</strong> 3.7M في أمريكا + 750K في كندا + 5M+ مغاربي في فرنسا. أعلى قدرة شرائية، أقل منافسة عربية</li>
+          <li>رؤية 2030 السعودية تجعل الصحة النفسية أولوية في الإصلاح الصحي</li>
+          <li>دبي خصّصت $28 مليون لمبادرة "الثروة العقلية" ضمن استراتيجية الرفاه 2031</li>
+          <li>منصة مصر الحكومية: 100 ألف مستخدم و10,767 جلسة افتراضية منذ 2022</li>
+          <li>60٪ من سكان المنطقة تحت سن 35. جيل يبدأ يومه بالهاتف</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 4: DEMAND GAP ============ -->
+  <section class="slide" data-slide="4" data-title="فجوة الطلب">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">فجوة الطلب</div>
+    <span class="eyebrow">الحاجة غير المُلباة</span>
+    <h1 class="slide-title">الطلب أكبر من العرض. <span class="red">هذه فجوتكم.</span></h1>
+    <div class="slide-subtitle">ستة أرقام توضح المعادلة: من يحتاج، من يصمت، ومن جاهز يدفع. تشمل الخليج ومصر والشتات العربي.</div>
+
+    <div class="gap-grid">
+      <div class="gap-card">
+        <div class="big-num">2<span class="small">/</span>3</div>
+        <h3>من سكان الخليج يعانون من أعراض نفسية</h3>
+        <p>ماكنزي مسحت السعودية والإمارات والكويت وقطر في 2022. ثلثا المشاركين لديهم أعراض أو حالة قابلة للتشخيص.</p>
+        <div class="src">McKinsey Gulf Study, 2022</div>
+      </div>
+      <div class="gap-card">
+        <div class="big-num">80%</div>
+        <h3>حالات غير مُشخّصة في الخليج</h3>
+        <p>الرقم في الدول عالية الدخل المماثلة هو 50٪. كل 100 شخص لديه حالة، 80 منهم لم يصلوا لمعالج بعد. هؤلاء عملاؤكم.</p>
+        <div class="src">Oliver Wyman, GCC 2025</div>
+      </div>
+      <div class="gap-card">
+        <div class="big-num">35%</div>
+        <h3>يصمتون بسبب الوصمة الاجتماعية</h3>
+        <p>لا يدخلون عيادة لئلا يُرَوا. الأونلاين يحل هذا. KindMind يستهدف هذه الشريحة تحديداً.</p>
+        <div class="src">Workplace Options UAE</div>
+      </div>
+      <div class="gap-card">
+        <div class="big-num">5.7%</div>
+        <h3>اكتئاب إكلينيكي في مصر</h3>
+        <p>أعلى من المتوسط العالمي (4. 4٪). دراسات مستقلة تضع المعدل بين 24٪ و74٪ حسب الشريحة.</p>
+        <div class="src">Egypt MOH + Taylor & Francis 2024</div>
+      </div>
+      <div class="gap-card">
+        <div class="big-num">69%</div>
+        <h3>من المستخدمين على منصة مصر الحكومية إناث</h3>
+        <p>82٪ غير متزوجين، أغلبهم مراهقون وشباب. شريحة تصل عبر إنستغرام وتيك توك، لا فيسبوك.</p>
+        <div class="src">Daily News Egypt, Mar 2025</div>
+      </div>
+      <div class="gap-card">
+        <div class="big-num">3.7M+</div>
+        <h3>عرب في أمريكا وحدها</h3>
+        <p>بدون احتساب كندا (750K) وفرنسا (5M+ مغاربة). معالج عربي مرخّص يفهم سياقهم الثقافي شحيح. هذه شريحة عميل KindMind الأقوى شرائياً.</p>
+        <div class="src">Arab American Institute · Stats Canada · INSEE</div>
+      </div>
+    </div>
+
+    <div class="gap-banner">
+      <div class="icon">◆</div>
+      <div class="text">السوق مستعدّ. الطلب موجود. ما ينقص: قناة رقمية تربط من يبحث بمن يعالج، بخصوصية وبدون عيادة.</div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 5: DIGITAL LANDSCAPE ============ -->
+  <section class="slide" data-slide="5" data-title="المشهد الرقمي">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">المشهد الرقمي</div>
+    <span class="eyebrow">المشهد الرقمي</span>
+    <h1 class="slide-title">أين <span class="red">يقضي جمهوركم</span> وقته؟</h1>
+    <div class="slide-subtitle">شريحتكم الأولى هي الجالية العربية في الشتات. الخليج ومصر امتداد طبيعي. ثلاث أسواق، أربع قنوات لكل واحدة.</div>
+
+    <div class="digital-grid">
+      <div class="country-block primary">
+        <div class="country-head">
+          <div class="flag">🌍</div>
+          <div>
+            <h3>الجالية العربية في الشتات</h3>
+            <div class="pop">3.7M أمريكا · 750K كندا · 5M+ مغاربي فرنسا</div>
+          </div>
+        </div>
+        <div class="platforms-grid">
+          <div class="platform-card">
+            <div class="platform-card-head">
+              <span class="platform-name">واتساب</span>
+              <span class="platform-stat">يومي</span>
+            </div>
+            <div class="platform-bar"><div class="fill" style="width:95%"></div></div>
+            <div class="platform-hint">قناة الأهل والعائلة. مثالية لـ Click-to-Chat</div>
+          </div>
+          <div class="platform-card">
+            <div class="platform-card-head">
+              <span class="platform-name">فيسبوك</span>
+              <span class="platform-stat">الأكثر استخداماً</span>
+            </div>
+            <div class="platform-bar"><div class="fill" style="width:88%"></div></div>
+            <div class="platform-hint">الجيل الأول، الأخبار، التواصل مع الوطن</div>
+          </div>
+          <div class="platform-card">
+            <div class="platform-card-head">
+              <span class="platform-name">يوتيوب</span>
+              <span class="platform-stat">محتوى عربي</span>
+            </div>
+            <div class="platform-bar"><div class="fill" style="width:78%"></div></div>
+            <div class="platform-hint">طلب عالٍ على المحتوى التعليمي بالعربية</div>
+          </div>
+          <div class="platform-card">
+            <div class="platform-card-head">
+              <span class="platform-name">إنستغرام</span>
+              <span class="platform-stat">جيل ثانٍ</span>
+            </div>
+            <div class="platform-bar"><div class="fill" style="width:60%"></div></div>
+            <div class="platform-hint">الهوية الثقافية والـ Reels</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="country-block">
+        <div class="country-head">
+          <div class="flag">🇸🇦</div>
+          <div>
+            <h3>السعودية</h3>
+            <div class="pop">34.1M مستخدم سوشيال · تغلغل 99.6٪</div>
+          </div>
+        </div>
+        <div class="platforms-grid">
+          <div class="platform-card">
+            <div class="platform-card-head">
+              <span class="platform-name">يوتيوب</span>
+              <span class="platform-stat">91٪ وصول</span>
+            </div>
+            <div class="platform-bar"><div class="fill" style="width:91%"></div></div>
+            <div class="platform-hint">المحتوى التعليمي الطويل والشهادات</div>
+          </div>
+          <div class="platform-card">
+            <div class="platform-card-head">
+              <span class="platform-name">تيك توك</span>
+              <span class="platform-stat">34.1M (+18)</span>
+            </div>
+            <div class="platform-bar"><div class="fill" style="width:85%"></div></div>
+            <div class="platform-hint">أوسع وصول للشباب وكسر الوصمة</div>
+          </div>
+          <div class="platform-card">
+            <div class="platform-card-head">
+              <span class="platform-name">سناب شات</span>
+              <span class="platform-stat">20M+</span>
+            </div>
+            <div class="platform-bar"><div class="fill" style="width:62%"></div></div>
+            <div class="platform-hint">الشباب السعودي تحديداً، حضور يومي</div>
+          </div>
+          <div class="platform-card">
+            <div class="platform-card-head">
+              <span class="platform-name">إنستغرام</span>
+              <span class="platform-stat">تغلغل عالٍ</span>
+            </div>
+            <div class="platform-bar"><div class="fill" style="width:55%"></div></div>
+            <div class="platform-hint">بناء مجتمع متفاعل وReels</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="country-block">
+        <div class="country-head">
+          <div class="flag">🇪🇬</div>
+          <div>
+            <h3>مصر</h3>
+            <div class="pop">50.7M مستخدم سوشيال · 96.3M على الإنترنت</div>
+          </div>
+        </div>
+        <div class="platforms-grid">
+          <div class="platform-card">
+            <div class="platform-card-head">
+              <span class="platform-name">تيك توك</span>
+              <span class="platform-stat">41.3M (+18)</span>
+            </div>
+            <div class="platform-bar"><div class="fill" style="width:95%"></div></div>
+            <div class="platform-hint">أكبر منصة وصولاً، شباب وعمالة</div>
+          </div>
+          <div class="platform-card">
+            <div class="platform-card-head">
+              <span class="platform-name">فيسبوك</span>
+              <span class="platform-stat">81٪ وصول</span>
+            </div>
+            <div class="platform-bar"><div class="fill" style="width:81%"></div></div>
+            <div class="platform-hint">الجمهور المصري الأوسع، الأمهات</div>
+          </div>
+          <div class="platform-card">
+            <div class="platform-card-head">
+              <span class="platform-name">يوتيوب</span>
+              <span class="platform-stat">منصّة متصدّرة</span>
+            </div>
+            <div class="platform-bar"><div class="fill" style="width:72%"></div></div>
+            <div class="platform-hint">المحتوى التعليمي والحلقات الطويلة</div>
+          </div>
+          <div class="platform-card">
+            <div class="platform-card-head">
+              <span class="platform-name">إنستغرام</span>
+              <span class="platform-stat">20.1M</span>
+            </div>
+            <div class="platform-bar"><div class="fill" style="width:50%"></div></div>
+            <div class="platform-hint">الشباب الحضري والأم العاملة</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 6: KINDMIND POSITION ============ -->
+  <section class="slide" data-slide="6" data-title="موقع KindMind الحالي">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">تقييم الوضع الحالي</div>
+    <span class="eyebrow">تحليل الوضع الحالي</span>
+    <h1 class="slide-title">موقعكم اليوم على Google، <span class="red">مقابل عرب ثيرابي</span></h1>
+    <div class="slide-subtitle">بيانات Ahrefs، 25 أبريل 2026. عرب ثيرابي هو الأعلى زيارات في القطاع (296 ألف شهرياً). نقارن أنفسكم بالأقوى مباشرة.</div>
+
+    <div class="position-hero">
+      <div class="position-left">
+        <h3>kindmind.care</h3>
+        <div class="metric-line">
+          <span class="mlabel">تقييم النطاق (Domain Rating)</span>
+          <span class="mval">0</span>
+        </div>
+        <div class="metric-line">
+          <span class="mlabel">الزيارات العضوية الشهرية</span>
+          <span class="mval">0</span>
+        </div>
+        <div class="metric-line">
+          <span class="mlabel">الكلمات المفتاحية المُصنّفة</span>
+          <span class="mval">0</span>
+        </div>
+        <div class="metric-line">
+          <span class="mlabel">المواقع المُحيلة</span>
+          <span class="mval">18</span>
+        </div>
+        <div class="metric-line">
+          <span class="mlabel">الروابط الخلفية</span>
+          <span class="mval">30</span>
+        </div>
+      </div>
+
+      <div class="position-right">
+        <h3>arabtherapy.com</h3>
+        <div class="metric-line">
+          <span class="mlabel">تقييم النطاق (Domain Rating)</span>
+          <span class="mval">36</span>
+        </div>
+        <div class="metric-line">
+          <span class="mlabel">الزيارات العضوية الشهرية</span>
+          <span class="mval">296,000</span>
+        </div>
+        <div class="metric-line">
+          <span class="mlabel">الكلمات المفتاحية المُصنّفة</span>
+          <span class="mval">3,800</span>
+        </div>
+        <div class="metric-line">
+          <span class="mlabel">المواقع المُحيلة</span>
+          <span class="mval">549</span>
+        </div>
+        <div class="metric-line">
+          <span class="mlabel">الروابط الخلفية</span>
+          <span class="mval">3,000</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============ SLIDE 7: COMPETITORS GRID ============ -->
+  <section class="slide" data-slide="7" data-title="خارطة المنافسين">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">تحليل المنافسين</div>
+    <span class="eyebrow">تحليل المنافسين</span>
+    <h1 class="slide-title">ست منصات <span class="red">تنافسكم</span></h1>
+    <div class="slide-subtitle">مرتّبة حسب الزيارات العضوية الشهرية. البيانات من Ahrefs، 25 أبريل 2026.</div>
+
+    <div class="comp-grid">
+      <div class="comp-card highlight">
+        <div class="rank">#01</div>
+        <div class="comp-logo-wrap"><img class="comp-logo" src="assets/logos/arabtherapy.svg" alt="Arab Therapy"></div>
+        <div class="cname">arabtherapy.com</div>
+        <div class="country">🌐 عرب ثيرابي · إقليمي</div>
+        <div class="comp-metric-row"><span>DR</span><span class="n">36</span></div>
+        <div class="comp-metric-row"><span>الزيارات</span><span class="n">296,000</span></div>
+        <div class="comp-metric-row"><span>كلمات</span><span class="n">3,800</span></div>
+        <div class="comp-metric-row"><span>روابط</span><span class="n">549</span></div>
+      </div>
+      <div class="comp-card">
+        <div class="rank">#02</div>
+        <div class="comp-logo-wrap"><img class="comp-logo" src="assets/logos/labayh.svg" alt="Labayh"></div>
+        <div class="cname">labayh.net</div>
+        <div class="country">🇸🇦 لبيه · السعودية</div>
+        <div class="comp-metric-row"><span>DR</span><span class="n">40</span></div>
+        <div class="comp-metric-row"><span>الزيارات</span><span class="n">49,800</span></div>
+        <div class="comp-metric-row"><span>كلمات</span><span class="n">1,300</span></div>
+        <div class="comp-metric-row"><span>روابط</span><span class="n">624</span></div>
+      </div>
+      <div class="comp-card">
+        <div class="rank">#03</div>
+        <div class="comp-logo-wrap"><img class="comp-logo" src="assets/logos/hakini.svg" alt="Hakini"></div>
+        <div class="cname">hakini.net</div>
+        <div class="country">🌐 حاكيني</div>
+        <div class="comp-metric-row"><span>DR</span><span class="n">30</span></div>
+        <div class="comp-metric-row"><span>الزيارات</span><span class="n">44,600</span></div>
+        <div class="comp-metric-row"><span>كلمات</span><span class="n">1,900</span></div>
+        <div class="comp-metric-row"><span>روابط</span><span class="n">506</span></div>
+      </div>
+      <div class="comp-card">
+        <div class="rank">#04</div>
+        <div class="comp-logo-wrap"><img class="comp-logo" src="assets/logos/shezlong.svg" alt="Shezlong"></div>
+        <div class="cname">shezlong.com</div>
+        <div class="country">🇪🇬 شيزلونج · مصر</div>
+        <div class="comp-metric-row"><span>DR</span><span class="n">35</span></div>
+        <div class="comp-metric-row"><span>الزيارات</span><span class="n">8,500</span></div>
+        <div class="comp-metric-row"><span>كلمات</span><span class="n">156</span></div>
+        <div class="comp-metric-row"><span>روابط</span><span class="n">380</span></div>
+      </div>
+      <div class="comp-card">
+        <div class="rank">#05</div>
+        <div class="comp-logo-wrap"><img class="comp-logo" src="assets/logos/psyter.png" alt="Psyter"></div>
+        <div class="cname">psyter.com</div>
+        <div class="country">🌐 سيطر · إقليمي</div>
+        <div class="comp-metric-row"><span>DR</span><span class="n">21</span></div>
+        <div class="comp-metric-row"><span>الزيارات</span><span class="n">1,000</span></div>
+        <div class="comp-metric-row"><span>كلمات</span><span class="n">124</span></div>
+        <div class="comp-metric-row"><span>روابط</span><span class="n">49</span></div>
+      </div>
+      <div class="comp-card">
+        <div class="rank">#06</div>
+        <div class="comp-logo-wrap"><img class="comp-logo" src="assets/logos/egytherapy.png" alt="EgyTherapy"></div>
+        <div class="cname">egytherapy.com</div>
+        <div class="country">🇪🇬 إيجي ثيرابي</div>
+        <div class="comp-metric-row"><span>DR</span><span class="n">0</span></div>
+        <div class="comp-metric-row"><span>الزيارات</span><span class="n">983</span></div>
+        <div class="comp-metric-row"><span>كلمات</span><span class="n">82</span></div>
+        <div class="comp-metric-row"><span>روابط</span><span class="n">31</span></div>
+      </div>
+      <div class="comp-card kindmind">
+        <div class="rank">أنتم</div>
+        <div class="comp-logo-wrap"><img class="comp-logo" src="assets/logos/kindmind.webp" alt="KindMind"></div>
+        <div class="cname">kindmind.care</div>
+        <div class="country">🇪🇬 KindMind</div>
+        <div class="comp-metric-row"><span>DR</span><span class="n">0</span></div>
+        <div class="comp-metric-row"><span>الزيارات</span><span class="n">0</span></div>
+        <div class="comp-metric-row"><span>كلمات</span><span class="n">0</span></div>
+        <div class="comp-metric-row"><span>روابط</span><span class="n">18</span></div>
+      </div>
+    </div>
+
+    <div class="comp-note">
+      عرب ثيرابي يتصدر بـ296 ألف زيارة شهرياً عبر محتوى تعليمي عربي شامل. لبيه يقود السعودية تحديداً بـ50 ألف زيارة، يدعمها 1,300 كلمة مفتاحية. حاكيني المفاجأة: DR 30 و44 ألف زيارة مع روابط نشطة. شيزلونج تراجع لـ8 آلاف رغم تاريخه. سيطر وإيجي ثيرابي خارج المعركة عضوياً.
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 8: CHART ============ -->
+  <section class="slide" data-slide="8" data-title="مقارنة الزيارات العضوية">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">المقارنة التنافسية</div>
+    <span class="eyebrow">القياس الكمي</span>
+    <h1 class="slide-title">كم زائراً يصل لكل منصة <span class="red">شهرياً</span> من Google؟</h1>
+    <div class="slide-subtitle">Ahrefs، 25 أبريل 2026. المحور لوغاريتمي لأن عرب ثيرابي يبتعد عن أصغر منافس بفارق 300×.</div>
+
+    <div class="chart-wrap">
+      <div class="chart-canvas-wrap">
+        <canvas id="trafficChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-legend-note">Source: Ahrefs Site Explorer · batch-analysis · country=SA · April 2026</div>
+  </section>
+
+  <!-- ============ SLIDE 9: MARKET WINNERS LESSONS ============ -->
+  <section class="slide market-winners-slide" data-slide="9" data-title="دروس من الفائزين">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">دروس السوق</div>
+    <span class="eyebrow">كيف يكسب اللاعبون الأقوى</span>
+    <h1 class="slide-title">الفائزون لا يبيعون جلسات. <span class="red">يبيعون ثقة.</span></h1>
+    <div class="slide-subtitle">وجود الموقع وحده لا يكفي. اللاعبون الأقوى يعيدون تصميم لحظة طلب المساعدة من خمس زوايا: الخجل، الشرح، الاختيار، الخطوة الأولى، والمتابعة.</div>
+
+    <div class="winner-topline">
+      <div class="winner-thesis">
+        <h3>كيف يفكر مستخدم الصحة النفسية</h3>
+        <p>المستخدم لا يفاوض السعر. يفاوض خوفه: هل أنا ضعيف؟ هل سيفهمني المعالج؟ هل سيفضحني أحد؟ هل أحتاج طبيباً أو جلسة كلام؟ كل منصة نمت في القطاع تجيب عن هذه الأسئلة على الموقع قبل أن تطلب الحجز. بدون الإجابات، الإعلان يجلب زيارة، لا حجزاً.</p>
+      </div>
+      <div class="winner-rulebook">
+        <h3>قاعدة الفوز في خمس خطوات</h3>
+        <ol>
+          <li><strong>قبل الحجز:</strong> أزيلوا الخجل والشك بمحتوى وتعهدات واضحة.</li>
+          <li><strong>عند الاختيار:</strong> وجّهوا المستخدم. لا تتركوه أمام قائمة معالجين.</li>
+          <li><strong>قبل الدفع:</strong> اجعلوا الخطوة الأولى آمنة: تقييم، مكالمة مطابقة، جلسة تعريفية.</li>
+          <li><strong>بعد الجلسة:</strong> استمرّوا بالتواصل برسائل وتمارين، لا حجز يتيم.</li>
+          <li><strong>بعد إثبات الطلب:</strong> ركّزوا على رفع متوسط الجلسات. العميل الموجود أرخص بكثير من عميل جديد.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="winner-flow">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h4>إزالة الخجل</h4>
+        <p>الرسالة الأولى ليست "احجز الآن"، بل "ما تمر به مفهوم، وله طريق آمن وسري".</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h4>شرح الرحلة</h4>
+        <p>ماذا يحدث في أول جلسة؟ من يرى معلوماتي؟ كيف أعرف أن المعالج مناسب؟</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h4>توجيه الاختيار</h4>
+        <p>استبيان أو مكالمة مطابقة يمنع المستخدم من الضياع بين أسماء وتخصصات.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <h4>أول خطوة سهلة</h4>
+        <p>تقييم، مكالمة، أو جلسة تعريفية تجعل القرار أقل مخاطرة من جلسة كاملة مباشرة.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">05</div>
+        <h4>استمرارية</h4>
+        <p>تمارين ومتابعة ورسائل بين الجلسات تجعل العلاقة علاجية، لا حجزاً منفرداً.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 10: WINNER PATTERNS ============ -->
+  <section class="slide winner-chapter" data-slide="10" data-title="أنماط الفوز">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">أنماط الفوز</div>
+    <span class="eyebrow">ما يتكرر عند الفائزين</span>
+    <h1 class="slide-title">ستة أنماط <span class="red">تتكرر</span> عند المنصات التي تكسب</h1>
+    <div class="slide-subtitle">ليست ملاحظات سطحية. هذه أنماط تشغيلية وتسويقية رصدناها عند 6 منصات حوّلت سوقاً حساساً إلى طلب قابل للقياس.</div>
+
+    <div class="deep-pattern-grid">
+      <div class="deep-pattern-card">
+        <div class="tag">PATTERN 01</div>
+        <h4>يحوّلون الوصمة إلى وعد خصوصية</h4>
+        <p>Shezlong بدأ من احتياج عربي حساس: الناس تريد العلاج، لكنها لا تريد أن تُرى داخلة عيادة. Labayh وArab Therapy وO7 يكررون نفس الرسالة: آمن، سري، من البيت، دون إحراج.</p>
+        <div class="lesson">درس KindMind: لا تكتفوا بقول "خصوصية". اشرحوا عملياً: هل تُسجل الجلسات؟ من يرى البيانات؟ متى تُكسر السرية؟ كيف يحجز المستخدم دون كشف زائد؟</div>
+      </div>
+      <div class="deep-pattern-card">
+        <div class="tag">PATTERN 02</div>
+        <h4>يبنون سلّم منتجات لا زر حجز واحد</h4>
+        <p>Labayh لديه تقييمات، جلسات فورية، جلسات مجدولة، برامج، مجموعات، ويبنارات، وBusiness. O7 لديه مطابقة، Rassel text-line، تقييمات، مجموعات، ويبنارات، وEmployee Benefits.</p>
+        <div class="lesson">درس KindMind: المستخدم لا ينتقل دائماً من خوف إلى جلسة مدفوعة. أعطوه درجات: اختبار مجاني ← مكالمة مطابقة ← جلسة أولى ← برنامج علاجي ← اشتراك/متابعة.</div>
+      </div>
+      <div class="deep-pattern-card">
+        <div class="tag">PATTERN 03</div>
+        <h4>يقللون عبء الاختيار</h4>
+        <p>أصعب لحظة ليست الدفع فقط؛ بل اختيار شخص غريب للحديث معه. O7 يخفف هذا بمكالمة مطابقة وتوصيتين في نفس اليوم، وShezlong يبدأ باستبيان، وTalkspace يستخدم matching بعد أسئلة قصيرة.</p>
+        <div class="lesson">درس KindMind: لا تبدأوا بصفحة "كل المعالجين". ابدأوا بسؤال: ما الذي تمر به؟ ثم اعرضوا خيارين واضحين مع سبب الترشيح.</div>
+      </div>
+      <div class="deep-pattern-card">
+        <div class="tag">PATTERN 04</div>
+        <h4>يجعلون الجودة قابلة للفهم</h4>
+        <p>Arab Therapy يشرح المؤهلات والإشراف والمعايير، O7 يعرض فيديوهات ونبذات معالجين، Labayh يضع ترخيصاً وتخصصات وأرقام تراكم منشورة (1000+ معالج، 70M دقيقة). الجودة هنا ليست ادعاء، هي عناصر مرئية متكررة.</p>
+        <div class="lesson">درس KindMind: اعرضوا "نظام الجودة" لا أسماء المعالجين فقط: آلية اختيار، إشراف، تخصصات، منهجيات CBT/MBSR، تقييم تجربة، وخطة متابعة.</div>
+      </div>
+      <div class="deep-pattern-card">
+        <div class="tag">PATTERN 05</div>
+        <h4>يصنعون الطلب قبل التقاطه</h4>
+        <p>Shezlong يقاتل الوصمة بحملات توعية. Headspace/Calm لا ينتظران كلمة "علاج"؛ يدخلان من النوم، الضغط، التركيز، العادات اليومية. هذا يخلق علاقة قبل الاحتياج الحاد.</p>
+        <div class="lesson">درس KindMind: المحتوى ليس روزنامة منشورات. هو "تثقيف يقود للحجز": هل هذا قلق؟ متى أحتاج مختصاً؟ كيف أختار معالجاً؟ ماذا يحدث في أول جلسة؟</div>
+      </div>
+      <div class="deep-pattern-card">
+        <div class="tag">PATTERN 06</div>
+        <h4>يفصلون الرعاية عن نموذج الدفع الفردي</h4>
+        <p>Talkspace توسع عبر التأمين، EAP، أصحاب العمل، وشراكات مثل Amazon Health Services. Labayh وO7 يقدمان مسارات مؤسساتية. السبب بسيط: الفرد متردد، لكن الشركة لديها ميزانية رفاه واحتياج إنتاجية.</p>
+        <div class="lesson">درس KindMind: بعد بناء الثقة الفردية، جهزوا عرضاً للشركات والمدارس: جلسات مجهولة، ويبنارات، استطلاعات رفاه، تقارير مجمعة لا تكشف الأفراد.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 11: LABAYH DEEP DIVE ============ -->
+  <section class="slide winner-chapter" data-slide="11" data-title="درس لبيه">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">دروس اللاعبين الأقوى</div>
+    <span class="eyebrow">Labayh · السعودية</span>
+    <div class="competitor-id">
+      <img class="competitor-logo" src="assets/logos/labayh.svg" alt="Labayh">
+      <div class="competitor-meta"><strong>labayh.net</strong><br>منصّة سعودية · DR 40 · 49.8K زيارة شهرية</div>
+    </div>
+    <h1 class="slide-title">لبيه لا يبيع جلسة. يبني <span class="red">منظومة ثقة محلية.</span></h1>
+    <div class="slide-subtitle">لبيه يجمع بين السرعة، سعة المعالجين، تنوع المنتجات، المسار المؤسسي، والشرعية المحلية. هذه الخمسة معاً تصعّب على أي منصة جديدة منافسته بالحجم.</div>
+
+    <div class="winner-panel-grid">
+      <div class="winner-panel dark">
+        <div class="kicker">WHAT THEY DO</div>
+        <h3>منتج متعدد المستويات</h3>
+        <p>جلسات فورية ومجدولة، مجموعات دعم، برامج علاجية، ويبنارات، تقييمات نفسية، وصفات طبية، ومسار Labayh Business.</p>
+      </div>
+      <div class="winner-panel">
+        <div class="kicker">WHY IT WORKS</div>
+        <h3>الثقة تأتي من الحجم</h3>
+        <p>المستخدم يرى 1000+ معالج و70 مليون دقيقة علاج وترخيصاً محلياً، فيشعر أنه يدخل مؤسسة رعاية، لا صفحة ناشئة.</p>
+      </div>
+      <div class="winner-panel tint">
+        <div class="kicker">KINDMIND LESSON</div>
+        <h3>عوّضوا الحجم بالانتقاء</h3>
+        <p>لا تدّعوا سعة لا تملكونها. حوّلوا الـ12 معالجاً إلى ميزة: انتقاء دقيق، إشراف واضح، تخصصات محددة، وجودة قابلة للقياس.</p>
+      </div>
+    </div>
+
+    <div class="winner-proof-strip">
+      <div class="winner-proof">
+        <div class="num">1000+</div>
+        <div class="label">معالجون مرخصون على المنصة حسب موقع لبيه.</div>
+      </div>
+      <div class="winner-proof">
+        <div class="num">70M</div>
+        <div class="label">دقيقة علاج تراكمية حسب موقع لبيه.</div>
+      </div>
+      <div class="winner-proof">
+        <div class="num">B2B</div>
+        <div class="label">مسار للشركات يفتح ميزانيات رفاه غير مرتبطة بتردد الفرد.</div>
+      </div>
+      <div class="winner-proof">
+        <div class="num">Research</div>
+        <div class="label">مركز أبحاث يحول البيانات إلى شرعية ومعرفة محلية.</div>
+      </div>
+    </div>
+
+    <div class="winner-big-callout">
+      <h3>ترجمة الدرس لـ KindMind</h3>
+      <p>في السعودية، لا ننافس لبيه بالحجم من اليوم الأول. ننافسه بالوضوح والانتقاء: صفحة ترخيص وجودة، ملف معالج تفصيلي بمؤهلات وتخصصات، اختبار توجيه، ومنتج أول خطوة بكلفة منخفضة. الحجم يأتي بعد إثبات معدل التحويل، لا قبله.</p>
+    </div>
+    <div class="winner-source-line">Sources: Labayh website, Labayh Research Center, Saudipedia, Labayh CST/top downloaded health apps article.</div>
+  </section>
+
+  <!-- ============ SLIDE 12: SHEZLONG DEEP DIVE ============ -->
+  <section class="slide winner-chapter" data-slide="12" data-title="درس شيزلونج">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">دروس اللاعبين الأقوى</div>
+    <span class="eyebrow">Shezlong · مصر والشتات</span>
+    <div class="competitor-id">
+      <img class="competitor-logo" src="assets/logos/shezlong.svg" alt="Shezlong">
+      <div class="competitor-meta"><strong>shezlong.com</strong><br>منصّة مصرية · DR 35 · 8.5K زيارة شهرية</div>
+    </div>
+    <h1 class="slide-title">شيزلونج فهم أن العلاج العربي <span class="red">مسألة ثقافة لا لغة</span></h1>
+    <div class="slide-subtitle">قيمته لم تكن في الفيديو كول وحده. كانت في إزالة عوائق محددة: الخجل، العائلة، المسافة، النساء، والمغتربون الذين يريدون معالجاً يفهم سياقهم.</div>
+
+    <div class="winner-panel-grid">
+      <div class="winner-panel dark">
+        <div class="kicker">WHAT THEY DO</div>
+        <h3>منصة عربية بسياق ثقافي</h3>
+        <p>فيديو، رسائل، وجلسات صوتية مع معالجين عرب. خدموا مصر والسعودية والشتات بنفس الرسالة: مكان آمن، خصوصية، ومعالج يفهم العائلة والدين والعلاقات.</p>
+      </div>
+      <div class="winner-panel">
+        <div class="kicker">WHY IT WORKS</div>
+        <h3>ثقافة لا لغة فقط</h3>
+        <p>المستخدم لا يريد أن يُرى داخلاً عيادة. اللغة العربية وحدها لا تكفي. يريد سياقاً مألوفاً يفهم الوصمة والزواج والغربة دون شرح.</p>
+      </div>
+      <div class="winner-panel tint">
+        <div class="kicker">KINDMIND LESSON</div>
+        <h3>قسّموا حسب السياق</h3>
+        <p>لا تبيعوا "ثنائية اللغة" كميزة. ابنوا مسارات: مصري، خليجي، مغترب، أم قلقة، زوجان، مراهق، محترف محترق.</p>
+      </div>
+    </div>
+
+    <div class="winner-proof-strip">
+      <div class="winner-proof">
+        <div class="num">300+</div>
+        <div class="label">مستشار من 18 دولة بحسب تغطية The National.</div>
+      </div>
+      <div class="winner-proof">
+        <div class="num">80K+</div>
+        <div class="label">مستخدمون من 80 دولة في التغطية نفسها.</div>
+      </div>
+      <div class="winner-proof">
+        <div class="num">60%</div>
+        <div class="label">نساء ضمن المستخدمين بحسب FT. شريحة حساسة للخصوصية.</div>
+      </div>
+      <div class="winner-proof">
+        <div class="num">3.5×</div>
+        <div class="label">نمو الإيرادات والمستخدمين والجلسات في سنة الجائحة مقابل 2019.</div>
+      </div>
+    </div>
+
+    <div class="winner-big-callout">
+      <h3>ترجمة الدرس لـ KindMind</h3>
+      <p>الرسالة الأقوى ليست "علاج نفسي أونلاين"، بل "تحدث مع مختص يفهم حياتك". ابنوا مكتبة محتوى تجيب الأسئلة الحقيقية: كيف أبدأ دون أن يعرف أحد؟ هل العلاج يناسب المتزوجين؟ كيف أقنع أهلي؟ هل المعالج سيفهمني كمغترب؟</p>
+    </div>
+    <div class="winner-source-line">Sources: The National on Shezlong, FT coverage, Shezlong website and media coverage.</div>
+  </section>
+
+  <!-- ============ SLIDE 13: ARAB THERAPY DEEP DIVE ============ -->
+  <section class="slide winner-chapter" data-slide="13" data-title="درس عرب ثيرابي">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">دروس اللاعبين الأقوى</div>
+    <span class="eyebrow">Arab Therapy · إقليمي</span>
+    <div class="competitor-id">
+      <img class="competitor-logo" src="assets/logos/arabtherapy.svg" alt="Arab Therapy">
+      <div class="competitor-meta"><strong>arabtherapy.com</strong><br>منصّة إقليمية · DR 36 · 296K زيارة شهرية</div>
+    </div>
+    <h1 class="slide-title">عرب ثيرابي يكسب <span class="red">بالشفافية</span>، لا بالحجم</h1>
+    <div class="slide-subtitle">296 ألف زيارة شهرية لم تأت من إعلانات. أتت من محتوى عربي يشرح الجودة والخصوصية، فيعرف المستخدم لماذا يدفع ولماذا يثق قبل أن يحجز.</div>
+
+    <div class="winner-panel-grid">
+      <div class="winner-panel dark">
+        <div class="kicker">WHAT THEY DO</div>
+        <h3>الخصوصية في الواجهة</h3>
+        <p>معالجون عرب مؤهلون مع إشراف وتدريب، تطبيق للحجز والمحادثة، اشتراكات واضحة، وصفحة FAQ تشرح التشفير وعدم تسجيل الجلسات.</p>
+      </div>
+      <div class="winner-panel">
+        <div class="kicker">WHY IT WORKS</div>
+        <h3>الوضوح يبرّر السعر</h3>
+        <p>الخوف الأكبر في العلاج الأونلاين هو الخصوصية والاستغلال. حين يرى المستخدم آلية الجودة مكتوبة، يقل خوف الدفع ويزداد قبول السعر.</p>
+      </div>
+      <div class="winner-panel tint">
+        <div class="kicker">KINDMIND LESSON</div>
+        <h3>اصنعوا صفحة الجودة</h3>
+        <p>صفحة "كيف نضمن جودة الرعاية؟" تجيب عن أربعة أسئلة: من يراجع المعالجين؟ كيف نُدير الحالة؟ متى نُحيل لطبيب؟ كيف نحمي البيانات؟</p>
+      </div>
+    </div>
+
+    <div class="winner-proof-strip">
+      <div class="winner-proof">
+        <div class="num">296K</div>
+        <div class="label">زيارة شهرية عضوية حسب Ahrefs، أبريل 2026.</div>
+      </div>
+      <div class="winner-proof">
+        <div class="num">3.8K</div>
+        <div class="label">كلمة مفتاحية مُصنّفة على Google.</div>
+      </div>
+      <div class="winner-proof">
+        <div class="num">DR 36</div>
+        <div class="label">سلطة نطاق من 549 موقعاً مُحيلاً.</div>
+      </div>
+      <div class="winner-proof">
+        <div class="num">FAQ</div>
+        <div class="label">صفحة خصوصية مكتوبة، ليست ادعاء "خصوصية تامة".</div>
+      </div>
+    </div>
+
+    <div class="winner-big-callout">
+      <h3>ترجمة الدرس لـ KindMind</h3>
+      <p>اكتبوا "نظام الجودة" قبل ما تطلبوا الحجز. أربع صفحات أساسية: (1) كيف نختار المعالج، (2) ما الذي يحدث في الجلسة، (3) ماذا نفعل ببياناتك، (4) متى نحيل لطبيب. هذه الصفحات تفعل ما يفعله إعلان مدفوع: تخفّض حاجز الثقة قبل أن يدفع المستخدم دولاراً.</p>
+    </div>
+    <div class="winner-source-line">Sources: Arab Therapy website + privacy FAQ, Ahrefs (April 25, 2026).</div>
+  </section>
+
+  <!-- ============ SLIDE 14: O7 THERAPY DEEP DIVE ============ -->
+  <section class="slide winner-chapter" data-slide="14" data-title="درس O7 Therapy">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">دروس اللاعبين الأقوى</div>
+    <span class="eyebrow">O7 Therapy · مصر</span>
+    <div class="competitor-id">
+      <img class="competitor-logo" src="assets/logos/o7therapy.avif" alt="O7 Therapy">
+      <div class="competitor-meta"><strong>o7therapy.com</strong><br>منصّة مصرية · مطابقة بشرية · Rassel</div>
+    </div>
+    <h1 class="slide-title">O7 لا يتركك تختار وحدك. <span class="red">يُطابقك.</span></h1>
+    <div class="slide-subtitle">المستخدم لا يحتاج قائمة معالجين، يحتاج توجيهاً. O7 يحلّ مشكلتين معاً: "لا أعرف من أختار"، و"لا أريد الانتظار لأقول إنني لست بخير".</div>
+
+    <div class="winner-panel-grid">
+      <div class="winner-panel dark">
+        <div class="kicker">WHAT THEY DO</div>
+        <h3>مطابقة بشرية مفسّرة</h3>
+        <p>مكالمة مطابقة مع مختص، توصيتان في نفس اليوم مع سبب الترشيح، فيديوهات تعريفية للمعالجين، خدمة Rassel للدعم النصّي بدون موعد، ومجموعات وتقييمات وويبنارات.</p>
+      </div>
+      <div class="winner-panel">
+        <div class="kicker">WHY IT WORKS</div>
+        <h3>التوجيه يرفع التحويل</h3>
+        <p>القلق يجعل الاختيار مرهقاً. حين يقدّم لك أحدهم اختيارين بسبب واضح، تتخذ القرار. قائمة طويلة من 100 معالج تُجمّد المستخدم أكثر مما تساعده.</p>
+      </div>
+      <div class="winner-panel tint">
+        <div class="kicker">KINDMIND LESSON</div>
+        <h3>اختبار قصير + توصيتان</h3>
+        <p>5–7 أسئلة تنتج توصيتي معالج مع سبب الترشيح. هذه الخطوة وحدها قد ترفع التحويل أكثر من إعلان جديد. ثم رسائل بين الجلسات لربط الزيارات ببعضها.</p>
+      </div>
+    </div>
+
+    <div class="winner-proof-strip">
+      <div class="winner-proof">
+        <div class="num">2 / 1d</div>
+        <div class="label">توصيتان معالج في نفس اليوم بعد المكالمة.</div>
+      </div>
+      <div class="winner-proof">
+        <div class="num">Rassel</div>
+        <div class="label">خط نصّي للدعم بدون جدولة موعد رسمي.</div>
+      </div>
+      <div class="winner-proof">
+        <div class="num">EAP</div>
+        <div class="label">مسار Employee Benefits مفتوح للشركات والمؤسسات.</div>
+      </div>
+      <div class="winner-proof">
+        <div class="num">1:1</div>
+        <div class="label">مكالمة مطابقة قبل أي حجز رسمي.</div>
+      </div>
+    </div>
+
+    <div class="winner-big-callout">
+      <h3>ترجمة الدرس لـ KindMind</h3>
+      <p>ابنوا "Matching Flow" من 5 إلى 7 أسئلة عن الحالة واللغة والتفضيل، ثم توصيتان لمعالجين من فريقكم مع شرح "لماذا هؤلاء". أضيفوا رسالة متابعة بعد 24 ساعة من الجلسة الأولى. هذان التغييران يرفعان التحويل دون زيادة ميزانية الإعلانات.</p>
+    </div>
+    <div class="winner-source-line">Sources: O7 Therapy website, O7 Rassel page, O7 Employee Benefits.</div>
+  </section>
+
+  <!-- ============ SLIDE 15: GLOBAL PLAYERS DEEP DIVE ============ -->
+  <section class="slide winner-chapter" data-slide="15" data-title="درس اللاعبين العالميين">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">دروس اللاعبين الأقوى</div>
+    <span class="eyebrow">اللاعبون العالميون</span>
+    <div class="competitor-id global-set">
+      <div class="global-badges">
+        <span>Talkspace</span>
+        <span>BetterHelp</span>
+        <span>Headspace</span>
+        <span>Calm</span>
+      </div>
+    </div>
+    <h1 class="slide-title">العالميون: التوزيع <span class="red">أقوى من الإعلان</span></h1>
+    <div class="slide-subtitle">أربع منصات بمليارات الإيرادات لا تعتمد على إعلانات Google وحدها. يدخلون من التأمين، الشركات، الشراكات، والعادات اليومية، قبل لحظة العلاج بأشهر.</div>
+
+    <div class="winner-panel-grid">
+      <div class="winner-panel dark">
+        <div class="kicker">WHAT THEY DO</div>
+        <h3>توزيع متعدّد الأبواب</h3>
+        <p>Talkspace يربط therapy + psychiatry + messaging مع التأمين وEAP وأصحاب العمل، وشراكات مع Amazon Health Services. Headspace وCalm يدخلان من النوم والتنفس والتركيز قبل العلاج.</p>
+      </div>
+      <div class="winner-panel">
+        <div class="kicker">WHY IT WORKS</div>
+        <h3>سقف الإعلانات منخفض</h3>
+        <p>المستخدم لا يبحث عن "Talkspace". يبحث عن "هل يغطي تأميني العلاج؟". المؤسسات تدفع قبل أن يعترف الفرد بحاجته. والعادة اليومية تبني علاقة قبل لحظة الأزمة.</p>
+      </div>
+      <div class="winner-panel tint">
+        <div class="kicker">KINDMIND LESSON</div>
+        <h3>افتحوا قنوات غير الإعلان</h3>
+        <p>الدرس العملي: ابنوا مكتبة محتوى عافية يومي (نوم، قلق، تركيز، تنفس). يبني هذا المحتوى عادة قبل لحظة الأزمة، فيصلكم المستخدم طبيعياً عند الحاجة العلاجية، بكلفة أقل من إعلان البحث المباشر.</p>
+      </div>
+    </div>
+
+    <div class="winner-proof-strip">
+      <div class="winner-proof">
+        <div class="num">Amazon</div>
+        <div class="label">شراكة Talkspace مع Amazon Health Services لاكتشاف المستخدمين.</div>
+      </div>
+      <div class="winner-proof">
+        <div class="num">EAP</div>
+        <div class="label">Talkspace يبيع للشركات قبل الأفراد. ميزانية رفاه ثابتة.</div>
+      </div>
+      <div class="winner-proof">
+        <div class="num">$7.8M</div>
+        <div class="label">تسوية BetterHelp مع FTC. درس واضح في حدود الخصوصية.</div>
+      </div>
+      <div class="winner-proof">
+        <div class="num">Daily</div>
+        <div class="label">Headspace/Calm يبنيان عادة يومية قبل لحظة الأزمة.</div>
+      </div>
+    </div>
+
+    <div class="winner-big-callout">
+      <h3>ترجمة الدرس لـ KindMind</h3>
+      <p>الإعلانات الفردية وحدها لها سقف، وكلفة الاكتساب فيها أعلى من قنوات أخرى. ما نأخذه من العالميين الآن: مكتبة عافية يومية (نوم، قلق، تركيز، تنفس) تجعل المستخدم يصلكم قبل لحظة الأزمة. حذار: لا تستخدموا بيانات الحالة النفسية في الاستهداف الإعلاني. درس BetterHelp كلّف 7.8 مليون دولار.</p>
+    </div>
+    <div class="winner-source-line">Sources: Talkspace website + Amazon Health Services partnership, Headspace DTC announcement, Calm Lifestyle announcement, FTC BetterHelp order.</div>
+  </section>
+
+  <!-- ============ SLIDE 15: COMPETITIVE MATRIX ============ -->
+  <section class="slide winner-chapter" data-slide="16" data-title="مصفوفة الدروس">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">مصفوفة الدروس</div>
+    <span class="eyebrow">ماذا نأخذ من كل لاعب</span>
+    <h1 class="slide-title">كل دروس السوق <span class="red">في جدول واحد</span></h1>
+    <div class="slide-subtitle">ماذا يفعل كل لاعب جيداً، لماذا يعمل تجارياً، وكيف نترجمه لـ KindMind.</div>
+
+    <div class="deep-matrix">
+      <div class="deep-matrix-row head">
+        <div class="player">Player</div>
+        <div>ما يفعلونه جيداً</div>
+        <div>لماذا يعمل تجارياً</div>
+        <div>الدرس المباشر لـ KindMind</div>
+      </div>
+      <div class="deep-matrix-row">
+        <div class="player">Labayh</div>
+        <div>تنوّع المنتج: جلسات فورية ومجدولة، مجموعات، برامج، ويبنارات، تقييمات، وصفات، Labayh Business، ومركز أبحاث.</div>
+        <div>تتراكم طبقات الثقة: مستخدمون، شركات، جهات صحية، وبحث. كل طبقة ترفع الحاجز أمام أي منافس جديد.</div>
+        <div>ابدأوا بـ"ثقة السعودية": ترخيص واضح، ملفات معالجين، خدمة أولى سهلة، ثم مسار مؤسسي ودليل رفاه دوري.</div>
+      </div>
+      <div class="deep-matrix-row">
+        <div class="player">Shezlong</div>
+        <div>فهم أن المشكلة ثقافية لا لوجستية: وصمة، عائلة، تنقل، نساء لا يدخلن عيادة، ومغتربون يريدون لغة وسياقاً مألوفاً.</div>
+        <div>"العلاج العربي الآمن" أصبح سبب اختيار، لا ميزة لغوية. خدم مصر والسعودية والشتات بنفس الرسالة.</div>
+        <div>لا تبيعوا "ثنائية اللغة". بيعوا "معالج يفهم سياقك": مصري، خليجي، مغترب، أم، زوجان، مراهق، محترف محترق.</div>
+      </div>
+      <div class="deep-matrix-row">
+        <div class="player">Arab Therapy</div>
+        <div>الجودة والخصوصية في الواجهة: معالجون مؤهلون، إشراف، اشتراكات واضحة، وشرح صريح للتشفير وعدم تسجيل الجلسات.</div>
+        <div>في سوق يخاف الاستغلال، الشفافية في شرح الجودة تخفض خوف الدفع وتبرّر السعر.</div>
+        <div>اصنعوا صفحة "كيف نضمن جودة الرعاية؟" تجيب عن: من يراجع المعالجين؟ كيف نُدير الحالة؟ متى نُحيل لطبيب؟ كيف نحمي البيانات؟</div>
+      </div>
+      <div class="deep-matrix-row">
+        <div class="player">O7 Therapy</div>
+        <div>مطابقة بشرية، فيديوهات معالجين، Rassel للدعم النصّي دون جدولة، مجموعات، تقييمات، وويبنارات بأسئلة مجهولة.</div>
+        <div>يحل مشكلتين معاً: "لا أعرف من أختار" و"لا أريد الانتظار حتى أقول إنني لست بخير".</div>
+        <div>الإضافة الأقوى لكم: مكالمة أو اختبار قصير يُنتج توصيتين بسبب واضح، ثم رسائل بين الجلسات ولو بسيطة.</div>
+      </div>
+      <div class="deep-matrix-row">
+        <div class="player">Talkspace</div>
+        <div>دمج therapy + psychiatry + messaging + insurance + EAP + employers، ثم زادوا الاكتشاف بشراكة Amazon Health Services.</div>
+        <div>يخفض حاجزَي السعر والاكتشاف. المستخدم لا يبحث عن Talkspace. يبحث عن "هل يغطي تأميني العلاج؟"</div>
+        <div>في الخليج ومصر: ابحثوا مبكراً عن شراكات دفع وتأمين وشركات، لا عن إعلانات أفراد فقط. التوزيع أقوى من الإعلان.</div>
+      </div>
+      <div class="deep-matrix-row">
+        <div class="player">Headspace / Calm</div>
+        <div>يدخلان من عادات أخف: نوم، تنفس، تركيز، ضغط عمل، محتوى قصير، ثم يفتحان coaching وtherapy وenterprise.</div>
+        <div>يبنيان علاقة يومية قبل لحظة الأزمة. حين يصبح المستخدم جاهزاً، الثقة موجودة مسبقاً.</div>
+        <div>لا تجعلوا كل المحتوى يطلب حجز جلسة. ابنوا مكتبة عافية تقود إلى العلاج طبيعياً عند الحاجة.</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============ SLIDE 16: COPY / AVOID ============ -->
+  <section class="slide winner-chapter" data-slide="17" data-title="ما ننسخه وما نتجنبه">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">خلاصة تطبيقية</div>
+    <span class="eyebrow">Copy / Avoid</span>
+    <h1 class="slide-title">ما ننسخه من السوق، <span class="red">وما لا ننسخه</span></h1>
+    <div class="slide-subtitle">النسخة التنفيذية: ما يستحق الاقتباس، وما نتجنّبه حتى لو نجح عند منصات أكبر.</div>
+
+    <div class="winner-grid">
+      <div class="winner-card primary">
+        <div class="winner-name">
+          <h4>What to Copy</h4>
+          <span>بذكاء لا بحرفية</span>
+        </div>
+        <dl>
+          <dt>من Labayh</dt>
+          <dd>تعدد مسارات الخدمة: فوري، مجدول، مجموعات، برامج، B2B، وأرقام تراكم منشورة (1000+ معالج، 70M دقيقة).</dd>
+          <dt>من O7</dt>
+          <dd>المطابقة البشرية/الموجهة، الفيديوهات، الدعم النصّي، والويبنارات بأسئلة مجهولة.</dd>
+          <dt>من Arab Therapy</dt>
+          <dd>تفصيل الجودة والخصوصية في صفحات مكتوبة (FAQ، آلية الإشراف، حدود السرية) تجعل المستخدم يعرف لماذا يدفع ولماذا يثق.</dd>
+          <dt>من Shezlong</dt>
+          <dd>التموضع الثقافي: العلاج ليس عالمياً فقط، بل عربي، عائلي، اجتماعي، ومناسب للشتات.</dd>
+        </dl>
+      </div>
+
+      <div class="winner-card">
+        <div class="winner-name">
+          <h4>What Not to Copy</h4>
+          <span>حتى لو نجح عند غيركم</span>
+        </div>
+        <dl>
+          <dt>لا تنسخوا الحجم</dt>
+          <dd>KindMind لديها 12+ معالجاً، وليس 1000+. لا تدّعوا سعة لا تملكونها؛ اجعلوا القلة تعني انتقاء وجودة.</dd>
+          <dt>لا تنسخوا الغموض</dt>
+          <dd>عبارات "خصوصية تامة" و"خبراء مرخصون" وحدها لا تكفي. السوق يحتاج شرحاً وتشغيلاً واضحاً.</dd>
+          <dt>لا تنسخوا AI كواجهة علاج</dt>
+          <dd>استخدموا الذكاء الاصطناعي لاحقاً للإدارة/الفرز/المحتوى، لا كبديل علاجي يهدد الثقة والامتثال.</dd>
+          <dt>لا تنسخوا Growth بأي ثمن</dt>
+          <dd>في هذا المجال، أي خطأ بيانات أو وعود مبالغ فيها يضرب الثقة أكثر مما يرفع التحويل.</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="comp-note" style="margin-top: 18px;">
+      ملاحظات فريق KindMind على نقاط ضعف المنافسين: "أطباء دون المستوى"، "فلسفة فارغة"، و"التركيز على وسائل تواصل محدودة". هذه ثلاث فجوات سنحوّلها إلى نقاط قوة قابلة للقياس في خطة المحتوى وصفحات الجودة.
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 18: KINDMIND EXECUTION ============ -->
+  <section class="slide winner-chapter" data-slide="18" data-title="ترجمة الدروس">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">خطة KindMind</div>
+    <span class="eyebrow">من الدروس إلى التنفيذ</span>
+    <h1 class="slide-title">ست جوانب نطورها <span class="red">في أول 90 يوماً</span></h1>
+    <div class="slide-subtitle">هذه ليست مرحلة منفصلة عن خارطة الطريق. هي أول 90 يوماً من التنفيذ: Stage 1 يطلق إعادة تصميم الموقع والثقة والقياس، ثم تعمل مراحل SEO والمحتوى والإعلانات والفيديو والتحويل بالتوازي من Stage 2 فصاعداً.</div>
+
+    <div class="winner-actions">
+      <h3>الخطة التشغيلية لأول 90 يوماً، مرتبطة مباشرة بالمراحل</h3>
+      <div class="action-grid">
+        <div class="action-card">
+          <div class="step">01</div>
+          <h4>Website Redesign</h4>
+          <p>إعادة تصميم كاملة للموقع: هيكل صفحات، UX للحجز، نسخة عربية/إنجليزية، صفحات ثقة، ملفات المعالجين، وتجربة موبايل جاهزة للتحويل.</p>
+        </div>
+        <div class="action-card">
+          <div class="step">02</div>
+          <h4>Trust Stack</h4>
+          <p>صفحة جودة وخصوصية: الترخيص، المؤهلات، الإشراف، حدود السرية، عدم التسجيل، إحالات الحالات الحرجة، وسياسة بيانات بلغة مفهومة.</p>
+        </div>
+        <div class="action-card">
+          <div class="step">03</div>
+          <h4>Matching Flow</h4>
+          <p>اختبار 5-7 أسئلة ينتج توصيتين لمعالجين مع سبب الترشيح، بدل قائمة مفتوحة تربك المستخدم القلق.</p>
+        </div>
+        <div class="action-card">
+          <div class="step">04</div>
+          <h4>First-Step Product</h4>
+          <p>منتج منخفض المخاطرة: مكالمة مطابقة، تقييم أولي، أو جلسة تعريفية. الهدف تحويل "أفكر" إلى "بدأت".</p>
+        </div>
+        <div class="action-card">
+          <div class="step">05</div>
+          <h4>Therapist-Led Content</h4>
+          <p>محتوى يبدأ مع SEO والسوشيال بالتوازي: أول جلسة، القلق، العلاقات، المراهقين، الأزواج، متى أحتاج طبيباً، وكيف أختار.</p>
+        </div>
+        <div class="action-card">
+          <div class="step">06</div>
+          <h4>Retention Loop</h4>
+          <p>تدفق متابعة آلي بعد الجلسة الأولى: تذكير، تمرين، عرض ترقية للجلسة الثانية. الهدف: رفع متوسط الجلسات من 3 إلى 4-5.</p>
+        </div>
+      </div>
+      <div class="winner-warning">
+        <strong>الدرس الصعب:</strong> BetterHelp اكتسبت ملايين المستخدمين، ثم دفعت 7.8 مليون دولار في تسوية FTC بسبب مشاركة بيانات صحية حساسة في الإعلانات. في الصحة النفسية، الخصوصية ليست نصاً في الفوتر. هي جزء من عرض القيمة. لا نستخدم بيانات الحالة في الاستهداف، ولا نقدّم وعوداً لا نستطيع إثباتها.
+      </div>
+    </div>
+
+    <div class="comp-note">
+      مصادر مختصرة: Labayh website + Research Center + CST/top downloaded health apps note، The National/FT coverage of Shezlong، Arab Therapy website/privacy FAQs، O7 Therapy website/Rassel/Employee Benefits، Talkspace website + Amazon Health Services partnership، Headspace/Calm product announcements، FTC BetterHelp order.
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 19: KEYWORDS ============ -->
+  <section class="slide" data-slide="19" data-title="بحث الكلمات المفتاحية">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">بحث الكلمات المفتاحية</div>
+    <span class="eyebrow">بحث الكلمات المفتاحية</span>
+    <h1 class="slide-title">ما يبحث عنه <span class="red">جمهوركم</span> على Google</h1>
+    <div class="slide-subtitle">عيّنات من ثلاثة أسواق. الصعوبة (KD): أخضر تحت 20، أصفر 20–40، أحمر فوق 40. كلمات الشتات منخفضة المنافسة بنية شراء عالية.</div>
+
+    <div class="kw-split kw-three">
+      <div class="kw-block">
+        <h3><span class="country-chip">SA</span> الكلمات المفتاحية · السعودية</h3>
+        <div class="kw-table">
+          <div class="kw-head">
+            <div>الكلمة المفتاحية</div>
+            <div>الحجم</div>
+            <div>الصعوبة</div>
+            <div>CPC $</div>
+          </div>
+          <div class="kw-row"><span class="kw-term">علاج نفسي</span><span class="kw-vol">400</span><span class="kw-kd"><span class="kd-med">26</span></span><span class="kw-cpc">25</span></div>
+          <div class="kw-row"><span class="kw-term">علاج نفسي مجاني</span><span class="kw-vol">150</span><span class="kw-kd"><span class="kd-med">22</span></span><span class="kw-cpc">15</span></div>
+          <div class="kw-row"><span class="kw-term">جلسات علاج نفسي</span><span class="kw-vol">50</span><span class="kw-kd"><span class="kd-easy">0</span></span><span class="kw-cpc">30</span></div>
+          <div class="kw-row"><span class="kw-term">علاج نفسي اونلاين</span><span class="kw-vol">40</span><span class="kw-kd"><span class="kd-easy">-</span></span><span class="kw-cpc">40</span></div>
+          <div class="kw-row"><span class="kw-term">تطبيق علاج نفسي</span><span class="kw-vol">40</span><span class="kw-kd"><span class="kd-easy">-</span></span><span class="kw-cpc">35</span></div>
+          <div class="kw-row"><span class="kw-term">علاج نفسي سلوكي</span><span class="kw-vol">40</span><span class="kw-kd"><span class="kd-easy">2</span></span><span class="kw-cpc">15</span></div>
+          <div class="kw-row"><span class="kw-term">مركز علاج نفسي</span><span class="kw-vol">40</span><span class="kw-kd"><span class="kd-easy">15</span></span><span class="kw-cpc">30</span></div>
+          <div class="kw-row"><span class="kw-term">جلسات علاج نفسي اونلاين</span><span class="kw-vol">20</span><span class="kw-kd"><span class="kd-easy">-</span></span><span class="kw-cpc">60</span></div>
+          <div class="kw-row"><span class="kw-term">منصة علاج نفسي</span><span class="kw-vol">20</span><span class="kw-kd"><span class="kd-easy">-</span></span><span class="kw-cpc">-</span></div>
+          <div class="kw-row"><span class="kw-term">دكتور علاج نفسي</span><span class="kw-vol">20</span><span class="kw-kd"><span class="kd-easy">-</span></span><span class="kw-cpc">30</span></div>
+        </div>
+      </div>
+
+      <div class="kw-block">
+        <h3><span class="country-chip">EG</span> الكلمات المفتاحية · مصر</h3>
+        <div class="kw-table">
+          <div class="kw-head">
+            <div>الكلمة المفتاحية</div>
+            <div>الحجم</div>
+            <div>الصعوبة</div>
+            <div>CPC $</div>
+          </div>
+          <div class="kw-row"><span class="kw-term">طبيب نفسي</span><span class="kw-vol">1,400</span><span class="kw-kd"><span class="kd-easy">4</span></span><span class="kw-cpc">2</span></div>
+          <div class="kw-row"><span class="kw-term">طبيب نفسي اونلاين</span><span class="kw-vol">300</span><span class="kw-kd"><span class="kd-med">21</span></span><span class="kw-cpc">6</span></div>
+          <div class="kw-row"><span class="kw-term">رقم طبيب نفسي ممتاز</span><span class="kw-vol">200</span><span class="kw-kd"><span class="kd-easy">0</span></span><span class="kw-cpc">6</span></div>
+          <div class="kw-row"><span class="kw-term">أفضل طبيب نفسي في مصر</span><span class="kw-vol">150</span><span class="kw-kd"><span class="kd-easy">0</span></span><span class="kw-cpc">4</span></div>
+          <div class="kw-row"><span class="kw-term">تطبيق للتحدث مع طبيب نفسي</span><span class="kw-vol">150</span><span class="kw-kd"><span class="kd-easy">0</span></span><span class="kw-cpc">6</span></div>
+          <div class="kw-row"><span class="kw-term">طبيب نفسي مجاني</span><span class="kw-vol">150</span><span class="kw-kd"><span class="kd-med">20</span></span><span class="kw-cpc">4</span></div>
+          <div class="kw-row"><span class="kw-term">طبيب نفسي أونلاين مجاني</span><span class="kw-vol">60</span><span class="kw-kd"><span class="kd-easy">6</span></span><span class="kw-cpc">-</span></div>
+          <div class="kw-row"><span class="kw-term">طبيب نفسي أطفال</span><span class="kw-vol">60</span><span class="kw-kd"><span class="kd-easy">0</span></span><span class="kw-cpc">2</span></div>
+          <div class="kw-row"><span class="kw-term">أقرب طبيب نفسي من موقعي</span><span class="kw-vol">60</span><span class="kw-kd"><span class="kd-easy">0</span></span><span class="kw-cpc">5</span></div>
+          <div class="kw-row"><span class="kw-term">طبيب نفسي اونلاين مصر</span><span class="kw-vol">60</span><span class="kw-kd"><span class="kd-easy">-</span></span><span class="kw-cpc">8</span></div>
+        </div>
+      </div>
+
+      <div class="kw-block">
+        <h3><span class="country-chip">DIASPORA</span> English · الشتات</h3>
+        <div class="kw-table">
+          <div class="kw-head">
+            <div>الكلمة المفتاحية</div>
+            <div>الحجم</div>
+            <div>الصعوبة</div>
+            <div>CPC $</div>
+          </div>
+          <div class="kw-row"><span class="kw-term">arabic speaking therapist</span><span class="kw-vol">320</span><span class="kw-kd"><span class="kd-easy">14</span></span><span class="kw-cpc">12</span></div>
+          <div class="kw-row"><span class="kw-term">muslim therapist online</span><span class="kw-vol">260</span><span class="kw-kd"><span class="kd-easy">10</span></span><span class="kw-cpc">9</span></div>
+          <div class="kw-row"><span class="kw-term">arabic therapist near me</span><span class="kw-vol">170</span><span class="kw-kd"><span class="kd-easy">6</span></span><span class="kw-cpc">14</span></div>
+          <div class="kw-row"><span class="kw-term">therapy in arabic</span><span class="kw-vol">140</span><span class="kw-kd"><span class="kd-easy">12</span></span><span class="kw-cpc">8</span></div>
+          <div class="kw-row"><span class="kw-term">muslim counselor</span><span class="kw-vol">110</span><span class="kw-kd"><span class="kd-easy">8</span></span><span class="kw-cpc">7</span></div>
+          <div class="kw-row"><span class="kw-term">arabic psychologist usa</span><span class="kw-vol">90</span><span class="kw-kd"><span class="kd-easy">4</span></span><span class="kw-cpc">11</span></div>
+          <div class="kw-row"><span class="kw-term">online therapy for arabs</span><span class="kw-vol">70</span><span class="kw-kd"><span class="kd-easy">2</span></span><span class="kw-cpc">10</span></div>
+          <div class="kw-row"><span class="kw-term">arabic family therapy online</span><span class="kw-vol">50</span><span class="kw-kd"><span class="kd-easy">0</span></span><span class="kw-cpc">9</span></div>
+          <div class="kw-row"><span class="kw-term">therapist that speaks arabic</span><span class="kw-vol">40</span><span class="kw-kd"><span class="kd-easy">0</span></span><span class="kw-cpc">11</span></div>
+          <div class="kw-row"><span class="kw-term">arabic therapy canada</span><span class="kw-vol">30</span><span class="kw-kd"><span class="kd-easy">0</span></span><span class="kw-cpc">10</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 20: AUDIENCE SEGMENTS ============ -->
+  <section class="slide" data-slide="20" data-title="شرائح الجمهور">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">شرائح الجمهور</div>
+    <span class="eyebrow">التقسيم الجمهوري</span>
+    <h1 class="slide-title">خمس شرائح <span class="red">للاستهداف</span></h1>
+    <div class="slide-subtitle">كل شريحة لها قناة تفضّلها، رسالة تقنعها، وحاجز مختلف يمنعها من الخطوة الأولى. الاستراتيجية تتعامل معها فردياً.</div>
+
+    <div class="audience-grid">
+      <div class="aud-card">
+        <div class="aud-icon">◎</div>
+        <h4>الشابة العاملة</h4>
+        <div class="age">24–34 · دخل متوسط–مرتفع · مدن رئيسية</div>
+        <ul>
+          <li>قلق عام، ضغط عمل، علاقات</li>
+          <li>تحتاج خصوصية لا يعرف أحد بها</li>
+          <li>تدفع مقابل الجودة</li>
+          <li>تقرأ قبل أن تحجز</li>
+        </ul>
+        <div class="aud-channels"><span>Instagram</span><span>TikTok</span><span>Google</span></div>
+      </div>
+
+      <div class="aud-card a2">
+        <div class="aud-icon">♁</div>
+        <h4>الأزواج الجدد</h4>
+        <div class="age">28–40 · دخل متوسط–مرتفع · متزوجون 1–7 سنوات</div>
+        <ul>
+          <li>توتر تواصل، تحديات أبوّة</li>
+          <li>يحجزون جلسة زوجية معاً</li>
+          <li>قرار مشترك. يحتاجان مرجعاً</li>
+          <li>الأماسي وعطلة نهاية الأسبوع</li>
+        </ul>
+        <div class="aud-channels"><span>Facebook</span><span>YouTube</span><span>Google</span></div>
+      </div>
+
+      <div class="aud-card a3">
+        <div class="aud-icon">☾</div>
+        <h4>الأم القلقة</h4>
+        <div class="age">30–45 · ربة أسرة · لديها مراهق</div>
+        <ul>
+          <li>قلق على ابن أو ابنة مراهقة</li>
+          <li>لا تعرف كيف تبدأ الحوار</li>
+          <li>تحتاج إرشاداً أبوياً أولاً</li>
+          <li>"كيف أساعد ابني" يجذبها</li>
+        </ul>
+        <div class="aud-channels"><span>Facebook</span><span>Instagram</span><span>TikTok</span></div>
+      </div>
+
+      <div class="aud-card a4">
+        <div class="aud-icon">✦</div>
+        <h4>الطالب الجامعي</h4>
+        <div class="age">18–24 · طالب · دخل محدود أو من الأسرة</div>
+        <ul>
+          <li>اكتئاب، ضغط اختبارات، قلق اجتماعي</li>
+          <li>يخشى أن تعرف الأسرة</li>
+          <li>حساس للسعر. يبحث عن خصم</li>
+          <li>يومه على تيك توك ويوتيوب</li>
+        </ul>
+        <div class="aud-channels"><span>TikTok</span><span>Instagram</span><span>Snapchat</span></div>
+      </div>
+
+      <div class="aud-card a5">
+        <div class="aud-icon">◈</div>
+        <h4>المحترف التنفيذي</h4>
+        <div class="age">35–50 · دخل مرتفع · قيادي أو رائد أعمال</div>
+        <ul>
+          <li>احتراق مهني، قلق أداء، أرق</li>
+          <li>يطلب السرعة والخصوصية</li>
+          <li>يدفع أعلى للموثوقية</li>
+          <li>يرفض المحتوى السطحي</li>
+        </ul>
+        <div class="aud-channels"><span>LinkedIn</span><span>YouTube</span><span>Google</span></div>
+      </div>
+    </div>
+
+    <div class="gap-banner" style="margin-top: 22px;">
+      <div class="icon">◆</div>
+      <div class="text">لحظة القرار التي ذكرها فريقكم: "ذروة المشكلة + جرّب معالجين بدون نتيجة". هذه زاوية إعلانية مقترحة للاختبار: "جرّبت العلاج وما جاب نتيجة؟ نطابقك بمعالج فاهمك."</div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 21: ROADMAP OVERVIEW ============ -->
+  <section class="slide" data-slide="21" data-title="خارطة الطريق">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">خارطة الطريق</div>
+    <span class="eyebrow">ما سنقدمه لكم</span>
+    <h1 class="slide-title">خارطة طريق <span class="red">على 6 مراحل</span></h1>
+    <div class="slide-subtitle">مبنية لمرحلة النمو. نبدأ بمرحلة تأسيس واحدة للموقع والقياس، ثم تتحرك كل مراحل الاكتساب والتحويل بالتوازي من المرحلة الثانية فصاعداً.</div>
+
+    <div class="parallel-note"><strong>طريقة التنفيذ:</strong> Stage 1 يجهّز الموقع والأساس. من Stage 2 إلى Stage 6 العمل متوازٍ، لا ينتظر كل مسار انتهاء الآخر.</div>
+
+    <div class="roadmap-wrap">
+      <div class="phase-card">
+        <div class="phase-dot">1</div>
+        <h4>تأسيس + إعادة تصميم</h4>
+        <div class="phase-time">Weeks 1–4/6</div>
+        <div class="phase-scope">Scope: تحويل الموقع إلى منصة ثقة وحجز جاهزة لكل القنوات.</div>
+        <ul>
+          <li>إعادة تصميم كاملة للموقع</li>
+          <li>هيكل صفحات وخريطة UX</li>
+          <li>Trust Stack وصفحات الخدمة</li>
+          <li>ضبط التحليلات والقياس</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="phase-dot">2</div>
+        <h4>تحسين SEO</h4>
+        <div class="phase-time">From Month 2 · Parallel</div>
+        <div class="phase-scope">Scope: بناء حركة بحث مستمرة فوق الموقع الجديد.</div>
+        <ul>
+          <li>SEO تقني كامل</li>
+          <li>محتوى مقالات طبي/عربي</li>
+          <li>بناء روابط موثوقة</li>
+          <li>صفحات هبوط للخدمات</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="phase-dot">3</div>
+        <h4>محتوى سوشيال</h4>
+        <div class="phase-time">From Month 2 · Parallel</div>
+        <div class="phase-scope">Scope: تحويل خبرة المعالجين إلى ثقة يومية قابلة للنشر.</div>
+        <ul>
+          <li>خطة محتوى شهرية</li>
+          <li>فيديوهات تعليمية قصيرة</li>
+          <li>تعاون مع مؤثرين صحيين</li>
+          <li>بناء مجتمع تفاعلي</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="phase-dot">4</div>
+        <h4>إعلانات مدفوعة</h4>
+        <div class="phase-time">From Month 2 · Parallel</div>
+        <div class="phase-scope">Scope: اختبار الطلب المدفوع بعد تجهيز صفحات الهبوط والقياس.</div>
+        <ul>
+          <li>Google Search عالي النية</li>
+          <li>Meta Ads بالقمع الكامل</li>
+          <li>TikTok & Snap للشباب</li>
+          <li>ريتارجيتنغ الزوار</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="phase-dot">5</div>
+        <h4>فيديو وإنتاج</h4>
+        <div class="phase-time">From Month 2 · Parallel</div>
+        <div class="phase-scope">Scope: أصول فيديو تعرّف بالخدمة وتدعم الإعلانات والصفحات.</div>
+        <ul>
+          <li>فيديو تعريفي رئيسي</li>
+          <li>سلسلة يوتيوب شهرية</li>
+          <li>شهادات عملاء بخصوصية</li>
+          <li>محتوى Reels منتظم</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="phase-dot">6</div>
+        <h4>تحسين التحويل</h4>
+        <div class="phase-time">From Month 2 · Parallel</div>
+        <div class="phase-scope">Scope: تحسين الحجز، المطابقة، المتابعة، وحلقة الاحتفاظ بناءً على بيانات حقيقية.</div>
+        <ul>
+          <li>اختبار A/B للصفحات</li>
+          <li>تحسين قمع الحجز</li>
+          <li>أتمتة المتابعة</li>
+          <li>حلقة احتفاظ ودفع لباقات أعلى</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 22: Phase Detail - Website Redesign ============ -->
+  <section class="slide" data-slide="22" data-title="المرحلة 1: إعادة تصميم الموقع">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">تفاصيل المرحلة</div>
+    <span class="eyebrow">تفاصيل المرحلة</span>
+    <h1 class="slide-title">المرحلة 1: إعادة تصميم <span class="red">كاملة للموقع</span></h1>
+
+    <div class="service-layout">
+      <div class="service-hero">
+        <div class="phase-num">PHASE 01 · WEEKS 1–4/6 · FOUNDATION</div>
+        <h3>الموقع ليس واجهة. هو آلة الثقة والحجز.</h3>
+        <p>كل قناة لاحقة تحتاج موقعاً يشرح الرحلة العلاجية، يثبت جودة المعالجين، يخفف الخوف، ويحوّل الزيارة إلى خطوة أولى واضحة. هنا أيضاً نعالج فجوة "Leads بدون حجوزات" التي ذكرها فريقكم (تفاصيل الفرضيات في الملحق).</p>
+        <div class="kpi-pill">الهدف: موقع جاهز للإطلاق والقياس قبل توسيع القنوات</div>
+      </div>
+      <div class="service-deliverables">
+        <div class="deliv-card">
+          <div class="num">01</div>
+          <h4>هيكلة UX كاملة</h4>
+          <p>خريطة صفحات، رحلة حجز، تدفق مطابقة، صفحات خدمات، ملفات معالجين، مسارات عربي/إنجليزي، وتجربة موبايل أولاً.</p>
+        </div>
+        <div class="deliv-card">
+          <div class="num">02</div>
+          <h4>Copywriting وثقة</h4>
+          <p>رسائل الصفحة الرئيسية، Trust Stack، شرح السرية والجودة، أسئلة شائعة، نصوص الخدمة، ومعالجة اعتراضات أول جلسة.</p>
+        </div>
+        <div class="deliv-card">
+          <div class="num">03</div>
+          <h4>تصميم UI وصفحات تحويل</h4>
+          <p>واجهة متسقة مع الهوية، صفحات هبوط قابلة للإعلانات وSEO، CTA واضح، عناصر إثبات، ونماذج تواصل/حجز أخف احتكاكاً.</p>
+        </div>
+        <div class="deliv-card">
+          <div class="num">04</div>
+          <h4>التسليم والقياس</h4>
+          <p>مواصفات تنفيذ للمطورين أو بناء مباشر حسب الاتفاق، GA4/GTM، أحداث الحجز، Heatmaps، QA قبل الإطلاق، وخطة تحسين بعد البيانات الأولى.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 23: Phase Detail - SEO ============ -->
+  <section class="slide" data-slide="23" data-title="المرحلة 2: SEO">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">تفاصيل المرحلة</div>
+    <span class="eyebrow">تفاصيل المرحلة</span>
+    <h1 class="slide-title">المرحلة 2: تحسين محركات <span class="red">البحث</span></h1>
+
+    <div class="service-layout">
+      <div class="service-hero">
+        <div class="phase-num">PHASE 02 · FROM MONTH 2 · PARALLEL</div>
+        <h3>كل كلمة مفتاحية = زائر محتمل بكلفة إعلانية صفر.</h3>
+        <p>منافسوكم يحصلون على 400 ألف زيارة شهرياً من البحث العضوي بدون إعلانات. يبدأ هذا المسار فور جاهزية هيكل الموقع الأساسي، ويستمر بالتوازي مع المحتوى والإعلانات.</p>
+        <div class="kpi-pill">الهدف: أول 1,000 زيارة شهرية خلال 4 أشهر</div>
+      </div>
+      <div class="service-deliverables">
+        <div class="deliv-card">
+          <div class="num">01</div>
+          <h4>SEO تقني</h4>
+          <p>السرعة، Core Web Vitals، بنية URL، خريطة الموقع، ترميز Schema طبي، وتصحيح الأخطاء الموروثة.</p>
+        </div>
+        <div class="deliv-card">
+          <div class="num">02</div>
+          <h4>محتوى عربي بإشراف معالج</h4>
+          <p>8–12 مقالاً شهرياً، يستهدف كلمات عالية النية، يكتبها فريقنا ويراجعها معالج من عندكم.</p>
+        </div>
+        <div class="deliv-card">
+          <div class="num">03</div>
+          <h4>صفحات هبوط للخدمات</h4>
+          <p>صفحة لكل خدمة (فردي، زوجي، مراهقين، أبوي) وصفحات مدينة (الرياض، جدة، القاهرة، دبي).</p>
+        </div>
+        <div class="deliv-card">
+          <div class="num">04</div>
+          <h4>بناء روابط</h4>
+          <p>تعاون مع مواقع صحية ومنصات محلية. الهدف: رفع DR من 0 إلى 15+ خلال 6 أشهر.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 24: Phase Detail - Paid ============ -->
+  <section class="slide" data-slide="24" data-title="المرحلة 4: الإعلانات">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">تفاصيل المرحلة</div>
+    <span class="eyebrow">تفاصيل المرحلة</span>
+    <h1 class="slide-title">المرحلة 4: الإعلانات <span class="red">المدفوعة</span></h1>
+
+    <div class="service-layout">
+      <div class="service-hero">
+        <div class="phase-num">PHASE 04 · FROM MONTH 2 · PARALLEL</div>
+        <h3>اكتساب سريع بكلفة معروفة لكل حجز.</h3>
+        <p>الإعلانات لا تنتظر انتهاء SEO. بعد تجهيز صفحات الهبوط والقياس، نبدأ اختبار الطلب بسرعة بميزانية مرنة وكلفة قابلة للقياس.</p>
+        <div class="kpi-pill">الهدف: CAC أقل من 50٪ من قيمة الجلسة الأولى</div>
+      </div>
+      <div class="service-deliverables">
+        <div class="deliv-card">
+          <div class="num">01</div>
+          <h4>Google Search</h4>
+          <p>استهداف "طبيب نفسي أونلاين" وبدائله. CPC ‏2–8 دولار في مصر، 15–60 دولار في الخليج. نيّة عالية تعني تحويلاً أعلى.</p>
+        </div>
+        <div class="deliv-card">
+          <div class="num">02</div>
+          <h4>Meta Ads (Facebook + IG)</h4>
+          <p>قمع كامل: وعي بالفيديو، اهتمام بالمقالات، تحويل بالعروض. استهداف سلوكي وقوائم Lookalike لعملائكم الحاليين.</p>
+        </div>
+        <div class="deliv-card">
+          <div class="num">03</div>
+          <h4>TikTok و Snap للشباب</h4>
+          <p>فيديوهات قصيرة عن الوصمة، القلق الاجتماعي، وضغط الدراسة. تصلون لشريحة 18–30 بكلفة منخفضة.</p>
+        </div>
+        <div class="deliv-card">
+          <div class="num">04</div>
+          <h4>إعادة الاستهداف</h4>
+          <p>من زار صفحة الخدمة ولم يحجز، نلاحقه بعروض مُخصّصة: خصم أول جلسة، شهادة من معالج، نص مختلف.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 25: Phase Detail - Content & Video ============ -->
+  <section class="slide" data-slide="25" data-title="المحتوى والفيديو">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">تفاصيل المرحلة</div>
+    <span class="eyebrow">تفاصيل المرحلة</span>
+    <h1 class="slide-title">المحتوى والفيديو: <span class="red">بناء ثقة</span> قبل الطلب</h1>
+
+    <div class="service-layout">
+      <div class="service-hero">
+        <div class="phase-num">PHASES 03 + 05 · FROM MONTH 2 · PARALLEL</div>
+        <h3>الثقة تسبق الشراء بأشهر.</h3>
+        <p>35٪ من المحتاجين يصمتون بسبب الوصمة. المحتوى يكسر هذا الحاجز قبل أن يصلوا لصفحة الحجز.</p>
+        <div class="kpi-pill">الهدف: 100 ألف متابع موحّد عبر القنوات خلال عام</div>
+      </div>
+      <div class="service-deliverables">
+        <div class="deliv-card">
+          <div class="num">01</div>
+          <h4>خطة محتوى شهرية</h4>
+          <p>30+ قطعة شهرياً: Reels، قصص، منشورات تعليمية، شهادات بخصوصية، ونصائح من المعالجين.</p>
+        </div>
+        <div class="deliv-card">
+          <div class="num">02</div>
+          <h4>سلسلة يوتيوب</h4>
+          <p>حلقة شهرية 8–12 دقيقة مع معالج من عندكم. يوتيوب يحتفظ بالمحتوى ويعيد تشغيله سنوات.</p>
+        </div>
+        <div class="deliv-card">
+          <div class="num">03</div>
+          <h4>تعاون مع مؤثّرين</h4>
+          <p>مؤثّرون متوسطو الحجم في الصحة والعافية، لا مشاهير. المصداقية هنا أهم من الوصول.</p>
+        </div>
+        <div class="deliv-card">
+          <div class="num">04</div>
+          <h4>فيديو تعريفي رئيسي</h4>
+          <p>90 ثانية على الصفحة الرئيسية. يعمل كإعلان، وكأصل محوري في كل الحملات لاحقاً.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 26: BUDGET × TARGET MATH ============ -->
+  <section class="slide" data-slide="26" data-title="حساب الجدوى">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">حساب الجدوى</div>
+    <span class="eyebrow">حساب الجدوى</span>
+    <h1 class="slide-title">هل الميزانية <span class="red">$3,000 شهرياً</span> تكفي لـ 120 جلسة؟</h1>
+    <div class="slide-subtitle">بأرقامكم الحقيقية. هذا ما تقوله الحسابات اليوم، وأين توجد الرافعات لتقريب النتيجة من الهدف.</div>
+
+    <div class="cac-inputs">
+      <div class="cac-stat">
+        <div class="cac-num">$3,000</div>
+        <div class="cac-label">ميزانيتكم الشهرية للإعلانات</div>
+      </div>
+      <div class="cac-stat">
+        <div class="cac-num">$85</div>
+        <div class="cac-label">متوسط كلفة الحصول على عميل<br/><span class="cac-note">(الذي ذكرتموه: $55 إلى $120)</span></div>
+      </div>
+      <div class="cac-stat">
+        <div class="cac-num">3</div>
+        <div class="cac-label">متوسط جلسات العميل<br/><span class="cac-note">(الذي ذكرتموه)</span></div>
+      </div>
+      <div class="cac-stat goal">
+        <div class="cac-num">120</div>
+        <div class="cac-label">هدف الجلسات الشهري<br/><span class="cac-note">(الذي ذكرتموه)</span></div>
+      </div>
+    </div>
+
+    <div class="cac-math-row">
+      <div class="cac-math-card">
+        <span class="cac-card-tag">الحساب اليوم</span>
+        <div class="cac-equation">
+          <div class="cac-step">
+            <span class="cac-step-label">الميزانية مقسومة على كلفة العميل</span>
+            <span class="cac-step-result"><span class="cac-eq">$3,000 / $85</span> = 35 عميل</span>
+          </div>
+          <div class="cac-step">
+            <span class="cac-step-label">35 عميل × 3 جلسات لكل عميل</span>
+            <span class="cac-step-result red">= 105 جلسة شهرياً</span>
+          </div>
+        </div>
+        <div class="cac-gap">
+          النتيجة <strong>أقل من الهدف بـ 15 جلسة</strong> (12.5٪)
+        </div>
+      </div>
+
+      <div class="cac-math-card highlight">
+        <span class="cac-card-tag">ثلاث طرق لتقليص الفجوة</span>
+        <ul class="cac-levers">
+          <li><strong>رفع متوسط الجلسات من 3 إلى 4:</strong> نفس الميزانية، نفس عدد العملاء، لكن كل عميل يحجز جلسة إضافية. النتيجة: 140 جلسة شهرياً.</li>
+          <li><strong>تخفيض كلفة العميل من $85 إلى $70:</strong> عبر تحسين صفحة الحجز ومعدل التحويل. النتيجة: 42 عميل و 126 جلسة.</li>
+          <li><strong>دفع 10٪ من العملاء لباقة 6 جلسات:</strong> 3.5 عميل من أصل 35 يأخذون باقة أكبر. النتيجة: +18 جلسة شهرياً.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ SLIDE 29: APPENDIX DIVIDER ============ -->
+  <section class="slide" data-slide="27" data-title="ملحق · تعليقات">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">ملحق</div>
+    <span class="eyebrow">APPENDIX · ملحق</span>
+    <h1 class="slide-title">تعليقات على <span class="red">إجاباتكم</span></h1>
+    <div class="slide-subtitle">5 إجابات استحقّت تحليلاً أعمق. لكل واحدة: أسباب محتملة، ما سنختبره، وكيف نساعد. هذه فرضيات للنقاش، ليست التزامات.</div>
+
+    <div class="appendix-toc">
+      <div class="appendix-toc-item">
+        <div class="toc-num">A1</div>
+        <div class="toc-text"><strong>"Leads ولكن بدون حجوزات"</strong> · تحليل فجوة القمع</div>
+      </div>
+      <div class="appendix-toc-item">
+        <div class="toc-num">A2</div>
+        <div class="toc-text"><strong>"خصم 50٪ على أول جلسة"</strong> · اختبار العرض الأمثل</div>
+      </div>
+      <div class="appendix-toc-item">
+        <div class="toc-num">A3</div>
+        <div class="toc-text"><strong>"أحتاج رده منكم"</strong> · توزيع الميزانية على القنوات</div>
+      </div>
+      <div class="appendix-toc-item">
+        <div class="toc-num">A4</div>
+        <div class="toc-text"><strong>"العميل واعٍ ويحب المقارنة"</strong> · استراتيجية المحتوى</div>
+      </div>
+      <div class="appendix-toc-item">
+        <div class="toc-num">A5</div>
+        <div class="toc-text"><strong>"متوسط 3 جلسات بعد الأولى"</strong> · رفع LTV</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 30: APPENDIX A1 ============ -->
+  <section class="slide winner-chapter appendix-card" data-slide="28" data-title="A1: Leads بدون حجوزات">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">ملحق · A1</div>
+    <span class="eyebrow">APPENDIX · LEAD-TO-BOOKING</span>
+    <h1 class="slide-title">من إجابات الاستبيان: <span class="red">"Leads ولكن بدون حجوزات"</span></h1>
+    <div class="slide-subtitle">حصلتم على نماذج مملوءة لم تتحول إلى جلسات مدفوعة. هذه فجوة قمع، لا فجوة وصول. وقبل أن نحدد الحل، نحتاج تحديد السبب.</div>
+
+    <div class="winner-panel-grid">
+      <div class="winner-panel">
+        <div class="kicker">أسباب محتملة</div>
+        <h3>أين قد تكون الفجوة</h3>
+        <ul>
+          <li>النموذج عام وسهل التعبئة، فيجلب نية ضعيفة</li>
+          <li>الردّ بعد ساعات أو يوم، يبرد الـ Lead</li>
+          <li>الرسالة بعد التواصل لا تقنع بالحجز</li>
+          <li>الجمهور المُستهدف غير مناسب</li>
+          <li>صدمة سعر عند صفحة الحجز</li>
+        </ul>
+      </div>
+      <div class="winner-panel dark">
+        <div class="kicker">ما سنختبره</div>
+        <h3>أول 30 يوماً</h3>
+        <ul>
+          <li>قياس Time-to-Response لكل Lead</li>
+          <li>قياس وقت الردّ من ساعة الاستلام إلى أول رسالة</li>
+          <li>صفحات هبوط مخصّصة بدل نموذج عام</li>
+          <li>مقارنة معدّل التحويل بين كل قناة إعلانية</li>
+        </ul>
+      </div>
+      <div class="winner-panel tint">
+        <div class="kicker">كيف نساعد</div>
+        <h3>الأدوات والآليات</h3>
+        <ul>
+          <li>لوحة قياس funnel كاملة (Lead إلى Booking)</li>
+          <li>Automation لردّ سريع عبر القنوات المُختارة</li>
+          <li>إعادة تصميم رحلة الحجز لتقليل الاحتكاك</li>
+          <li>تقرير أسبوعي يحدد أين يتوقّف العميل</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="winner-warning" style="margin-top: 16px;">
+      <strong>تذكير مهم:</strong> النجاح هنا شراكة. نحن نُسلّم Lead عالي الجودة ونوفّر آلية الردّ السريعة وتقارير الـ funnel. أنتم تتولّون المتابعة والإقناع والإغلاق. بدون فريق مبيعات/متابعة قوي عندكم، أي تحسين تقني لن يُحقّق النتيجة وحده.
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 31: APPENDIX A2 ============ -->
+  <section class="slide winner-chapter appendix-card" data-slide="29" data-title="A2: عرض 50% off">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">ملحق · A2</div>
+    <span class="eyebrow">APPENDIX · OFFER OPTIMIZATION</span>
+    <h1 class="slide-title">من إجابات الاستبيان: <span class="red">"خصم 50٪ على أول جلسة كان الأفضل"</span></h1>
+    <div class="slide-subtitle">نقطة بداية. لكنها قد لا تكون العرض الأمثل اقتصادياً. ربما عرض مختلف يخفض كلفة الجلسة الأولى مع الحفاظ على معدل التحويل.</div>
+
+
+    <div class="winner-panel-grid">
+      <div class="winner-panel">
+        <div class="kicker">أسباب محتملة لنجاحه</div>
+        <h3>لماذا اشتغل</h3>
+        <ul>
+          <li>يكسر حاجز السعر عند العميل المتردد</li>
+          <li>يقلّل المخاطرة الذهنية للجلسة الأولى</li>
+          <li>"50٪" رقم نفسي قوي ومرئي</li>
+          <li>عرض محدود يخلق إحساس الفرصة</li>
+        </ul>
+      </div>
+      <div class="winner-panel dark">
+        <div class="kicker">ما سنختبره</div>
+        <h3>بدائل بكلفة أقل</h3>
+        <ul>
+          <li>خصم 30٪ مقابل 50٪ مقابل 70٪</li>
+          <li>"أول جلسة بـ$25" بدل نسبة خصم</li>
+          <li>جلسة تشخيصية مجانية ثم جلسة كاملة بسعر كامل</li>
+          <li>مكالمة مطابقة مجانية بدون جلسة</li>
+        </ul>
+      </div>
+      <div class="winner-panel tint">
+        <div class="kicker">كيف نساعد</div>
+        <h3>الأسلوب</h3>
+        <ul>
+          <li>A/B test أربعة عروض في 30 يوماً</li>
+          <li>قياس CAC و conversion rate لكل عرض</li>
+          <li>قياس LTV لكل مصدر (هل خصم 50٪ يعطي عميل أقل التزاماً؟)</li>
+          <li>توصية بالعرض الأمثل بناءً على البيانات</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 32: APPENDIX A3 ============ -->
+  <section class="slide winner-chapter appendix-card" data-slide="30" data-title="A3: توزيع الميزانية">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">ملحق · A3</div>
+    <span class="eyebrow">APPENDIX · CHANNEL ALLOCATION</span>
+    <h1 class="slide-title">من إجابات الاستبيان: <span class="red">"أحتاج رده منكم"</span></h1>
+    <div class="slide-subtitle">بخصوص توزيع الميزانية على القنوات. هذه نقطة بداية مقترحة، لا قرار نهائي. سنعيد توزيع الميزانية كل 30 يوماً بناءً على CPA الفعلي لكل قناة.</div>
+
+    <div class="winner-panel-grid">
+      <div class="winner-panel">
+        <div class="kicker">المنطق</div>
+        <h3>لماذا هذا التوزيع</h3>
+        <ul>
+          <li>نبدأ بالقنوات الأعلى نية (Google Search) للحجز السريع</li>
+          <li>نخصّص لـ Meta للوصول الأوسع وبناء الـ funnel</li>
+          <li>نحتفظ بميزانية للاختبار التجريبي شهرياً</li>
+          <li>كل قناة تأخذ 30 يوماً قبل تقييمها</li>
+        </ul>
+      </div>
+      <div class="winner-panel dark">
+        <div class="kicker">نقطة البداية المقترحة</div>
+        <h3>الشهر 1-2</h3>
+        <ul>
+          <li>Meta + Click-to-WhatsApp: 40٪ ($1,200)</li>
+          <li>Google Search: 30٪ ($900)</li>
+          <li>TikTok و Snap: 15٪ ($450)</li>
+          <li>إعادة الاستهداف: 10٪ ($300)</li>
+          <li>اختبارات تجريبية: 5٪ ($150)</li>
+        </ul>
+      </div>
+      <div class="winner-panel tint">
+        <div class="kicker">كيف نساعد</div>
+        <h3>الإدارة الشهرية</h3>
+        <ul>
+          <li>تقرير CPA شهري لكل قناة + توصية إعادة توزيع</li>
+          <li>إيقاف الإنفاق على القنوات الفاشلة بعد 30 يوماً</li>
+          <li>مضاعفة الإنفاق على القناة الأنجح</li>
+          <li>اختبار قناة جديدة كل شهرين بميزانية الاختبار</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 33: APPENDIX A4 ============ -->
+  <section class="slide winner-chapter appendix-card" data-slide="31" data-title="A4: عميل المقارنة">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">ملحق · A4</div>
+    <span class="eyebrow">APPENDIX · CONTENT STRATEGY</span>
+    <h1 class="slide-title">من إجابات الاستبيان: <span class="red">"العميل واعٍ ويحب المقارنة"</span></h1>
+    <div class="slide-subtitle">ملاحظة مفيدة، نضيفها لاستراتيجيتنا كطبقة، لا كاستبدال. عميلكم الحالي قد يكون واعياً، لكن جزءاً من جمهور الإعلانات لن يكون كذلك. نخدم الاثنين.</div>
+
+    <div class="winner-panel-grid">
+      <div class="winner-panel">
+        <div class="kicker">كيف نقرأ الملاحظة</div>
+        <h3>صحيحة لكن جزئية</h3>
+        <ul>
+          <li>صحيح: من يصل لصفحة الحجز يقارن قبل الدفع</li>
+          <li>لكن: قبله جمهور لم يقرّر العلاج بعد</li>
+          <li>الاستراتيجية تخدم المرحلتين معاً</li>
+          <li>لا نُلغي المحتوى التعليمي والتوعوي</li>
+        </ul>
+      </div>
+      <div class="winner-panel dark">
+        <div class="kicker">ما نضيفه للاستراتيجية</div>
+        <h3>طبقة مقارنة</h3>
+        <ul>
+          <li>صفحة "لماذا KindMind؟" مبنية على فروقات حقيقية</li>
+          <li>عنصر مقارنة في صفحات الهبوط للمقارنين</li>
+          <li>شهادات "لماذا اخترت KindMind بعد..."</li>
+          <li>إعلانات مقارنة مستهدفة لمن يبحث عن "vs"</li>
+        </ul>
+      </div>
+      <div class="winner-panel tint">
+        <div class="kicker">ما يبقى من المحتوى الأساسي</div>
+        <h3>التوعية والتعليم</h3>
+        <ul>
+          <li>محتوى تعليمي للجمهور غير المُقرِّر بعد</li>
+          <li>كسر الوصمة وشرح الرحلة العلاجية</li>
+          <li>SEO لكلمات النية المنخفضة (احتياج لا مقارنة)</li>
+          <li>محتوى توعوي على القنوات الواسعة (تيك توك، Reels)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 34: APPENDIX A5 ============ -->
+  <section class="slide winner-chapter appendix-card" data-slide="32" data-title="A5: رفع LTV">
+    <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
+    <div class="slide-tag">ملحق · A5</div>
+    <span class="eyebrow">APPENDIX · LTV LIFT</span>
+    <h1 class="slide-title">من إجابات الاستبيان: <span class="red">"متوسط 3 جلسات بعد الأولى"</span></h1>
+    <div class="slide-subtitle">متوسط الجلسات يحدد LTV ويحدد قدرتنا على دفع CAC أعلى. كل جلسة إضافية ترفع LTV بـ$40-$75. الفرق بين 3 و 5 جلسات هو الفرق بين بيزنس ضيق وبيزنس مرن.</div>
+
+    <div class="winner-panel-grid">
+      <div class="winner-panel">
+        <div class="kicker">أسباب محتملة لتوقّف 3</div>
+        <h3>لماذا يتوقفون</h3>
+        <ul>
+          <li>لا يوجد مسار واضح بعد الجلسة الأولى</li>
+          <li>لا تذكير أو متابعة بين الجلسات</li>
+          <li>لا حافز اقتصادي (الباقات غير ظاهرة على الموقع وفي رسائل المتابعة)</li>
+          <li>لم يحصلوا على نتيجة سريعة فيتوقفون</li>
+        </ul>
+      </div>
+      <div class="winner-panel dark">
+        <div class="kicker">ما سنختبره</div>
+        <h3>رافعات الاحتفاظ</h3>
+        <ul>
+          <li>رسالة متابعة بعد كل جلسة</li>
+          <li>عرض ترقية باقة في الجلسة الثانية (3 إلى 6)</li>
+          <li>تمارين بسيطة بين الجلسات</li>
+          <li>"خطة علاجية" مرئية بدل جلسات منفصلة</li>
+        </ul>
+      </div>
+      <div class="winner-panel tint">
+        <div class="kicker">كيف نساعد</div>
+        <h3>التنفيذ</h3>
+        <ul>
+          <li>تصميم تدفق متابعة آلي بعد كل جلسة</li>
+          <li>إعادة تأطير الباقات على الموقع</li>
+          <li>A/B test توقيت عرض الترقية</li>
+          <li>قياس متوسط الجلسات شهرياً ومقارنته بـ 3</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 33: CLOSING (now last) ============ -->
+  <section class="slide slide-close" data-slide="33" data-title="الخطوة التالية">
+    <div class="cover-grid-bg"></div>
+    <div class="wrap">
+      <h1>لنبدأ.</h1>
+      <div class="lead">بدأت KindMind لخدمة العرب المغتربين الذين لم يجدوا منصة تفهمهم. عندكم فريق مرخّص، هوية، وموقع. ينقصكم المحرك الرقمي الذي يصلهم بكم. هذا ما نقترح اختباره وبناءه معكم.</div>
+      <div class="contacts">
+        <div>
+          <div class="label">Agency</div>
+          <div class="val">Brandology</div>
+        </div>
+        <div>
+          <div class="label">Proposal</div>
+          <div class="val">6-Month Growth Plan</div>
+        </div>
+        <div>
+          <div class="label">Next Step</div>
+          <div class="val">Kickoff Workshop</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav">
+  <button id="prevBtn" title="السابق">›</button>
+  <div class="counter"><span id="curSlide">1</span> / <span id="totalSlides">33</span></div>
+  <button id="nextBtn" title="التالي">‹</button>
+</div>
+
+<!-- Table of contents -->
+<div class="toc">
+  <button class="toc-btn" id="tocBtn" title="الفهرس">☰</button>
+  <div class="toc-panel" id="tocPanel"></div>
+</div>
+
+<script>
+(function(){
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  document.getElementById('totalSlides').textContent = total;
+  const counter = document.getElementById('curSlide');
+  const bar = document.getElementById('progressBar');
+  let i = 0;
+
+  function go(n){
+    i = Math.max(0, Math.min(total - 1, n));
+    slides.forEach((s,k)=> s.classList.toggle('active', k===i));
+    counter.textContent = i+1;
+    bar.style.width = ((i+1)/total*100) + '%';
+    document.querySelectorAll('#tocPanel .ti').forEach((el,k)=> el.classList.toggle('active', k===i));
+    if(i === 7 && !window.__chartDrawn) drawChart();
+  }
+
+  document.getElementById('nextBtn').onclick = ()=> go(i+1);
+  document.getElementById('prevBtn').onclick = ()=> go(i-1);
+
+  document.addEventListener('keydown', e=>{
+    // In RTL, ArrowLeft should go forward, ArrowRight backward
+    if(e.key === 'ArrowLeft' || e.key === 'PageDown' || e.key === ' ') { go(i+1); e.preventDefault(); }
+    else if(e.key === 'ArrowRight' || e.key === 'PageUp') { go(i-1); e.preventDefault(); }
+    else if(e.key === 'Home') go(0);
+    else if(e.key === 'End') go(total-1);
+    else if(e.key === 'p' || e.key === 'P') { document.body.classList.toggle('print-mode'); }
+  });
+
+  // TOC
+  const tocPanel = document.getElementById('tocPanel');
+  slides.forEach((s, k)=>{
+    const t = s.dataset.title || ('Slide ' + (k+1));
+    const el = document.createElement('div');
+    el.className = 'ti' + (k===0 ? ' active' : '');
+    el.innerHTML = '<span class="tn">' + String(k+1).padStart(2,'0') + '</span><span>' + t + '</span>';
+    el.onclick = ()=> { go(k); tocPanel.classList.remove('open'); };
+    tocPanel.appendChild(el);
+  });
+  document.getElementById('tocBtn').onclick = ()=> tocPanel.classList.toggle('open');
+  document.addEventListener('click', e=>{
+    if(!e.target.closest('.toc')) tocPanel.classList.remove('open');
+  });
+
+  // Chart
+  function drawChart(){
+    const ctx = document.getElementById('trafficChart');
+    if(!ctx) return;
+    window.__chartDrawn = true;
+    const data = {
+      labels: ['arabtherapy.com','labayh.net','hakini.net','shezlong.com','psyter.com','egytherapy.com','kindmind.care'],
+      values: [296000, 49800, 44600, 8500, 1000, 983, 0]
+    };
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: data.labels,
+        datasets: [{
+          label: 'الزيارات العضوية الشهرية',
+          data: data.values,
+          backgroundColor: data.labels.map(l => l === 'kindmind.care' ? '#0F1419' : l === 'arabtherapy.com' ? '#C9100E' : '#3A3F47'),
+          borderRadius: 6,
+          borderSkipped: false
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        maintainAspectRatio: false,
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (c)=> ' ' + c.parsed.x.toLocaleString() + ' زيارة/شهر'
+            }
+          }
+        },
+        scales: {
+          x: {
+            type: 'logarithmic',
+            position: 'top',
+            min: 1,
+            ticks: {
+              callback: (v)=> v >= 1000 ? (v/1000)+'K' : v,
+              font: { family: 'Baloo Bhaijaan 2', size: 11 },
+              color: '#6B7280'
+            },
+            grid: { color: '#E5E2D9' }
+          },
+          y: {
+            ticks: {
+              font: { family: 'Baloo Bhaijaan 2', size: 13, weight: '600' },
+              color: '#0F1419'
+            },
+            grid: { display: false }
+          }
+        }
+      }
+    });
+  }
+
+  go(0);
+})();
+</script>
+
+</body>
+</html>
