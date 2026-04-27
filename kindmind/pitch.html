@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>براندولوجي × KindMind · عرض الخدمات</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='42' fill='%232563eb'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -1749,8 +1750,8 @@
   /* ============ Audience segments slide ============ */
   .audience-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 14px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
     margin-top: 8px;
   }
   .aud-card {
@@ -1759,7 +1760,7 @@
     border-radius: 14px;
     padding: 22px 18px;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
   }
   .aud-card::before {
     content: '';
@@ -1767,11 +1768,42 @@
     top: 0; right: 0;
     width: 100%; height: 5px;
     background: var(--accent);
+    border-radius: 14px 14px 0 0;
   }
   .aud-card.a2::before { background: var(--teal); }
   .aud-card.a3::before { background: var(--red); }
   .aud-card.a4::before { background: var(--green); }
   .aud-card.a5::before { background: var(--kind-navy); }
+
+  /* Priority cards (client-prioritized in questionnaire) */
+  .aud-card.priority {
+    border: 2px solid var(--red);
+    background: linear-gradient(180deg, #FFF9F9 0%, #FFFFFF 100%);
+    box-shadow: 0 1px 2px rgba(201,16,14,0.08), 0 12px 32px -18px rgba(201,16,14,0.18);
+  }
+  .aud-card.priority::after {
+    content: 'أولوية فريق KindMind';
+    position: absolute;
+    top: -11px;
+    right: 14px;
+    background: var(--red);
+    color: #fff;
+    padding: 3px 12px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    white-space: nowrap;
+  }
+
+  /* Secondary card (not in client priority list) */
+  .aud-card.secondary {
+    background: var(--paper-2);
+    border: 1px dashed var(--line);
+    opacity: 0.85;
+  }
+  .aud-card.secondary::before { background: var(--muted); }
 
   .aud-icon {
     width: 44px; height: 44px;
@@ -3456,79 +3488,92 @@
     <div class="slide-brand">BRANDOLOGY × KINDMIND</div>
     <div class="slide-tag">شرائح الجمهور</div>
     <span class="eyebrow">التقسيم الجمهوري</span>
-    <h1 class="slide-title">خمس شرائح <span class="red">للاستهداف</span></h1>
-    <div class="slide-subtitle">كل شريحة لها قناة تفضّلها، رسالة تقنعها، وحاجز مختلف يمنعها من الخطوة الأولى. الاستراتيجية تتعامل معها فردياً.</div>
+    <h1 class="slide-title">ست شرائح، <span class="red">الأولوية للعاملين والمنفصلين والأمهات والأزواج</span></h1>
+    <div class="slide-subtitle">حدّد فريق KindMind في الاستبيان: العاملون والمنفصلون أسهل الشرائح للتحويل، والأمهات والأزواج ضمن الأولويات أيضاً. الشرائح الخمس الأولى تحمل شارة الأولوية. الطالب الجامعي شريحة ثانوية للمستقبل.</div>
 
     <div class="audience-grid">
-      <div class="aud-card">
+      <div class="aud-card a5 priority">
+        <div class="aud-icon">◈</div>
+        <h4>المحترف التنفيذي</h4>
+        <div class="age">35–55 · متزوج أو منفصل · شتات + خليج</div>
+        <ul>
+          <li>قلق أداء، احتراق مهني، أرق، اكتئاب</li>
+          <li>قدرة شرائية مرتفعة، يدفع للموثوقية</li>
+          <li>يطلب السرعة والخصوصية</li>
+          <li>أسهل شرائح التحويل (واعٍ ومُقارِن)</li>
+        </ul>
+        <div class="aud-channels"><span>LinkedIn</span><span>YouTube</span><span>Google</span></div>
+      </div>
+
+      <div class="aud-card priority">
         <div class="aud-icon">◎</div>
         <h4>الشابة العاملة</h4>
-        <div class="age">24–34 · دخل متوسط–مرتفع · مدن رئيسية</div>
+        <div class="age">24–34 · متزوجة أو منفصلة · شتات + مدن رئيسية</div>
         <ul>
-          <li>قلق عام، ضغط عمل، علاقات</li>
+          <li>قلق عام، ضغط عمل، علاقات، اكتئاب</li>
           <li>تحتاج خصوصية لا يعرف أحد بها</li>
-          <li>تدفع مقابل الجودة</li>
-          <li>تقرأ قبل أن تحجز</li>
+          <li>تدفع مقابل الجودة، تقرأ قبل الحجز</li>
+          <li>قدرة شرائية جيدة (واعية ومُقارِنة)</li>
         </ul>
         <div class="aud-channels"><span>Instagram</span><span>TikTok</span><span>Google</span></div>
       </div>
 
-      <div class="aud-card a2">
+      <div class="aud-card a3 priority">
+        <div class="aud-icon">⊘</div>
+        <h4>المنفصلون والمطلقون</h4>
+        <div class="age">28–50 · منفصل أو مطلق · شتات + مدن رئيسية</div>
+        <ul>
+          <li>قلق، اكتئاب، إعادة بناء الهوية بعد قرار صعب</li>
+          <li>قدرة شرائية جيدة، نية حجز عالية</li>
+          <li>يفضّل الخصوصية التامة وعدم المواجهة</li>
+          <li>ذكرها فريقكم: من أسهل الشرائح للتحويل</li>
+        </ul>
+        <div class="aud-channels"><span>Facebook</span><span>Google</span><span>YouTube</span></div>
+      </div>
+
+      <div class="aud-card priority">
+        <div class="aud-icon">☾</div>
+        <h4>الأم القلقة</h4>
+        <div class="age">30–50 · ربة أسرة · لديها مراهق</div>
+        <ul>
+          <li>قلق على ابن أو ابنة مراهقة، اكتئاب</li>
+          <li>لا تعرف كيف تبدأ الحوار</li>
+          <li>تحتاج إرشاداً أبوياً قبل الجلسة</li>
+          <li>محتوى "كيف أساعد ابني" يجذبها</li>
+        </ul>
+        <div class="aud-channels"><span>Facebook</span><span>Instagram</span><span>TikTok</span></div>
+      </div>
+
+      <div class="aud-card a2 priority">
         <div class="aud-icon">♁</div>
-        <h4>الأزواج الجدد</h4>
-        <div class="age">28–40 · دخل متوسط–مرتفع · متزوجون 1–7 سنوات</div>
+        <h4>الأزواج</h4>
+        <div class="age">28–45 · متزوجون 1–10 سنوات</div>
         <ul>
           <li>توتر تواصل، تحديات أبوّة</li>
           <li>يحجزون جلسة زوجية معاً</li>
-          <li>قرار مشترك. يحتاجان مرجعاً</li>
+          <li>قرار مشترك يحتاج مرجعاً موثوقاً</li>
           <li>الأماسي وعطلة نهاية الأسبوع</li>
         </ul>
         <div class="aud-channels"><span>Facebook</span><span>YouTube</span><span>Google</span></div>
       </div>
 
-      <div class="aud-card a3">
-        <div class="aud-icon">☾</div>
-        <h4>الأم القلقة</h4>
-        <div class="age">30–45 · ربة أسرة · لديها مراهق</div>
-        <ul>
-          <li>قلق على ابن أو ابنة مراهقة</li>
-          <li>لا تعرف كيف تبدأ الحوار</li>
-          <li>تحتاج إرشاداً أبوياً أولاً</li>
-          <li>"كيف أساعد ابني" يجذبها</li>
-        </ul>
-        <div class="aud-channels"><span>Facebook</span><span>Instagram</span><span>TikTok</span></div>
-      </div>
-
-      <div class="aud-card a4">
+      <div class="aud-card a4 secondary">
         <div class="aud-icon">✦</div>
         <h4>الطالب الجامعي</h4>
-        <div class="age">18–24 · طالب · دخل محدود أو من الأسرة</div>
+        <div class="age">18–24 · طالب · شريحة ثانوية للمستقبل</div>
         <ul>
           <li>اكتئاب، ضغط اختبارات، قلق اجتماعي</li>
           <li>يخشى أن تعرف الأسرة</li>
-          <li>حساس للسعر. يبحث عن خصم</li>
-          <li>يومه على تيك توك ويوتيوب</li>
+          <li>حساس للسعر، يبحث عن خصم</li>
+          <li>قدرة شرائية محدودة. ليس أولوية حالياً</li>
         </ul>
         <div class="aud-channels"><span>TikTok</span><span>Instagram</span><span>Snapchat</span></div>
-      </div>
-
-      <div class="aud-card a5">
-        <div class="aud-icon">◈</div>
-        <h4>المحترف التنفيذي</h4>
-        <div class="age">35–50 · دخل مرتفع · قيادي أو رائد أعمال</div>
-        <ul>
-          <li>احتراق مهني، قلق أداء، أرق</li>
-          <li>يطلب السرعة والخصوصية</li>
-          <li>يدفع أعلى للموثوقية</li>
-          <li>يرفض المحتوى السطحي</li>
-        </ul>
-        <div class="aud-channels"><span>LinkedIn</span><span>YouTube</span><span>Google</span></div>
       </div>
     </div>
 
     <div class="gap-banner" style="margin-top: 22px;">
       <div class="icon">◆</div>
-      <div class="text">لحظة القرار التي ذكرها فريقكم: "ذروة المشكلة + جرّب معالجين بدون نتيجة". هذه زاوية إعلانية مقترحة للاختبار: "جرّبت العلاج وما جاب نتيجة؟ نطابقك بمعالج فاهمك."</div>
+      <div class="text">المشترك بين الشرائح الأربع: عمر 22–55، واعون للعلاج، يحبون المقارنة قبل القرار، ولحظة القرار ذكرها فريقكم: "ذروة المشكلة + جرّب معالجين بدون نتيجة". زاوية إعلانية مقترحة للاختبار: "جرّبت العلاج وما جاب نتيجة؟ نطابقك بمعالج يفهمك."</div>
     </div>
   </section>
 
@@ -3628,7 +3673,7 @@
     <div class="service-layout">
       <div class="service-hero">
         <div class="phase-num">PHASE 01 · WEEKS 1–4/6 · FOUNDATION</div>
-        <h3>الموقع ليس واجهة. هو آلة الثقة والحجز.</h3>
+        <h3>الموقع ليس مجرد واجهة. هو آلة الثقة والحجز.</h3>
         <p>كل قناة لاحقة تحتاج موقعاً يشرح الرحلة العلاجية، يثبت جودة المعالجين، يخفف الخوف، ويحوّل الزيارة إلى خطوة أولى واضحة. هنا أيضاً نعالج فجوة "Leads بدون حجوزات" التي ذكرها فريقكم (تفاصيل الفرضيات في الملحق).</p>
         <div class="kpi-pill">الهدف: موقع جاهز للإطلاق والقياس قبل توسيع القنوات</div>
       </div>
@@ -3934,7 +3979,7 @@
         <div class="kicker">ما سنختبره</div>
         <h3>بدائل بكلفة أقل</h3>
         <ul>
-          <li>خصم 30٪ مقابل 50٪ مقابل 70٪</li>
+          <li>اختبار ثلاث نسب خصم: 30٪، 50٪، 70٪ على نفس الجمهور لقياس التحويل</li>
           <li>"أول جلسة بـ$25" بدل نسبة خصم</li>
           <li>جلسة تشخيصية مجانية ثم جلسة كاملة بسعر كامل</li>
           <li>مكالمة مطابقة مجانية بدون جلسة</li>
