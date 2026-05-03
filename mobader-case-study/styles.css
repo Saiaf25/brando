@@ -265,29 +265,89 @@ p{font-size:17px;line-height:1.6;color:var(--ink)}
 /* Brandology mark */
 .brandology-mark{
   font-family:var(--font-display);
-  font-size:18px;
+  font-size:22px;
   font-weight:700;
-  letter-spacing:-.01em;
+  letter-spacing:-.02em;
   display:inline-flex;
-  align-items:baseline;
-  gap:2px;
+  flex-direction:column;
+  align-items:flex-start;
+  line-height:1;
   position:relative;
-  padding-right:6px;
+  padding-top:10px;
+  text-decoration:none;
 }
-.brandology-mark::after{
-  content:"";
+.brandology-mark .wordmark{display:inline-flex;align-items:baseline;gap:0;position:relative}
+.brandology-mark .bubble{
   position:absolute;
-  top:-3px;
-  left:11px;
-  width:8px;
-  height:9px;
-  background:var(--brand-yellow);
-  border-radius:50% 50% 50% 0;
-  transform:rotate(-30deg);
+  top:-13px;
+  left:-2px;
+  width:16px;
+  height:14px;
+  pointer-events:none;
 }
 .brandology-mark .red{color:var(--brand-red)}
-.brandology-mark .blk{color:var(--on-dark);font-style:italic;font-weight:600}
+.brandology-mark .blk{color:var(--on-dark);font-style:italic;font-weight:700;letter-spacing:-.04em}
 .brandology-mark.on-light .blk{color:var(--brand-black)}
+.brandology-mark .tagline{
+  font-family:var(--font-body);
+  font-size:9px;
+  font-weight:500;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--on-dark-3);
+  margin-top:3px;
+  font-style:normal;
+}
+.brandology-mark.on-light .tagline{color:rgba(0,0,0,.5)}
+[dir="rtl"] .brandology-mark{align-items:flex-start}
+
+/* Mobader mark */
+.mobader-mark{
+  display:inline-flex;
+  flex-direction:column;
+  align-items:flex-start;
+  line-height:1;
+  text-decoration:none;
+  color:var(--mobader-purple);
+}
+[dir="rtl"] .mobader-mark{align-items:flex-end}
+.mobader-mark .word{
+  font-family:var(--font-ar-display);
+  font-size:26px;
+  font-weight:800;
+  letter-spacing:0;
+  color:var(--mobader-purple);
+  direction:rtl;
+}
+.mobader-mark .tag{
+  font-family:var(--font-ar-body);
+  font-size:10px;
+  font-weight:600;
+  color:var(--mobader-purple);
+  opacity:.9;
+  letter-spacing:0;
+  margin-top:2px;
+  direction:rtl;
+}
+
+/* Partner logo pair (Mobader × Brandology) */
+.logo-pair{
+  display:inline-flex;
+  align-items:center;
+  gap:14px;
+}
+.logo-pair .x-sep{
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:16px;
+  font-weight:400;
+  color:var(--on-dark-3);
+  line-height:1;
+  user-select:none;
+  align-self:center;
+  margin-top:4px;
+}
+.logo-pair.on-light .x-sep{color:rgba(0,0,0,.4)}
 
 /* === TL;DR (3-stat band) === */
 .tldr{
