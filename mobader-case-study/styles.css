@@ -270,17 +270,17 @@ p{font-size:17px;line-height:1.6;color:var(--ink)}
   text-decoration:none;
   line-height:0;
 }
-.brandology-mark img{
-  height:42px;
-  width:auto;
-  display:block;
-  /* logo is on a white background; on dark hero we keep it as-is for fidelity */
-}
+.brandology-mark img,
 .mobader-mark img{
-  height:42px;
   width:auto;
   display:block;
+  object-fit:contain;
 }
+/* Brandology PNG is square 200x200 with internal padding;
+   Mobader PNG is wider 276x198. Normalize visible mark height
+   by giving the square logo a bit more vertical room. */
+.brandology-mark img{height:52px}
+.mobader-mark img{height:42px}
 
 /* Partner logo pair (Mobader × Brandology) */
 .logo-pair{
@@ -288,22 +288,31 @@ p{font-size:17px;line-height:1.6;color:var(--ink)}
   align-items:center;
   gap:14px;
   background:#FFFFFF;
-  padding:8px 14px;
+  padding:5px 14px;
   border-radius:10px;
-  box-shadow:0 2px 12px rgba(0,0,0,.18);
+  box-shadow:0 1px 0 rgba(255,255,255,.06), 0 6px 20px rgba(0,0,0,.24);
 }
 .logo-pair .x-sep{
   font-family:var(--font-display);
   font-style:italic;
   font-size:18px;
   font-weight:400;
-  color:rgba(0,0,0,.4);
+  color:rgba(0,0,0,.32);
   line-height:1;
   user-select:none;
   align-self:center;
 }
-/* In the footer (already on dark) keep same white chip */
-.footer .logo-pair{background:#FFFFFF}
+/* Footer pair: same chip, slightly softer shadow */
+.footer .logo-pair{
+  background:#FFFFFF;
+  box-shadow:0 1px 0 rgba(255,255,255,.04), 0 3px 10px rgba(0,0,0,.2);
+}
+@media (max-width:640px){
+  .brandology-mark img{height:42px}
+  .mobader-mark img{height:34px}
+  .logo-pair{gap:10px;padding:4px 10px;border-radius:8px}
+  .logo-pair .x-sep{font-size:15px}
+}
 
 /* === TL;DR (3-stat band) === */
 .tldr{
