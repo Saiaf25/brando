@@ -262,72 +262,24 @@ p{font-size:17px;line-height:1.6;color:var(--ink)}
 }
 [dir="rtl"] .hero-foot{font-family:var(--font-ar-body);letter-spacing:0;text-transform:none;font-size:13px}
 
-/* Brandology mark */
-.brandology-mark{
-  font-family:var(--font-display);
-  font-size:22px;
-  font-weight:700;
-  letter-spacing:-.02em;
-  display:inline-flex;
-  flex-direction:column;
-  align-items:flex-start;
-  line-height:1;
-  position:relative;
-  padding-top:10px;
-  text-decoration:none;
-}
-.brandology-mark .wordmark{display:inline-flex;align-items:baseline;gap:0;position:relative}
-.brandology-mark .bubble{
-  position:absolute;
-  top:-13px;
-  left:-2px;
-  width:16px;
-  height:14px;
-  pointer-events:none;
-}
-.brandology-mark .red{color:var(--brand-red)}
-.brandology-mark .blk{color:var(--on-dark);font-style:italic;font-weight:700;letter-spacing:-.04em}
-.brandology-mark.on-light .blk{color:var(--brand-black)}
-.brandology-mark .tagline{
-  font-family:var(--font-body);
-  font-size:9px;
-  font-weight:500;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--on-dark-3);
-  margin-top:3px;
-  font-style:normal;
-}
-.brandology-mark.on-light .tagline{color:rgba(0,0,0,.5)}
-[dir="rtl"] .brandology-mark{align-items:flex-start}
-
-/* Mobader mark */
+/* Logo marks (image-based) */
+.brandology-mark,
 .mobader-mark{
   display:inline-flex;
-  flex-direction:column;
-  align-items:flex-start;
-  line-height:1;
+  align-items:center;
   text-decoration:none;
-  color:var(--mobader-purple);
+  line-height:0;
 }
-[dir="rtl"] .mobader-mark{align-items:flex-end}
-.mobader-mark .word{
-  font-family:var(--font-ar-display);
-  font-size:26px;
-  font-weight:800;
-  letter-spacing:0;
-  color:var(--mobader-purple);
-  direction:rtl;
+.brandology-mark img{
+  height:42px;
+  width:auto;
+  display:block;
+  /* logo is on a white background; on dark hero we keep it as-is for fidelity */
 }
-.mobader-mark .tag{
-  font-family:var(--font-ar-body);
-  font-size:10px;
-  font-weight:600;
-  color:var(--mobader-purple);
-  opacity:.9;
-  letter-spacing:0;
-  margin-top:2px;
-  direction:rtl;
+.mobader-mark img{
+  height:42px;
+  width:auto;
+  display:block;
 }
 
 /* Partner logo pair (Mobader × Brandology) */
@@ -335,19 +287,23 @@ p{font-size:17px;line-height:1.6;color:var(--ink)}
   display:inline-flex;
   align-items:center;
   gap:14px;
+  background:#FFFFFF;
+  padding:8px 14px;
+  border-radius:10px;
+  box-shadow:0 2px 12px rgba(0,0,0,.18);
 }
 .logo-pair .x-sep{
   font-family:var(--font-display);
   font-style:italic;
-  font-size:16px;
+  font-size:18px;
   font-weight:400;
-  color:var(--on-dark-3);
+  color:rgba(0,0,0,.4);
   line-height:1;
   user-select:none;
   align-self:center;
-  margin-top:4px;
 }
-.logo-pair.on-light .x-sep{color:rgba(0,0,0,.4)}
+/* In the footer (already on dark) keep same white chip */
+.footer .logo-pair{background:#FFFFFF}
 
 /* === TL;DR (3-stat band) === */
 .tldr{
