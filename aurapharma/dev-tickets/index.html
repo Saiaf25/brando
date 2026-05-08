@@ -124,8 +124,8 @@ a{color:var(--brand-red)}
       <span class="id">AURA-005</span>
       <span class="pill">Critical</span>
     </div>
-    <h3>Implement JSON-LD structured data sitewide</h3>
-    <p>Zero structured data on every page. Missing Organization, Product, FAQPage, BreadcrumbList, ItemList, WebSite + SearchAction. Includes per-template reference JSON-LD blocks ready to adapt.</p>
+    <h3>Migrate microdata to JSON-LD and fill the gaps</h3>
+    <p>Product pages have <code style="font-family:'SF Mono',monospace;font-size:13px">Product</code> + <code style="font-family:'SF Mono',monospace;font-size:13px">Offer</code> microdata (incomplete fields). Shop emits 8x <code style="font-family:'SF Mono',monospace;font-size:13px">Product</code> instead of <code style="font-family:'SF Mono',monospace;font-size:13px">ItemList</code> (wrong type). Homepage and static pages have nothing. Zero JSON-LD anywhere. Includes reference JSON-LD blocks ready to adapt.</p>
     <div class="meta">
       <span><strong>Surfaces:</strong> Base template + per-template overrides</span>
       <span><strong>Audit rows:</strong> 66, 67, 68</span>

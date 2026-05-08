@@ -3,13 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AURA-005 · Implement JSON-LD structured data sitewide</title>
+<title>AURA-005 · Migrate microdata to JSON-LD and fill the gaps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--brand-red:#E60012;--brand-yellow:#FFD100;--brand-dark:#1A1A1A;--brand-gray:#F7F7F7;--text:#1A1A1A;--text-muted:#555;--border:#E0E0E0;--code-bg:#F4F4F4;--critical:#E60012;--high:#FF7043;--moderate:#FFD100}
 *{box-sizing:border-box}html,body{margin:0;padding:0;font-family:'Baloo Bhaijaan 2',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--text);background:#fff;font-size:15px;line-height:1.55}
 .wrap{max-width:880px;margin:0 auto;padding:0 32px 64px}
 header.t-hd{background:var(--brand-dark);color:#fff;padding:20px 32px;border-bottom:4px solid var(--brand-red)}
 header.t-hd .crumb{color:#999;font-size:12px;letter-spacing:1px;text-transform:uppercase}
+header.t-hd .crumb a{color:#fff;text-decoration:none;border-bottom:1px dotted rgba(255,255,255,.5);padding-bottom:1px;transition:color .12s ease,border-color .12s ease}
+header.t-hd .crumb a:hover{color:var(--brand-yellow);border-bottom-color:var(--brand-yellow)}
 header.t-hd h1{margin:4px 0 0;font-size:22px;font-weight:600;line-height:1.3}
 .pill{display:inline-block;padding:4px 10px;border-radius:3px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
 .pill.critical{background:var(--critical);color:#fff}
@@ -24,6 +29,7 @@ pre{background:var(--brand-dark);color:#f4f4f4;padding:14px 18px;border-radius:4
 pre code{background:transparent;color:inherit;padding:0}
 .callout{border-left:4px solid var(--brand-red);background:#FFF6F7;padding:12px 16px;margin:16px 0;font-size:14px}
 .callout.note{border-color:var(--brand-yellow);background:#FFFCEB}
+.callout.warn{border-color:var(--high);background:#FFF8F2}
 .checklist{list-style:none;padding-left:0}
 .checklist li{padding-left:28px;position:relative}
 .checklist li::before{content:"\2610";position:absolute;left:4px;top:0;color:var(--brand-red);font-weight:700}
@@ -31,73 +37,124 @@ table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
 th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top}
 th{background:var(--brand-dark);color:#fff;font-weight:600}tr:nth-child(even) td{background:var(--brand-gray)}
 footer.t-ft{margin-top:48px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted)}
-.badge{display:inline-block;padding:2px 8px;border-radius:2px;font-size:11px;font-weight:600;background:var(--brand-gray);color:var(--text)}
-.badge.fail{background:#FFCDD2;color:#B71C1C}
-a{color:var(--brand-red);text-decoration:none;border-bottom:1px solid transparent}a:hover{border-bottom-color:var(--brand-red)}
-.placeholders{font-size:13px;background:var(--brand-gray);border-left:3px solid var(--brand-yellow);padding:10px 14px;margin:8px 0}
-
-header.t-hd .crumb a{color:#fff;text-decoration:none;border-bottom:1px dotted rgba(255,255,255,.5);padding-bottom:1px;transition:color .12s ease,border-color .12s ease}
-header.t-hd .crumb a:hover{color:var(--brand-yellow);border-bottom-color:var(--brand-yellow)}
 footer.t-ft .back{display:inline-block;margin-bottom:6px;color:var(--brand-red);text-decoration:none;border-bottom:1px solid transparent;font-weight:600}
 footer.t-ft .back:hover{border-bottom-color:var(--brand-red)}
+.badge{display:inline-block;padding:2px 8px;border-radius:2px;font-size:11px;font-weight:600;background:var(--brand-gray);color:var(--text)}
+.badge.fail{background:#FFCDD2;color:#B71C1C}
+.badge.attention{background:#FFF4CC;color:var(--brand-dark)}
+.badge.partial{background:#FFE0B2;color:#5D4037}
+a{color:var(--brand-red);text-decoration:none;border-bottom:1px solid transparent}a:hover{border-bottom-color:var(--brand-red)}
+.placeholders{font-size:13px;background:var(--brand-gray);border-left:3px solid var(--brand-yellow);padding:10px 14px;margin:8px 0}
 </style>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 <header class="t-hd">
   <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">← All tickets</a> · Aura Pharma · Technical SEO</nav>
-  <h1>AURA-005 · Implement JSON-LD structured data sitewide</h1>
+  <h1>AURA-005 · Migrate microdata to JSON-LD and fill the gaps</h1>
 </header>
 <div class="wrap">
 
 <dl class="meta">
   <dt>Severity</dt><dd><span class="pill critical">Critical</span></dd>
-  <dt>Status</dt><dd><span class="badge fail">Fail</span></dd>
+  <dt>Status</dt><dd><span class="badge partial">Partial</span></dd>
   <dt>Category</dt><dd>Structured data</dd>
-  <dt>Surfaces</dt><dd>Sitewide base template + per-template overrides</dd>
+  <dt>Surfaces</dt><dd>Base template + product, shop, faq, contact, home overrides</dd>
   <dt>Audit reference</dt><dd>Master sheet rows 66, 67, 68</dd>
-  <dt>Verified</dt><dd>2026-05-08 via Playwright <code>document.querySelectorAll('script[type="application/ld+json"]').length</code> on every checked page</dd>
+  <dt>Verified</dt><dd>2026-05-09 via curl HTML inspection of <code>itemtype</code>, <code>itemscope</code>, <code>itemprop</code> attributes plus JSON-LD scripts</dd>
 </dl>
 
 <section>
-<h2>Issue</h2>
-<p>The site currently outputs zero JSON-LD structured data on every page. Confirmed on home, about, contact, faq, shop, and the Vitamin C product page. For a pharma and cosmeceutical ecommerce brand, structured data is the primary mechanism Google uses to understand what the business is, what it sells, where it operates, and how the products relate to each other.</p>
-<p>Without it, Aura is invisible to:</p>
-<ul>
-  <li>Google Knowledge Panel for the brand entity.</li>
-  <li>Product rich results in SERPs (price, availability, rating).</li>
-  <li>FAQ rich results from the existing <code>/faq</code> page.</li>
-  <li>Sitelinks search box on branded queries.</li>
-  <li>Local business listings for the Qatar office.</li>
-</ul>
+<h2>What's actually on the site today</h2>
+<p>This ticket previously claimed the site had zero structured data. That was wrong. The site has structured data, but in <strong>microdata format</strong> (Schema.org expressed via HTML attributes), not JSON-LD. The microdata is partial and the schema chosen for the shop page is not the right type. Below is the verified state.</p>
+
+<table>
+  <tr><th>Page</th><th>What it has</th><th>Verdict</th></tr>
+  <tr><td><code>/</code> (Home) and <code>/home</code></td><td>Nothing</td><td><span class="badge fail">Missing</span></td></tr>
+  <tr><td><code>/about</code></td><td>Nothing</td><td><span class="badge fail">Missing</span></td></tr>
+  <tr><td><code>/contactus</code></td><td>Nothing</td><td><span class="badge fail">Missing</span></td></tr>
+  <tr><td><code>/faq</code></td><td>Nothing</td><td><span class="badge fail">Missing</span></td></tr>
+  <tr><td><code>/shop</code></td><td>8x <code>Product</code> + 8x <code>Offer</code> microdata (one per product card)</td><td><span class="badge attention">Wrong type</span></td></tr>
+  <tr><td>9 product pages</td><td><code>Product</code> + <code>Offer</code> microdata, partial fields</td><td><span class="badge attention">Right type, incomplete</span></td></tr>
+</table>
+
+<div class="callout warn">
+<strong>Sitewide protocol issue:</strong> the existing microdata uses <code>itemtype="http://schema.org/..."</code> (HTTP, not HTTPS). Both still work, but <code>https://schema.org/...</code> is current best practice and the form Google's documentation uses.
+</div>
 </section>
 
 <section>
-<h2>What to implement, by template</h2>
+<h2>Verified evidence</h2>
 
-<table>
-  <tr><th>Template</th><th>Schema types</th><th>Why</th></tr>
-  <tr><td>All pages (sitewide)</td><td><code>Organization</code></td><td>Tells Google who the business is. Drives Knowledge Panel.</td></tr>
-  <tr><td>Homepage</td><td><code>WebSite</code> with <code>SearchAction</code></td><td>Enables sitelinks search box once the site has its own search.</td></tr>
-  <tr><td>Contact</td><td><code>LocalBusiness</code> (or <code>Organization</code> with <code>address</code>)</td><td>Surfaces the Qatar office in local results.</td></tr>
-  <tr><td>FAQ (<code>/faq</code>)</td><td><code>FAQPage</code></td><td>Rich-result eligibility for the existing FAQ content.</td></tr>
-  <tr><td>Shop (<code>/shop</code>)</td><td><code>ItemList</code> of <code>Product</code> entries</td><td>Helps Google understand category-page structure.</td></tr>
-  <tr><td>Each product page</td><td><code>Product</code> with <code>Offer</code></td><td>Eligible for product rich results (price, availability).</td></tr>
-  <tr><td>All non-home pages, once breadcrumbs ship</td><td><code>BreadcrumbList</code></td><td>Improves SERP appearance and crawl understanding.</td></tr>
-</table>
+<h3>Product page (<code>/shop/vitamin-c-6</code>)</h3>
+<pre><code>$ curl -s "https://www.aurapharma.org/shop/vitamin-c-6" \
+    | grep -oiE 'itemtype="[^"]+"|itemprop="[^"]+"' | sort | uniq -c
+
+   4 itemscope
+   1 itemtype="http://schema.org/Product"
+   1 itemtype="http://schema.org/Offer"
+   1 itemprop="name"          (value: "Vitamin C")
+   1 itemprop="url"           (value: full canonical URL)
+   1 itemprop="image"         (value: image URL on aurapharma.org)
+   1 itemprop="offers"
+   1 itemprop="price"         (value: "1.0")
+   1 itemprop="priceCurrency" (value: "QAR")
+   1 itemprop="listPrice"</code></pre>
+<p><strong>What is populated:</strong> name, url, image, offers (with price + priceCurrency), listPrice.<br>
+<strong>What is missing:</strong> <code>description</code>, <code>sku</code>, <code>brand</code>, <code>availability</code>, <code>itemCondition</code>, <code>aggregateRating</code> / <code>review</code> (when reviews exist), <code>mpn</code> or <code>gtin</code>.</p>
+
+<h3>Shop page (<code>/shop</code>)</h3>
+<pre><code>$ curl -s "https://www.aurapharma.org/shop" \
+    | grep -oiE 'itemtype="[^"]+"' | sort | uniq -c
+
+   8 itemtype="http://schema.org/Product"
+   8 itemtype="http://schema.org/Offer"</code></pre>
+<p>Each product card on the listing emits its own <code>Product</code> + <code>Offer</code>, so the page declares itself as eight separate products. The category page is not eight products. It is a list of pointers to eight products. The right schema is a single <code>ItemList</code> whose <code>itemListElement</code>s are <code>ListItem</code> nodes pointing at each product URL.</p>
+
+<h3>Homepage and static pages</h3>
+<pre><code>$ for url in / /home /about /contactus /faq; do
+    echo "$url:"
+    curl -s "https://www.aurapharma.org$url" | grep -oc 'itemtype='
+  done
+
+/         : 0
+/home     : 0
+/about    : 0
+/contactus: 0
+/faq      : 0</code></pre>
+<p>Zero structured data on the homepage and on every static page. No <code>Organization</code>, no <code>WebSite</code>, no <code>LocalBusiness</code>, no <code>FAQPage</code>, no <code>BreadcrumbList</code>.</p>
+</section>
+
+<section>
+<h2>What needs to change</h2>
+
+<h3>1. Migrate the existing product microdata to JSON-LD</h3>
+<p>Microdata still works, but Google's current documentation uses JSON-LD in every example, the format is easier to maintain (one block at the bottom of the page rather than attributes scattered across the markup), and decoupling structured data from presentation HTML makes future template changes safer. Migrate the existing Product + Offer microdata on the 9 product pages to JSON-LD, and at the same time fill the missing fields.</p>
+
+<h3>2. Replace the shop-page Product blocks with a single ItemList</h3>
+<p>Stop emitting <code>Product</code> microdata on category cards. The shop page is a list, so it should emit <code>ItemList</code> with each card as a <code>ListItem</code>. The <code>Product</code> microdata still belongs on the actual product detail pages.</p>
+
+<h3>3. Add missing schema types</h3>
+<ul>
+  <li><strong>Sitewide:</strong> <code>Organization</code> on every page (in the base template).</li>
+  <li><strong>Homepage:</strong> <code>WebSite</code> with <code>SearchAction</code> (only ship if the search endpoint actually works).</li>
+  <li><strong>Contact:</strong> <code>LocalBusiness</code> with the Qatar address.</li>
+  <li><strong>FAQ:</strong> <code>FAQPage</code> with the Q and A pairs that already exist on the page.</li>
+  <li><strong>All non-home pages, once breadcrumbs ship (see master sheet row 46):</strong> <code>BreadcrumbList</code>.</li>
+</ul>
+
+<h3>4. Fix the protocol</h3>
+<p>Use <code>https://schema.org</code> in the <code>@context</code> field, not <code>http://schema.org</code>.</p>
+
+<div class="callout warn">
+<strong>Do not ship Product schema until pricing is real.</strong> The current microdata exposes <code>price="1.0"</code>, <code>priceCurrency="QAR"</code> on every product. That is the placeholder value flagged in master sheet row 92. If we migrate to JSON-LD without first fixing the prices, Google indexes 1.0 QAR for everything. Either set real prices first, or temporarily strip the <code>offers</code> block from the JSON-LD until prices are real.
+</div>
 </section>
 
 <section>
 <h2>Reference JSON-LD blocks</h2>
+<p>Treat each block as a template. Replace <code>{{...}}</code> placeholders with real values at render time. Output one combined <code>&lt;script type="application/ld+json"&gt;</code> array per page or multiple separate scripts. Both are valid.</p>
 
-<div class="callout note">
-Treat each block as a template. Replace <code>{{...}}</code> placeholders with real data at render time. Output one combined <code>&lt;script type="application/ld+json"&gt;</code> per page (a JSON array) or multiple separate scripts. Both are valid per Google's docs. Never hard-code values that exist in the data layer.
-</div>
-
-<h3>1. Organization (sitewide)</h3>
-<p>Place in the base template so it renders on every page.</p>
+<h3>Organization (sitewide, base template)</h3>
 <pre><code>{
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -128,9 +185,9 @@ Treat each block as a template. Replace <code>{{...}}</code> placeholders with r
     "{{twitter_url}}"
   ]
 }</code></pre>
-<p class="placeholders">Note: <code>logo</code> currently resolves to <code>aurapharma.odoo.com</code> in the live OG tags. Make sure the value above uses the production domain (<code>aurapharma.org</code>), not the legacy subdomain. The <code>sameAs</code> array should include only profiles that exist (see ticket AURA-003).</p>
+<p class="placeholders">The <code>logo</code> field above uses <code>aurapharma.org</code>. The current OG image still points at <code>aurapharma.odoo.com</code>; both should be migrated to the production domain at the same time.</p>
 
-<h3>2. WebSite + SearchAction (homepage only)</h3>
+<h3>WebSite + SearchAction (homepage only)</h3>
 <pre><code>{
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -143,14 +200,14 @@ Treat each block as a template. Replace <code>{{...}}</code> placeholders with r
     "@type": "SearchAction",
     "target": {
       "@type": "EntryPoint",
-      "urlTemplate": "https://www.aurapharma.org/shop?search={search_term_string}"
+      "urlTemplate": "https://www.aurapharma.org/website/search?search={search_term_string}"
     },
     "query-input": "required name=search_term_string"
   }
 }</code></pre>
-<p class="placeholders">Only ship the <code>SearchAction</code> if the search URL pattern is real and returns results for any query. Do not ship a fake search endpoint.</p>
+<p class="placeholders">Only ship the <code>SearchAction</code> after AURA-006 (noindex on internal search results) has shipped. The search endpoint will still return results to users; it just stops being indexable. The <code>SearchAction</code> declaration is fine alongside that.</p>
 
-<h3>3. Product + Offer (every product page)</h3>
+<h3>Product + Offer (every product page, replaces existing microdata)</h3>
 <pre><code>{
   "@context": "https://schema.org",
   "@type": "Product",
@@ -175,9 +232,9 @@ Treat each block as a template. Replace <code>{{...}}</code> placeholders with r
     "seller": { "@id": "https://www.aurapharma.org/#organization" }
   }
 }</code></pre>
-<p class="placeholders">All 9 products are currently priced at 1.00 QAR (placeholder). Do not ship Product schema until real prices are set, or Google will index the placeholder price. See master sheet row 92.</p>
+<p class="placeholders">Once this ships, remove the existing <code>itemscope</code> / <code>itemtype</code> / <code>itemprop</code> attributes from the product detail template. Don't run both formats in parallel; pick one. JSON-LD is the recommended one.</p>
 
-<h3>4. ItemList (<code>/shop</code> page)</h3>
+<h3>ItemList (replaces the 8x Product microdata on /shop)</h3>
 <pre><code>{
   "@context": "https://schema.org",
   "@type": "ItemList",
@@ -192,34 +249,49 @@ Treat each block as a template. Replace <code>{{...}}</code> placeholders with r
     { "@type": "ListItem", "position": 8, "url": "https://www.aurapharma.org/shop/foot-care-cream-9" }
   ]
 }</code></pre>
-<p class="placeholders">Generate the array dynamically from the product collection so it stays in sync as products are added or removed.</p>
+<p class="placeholders">Generate dynamically from the product collection so it stays in sync. Remove the existing per-card Product microdata at the same deploy.</p>
 
-<h3>5. FAQPage (<code>/faq</code>)</h3>
+<h3>FAQPage (<code>/faq</code>)</h3>
 <pre><code>{
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {
-      "@type": "Question",
+    { "@type": "Question",
       "name": "{{question_1_text}}",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "{{answer_1_text}}"
-      }
-    },
-    {
-      "@type": "Question",
+      "acceptedAnswer": { "@type": "Answer", "text": "{{answer_1_text}}" } },
+    { "@type": "Question",
       "name": "{{question_2_text}}",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "{{answer_2_text}}"
-      }
-    }
+      "acceptedAnswer": { "@type": "Answer", "text": "{{answer_2_text}}" } }
   ]
 }</code></pre>
-<p class="placeholders">Only include questions that are actually visible to the user on <code>/faq</code>. Hidden Q&amp;A is a Google policy violation.</p>
+<p class="placeholders">Only include questions that are actually visible to the user on <code>/faq</code>. Hidden Q and A is a Google policy violation.</p>
 
-<h3>6. BreadcrumbList (every non-home page, once breadcrumbs ship)</h3>
+<h3>LocalBusiness (<code>/contactus</code>)</h3>
+<pre><code>{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://www.aurapharma.org/contactus#localbusiness",
+  "name": "Aura Pharma",
+  "image": "https://www.aurapharma.org/web/image/website/1/logo",
+  "url": "https://www.aurapharma.org/",
+  "telephone": "{{phone_e164}}",
+  "email": "{{contact_email}}",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "QA",
+    "addressLocality": "{{city}}",
+    "streetAddress": "{{street}}",
+    "postalCode": "{{postal_code}}"
+  },
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Sunday","Monday","Tuesday","Wednesday","Thursday"],
+    "opens": "{{open_time}}",
+    "closes": "{{close_time}}"
+  }]
+}</code></pre>
+
+<h3>BreadcrumbList (every non-home page, after breadcrumbs ship)</h3>
 <pre><code>{
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -229,18 +301,17 @@ Treat each block as a template. Replace <code>{{...}}</code> placeholders with r
     { "@type": "ListItem", "position": 3, "name": "{{product_name}}", "item": "{{canonical_product_url}}" }
   ]
 }</code></pre>
-<p class="placeholders">Depends on visible breadcrumb UI being added first (see master sheet row 46). The structured data must mirror what is on the page.</p>
 </section>
 
 <section>
 <h2>Implementation order</h2>
 <ol>
-  <li><strong>Ship Organization first</strong> in the base template. It is the lowest-risk addition and unlocks brand entity recognition for every page on the site.</li>
-  <li><strong>Hold Product schema</strong> until the placeholder 1.00 QAR pricing is replaced with real values. Shipping it now would index the wrong prices.</li>
-  <li><strong>Ship FAQPage</strong> as soon as the FAQ content is finalised. It is one of the fastest paths to a SERP rich result.</li>
-  <li><strong>Ship LocalBusiness on Contact</strong> once the Qatar office address, phone number, and hours are confirmed by the client.</li>
-  <li><strong>Ship BreadcrumbList</strong> together with the breadcrumb UI work in master sheet row 46.</li>
-  <li><strong>Ship ItemList on Shop</strong> any time after Organization is live.</li>
+  <li><strong>Ship Organization first</strong> in the base template. Lowest risk, unlocks brand-entity recognition for every page.</li>
+  <li><strong>Replace shop microdata with ItemList</strong> on <code>/shop</code>. Stops the wrong-schema signal Google is currently receiving.</li>
+  <li><strong>Migrate product microdata to JSON-LD on the 9 product pages.</strong> Hold this until the placeholder 1.0 QAR pricing is replaced with real prices, or strip the <code>offers</code> block until pricing is real.</li>
+  <li><strong>Ship FAQPage</strong> as soon as the FAQ content is finalised. One of the fastest paths to a SERP rich result.</li>
+  <li><strong>Ship LocalBusiness</strong> on Contact once the Qatar office address, phone number, and hours are confirmed.</li>
+  <li><strong>Ship BreadcrumbList</strong> alongside the breadcrumb UI work in master sheet row 46.</li>
 </ol>
 </section>
 
@@ -248,16 +319,17 @@ Treat each block as a template. Replace <code>{{...}}</code> placeholders with r
 <h2>Verification</h2>
 <ul class="checklist">
   <li>Validate every template with the <a href="https://search.google.com/test/rich-results">Google Rich Results Test</a>. Expected: zero errors, warnings acknowledged.</li>
-  <li>Validate with the <a href="https://validator.schema.org/">Schema.org Validator</a> for full schema-spec compliance.</li>
-  <li>In DevTools console: <code>document.querySelectorAll('script[type="application/ld+json"]').length</code>. Expected: at least 1 on every page, more on product / FAQ / shop pages.</li>
-  <li>Once Search Console is connected, confirm the Enhancements section starts surfacing Organization, Product, FAQ, and Breadcrumb reports without errors.</li>
-  <li>Search <code>site:aurapharma.org</code> in Google a few weeks after deploy. Expected: rich results begin appearing for FAQ and Product entries.</li>
+  <li>Validate with the <a href="https://validator.schema.org/">Schema.org Validator</a>. Expected: full schema-spec compliance.</li>
+  <li>In DevTools: <code>document.querySelectorAll('script[type="application/ld+json"]').length</code>. Expected: at least 1 on every page.</li>
+  <li>Confirm the old <code>itemtype</code> and <code>itemprop</code> attributes are removed from product and shop templates after JSON-LD ships. Running both formats in parallel can confuse parsers.</li>
+  <li>Once Search Console is connected, confirm Enhancements starts surfacing Organization, Product, FAQ, Breadcrumb, Sitelinks searchbox reports without errors.</li>
+  <li>Search <code>site:aurapharma.org</code> in Google after deploy. Expected: rich results begin appearing for FAQ and product entries.</li>
 </ul>
 </section>
 
 <section>
 <h2>Why this is critical</h2>
-<p>Aura is a small, new ecommerce brand competing in a category with dominant retailers and aggregators. Structured data is one of the few levers a small brand has that does not require backlinks or domain authority to work. Every other ticket fixes something that is broken; this one builds something that does not yet exist. Without it, the site relies on Google guessing what each page is about from text alone, which for a 100-word product page is a losing strategy.</p>
+<p>Aura is a small new brand competing against entrenched retailers and aggregators. Structured data is one of the few SEO levers that does not require backlinks or domain authority to work. Half the pages on the site already have schema, just not the right schema in the right format with the right fields. Closing those gaps and migrating to JSON-LD makes every other ticket pay off harder, because Google can finally read what the site is about without guessing.</p>
 </section>
 
 <footer class="t-ft">
