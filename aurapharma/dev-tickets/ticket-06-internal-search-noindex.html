@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AURA-006 · Noindex internal search results</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--brand-red:#E60012;--brand-yellow:#FFD100;--brand-dark:#1A1A1A;--brand-gray:#F7F7F7;--text:#1A1A1A;--text-muted:#555;--border:#E0E0E0;--code-bg:#F4F4F4;--critical:#E60012;--high:#FF7043;--moderate:#FFD100}
+*{box-sizing:border-box}html,body{margin:0;padding:0;font-family:'Baloo Bhaijaan 2',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--text);background:#fff;font-size:15px;line-height:1.55}
+.wrap{max-width:880px;margin:0 auto;padding:0 32px 64px}
+header.t-hd{background:var(--brand-dark);color:#fff;padding:20px 32px;border-bottom:4px solid var(--brand-red)}
+header.t-hd .crumb{color:#999;font-size:12px;letter-spacing:1px;text-transform:uppercase}
+header.t-hd h1{margin:4px 0 0;font-size:22px;font-weight:600;line-height:1.3}
+.pill{display:inline-block;padding:4px 10px;border-radius:3px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.pill.critical{background:var(--critical);color:#fff}
+.meta{display:grid;grid-template-columns:140px 1fr;gap:8px 16px;margin:24px 0 32px;padding:16px 20px;background:var(--brand-gray);border-left:4px solid var(--brand-red);font-size:13px}
+.meta dt{color:var(--text-muted);font-weight:600}.meta dd{margin:0}
+section{margin:28px 0}
+h2{font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--brand-dark);margin:0 0 12px;padding-bottom:6px;border-bottom:2px solid var(--brand-yellow)}
+h3{font-size:14px;font-weight:700;color:var(--brand-dark);margin:18px 0 8px}
+p{margin:0 0 12px}ul,ol{margin:0 0 12px;padding-left:24px}li{margin-bottom:6px}
+code{font-family:"SF Mono",Menlo,Monaco,Consolas,monospace;background:var(--code-bg);padding:1px 6px;border-radius:2px;font-size:13px;color:#b00020}
+pre{background:var(--brand-dark);color:#f4f4f4;padding:14px 18px;border-radius:4px;overflow-x:auto;font-size:12.5px;line-height:1.5}
+pre code{background:transparent;color:inherit;padding:0}
+.callout{border-left:4px solid var(--brand-red);background:#FFF6F7;padding:12px 16px;margin:16px 0;font-size:14px}
+.callout.note{border-color:var(--brand-yellow);background:#FFFCEB}
+.checklist{list-style:none;padding-left:0}
+.checklist li{padding-left:28px;position:relative}
+.checklist li::before{content:"\2610";position:absolute;left:4px;top:0;color:var(--brand-red);font-weight:700}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top}
+th{background:var(--brand-dark);color:#fff;font-weight:600}tr:nth-child(even) td{background:var(--brand-gray)}
+footer.t-ft{margin-top:48px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted)}
+.badge{display:inline-block;padding:2px 8px;border-radius:2px;font-size:11px;font-weight:600;background:var(--brand-gray);color:var(--text)}
+.badge.fail{background:#FFCDD2;color:#B71C1C}
+a{color:var(--brand-red);text-decoration:none;border-bottom:1px solid transparent}a:hover{border-bottom-color:var(--brand-red)}
+</style>
+</head>
+<body>
+<header class="t-hd">
+  <div class="crumb">Aura Pharma · Technical SEO · Dev Ticket</div>
+  <h1>AURA-006 · Noindex internal search results</h1>
+</header>
+<div class="wrap">
+
+<dl class="meta">
+  <dt>Severity</dt><dd><span class="pill critical">Critical</span></dd>
+  <dt>Status</dt><dd><span class="badge fail">Fail</span></dd>
+  <dt>Category</dt><dd>Indexability</dd>
+  <dt>Surfaces</dt><dd><code>/website/search</code> template</dd>
+  <dt>Audit reference</dt><dd>Master sheet row 38</dd>
+  <dt>Verified</dt><dd>2026-05-08 via curl HTML inspection and the SEO Pro Chrome extension</dd>
+</dl>
+
+<section>
+<h2>Issue</h2>
+<p>The site exposes a public internal search at <code>/website/search</code>. Both the bare endpoint and every parameter URL it produces (<code>?search=&lt;query&gt;&amp;order=&lt;sort&gt;</code>) are currently indexable. The parameter URLs do correctly canonicalise to <code>/website/search</code>, which consolidates the parameter combinations to a single canonical target. But that target itself has no <code>&lt;meta name="robots"&gt;</code> tag, so it inherits the default <code>index,follow</code> directive. The page renders empty results scaffolding (0 H1, 0 H2, 0 H3, no description, 14 H5s used decoratively), so what Google would index is a thin-content page with no value.</p>
+</section>
+
+<section>
+<h2>Verified evidence</h2>
+<pre><code>$ curl -s "https://www.aurapharma.org/website/search?search=test&amp;order=name+asc" | grep -iE "canonical|robots|title"
+&lt;link rel="canonical" href="https://www.aurapharma.org/website/search"/&gt;
+&lt;title&gt;Any Search Results | aurapharma&lt;/title&gt;
+
+$ curl -s "https://www.aurapharma.org/website/search" | grep -iE "canonical|robots"
+&lt;link rel="canonical" href="https://www.aurapharma.org/website/search"/&gt;</code></pre>
+<p>Two confirmations: (1) no <code>&lt;meta name="robots"&gt;</code> on either URL, so both are indexable by default; (2) no <code>Disallow: /website/search</code> in robots.txt.</p>
+
+<table>
+  <tr><th>Aspect</th><th>Current state</th><th>What should happen</th></tr>
+  <tr><td>Meta robots on <code>/website/search</code></td><td>Not specified (defaults to <code>index,follow</code>)</td><td><code>noindex,follow</code></td></tr>
+  <tr><td>Canonical of parameter URLs</td><td>Points to <code>/website/search</code> (good)</td><td>Keep as is</td></tr>
+  <tr><td>robots.txt</td><td>No Disallow for search</td><td>Add <code>Disallow: /website/search</code> later (after Google sees the noindex)</td></tr>
+  <tr><td>Sitemap inclusion</td><td>Not in sitemap (good)</td><td>Keep as is</td></tr>
+</table>
+</section>
+
+<section>
+<h2>Why this is wrong</h2>
+<p>Google has been explicit on this since 2007. <a href="https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag">Search Central docs</a> and repeated guidance from John Mueller spell out four reasons internal search results should never be indexable:</p>
+<ol>
+  <li><strong>Search-results-within-search-results is poor UX.</strong> A user clicks a Google result and lands on another search page they have to re-search through. Google's Search Quality Rater Guidelines mark this as low-quality.</li>
+  <li><strong>Thin content risk.</strong> Empty or low-result search pages can trigger the "Thin content with little or no added value" guideline and have caused manual actions in the past.</li>
+  <li><strong>Crawl-budget waste.</strong> Search query URLs are infinite. Without a noindex, every parameter combination becomes a candidate URL, eating budget that should go to product and category pages.</li>
+  <li><strong>User-generated query risk.</strong> Crawlers can index URLs containing whatever a visitor typed. Imagine search queries with profanity, competitor names, or spam appearing as URLs in <code>site:aurapharma.org</code> results.</li>
+</ol>
+</section>
+
+<section>
+<h2>Fix</h2>
+
+<h3>Step 1: Add noindex to the search template</h3>
+<p>Edit the search-results template so every response includes:</p>
+<pre><code>&lt;meta name="robots" content="noindex,follow"&gt;</code></pre>
+<p>The <code>,follow</code> portion is intentional. It tells Google not to index the page itself but to still follow internal links from it (so any product links shown in search results still pass equity).</p>
+
+<div class="callout note">
+Do <strong>not</strong> use <code>noindex,nofollow</code>. The <code>nofollow</code> would block link discovery from the search page, which is unnecessary and slightly harmful.
+</div>
+
+<h3>Step 2: Wait, then optionally add a Disallow</h3>
+<p>Wait roughly two weeks after the noindex ships so Googlebot can recrawl and process the directive. After that, you can add to <code>robots.txt</code>:</p>
+<pre><code>Disallow: /website/search</code></pre>
+<p>This saves crawl budget on future visits. The order matters: shipping the Disallow first would block Google from ever seeing the noindex tag, leaving any already-indexed search URLs stuck in the index without a removal directive.</p>
+
+<h3>Step 3 (optional): Stop linking to search URLs internally</h3>
+<p>Audit the templates and remove any internal links that point to <code>/website/search?search=...</code> with hardcoded parameters. Search results should be reachable via the search input, not via persistent links from navigation or content.</p>
+</section>
+
+<section>
+<h2>Verification</h2>
+<ul class="checklist">
+  <li>Run <code>curl -s "https://www.aurapharma.org/website/search?search=test" | grep -i robots</code>. Expected: <code>&lt;meta name="robots" content="noindex,follow"&gt;</code>.</li>
+  <li>Run the same on the bare <code>/website/search</code> endpoint. Expected: same noindex tag.</li>
+  <li>Confirm parameter URLs still canonicalise to <code>/website/search</code> (the canonical behaviour should not regress).</li>
+  <li>Once Google Search Console is connected, monitor Pages > Not indexed for the count of "Excluded by 'noindex' tag" entries under <code>/website/search</code>. The count should rise as Google recrawls.</li>
+  <li>Two weeks after deploy, search <code>site:aurapharma.org/website/search</code> in Google. Expected: zero or rapidly diminishing results.</li>
+  <li>After step 5 confirms removal, ship the <code>Disallow: /website/search</code> robots.txt line and re-verify with <code>curl -s https://www.aurapharma.org/robots.txt</code>.</li>
+</ul>
+</section>
+
+<section>
+<h2>Why this is critical</h2>
+<p>This is a preventive fix more than a corrective one. The site is new, so the volume of search URLs already in Google's index is likely small. But the longer it stays open, the more parameter combinations get crawled, and the harder cleanup becomes. The fix is one line in one template. There is no reason to delay it.</p>
+<p>This is also why structured data (AURA-005) and the homepage canonical fix (AURA-001) compound: every fix that makes Google understand the site better also makes the wrong things easier to find. Closing the indexable-search door now means that work pays off cleanly.</p>
+</section>
+
+<footer class="t-ft">
+Aura Pharma Technical SEO audit · ticket AURA-006 · prepared by Brandology
+</footer>
+</div>
+</body>
+</html>

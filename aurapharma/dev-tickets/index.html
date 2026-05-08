@@ -55,9 +55,9 @@ a{color:var(--brand-red)}
 <section>
 <h2>At a glance</h2>
 <div class="summary-grid">
-  <div class="stat"><div class="num">5</div><span class="label">Critical tickets</span></div>
-  <div class="stat"><div class="num">17</div><span class="label">Critical audit rows</span></div>
-  <div class="stat"><div class="num">11</div><span class="label">Failing audit rows</span></div>
+  <div class="stat"><div class="num">6</div><span class="label">Critical tickets</span></div>
+  <div class="stat"><div class="num">18</div><span class="label">Critical audit rows</span></div>
+  <div class="stat"><div class="num">12</div><span class="label">Failing audit rows</span></div>
   <div class="stat"><div class="num">18</div><span class="label">Indexable URLs</span></div>
   <div class="stat"><div class="num">0</div><span class="label">JSON-LD blocks today</span></div>
 </div>
@@ -132,6 +132,19 @@ a{color:var(--brand-red)}
     </div>
   </a>
 
+  <a class="ticket" href="ticket-06-internal-search-noindex.html">
+    <div class="top">
+      <span class="id">AURA-006</span>
+      <span class="pill">Critical</span>
+    </div>
+    <h3>Noindex internal search results</h3>
+    <p>The <code style="font-family:'SF Mono',monospace;font-size:13px">/website/search</code> endpoint and every parameter URL it produces are indexable. No <code style="font-family:'SF Mono',monospace;font-size:13px">meta robots</code> tag. Page is thin (0 H1, no description). Google guidance since 2007: noindex required.</p>
+    <div class="meta">
+      <span><strong>Surfaces:</strong> Search-results template</span>
+      <span><strong>Audit row:</strong> 38</span>
+    </div>
+  </a>
+
 </div>
 </section>
 
@@ -141,6 +154,7 @@ a{color:var(--brand-red)}
   <li><strong>AURA-001</strong> first. Every other on-page recommendation depends on the homepage being indexable.</li>
   <li><strong>AURA-003</strong> second. Lowest effort, removes the worst trust signal on the page.</li>
   <li><strong>AURA-002</strong> in parallel with the above. DNS change owned by a different person, no template work.</li>
+  <li><strong>AURA-006</strong> next. One-line template change. Ship before AURA-005 so structured data does not amplify search-result discovery.</li>
   <li><strong>AURA-004</strong> next. Template-level fix, ships once.</li>
   <li><strong>AURA-005</strong> last and incrementally. Start with sitewide Organization, hold Product schema until real pricing replaces the 1.00 QAR placeholders.</li>
 </ol>
