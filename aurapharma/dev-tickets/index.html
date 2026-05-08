@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aura Pharma · Technical SEO Dev Tickets</title>
+<style>
+:root{--brand-red:#E60012;--brand-yellow:#FFD100;--brand-dark:#1A1A1A;--brand-gray:#F7F7F7;--text:#1A1A1A;--text-muted:#555;--border:#E0E0E0;--critical:#E60012;--high:#FF7043}
+*{box-sizing:border-box}html,body{margin:0;padding:0;font-family:'Baloo Bhaijaan 2',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--text);background:#fff;font-size:15px;line-height:1.55}
+.wrap{max-width:960px;margin:0 auto;padding:0 32px 64px}
+header.t-hd{background:var(--brand-dark);color:#fff;padding:32px;border-bottom:6px solid var(--brand-red)}
+header.t-hd .kicker{color:#999;font-size:12px;letter-spacing:2px;text-transform:uppercase}
+header.t-hd h1{margin:6px 0 8px;font-size:30px;font-weight:700;line-height:1.2}
+header.t-hd p{margin:0;color:#ccc;font-size:14px;max-width:680px}
+.intro{background:var(--brand-gray);padding:20px 24px;margin:32px 0;border-left:4px solid var(--brand-yellow);font-size:14px}
+.intro strong{color:var(--brand-dark)}
+section{margin:32px 0}
+h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin:0 0 16px}
+.tickets{display:grid;gap:14px}
+.ticket{display:block;border:1px solid var(--border);border-left:6px solid var(--critical);padding:20px 24px;text-decoration:none;color:inherit;transition:transform .12s ease,box-shadow .12s ease;background:#fff}
+.ticket:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,.06);border-bottom-color:var(--border)}
+.ticket .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.ticket .id{font-family:"SF Mono",Menlo,monospace;font-size:12px;color:var(--brand-red);font-weight:700;letter-spacing:1px}
+.ticket .pill{display:inline-block;padding:3px 10px;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:var(--critical);color:#fff}
+.ticket h3{margin:4px 0 8px;font-size:18px;font-weight:600;color:var(--brand-dark)}
+.ticket p{margin:0;color:var(--text-muted);font-size:14px}
+.ticket .meta{margin-top:12px;display:flex;gap:18px;font-size:12px;color:var(--text-muted)}
+.ticket .meta span{display:inline-flex;align-items:center;gap:4px}
+.ticket .meta strong{color:var(--brand-dark);font-weight:600}
+.legend{display:flex;gap:14px;margin:8px 0 24px;font-size:12px;color:var(--text-muted)}
+.legend .swatch{width:14px;height:14px;border-radius:2px;display:inline-block;vertical-align:middle;margin-right:4px}
+footer.t-ft{margin-top:48px;padding-top:20px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted)}
+a{color:var(--brand-red)}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:16px 0}
+.stat{padding:14px 16px;background:var(--brand-gray);border-left:4px solid var(--brand-red)}
+.stat .num{font-size:24px;font-weight:700;color:var(--brand-dark);line-height:1}
+.stat .label{font-size:11px;text-transform:uppercase;color:var(--text-muted);letter-spacing:1px;margin-top:6px;display:block}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="t-hd">
+  <div class="kicker">Brandology &middot; Technical SEO &middot; Aura Pharma</div>
+  <h1>Critical-priority dev tickets</h1>
+  <p>Five focused tickets covering the issues that should ship before any content or paid-media work begins. Each ticket is self-contained and includes verified evidence, fix instructions, and verification steps.</p>
+</header>
+<div class="wrap">
+
+<div class="intro">
+<strong>Audit context.</strong> Site: <a href="https://www.aurapharma.org">https://www.aurapharma.org</a>. CMS: Odoo on Odoo.sh. Crawl scope: 18 indexable URLs. Audit date: 2026-05-08. Source data: Screaming Frog crawl plus live verification via Playwright and curl. Full audit lives in <em>Aura Pharma Technical SEO [Master Sheet].xlsx</em> (76 rows, 5 tabs, EN + AR).
+</div>
+
+<section>
+<h2>At a glance</h2>
+<div class="summary-grid">
+  <div class="stat"><div class="num">5</div><span class="label">Critical tickets</span></div>
+  <div class="stat"><div class="num">17</div><span class="label">Critical audit rows</span></div>
+  <div class="stat"><div class="num">11</div><span class="label">Failing audit rows</span></div>
+  <div class="stat"><div class="num">18</div><span class="label">Indexable URLs</span></div>
+  <div class="stat"><div class="num">0</div><span class="label">JSON-LD blocks today</span></div>
+</div>
+</section>
+
+<section>
+<h2>Tickets</h2>
+<div class="tickets">
+
+  <a class="ticket" href="ticket-01-homepage-canonical.html">
+    <div class="top">
+      <span class="id">AURA-001</span>
+      <span class="pill">Critical</span>
+    </div>
+    <h3>Homepage canonical conflict and sitemap duplication</h3>
+    <p>The root URL canonicalises to <code style="font-family:'SF Mono',monospace;font-size:13px">/home</code>, making the most valuable page on the site non-indexable. The sitemap also lists both URLs as separate entries.</p>
+    <div class="meta">
+      <span><strong>Surfaces:</strong> Homepage template, sitemap generator</span>
+      <span><strong>Audit rows:</strong> 27, 40, 43, 54</span>
+    </div>
+  </a>
+
+  <a class="ticket" href="ticket-02-apex-domain-https.html">
+    <div class="top">
+      <span class="id">AURA-002</span>
+      <span class="pill">Critical</span>
+    </div>
+    <h3>Apex domain redirect chain crosses servers and protocols</h3>
+    <p>The bare domain <code style="font-family:'SF Mono',monospace;font-size:13px">aurapharma.org</code> is parked on Squarespace and 301-redirects to HTTP before HTTPS upgrades it. Two-hop chain on the wrong host.</p>
+    <div class="meta">
+      <span><strong>Surfaces:</strong> DNS records</span>
+      <span><strong>Audit rows:</strong> 32, 34, 61</span>
+    </div>
+  </a>
+
+  <a class="ticket" href="ticket-03-social-404s.html">
+    <div class="top">
+      <span class="id">AURA-003</span>
+      <span class="pill">Critical</span>
+    </div>
+    <h3>Sitewide 404s on the footer social-link block</h3>
+    <p>Four footer icons link to <code style="font-family:'SF Mono',monospace;font-size:13px">/website/social/&lt;platform&gt;</code> stubs that all return 404. 54 internal inlinks per stub. 200+ broken link relations across the crawl.</p>
+    <div class="meta">
+      <span><strong>Surfaces:</strong> Sitewide footer template</span>
+      <span><strong>Audit rows:</strong> 21, 29</span>
+    </div>
+  </a>
+
+  <a class="ticket" href="ticket-04-heading-hierarchy.html">
+    <div class="top">
+      <span class="id">AURA-004</span>
+      <span class="pill">Critical</span>
+    </div>
+    <h3>Missing H1 tags and broken heading hierarchy</h3>
+    <p>Zero H1 tags on Home, About, Contact, FAQ, Shop. Decorative H3s for step numbers on the homepage. Inconsistent ALL-CAPS vs Title Case product names.</p>
+    <div class="meta">
+      <span><strong>Surfaces:</strong> 5 page templates + product data layer</span>
+      <span><strong>Audit row:</strong> 65</span>
+    </div>
+  </a>
+
+  <a class="ticket" href="ticket-05-structured-data.html">
+    <div class="top">
+      <span class="id">AURA-005</span>
+      <span class="pill">Critical</span>
+    </div>
+    <h3>Implement JSON-LD structured data sitewide</h3>
+    <p>Zero structured data on every page. Missing Organization, Product, FAQPage, BreadcrumbList, ItemList, WebSite + SearchAction. Includes per-template reference JSON-LD blocks ready to adapt.</p>
+    <div class="meta">
+      <span><strong>Surfaces:</strong> Base template + per-template overrides</span>
+      <span><strong>Audit rows:</strong> 66, 67, 68</span>
+    </div>
+  </a>
+
+</div>
+</section>
+
+<section>
+<h2>Recommended ship order</h2>
+<ol>
+  <li><strong>AURA-001</strong> first. Every other on-page recommendation depends on the homepage being indexable.</li>
+  <li><strong>AURA-003</strong> second. Lowest effort, removes the worst trust signal on the page.</li>
+  <li><strong>AURA-002</strong> in parallel with the above. DNS change owned by a different person, no template work.</li>
+  <li><strong>AURA-004</strong> next. Template-level fix, ships once.</li>
+  <li><strong>AURA-005</strong> last and incrementally. Start with sitewide Organization, hold Product schema until real pricing replaces the 1.00 QAR placeholders.</li>
+</ol>
+</section>
+
+<footer class="t-ft">
+Aura Pharma Technical SEO audit &middot; prepared by Brandology &middot; 2026-05-08
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AURA-002 · Apex domain redirect chain via Squarespace and HTTP</title>
+<style>
+:root{--brand-red:#E60012;--brand-yellow:#FFD100;--brand-dark:#1A1A1A;--brand-gray:#F7F7F7;--text:#1A1A1A;--text-muted:#555;--border:#E0E0E0;--code-bg:#F4F4F4;--critical:#E60012;--high:#FF7043;--moderate:#FFD100}
+*{box-sizing:border-box}html,body{margin:0;padding:0;font-family:'Baloo Bhaijaan 2',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--text);background:#fff;font-size:15px;line-height:1.55}
+.wrap{max-width:880px;margin:0 auto;padding:0 32px 64px}
+header.t-hd{background:var(--brand-dark);color:#fff;padding:20px 32px;border-bottom:4px solid var(--brand-red)}
+header.t-hd .crumb{color:#999;font-size:12px;letter-spacing:1px;text-transform:uppercase}
+header.t-hd h1{margin:4px 0 0;font-size:22px;font-weight:600;line-height:1.3}
+.pill{display:inline-block;padding:4px 10px;border-radius:3px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.pill.critical{background:var(--critical);color:#fff}.pill.high{background:var(--high);color:#fff}.pill.moderate{background:var(--moderate);color:var(--brand-dark)}
+.meta{display:grid;grid-template-columns:140px 1fr;gap:8px 16px;margin:24px 0 32px;padding:16px 20px;background:var(--brand-gray);border-left:4px solid var(--brand-red);font-size:13px}
+.meta dt{color:var(--text-muted);font-weight:600}.meta dd{margin:0}
+section{margin:28px 0}
+h2{font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--brand-dark);margin:0 0 12px;padding-bottom:6px;border-bottom:2px solid var(--brand-yellow)}
+p{margin:0 0 12px}ul,ol{margin:0 0 12px;padding-left:24px}li{margin-bottom:6px}
+code{font-family:"SF Mono",Menlo,Monaco,Consolas,monospace;background:var(--code-bg);padding:1px 6px;border-radius:2px;font-size:13px;color:#b00020}
+pre{background:var(--brand-dark);color:#f4f4f4;padding:14px 18px;border-radius:4px;overflow-x:auto;font-size:12.5px;line-height:1.5}
+pre code{background:transparent;color:inherit;padding:0}
+.callout{border-left:4px solid var(--brand-red);background:#FFF6F7;padding:12px 16px;margin:16px 0;font-size:14px}
+.callout.note{border-color:var(--brand-yellow);background:#FFFCEB}
+.checklist{list-style:none;padding-left:0}
+.checklist li{padding-left:28px;position:relative}
+.checklist li::before{content:"\2610";position:absolute;left:4px;top:0;color:var(--brand-red);font-weight:700}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border)}
+th{background:var(--brand-dark);color:#fff;font-weight:600}tr:nth-child(even) td{background:var(--brand-gray)}
+footer.t-ft{margin-top:48px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted)}
+.badge{display:inline-block;padding:2px 8px;border-radius:2px;font-size:11px;font-weight:600;background:var(--brand-gray);color:var(--text)}
+.badge.fail{background:#FFCDD2;color:#B71C1C}
+a{color:var(--brand-red);text-decoration:none;border-bottom:1px solid transparent}a:hover{border-bottom-color:var(--brand-red)}
+.diagram{background:var(--brand-gray);padding:16px;border-radius:4px;font-family:"SF Mono",Menlo,monospace;font-size:13px;line-height:1.7;margin:12px 0}
+.diagram .bad{color:var(--brand-red);font-weight:700}
+.diagram .good{color:#1B5E20;font-weight:700}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="t-hd">
+  <div class="crumb">Aura Pharma · Technical SEO · Dev Ticket</div>
+  <h1>AURA-002 · Apex domain redirect chain crosses servers and protocols</h1>
+</header>
+<div class="wrap">
+
+<dl class="meta">
+  <dt>Severity</dt><dd><span class="pill critical">Critical</span></dd>
+  <dt>Status</dt><dd><span class="badge fail">Fail</span></dd>
+  <dt>Category</dt><dd>Hosting and DNS</dd>
+  <dt>Surfaces</dt><dd>DNS records for <code>aurapharma.org</code></dd>
+  <dt>Audit reference</dt><dd>Master sheet rows 32, 34, 61</dd>
+  <dt>Verified</dt><dd>2026-05-08 via curl response headers</dd>
+</dl>
+
+<section>
+<h2>Issue</h2>
+<p>Visitors who type <code>aurapharma.org</code> (without <code>www</code>) hit a redirect chain that crosses two unrelated servers and drops to HTTP before being upgraded back to HTTPS. The current chain is:</p>
+
+<div class="diagram">
+<span class="bad">https://aurapharma.org/</span><br>
+&nbsp;&nbsp;↓ 301 (server: <strong>Squarespace</strong>)<br>
+<span class="bad">http://www.aurapharma.org/</span><br>
+&nbsp;&nbsp;↓ 301 (server: Odoo.sh)<br>
+<span class="good">https://www.aurapharma.org/</span>
+</div>
+
+<p>Two distinct problems are visible here:</p>
+<ol>
+  <li><strong>Wrong host.</strong> The apex domain is being served by Squarespace, not by the same hosting layer as the rest of the site. The HTTP response includes <code>server: Squarespace</code> and a Squarespace-specific <code>x-contextid</code> header. This means the apex DNS records are pointing at a Squarespace parking page, probably left over from a previous registrar configuration.</li>
+  <li><strong>Wrong scheme.</strong> The first redirect lands on <code>http://www.aurapharma.org</code>, not <code>https://www.aurapharma.org</code>. There is a brief window during which the user is on plain HTTP before HSTS upgrades them. Modern browsers will auto-upgrade the second hop, but the published 301 still says <code>Location: http://...</code>, which is what crawlers will record.</li>
+</ol>
+</section>
+
+<section>
+<h2>Verified evidence</h2>
+<pre><code>$ curl -sI https://aurapharma.org/
+HTTP/2 301
+location: http://www.aurapharma.org
+server: Squarespace
+x-contextid: UWxVUt9F/JJbga3gz
+
+$ curl -sI http://www.aurapharma.org/
+HTTP/1.1 301 Moved Permanently
+Server: nginx
+Location: https://www.aurapharma.org/
+Server: Odoo.sh</code></pre>
+</section>
+
+<section>
+<h2>Fix</h2>
+<p>The fix is at the DNS layer, not in the CMS. Two changes are needed:</p>
+
+<ol>
+  <li><strong>Repoint the apex DNS records.</strong> Update the A and AAAA records (or ALIAS / ANAME if your DNS provider supports them) for <code>aurapharma.org</code> so they point at the same hosting layer that already serves <code>www.aurapharma.org</code>. The current Squarespace association needs to be removed.</li>
+  <li><strong>Configure a single 301 redirect at that hosting layer</strong> from <code>https://aurapharma.org/</code> directly to <code>https://www.aurapharma.org/</code>, preserving the path. Confirm the redirect is HTTPS-to-HTTPS, not HTTP-to-HTTP.</li>
+</ol>
+
+<p>The decision about whether the canonical host is <code>www</code> or non-<code>www</code> has already been made implicitly: <code>www</code> is the canonical (HSTS is set on it, the SSL certificate is valid for it, the sitemap and canonicals all use it). Do not change that. Just fix the apex so it consolidates to <code>www</code> in one hop.</p>
+
+<div class="callout note">
+The <code>http://www.aurapharma.org</code> → <code>https://www.aurapharma.org</code> redirect is already working correctly on the Odoo.sh layer. Keep it. The fix is only for the apex.
+</div>
+</section>
+
+<section>
+<h2>Verification</h2>
+<ul class="checklist">
+  <li>Run <code>curl -sI https://aurapharma.org/</code>. Expected: a single 301 with <code>Location: https://www.aurapharma.org/</code> and <code>server</code> header matching the production host (not Squarespace).</li>
+  <li>Run <code>curl -sIL https://aurapharma.org/about</code>. Expected: a single redirect, then a 200 from the production host.</li>
+  <li>Visit <code>https://aurapharma.org/</code> in a browser with developer tools open. Expected: one redirect entry in the network panel, no HTTP entries.</li>
+  <li>Test SSL on the apex: <a href="https://www.ssllabs.com/ssltest/analyze.html?d=aurapharma.org">ssllabs.com</a>. Expected: certificate valid for both <code>aurapharma.org</code> and <code>www.aurapharma.org</code>.</li>
+  <li>Confirm <code>strict-transport-security</code> header is present on the apex response too, so users who type the bare domain get HSTS protection.</li>
+</ul>
+</section>
+
+<section>
+<h2>Why this is critical</h2>
+<p>Users routinely type the bare domain. Crawlers do too. Today every one of those hits passes through a server (Squarespace) that has nothing to do with the brand, on plain HTTP. That is a security signal Google notices, a small but real exposure window for users on hostile networks, and a confusing data point if anyone ever audits this site externally. The fix is a 15-minute DNS change but it removes a class of issues no other ticket can address.</p>
+</section>
+
+<footer class="t-ft">
+Aura Pharma Technical SEO audit · ticket AURA-002 · prepared by Brandology
+</footer>
+</div>
+</body>
+</html>

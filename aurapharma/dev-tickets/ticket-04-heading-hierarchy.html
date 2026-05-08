@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AURA-004 · Missing H1 tags and broken heading hierarchy</title>
+<style>
+:root{--brand-red:#E60012;--brand-yellow:#FFD100;--brand-dark:#1A1A1A;--brand-gray:#F7F7F7;--text:#1A1A1A;--text-muted:#555;--border:#E0E0E0;--code-bg:#F4F4F4;--critical:#E60012;--high:#FF7043;--moderate:#FFD100}
+*{box-sizing:border-box}html,body{margin:0;padding:0;font-family:'Baloo Bhaijaan 2',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--text);background:#fff;font-size:15px;line-height:1.55}
+.wrap{max-width:880px;margin:0 auto;padding:0 32px 64px}
+header.t-hd{background:var(--brand-dark);color:#fff;padding:20px 32px;border-bottom:4px solid var(--brand-red)}
+header.t-hd .crumb{color:#999;font-size:12px;letter-spacing:1px;text-transform:uppercase}
+header.t-hd h1{margin:4px 0 0;font-size:22px;font-weight:600;line-height:1.3}
+.pill{display:inline-block;padding:4px 10px;border-radius:3px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.pill.critical{background:var(--critical);color:#fff}
+.meta{display:grid;grid-template-columns:140px 1fr;gap:8px 16px;margin:24px 0 32px;padding:16px 20px;background:var(--brand-gray);border-left:4px solid var(--brand-red);font-size:13px}
+.meta dt{color:var(--text-muted);font-weight:600}.meta dd{margin:0}
+section{margin:28px 0}
+h2{font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--brand-dark);margin:0 0 12px;padding-bottom:6px;border-bottom:2px solid var(--brand-yellow)}
+h3{font-size:14px;font-weight:700;color:var(--brand-dark);margin:18px 0 8px}
+p{margin:0 0 12px}ul,ol{margin:0 0 12px;padding-left:24px}li{margin-bottom:6px}
+code{font-family:"SF Mono",Menlo,Monaco,Consolas,monospace;background:var(--code-bg);padding:1px 6px;border-radius:2px;font-size:13px;color:#b00020}
+pre{background:var(--brand-dark);color:#f4f4f4;padding:14px 18px;border-radius:4px;overflow-x:auto;font-size:12.5px;line-height:1.5}
+pre code{background:transparent;color:inherit;padding:0}
+.callout{border-left:4px solid var(--brand-red);background:#FFF6F7;padding:12px 16px;margin:16px 0;font-size:14px}
+.callout.note{border-color:var(--brand-yellow);background:#FFFCEB}
+.checklist{list-style:none;padding-left:0}
+.checklist li{padding-left:28px;position:relative}
+.checklist li::before{content:"\2610";position:absolute;left:4px;top:0;color:var(--brand-red);font-weight:700}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top}
+th{background:var(--brand-dark);color:#fff;font-weight:600}tr:nth-child(even) td{background:var(--brand-gray)}
+footer.t-ft{margin-top:48px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted)}
+.badge{display:inline-block;padding:2px 8px;border-radius:2px;font-size:11px;font-weight:600;background:var(--brand-gray);color:var(--text)}
+.badge.fail{background:#FFCDD2;color:#B71C1C}
+a{color:var(--brand-red);text-decoration:none;border-bottom:1px solid transparent}a:hover{border-bottom-color:var(--brand-red)}
+.tree{font-family:"SF Mono",Menlo,monospace;font-size:13px;line-height:1.7;background:var(--brand-gray);padding:14px 18px;border-radius:4px}
+.tree .ok{color:#1B5E20;font-weight:700}.tree .bad{color:var(--brand-red);font-weight:700}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="t-hd">
+  <div class="crumb">Aura Pharma · Technical SEO · Dev Ticket</div>
+  <h1>AURA-004 · Missing H1 tags and broken heading hierarchy</h1>
+</header>
+<div class="wrap">
+
+<dl class="meta">
+  <dt>Severity</dt><dd><span class="pill critical">Critical</span></dd>
+  <dt>Status</dt><dd><span class="badge fail">Fail</span></dd>
+  <dt>Category</dt><dd>On-page / accessibility</dd>
+  <dt>Surfaces</dt><dd>Homepage, About, Contact, FAQ, Shop templates</dd>
+  <dt>Audit reference</dt><dd>Master sheet row 65</dd>
+  <dt>Verified</dt><dd>2026-05-08 via Playwright DOM <code>document.querySelectorAll('h1')</code></dd>
+</dl>
+
+<section>
+<h2>Issue</h2>
+<p>The H1 tag is the single strongest on-page signal a page can give about its topic. It is also the heading that screen readers announce when a user lands on a page. Five of Aura's six core templates ship with zero H1 elements in the rendered HTML.</p>
+
+<table>
+  <tr><th>Page</th><th>H1 count</th><th>What is currently top of hierarchy</th></tr>
+  <tr><td><code>/</code> (Home)</td><td>0</td><td>11 H2s, several H4s, decorative H3s for step numbers</td></tr>
+  <tr><td><code>/about</code></td><td>0</td><td>"About Aura Pharma" used as H2</td></tr>
+  <tr><td><code>/contactus</code></td><td>0</td><td>"Get in Touch with AuraPharma" used as H2</td></tr>
+  <tr><td><code>/faq</code></td><td>0</td><td>No H1, FAQ questions are H2/H3</td></tr>
+  <tr><td><code>/shop</code></td><td>0</td><td>"Sort By" and "Categories" used as H2 (sidebar labels, not page topic)</td></tr>
+  <tr><td>9 product pages</td><td>1</td><td>Product name (correct)</td></tr>
+</table>
+</section>
+
+<section>
+<h2>Other heading-hierarchy problems on the homepage</h2>
+<p>Beyond the missing H1, the homepage has three additional issues:</p>
+<ol>
+  <li><strong>Duplicate H2s.</strong> "Foot Care Cream", "Vitamin C Serum", and "Hyaluronic Acid serum" each appear twice in the H2 list. The same product is featured in two different sections, and both sections use the product name as an H2. Re-use a more general H2 for the second section ("Featured products", "Customer favourites", etc.).</li>
+  <li><strong>Decorative H3s.</strong> The "Our process in four easy steps" section uses H3 elements that contain the literal text "1", "2", "3", "4". Headings should describe content, not be visual labels. The step numbers should be styled spans inside an H3 that names the step, or moved out of the heading hierarchy entirely.</li>
+  <li><strong>Inconsistent capitalisation in headings.</strong> Some product H1s on detail pages are in ALL CAPS ("CLEANSER", "ANTI AGING SERUM", "BRIGHTENING CREAM"), others are Title Case ("Lip Balm", "Vitamin C"). Pick a single style and enforce it at the data layer (the product name field) so the H1 inherits the canonical casing.</li>
+</ol>
+</section>
+
+<section>
+<h2>Required heading structure per template</h2>
+
+<h3><code>/</code> (Home)</h3>
+<div class="tree">
+<span class="ok">H1</span>: "Aura Pharma | Cosmeceutical and wellness products in Qatar"<br>
+&nbsp;&nbsp;<span class="ok">H2</span>: "Our finest selection"<br>
+&nbsp;&nbsp;<span class="ok">H2</span>: "Discover our quality products"<br>
+&nbsp;&nbsp;<span class="ok">H2</span>: "Discover our sets"<br>
+&nbsp;&nbsp;<span class="ok">H2</span>: "Our process in four easy steps"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="ok">H3</span>: "Add to cart"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="ok">H3</span>: "Sign in"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="ok">H3</span>: "Pay"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="ok">H3</span>: "Get delivered"<br>
+&nbsp;&nbsp;<span class="ok">H2</span>: "Contact Aura Pharma"
+</div>
+<p>The bare digits 1 to 4 should be styled spans inside the step H3, not standalone H3 text.</p>
+
+<h3><code>/about</code></h3>
+<div class="tree">
+<span class="ok">H1</span>: "About Aura Pharma" <span style="color:#777">(promoted from H2)</span><br>
+&nbsp;&nbsp;<span class="ok">H2</span>: "Vision"<br>
+&nbsp;&nbsp;<span class="ok">H2</span>: "Mission"<br>
+&nbsp;&nbsp;<span class="ok">H2</span>: "Value"
+</div>
+
+<h3><code>/contactus</code></h3>
+<div class="tree">
+<span class="ok">H1</span>: "Contact Aura Pharma" <span style="color:#777">(or "Get in touch")</span>
+</div>
+<p>This page is short. One H1 is enough.</p>
+
+<h3><code>/faq</code></h3>
+<div class="tree">
+<span class="ok">H1</span>: "Frequently asked questions"<br>
+&nbsp;&nbsp;<span class="ok">H2</span>: each question topic
+</div>
+
+<h3><code>/shop</code></h3>
+<div class="tree">
+<span class="ok">H1</span>: "Aura Pharma products" <span style="color:#777">(or category-driven once categories exist)</span><br>
+&nbsp;&nbsp;<span class="ok">H2</span>: "Featured" / "All products"<br>
+&nbsp;&nbsp;<span style="color:#777">Sidebar labels "Sort by" and "Categories" should be styled as labels, not H2.</span>
+</div>
+
+<h3>Product pages (currently correct)</h3>
+<div class="tree">
+<span class="ok">H1</span>: Product name in canonical casing (Title Case, e.g. "Vitamin C Serum")
+</div>
+<p>Adjust the product name field at the data layer for the four ALL-CAPS products: <code>CLEANSER</code>, <code>SUN Screen</code>, <code>ANTI AGING SERUM</code>, <code>BRIGHTENING CREAM</code>.</p>
+</section>
+
+<section>
+<h2>Fix</h2>
+<ol>
+  <li>Edit each template (Home, About, Contact, FAQ, Shop) so that the page topic is wrapped in an H1 element, exactly once per page.</li>
+  <li>Demote the heading currently doing the job of an H1 (where it exists). On About this is "About Aura Pharma" (currently H2); change its tag to H1 in the template.</li>
+  <li>Replace the decorative number-only H3s on the homepage with H3s that name each step, and move the digit into a styled span.</li>
+  <li>De-duplicate the H2s on the homepage product sections by giving each section a section-level heading instead of repeating the product name.</li>
+  <li>Standardise product name casing in the data layer so the H1 on every product page renders in Title Case.</li>
+</ol>
+
+<div class="callout note">
+Do not solve this with CSS only (e.g., styling an H2 to look like an H1). Search engines and assistive technologies read the tag, not the visual style.
+</div>
+</section>
+
+<section>
+<h2>Verification</h2>
+<ul class="checklist">
+  <li>For each affected URL, run in DevTools console: <code>document.querySelectorAll('h1').length</code>. Expected: <code>1</code>.</li>
+  <li>Run <code>document.querySelectorAll('h1')[0].textContent</code> and confirm the text describes the page topic.</li>
+  <li>Open each page with VoiceOver (Mac) or NVDA (Windows) and confirm the first heading announced names the page.</li>
+  <li>Re-run a Screaming Frog crawl with the H1 filter set. Expected: zero pages flagged "H1: Missing".</li>
+  <li>Check the homepage for duplicate H2s in DevTools: <code>[...document.querySelectorAll('h2')].map(h =&gt; h.textContent.trim())</code>. Expected: no duplicates.</li>
+</ul>
+</section>
+
+<section>
+<h2>Why this is critical</h2>
+<p>For an 18-URL site competing for category-level keywords ("vitamin C serum Qatar", "cosmeceutical brand Doha"), the H1 is the page's first chance to tell Google what it is about. Sending the homepage with no H1 is sending a page with no topic statement. Add to that the inconsistent product casing and the decorative H3 numbers, and the heading hierarchy on this site is doing the opposite of what it is supposed to do, which is help both search engines and assistive technologies parse the page in seconds. The fix is template-level and ships once.</p>
+</section>
+
+<footer class="t-ft">
+Aura Pharma Technical SEO audit · ticket AURA-004 · prepared by Brandology
+</footer>
+</div>
+</body>
+</html>

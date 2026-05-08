@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AURA-001 · Fix homepage canonical and sitemap conflict</title>
+<style>
+:root{--brand-red:#E60012;--brand-yellow:#FFD100;--brand-dark:#1A1A1A;--brand-gray:#F7F7F7;--text:#1A1A1A;--text-muted:#555;--border:#E0E0E0;--code-bg:#F4F4F4;--critical:#E60012;--high:#FF7043;--moderate:#FFD100}
+*{box-sizing:border-box}html,body{margin:0;padding:0;font-family:'Baloo Bhaijaan 2',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--text);background:#fff;font-size:15px;line-height:1.55}
+.wrap{max-width:880px;margin:0 auto;padding:0 32px 64px}
+header.t-hd{background:var(--brand-dark);color:#fff;padding:20px 32px;border-bottom:4px solid var(--brand-red)}
+header.t-hd .crumb{color:#999;font-size:12px;letter-spacing:1px;text-transform:uppercase}
+header.t-hd h1{margin:4px 0 0;font-size:22px;font-weight:600;line-height:1.3}
+.pill{display:inline-block;padding:4px 10px;border-radius:3px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.pill.critical{background:var(--critical);color:#fff}.pill.high{background:var(--high);color:#fff}.pill.moderate{background:var(--moderate);color:var(--brand-dark)}
+.meta{display:grid;grid-template-columns:140px 1fr;gap:8px 16px;margin:24px 0 32px;padding:16px 20px;background:var(--brand-gray);border-left:4px solid var(--brand-red);font-size:13px}
+.meta dt{color:var(--text-muted);font-weight:600}.meta dd{margin:0}
+section{margin:28px 0}
+h2{font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--brand-dark);margin:0 0 12px;padding-bottom:6px;border-bottom:2px solid var(--brand-yellow)}
+p{margin:0 0 12px}ul,ol{margin:0 0 12px;padding-left:24px}li{margin-bottom:6px}
+code{font-family:"SF Mono",Menlo,Monaco,Consolas,monospace;background:var(--code-bg);padding:1px 6px;border-radius:2px;font-size:13px;color:#b00020}
+pre{background:var(--brand-dark);color:#f4f4f4;padding:14px 18px;border-radius:4px;overflow-x:auto;font-size:12.5px;line-height:1.5}
+pre code{background:transparent;color:inherit;padding:0}
+.callout{border-left:4px solid var(--brand-red);background:#FFF6F7;padding:12px 16px;margin:16px 0;font-size:14px}
+.callout.note{border-color:var(--brand-yellow);background:#FFFCEB}
+.checklist{list-style:none;padding-left:0}
+.checklist li{padding-left:28px;position:relative}
+.checklist li::before{content:"\2610";position:absolute;left:4px;top:0;color:var(--brand-red);font-weight:700}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border)}
+th{background:var(--brand-dark);color:#fff;font-weight:600}tr:nth-child(even) td{background:var(--brand-gray)}
+footer.t-ft{margin-top:48px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted)}
+.badge{display:inline-block;padding:2px 8px;border-radius:2px;font-size:11px;font-weight:600;background:var(--brand-gray);color:var(--text)}
+.badge.fail{background:#FFCDD2;color:#B71C1C}
+a{color:var(--brand-red);text-decoration:none;border-bottom:1px solid transparent}a:hover{border-bottom-color:var(--brand-red)}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="t-hd">
+  <div class="crumb">Aura Pharma · Technical SEO · Dev Ticket</div>
+  <h1>AURA-001 · Homepage canonical conflict and sitemap duplication</h1>
+</header>
+<div class="wrap">
+
+<dl class="meta">
+  <dt>Severity</dt><dd><span class="pill critical">Critical</span></dd>
+  <dt>Status</dt><dd><span class="badge fail">Fail</span></dd>
+  <dt>Category</dt><dd>Indexability</dd>
+  <dt>Surfaces</dt><dd>Homepage template, XML sitemap generator</dd>
+  <dt>Audit reference</dt><dd>Master sheet rows 27, 40, 43, 54</dd>
+  <dt>Verified</dt><dd>2026-05-08 via live HTML inspection (curl + Playwright)</dd>
+</dl>
+
+<section>
+<h2>Issue</h2>
+<p>The most valuable URL on the site is non-indexable. Loading <code>https://www.aurapharma.org/</code> returns a page whose canonical link points to a different URL:</p>
+<pre><code>&lt;link rel="canonical" href="https://www.aurapharma.org/home"/&gt;</code></pre>
+<p>This tells search engines to drop <code>/</code> from their index and credit <code>/home</code> instead. To compound the problem, the XML sitemap lists both URLs as separate entries, which sends a contradictory signal:</p>
+<pre><code>&lt;url&gt;&lt;loc&gt;https://www.aurapharma.org/&lt;/loc&gt;&lt;/url&gt;
+&lt;url&gt;&lt;loc&gt;https://www.aurapharma.org/home&lt;/loc&gt;&lt;/url&gt;</code></pre>
+<p>The Open Graph tags also point at <code>/home</code>, so social shares of the root URL also surface the wrong canonical. Most internal navigation links across the site point to <code>/</code>, which means every internal link is currently passing equity to a non-canonical URL.</p>
+</section>
+
+<section>
+<h2>Affected URLs</h2>
+<table>
+  <tr><th>URL</th><th>Current state</th><th>What should happen</th></tr>
+  <tr><td><code>/</code></td><td>200, canonical points to <code>/home</code></td><td>200, self-referencing canonical</td></tr>
+  <tr><td><code>/home</code></td><td>200, self-referencing canonical, in sitemap</td><td>301 redirect to <code>/</code>, removed from sitemap</td></tr>
+  <tr><td><code>sitemap.xml</code></td><td>Lists both <code>/</code> and <code>/home</code>, plus <code>/website/info</code></td><td>Lists only canonical URLs, no system pages</td></tr>
+</table>
+</section>
+
+<section>
+<h2>Root cause</h2>
+<p>The CMS is configured to treat <code>/home</code> as the canonical homepage path while still serving the same content at <code>/</code>. The default sitemap generator picks up both URLs because both return HTTP 200. The previous migration from the old subdomain did not consolidate to a single homepage path.</p>
+<p>Note that this same canonical issue is mirrored on the legacy <code>aurapharma.odoo.com</code> subdomain, where the canonical also points to <code>/home</code>. Fixing the canonical on the production host will not propagate to the legacy subdomain automatically.</p>
+</section>
+
+<section>
+<h2>Fix</h2>
+<p>Decide which URL is the canonical homepage. Recommendation: <code>/</code>, because (a) it is the URL most external sites and users will link to, (b) it is shorter, and (c) the HTTP redirect from the apex domain already lands on <code>/</code>.</p>
+
+<p><strong>Required changes:</strong></p>
+<ol>
+  <li>On the homepage template, replace the canonical so it points to itself: <code>&lt;link rel="canonical" href="https://www.aurapharma.org/"&gt;</code>.</li>
+  <li>Update Open Graph and Twitter meta on the homepage so <code>og:url</code> matches the new canonical.</li>
+  <li>Add a server-level 301 redirect from <code>/home</code> to <code>/</code>.</li>
+  <li>Regenerate the XML sitemap so it lists only valid canonical URLs returning 200. Specifically:
+    <ul>
+      <li>Keep <code>/</code></li>
+      <li>Remove <code>/home</code></li>
+      <li>Remove <code>/website/info</code> (the CMS "powered by" page; it should also be added to <code>robots.txt</code> Disallow)</li>
+      <li>Refresh the <code>&lt;lastmod&gt;</code> dates on all entries</li>
+    </ul>
+  </li>
+  <li>If the legacy <code>aurapharma.odoo.com</code> subdomain is still controllable, update its canonical to point to <code>/</code> as well. If not, leave it (it is already blocked via <code>robots.txt</code> Disallow).</li>
+</ol>
+
+<div class="callout note">
+<strong>Do not</strong> rewrite all the internal navigation links from <code>/</code> to <code>/home</code> as a workaround. That is treating the symptom, not the cause, and it will need to be reverted later.
+</div>
+</section>
+
+<section>
+<h2>Verification</h2>
+<ul class="checklist">
+  <li>Run <code>curl -s https://www.aurapharma.org/ | grep -i canonical</code>. Expected output: a single <code>link rel="canonical"</code> pointing to <code>https://www.aurapharma.org/</code>.</li>
+  <li>Run <code>curl -sI https://www.aurapharma.org/home</code>. Expected: HTTP 301 with <code>Location: https://www.aurapharma.org/</code>.</li>
+  <li>Run <code>curl -s https://www.aurapharma.org/sitemap.xml | grep -E '/home|/website/info'</code>. Expected: no matches.</li>
+  <li>Open <code>https://www.aurapharma.org/</code> in a browser, view source, confirm <code>og:url</code> matches the canonical.</li>
+  <li>Once Google Search Console is connected, use Inspect URL on <code>/</code> and confirm the Google-selected canonical equals the user-declared canonical.</li>
+  <li>Resubmit the sitemap in Search Console after the fix is deployed.</li>
+</ul>
+</section>
+
+<section>
+<h2>Why this is critical</h2>
+<p>The root URL is the page that accumulates the most external backlinks, the most direct-traffic visits, and the most internal link equity. Letting it canonicalise away to a duplicate means none of that signal compounds where it should. Combined with the sitemap conflict, this is the single highest-leverage fix on the site and it should ship before any content or paid-media work begins.</p>
+</section>
+
+<footer class="t-ft">
+Aura Pharma Technical SEO audit · ticket AURA-001 · prepared by Brandology
+</footer>
+</div>
+</body>
+</html>
