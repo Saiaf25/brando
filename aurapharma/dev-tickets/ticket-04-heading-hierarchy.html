@@ -36,6 +36,11 @@ footer.t-ft{margin-top:48px;padding-top:16px;border-top:1px solid var(--border);
 a{color:var(--brand-red);text-decoration:none;border-bottom:1px solid transparent}a:hover{border-bottom-color:var(--brand-red)}
 .tree{font-family:"SF Mono",Menlo,monospace;font-size:13px;line-height:1.7;background:var(--brand-gray);padding:14px 18px;border-radius:4px}
 .tree .ok{color:#1B5E20;font-weight:700}.tree .bad{color:var(--brand-red);font-weight:700}
+
+header.t-hd .crumb a{color:#fff;text-decoration:none;border-bottom:1px dotted rgba(255,255,255,.5);padding-bottom:1px;transition:color .12s ease,border-color .12s ease}
+header.t-hd .crumb a:hover{color:var(--brand-yellow);border-bottom-color:var(--brand-yellow)}
+footer.t-ft .back{display:inline-block;margin-bottom:6px;color:var(--brand-red);text-decoration:none;border-bottom:1px solid transparent;font-weight:600}
+footer.t-ft .back:hover{border-bottom-color:var(--brand-red)}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,7 +48,7 @@ a{color:var(--brand-red);text-decoration:none;border-bottom:1px solid transparen
 </head>
 <body>
 <header class="t-hd">
-  <div class="crumb">Aura Pharma · Technical SEO · Dev Ticket</div>
+  <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">← All tickets</a> · Aura Pharma · Technical SEO</nav>
   <h1>AURA-004 · Missing H1 tags and broken heading hierarchy</h1>
 </header>
 <div class="wrap">
@@ -166,6 +171,7 @@ Do not solve this with CSS only (e.g., styling an H2 to look like an H1). Search
 </section>
 
 <footer class="t-ft">
+<a href="index.html" class="back">← Back to all tickets</a><br>
 Aura Pharma Technical SEO audit · ticket AURA-004 · prepared by Brandology
 </footer>
 </div>

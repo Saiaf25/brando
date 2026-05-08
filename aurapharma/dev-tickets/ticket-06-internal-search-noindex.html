@@ -37,11 +37,16 @@ footer.t-ft{margin-top:48px;padding-top:16px;border-top:1px solid var(--border);
 .badge{display:inline-block;padding:2px 8px;border-radius:2px;font-size:11px;font-weight:600;background:var(--brand-gray);color:var(--text)}
 .badge.fail{background:#FFCDD2;color:#B71C1C}
 a{color:var(--brand-red);text-decoration:none;border-bottom:1px solid transparent}a:hover{border-bottom-color:var(--brand-red)}
+
+header.t-hd .crumb a{color:#fff;text-decoration:none;border-bottom:1px dotted rgba(255,255,255,.5);padding-bottom:1px;transition:color .12s ease,border-color .12s ease}
+header.t-hd .crumb a:hover{color:var(--brand-yellow);border-bottom-color:var(--brand-yellow)}
+footer.t-ft .back{display:inline-block;margin-bottom:6px;color:var(--brand-red);text-decoration:none;border-bottom:1px solid transparent;font-weight:600}
+footer.t-ft .back:hover{border-bottom-color:var(--brand-red)}
 </style>
 </head>
 <body>
 <header class="t-hd">
-  <div class="crumb">Aura Pharma · Technical SEO · Dev Ticket</div>
+  <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">← All tickets</a> · Aura Pharma · Technical SEO</nav>
   <h1>AURA-006 · Noindex internal search results</h1>
 </header>
 <div class="wrap">
@@ -130,6 +135,7 @@ Do <strong>not</strong> use <code>noindex,nofollow</code>. The <code>nofollow</c
 </section>
 
 <footer class="t-ft">
+<a href="index.html" class="back">← Back to all tickets</a><br>
 Aura Pharma Technical SEO audit · ticket AURA-006 · prepared by Brandology
 </footer>
 </div>
