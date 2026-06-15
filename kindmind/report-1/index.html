@@ -33,7 +33,7 @@
     line-height:1.7;letter-spacing:0;
     -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   }
-  .num{font-variant-numeric:tabular-nums lining-nums;font-feature-settings:"tnum" 1,"lnum" 1;direction:ltr;unicode-bidi:isolate}
+  .num{font-variant-numeric:tabular-nums lining-nums;font-feature-settings:"tnum" 1,"lnum" 1;unicode-bidi:isolate}
   .lat{direction:ltr;unicode-bidi:isolate;display:inline-block}
   .wrap{max-width:1080px;margin:0 auto;padding:clamp(28px,5vw,72px) clamp(20px,5vw,56px)}
 
@@ -80,16 +80,14 @@
 
   table{width:100%;border-collapse:collapse;font-size:15px}
   caption{text-align:right;font-size:13.5px;color:var(--ink-faint);padding-bottom:12px;font-weight:300;line-height:1.7}
-  thead th{font-size:13px;color:var(--ink-faint);font-weight:500;text-align:start;padding:0 0 12px;border-bottom:1.5px solid var(--ink)}
-  thead th:not(:first-child){text-align:end}
-  tbody td{padding:14px 0;border-bottom:1px solid var(--rule-soft);text-align:end;color:var(--ink)}
-  tbody td:first-child{text-align:start;font-weight:500}
+  thead th{font-size:13px;color:var(--ink-faint);font-weight:500;text-align:right;padding:0 0 12px;border-bottom:1.5px solid var(--ink)}
+  tbody td{padding:14px 0;border-bottom:1px solid var(--rule-soft);text-align:right;color:var(--ink)}
+  tbody td:first-child{font-weight:500}
   tbody tr:hover{background:var(--red-wash)}
   .muted{color:var(--ink-faint)}
   .cpl-best{color:var(--red);font-weight:500}
-  tfoot td{padding:16px 0;border-top:1.5px solid var(--ink);text-align:end;font-weight:900;
+  tfoot td{padding:16px 0;border-top:1.5px solid var(--ink);text-align:right;font-weight:900;
     font-family:"Thmanyah Serif Display","Thmanyah Serif Text",serif}
-  tfoot td:first-child{text-align:start}
 
   .funnel{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,22px)}
   .stage{padding:28px 24px;border:1px solid var(--rule);border-radius:3px;background:var(--paper-2)}
