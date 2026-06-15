@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KindMind — تقرير الأداء · Brandology</title>
+<style>
+  @font-face{font-family:"Thmanyah Serif Text";src:url("https://framerusercontent.com/assets/pXAhTrUNoEDB4CTUcjXvXy1gFAc.woff2") format("woff2");font-weight:300;font-style:normal;font-display:swap}
+  @font-face{font-family:"Thmanyah Serif Text";src:url("https://framerusercontent.com/assets/3WPjrTAizPcMoDaKDtKdNB0Jo50.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:"Thmanyah Serif Text";src:url("https://framerusercontent.com/assets/bsVNF5mKouPfUJiPWsBKDU324NM.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+  @font-face{font-family:"Thmanyah Serif Text";src:url("https://framerusercontent.com/assets/z8brS6Wjld2pvgVBkmzMQpyPO4.woff2") format("woff2");font-weight:900;font-style:normal;font-display:swap}
+  @font-face{font-family:"Thmanyah Serif Display";src:url("https://framerusercontent.com/assets/a9r2dKNoQcqFiTkwxTUnXgAfjws.woff2") format("woff2");font-weight:900;font-style:normal;font-display:swap}
+
+  :root{
+    --paper:oklch(0.974 0.008 70);
+    --paper-2:oklch(0.992 0.006 80);
+    --ink:oklch(0.255 0.014 250);
+    --ink-soft:oklch(0.46 0.012 250);
+    --ink-faint:oklch(0.62 0.01 250);
+    --rule:oklch(0.255 0.014 250 / 0.14);
+    --rule-soft:oklch(0.255 0.014 250 / 0.07);
+    --red:oklch(0.535 0.214 27);
+    --red-deep:oklch(0.44 0.18 27);
+    --red-wash:oklch(0.535 0.214 27 / 0.08);
+    --gold:oklch(0.79 0.155 80);
+    --gold-ink:oklch(0.55 0.12 75);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Thmanyah Serif Text",Georgia,serif;font-weight:400;
+    line-height:1.7;letter-spacing:0;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  .num{font-variant-numeric:tabular-nums lining-nums;font-feature-settings:"tnum" 1,"lnum" 1;direction:ltr;unicode-bidi:isolate}
+  .lat{direction:ltr;unicode-bidi:isolate;display:inline-block}
+  .wrap{max-width:1080px;margin:0 auto;padding:clamp(28px,5vw,72px) clamp(20px,5vw,56px)}
+
+  .mast{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+    padding-bottom:18px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:900;font-size:19px;direction:ltr}
+  .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px var(--red-wash)}
+  .meta{text-align:left;font-size:13px;color:var(--ink-soft);line-height:1.8}
+  .meta b{color:var(--ink);font-weight:500}
+
+  .lede{margin:clamp(34px,6vw,60px) 0 clamp(30px,5vw,52px);max-width:34ch}
+  .kicker{font-size:13px;letter-spacing:0.04em;color:var(--red-deep);font-weight:500;margin-bottom:18px}
+  h1{font-family:"Thmanyah Serif Display","Thmanyah Serif Text",serif;font-weight:900;
+    font-size:clamp(40px,7.5vw,82px);line-height:1.08;margin:0;color:var(--ink)}
+  h1 em{font-style:normal;color:var(--red)}
+  .lede p{font-size:clamp(16px,2.1vw,20px);color:var(--ink-soft);font-weight:300;
+    max-width:54ch;margin:22px 0 0;line-height:1.75}
+
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+  .fig{padding:26px 26px 24px;border-left:1px solid var(--rule-soft)}
+  .fig:last-child{border-left:0}
+  .fig .lab{font-size:13px;color:var(--ink-faint);font-weight:500}
+  .fig .val{font-family:"Thmanyah Serif Display","Thmanyah Serif Text",serif;font-weight:900;
+    font-size:clamp(30px,4.4vw,46px);line-height:1;margin:14px 0 7px}
+  .fig .val small{font-size:0.42em;font-weight:500;color:var(--ink-soft);margin-right:4px}
+  .fig .sub{font-size:13.5px;color:var(--ink-soft);font-weight:300}
+  .fig.accent .val{color:var(--red)}
+
+  section{margin-top:clamp(48px,8vw,88px)}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:28px}
+  .sec-head h2{font-size:clamp(22px,3vw,29px);font-weight:900;margin:0;white-space:nowrap}
+  .sec-head .line{flex:1;height:1px;background:var(--rule)}
+  .sec-head .idx{font-size:13px;color:var(--ink-faint);font-weight:500;direction:ltr}
+
+  .chart-card{background:var(--paper-2);border:1px solid var(--rule);border-radius:3px;padding:clamp(18px,3vw,30px) clamp(14px,3vw,26px) clamp(10px,2vw,18px)}
+  .legend{display:flex;gap:24px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);margin-bottom:6px;padding-right:4px}
+  .legend span{display:inline-flex;align-items:center;gap:8px}
+  .swatch{width:14px;height:14px;border-radius:2px;display:inline-block}
+  .swatch.bar{background:var(--red)}
+  .swatch.line{width:18px;height:0;border-top:2.5px solid var(--gold-ink);position:relative}
+  .swatch.line::after{content:"";position:absolute;left:50%;top:50%;width:7px;height:7px;border-radius:50%;background:var(--gold-ink);transform:translate(-50%,-50%)}
+  svg{display:block;width:100%;height:auto;overflow:visible}
+  .chart-note{font-size:13.5px;color:var(--ink-faint);font-weight:300;margin:14px 4px 0;max-width:72ch;line-height:1.7}
+
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  caption{text-align:right;font-size:13.5px;color:var(--ink-faint);padding-bottom:12px;font-weight:300;line-height:1.7}
+  thead th{font-size:13px;color:var(--ink-faint);font-weight:500;text-align:start;padding:0 0 12px;border-bottom:1.5px solid var(--ink)}
+  thead th:not(:first-child){text-align:end}
+  tbody td{padding:14px 0;border-bottom:1px solid var(--rule-soft);text-align:end;color:var(--ink)}
+  tbody td:first-child{text-align:start;font-weight:500}
+  tbody tr:hover{background:var(--red-wash)}
+  .muted{color:var(--ink-faint)}
+  .cpl-best{color:var(--red);font-weight:500}
+  tfoot td{padding:16px 0;border-top:1.5px solid var(--ink);text-align:end;font-weight:900;
+    font-family:"Thmanyah Serif Display","Thmanyah Serif Text",serif}
+  tfoot td:first-child{text-align:start}
+
+  .funnel{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,22px)}
+  .stage{padding:28px 24px;border:1px solid var(--rule);border-radius:3px;background:var(--paper-2)}
+  .stage .lab{font-size:13.5px;color:var(--ink-faint);font-weight:500}
+  .stage .n{font-family:"Thmanyah Serif Display","Thmanyah Serif Text",serif;font-weight:900;font-size:clamp(40px,6vw,60px);line-height:1;margin:16px 0 6px}
+  .stage .rate{font-size:13.5px;color:var(--ink-soft);font-weight:300}
+  .stage.s2 .n{color:var(--gold-ink)}
+  .stage.s3 .n{color:var(--red)}
+
+  .read{max-width:62ch;font-size:17px;color:var(--ink-soft);font-weight:300;line-height:1.85}
+  .read strong{color:var(--ink);font-weight:500}
+  .read p{margin:0 0 18px}
+
+  footer{margin-top:clamp(56px,9vw,96px);padding-top:20px;border-top:1px solid var(--rule);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--ink-faint)}
+
+  @media(max-width:720px){
+    .figs{grid-template-columns:repeat(2,1fr)}
+    .fig:nth-child(2){border-left:0}
+    .fig:nth-child(1),.fig:nth-child(2){border-bottom:1px solid var(--rule-soft)}
+    .funnel{grid-template-columns:1fr}
+    .meta{text-align:right}
+    table{font-size:13.5px}
+  }
+  @media print{ body{background:#fff} .chart-card,.stage,section{break-inside:avoid} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="mast">
+    <div class="brand"><span class="dot"></span>Brandology</div>
+    <div class="meta">
+      تقرير أداء العميل<br>
+      <b class="lat">KindMind</b> · حملات الإعلانات المدفوعة<br>
+      <span class="num">يناير – 13 يونيو 2026</span>
+    </div>
+  </header>
+
+  <div class="lede">
+    <div class="kicker">مراجعة ستة أشهر</div>
+    <h1>إنفاق أقل،<br>عملاء <em>أكثر.</em></h1>
+    <p>انخفضت تكلفة العميل المحتمل من <span class="num">1,526</span> جنيهاً في يناير إلى <span class="num">416</span> جنيهاً بحلول منتصف يونيو، بينما تضاعف عدد العملاء المحتملين شهرياً. ويتتبّع القمع الآن المسار حتى إتمام الصفقة.</p>
+  </div>
+
+  <div class="figs">
+    <div class="fig">
+      <div class="lab">إجمالي الإنفاق</div>
+      <div class="val num">263,062<small>جنيه</small></div>
+      <div class="sub">عبر ست فترات تقارير</div>
+    </div>
+    <div class="fig">
+      <div class="lab">المحتملون + الرسائل</div>
+      <div class="val num">311</div>
+      <div class="sub"><span class="num">292</span> عميلاً محتملاً · <span class="num">19</span> رسالة مباشرة</div>
+    </div>
+    <div class="fig accent">
+      <div class="lab">متوسط تكلفة العميل</div>
+      <div class="val num">846<small>جنيه</small></div>
+      <div class="sub">إجمالي الإنفاق ÷ جهات الاتصال</div>
+    </div>
+    <div class="fig">
+      <div class="lab">أحدث تكلفة</div>
+      <div class="val num">416<small>جنيه</small></div>
+      <div class="sub"><span class="num">1–13</span> يونيو · أفضل أداء</div>
+    </div>
+  </div>
+
+  <section>
+    <div class="sec-head">
+      <span class="idx">01</span>
+      <h2>الإنفاق مقابل الكفاءة</h2>
+      <span class="line"></span>
+    </div>
+    <div class="chart-card">
+      <div class="legend">
+        <span><i class="swatch bar"></i>الميزانية الشهرية (جنيه)</span>
+        <span><i class="swatch line"></i>تكلفة العميل المحتمل (جنيه)</span>
+      </div>
+      <svg id="chart" viewBox="0 0 960 460" role="img"
+        aria-label="رسم بياني مركّب: الأعمدة الحمراء تمثل الميزانية الشهرية، والخط الذهبي يمثل تكلفة العميل المحتمل. تبلغ الميزانية ذروتها في يناير وأبريل، وترتفع التكلفة في فبراير ثم تنخفض تدريجياً إلى أدنى مستوياتها في مايو ويونيو."></svg>
+      <p class="chart-note">فبراير هو الاستثناء: إنفاق قريب من المتوسط لم يحقق سوى <span class="num">9</span> عملاء محتملين، ما رفع التكلفة إلى <span class="num">4,455</span> جنيهاً. ومن مارس فصاعداً تتحسّن الكفاءة في كل فترة مع استقرار الاستهداف والمحتوى الإعلاني.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="idx">02</span>
+      <h2>السجل الكامل</h2>
+      <span class="line"></span>
+    </div>
+    <table>
+      <caption>تُحتسب تكلفة العميل = الميزانية ÷ (المحتملون + الرسائل) حتى أبريل، و الميزانية ÷ المحتملون لفترتي مايو ويونيو، مطابقةً للملف المصدر.</caption>
+      <thead>
+        <tr>
+          <th>الفترة</th>
+          <th>الميزانية</th>
+          <th>محتملون</th>
+          <th>رسائل</th>
+          <th>التكلفة</th>
+          <th>مؤهلون</th>
+          <th>مكتمل</th>
+        </tr>
+      </thead>
+      <tbody class="num">
+        <tr><td>يناير</td><td>67,125</td><td>36</td><td>8</td><td>1,525.57</td><td class="muted">—</td><td class="muted">—</td></tr>
+        <tr><td>فبراير</td><td>40,093</td><td>9</td><td class="muted">0</td><td>4,454.78</td><td class="muted">—</td><td class="muted">—</td></tr>
+        <tr><td>مارس</td><td>50,555</td><td>75</td><td class="muted">0</td><td>674.07</td><td class="muted">—</td><td class="muted">—</td></tr>
+        <tr><td>أبريل</td><td>65,520</td><td>66</td><td>11</td><td>850.91</td><td class="muted">—</td><td class="muted">—</td></tr>
+        <tr><td>22–31 مايو</td><td>8,968</td><td>32</td><td class="muted">0</td><td class="cpl-best">280.25</td><td>1</td><td class="muted">—</td></tr>
+        <tr><td>1–13 يونيو</td><td>30,801</td><td>74</td><td class="muted">0</td><td>416.23</td><td>35</td><td>4</td></tr>
+      </tbody>
+      <tfoot class="num">
+        <tr><td>الإجمالي</td><td>263,062</td><td>292</td><td>19</td><td>845.86</td><td>36</td><td>4</td></tr>
+      </tfoot>
+    </table>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="idx">03</span>
+      <h2>من عميل محتمل إلى صفقة مغلقة</h2>
+      <span class="line"></span>
+    </div>
+    <div class="funnel">
+      <div class="stage s1">
+        <div class="lab">إجمالي جهات الاتصال</div>
+        <div class="n num">311</div>
+        <div class="rate">عملاء محتملون ورسائل مباشرة</div>
+      </div>
+      <div class="stage s2">
+        <div class="lab">مؤهلون</div>
+        <div class="n num">36</div>
+        <div class="rate"><span class="num">11.6%</span> من جهات الاتصال · يُتتبَّع منذ أواخر مايو</div>
+      </div>
+      <div class="stage s3">
+        <div class="lab">صفقات مكتملة</div>
+        <div class="n num">4</div>
+        <div class="rate"><span class="num">11.1%</span> من المؤهلين · أول الإغلاقات في يونيو</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="idx">04</span>
+      <h2>قراءة الربع</h2>
+      <span class="line"></span>
+    </div>
+    <div class="read">
+      <p><strong>الكفاءة تتجه في الاتجاه الصحيح.</strong> بعد تراجع فبراير، انخفضت تكلفة العميل المحتمل أربع فترات متتالية، من <span class="num">674</span> جنيهاً في مارس إلى <span class="num">416</span> جنيهاً في يونيو. وجاءت دفعة أواخر مايو (<span class="num">280</span> جنيهاً) على ميزانية اختبارية صغيرة بلغت <span class="num">8,968</span> جنيهاً، فتعامل معها كمؤشر اتجاه لا كمعيار ثابت.</p>
+      <p><strong>الحجم يتعافى بأموال أقل.</strong> حقّق يونيو <span class="num">74</span> عميلاً محتملاً على <span class="num">30,801</span> جنيه، أي نحو نصف إنفاق يناير مقابل ضِعف العملاء. ولم يدخل التأهيل والإغلاق في التتبّع إلا في الفترتين الأخيرتين، لذا فإن <span class="num">36</span> مؤهلاً و<span class="num">4</span> صفقات مكتملة قراءة مبكرة لا حكماً نهائياً على القمع كاملاً.</p>
+      <p><strong>الخطوة التالية:</strong> الحفاظ على استهداف يونيو، وإعادة رفع الميزانية نحو نطاق <span class="num">50–65</span> ألف جنيه الذي يقود الحجم تاريخياً، وتسجيل المؤهلين والصفقات المكتملة من الفترة الأولى حتى تصبح معدلات التحويل موثوقة.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>أُعدّ بواسطة <span class="lat">Brandology</span> لصالح <span class="lat">KindMind</span></span>
+    <span class="num">المصدر: Report Clients.xlsx · 15 يونيو 2026</span>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  const periods=["يناير","فبراير","مارس","أبريل","22–31 مايو","1–13 يونيو"];
+  const budget=[67125,40093,50555,65520,8968,30801];
+  const cpl=[1525.57,4454.78,674.07,850.91,280.25,416.23];
+
+  const W=960,H=460,m={t:34,r:64,b:58,l:64};
+  const iw=W-m.l-m.r, ih=H-m.t-m.b, n=periods.length, sw=iw/n;
+  const bMax=70000, cMax=4600;
+  // RTL: i=0 (يناير) sits on the far right
+  const cx=i=>m.l+iw-(sw*i+sw/2);
+  const bw=sw*0.5;
+  const yB=v=>m.t+ih-(v/bMax)*ih;
+  const yC=v=>m.t+ih-(v/cMax)*ih;
+
+  const NS="http://www.w3.org/2000/svg";
+  const svg=document.getElementById("chart");
+  const css=getComputedStyle(document.documentElement);
+  const red=css.getPropertyValue("--red").trim();
+  const gold=css.getPropertyValue("--gold-ink").trim();
+  const ink=css.getPropertyValue("--ink").trim();
+  const faint=css.getPropertyValue("--ink-faint").trim();
+  const ruleSoft=css.getPropertyValue("--rule-soft").trim();
+  const FF="Thmanyah Serif Text, serif";
+  const el=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+
+  // gridlines + budget axis on the RIGHT
+  for(let v=0;v<=bMax;v+=10000){
+    const y=yB(v);
+    svg.appendChild(el("line",{x1:m.l,y1:y,x2:m.l+iw,y2:y,stroke:ruleSoft,"stroke-width":1}));
+    const t=el("text",{x:m.l+iw+12,y:y+4,"text-anchor":"start","font-size":12,fill:faint,"font-family":FF});
+    t.textContent=(v/1000)+"k"; svg.appendChild(t);
+  }
+  // CPL axis on the LEFT
+  for(let v=0;v<=cMax;v+=1000){
+    const y=yC(v);
+    const t=el("text",{x:m.l-12,y:y+4,"text-anchor":"end","font-size":12,fill:gold,"font-family":FF});
+    t.textContent=(v/1000).toFixed(0)+"k"; svg.appendChild(t);
+  }
+
+  // bars + labels
+  budget.forEach((v,i)=>{
+    const c=cx(i), by=yB(v);
+    svg.appendChild(el("rect",{x:c-bw/2,y:by,width:bw,height:m.t+ih-by,fill:red,rx:2}));
+    const vl=el("text",{x:c,y:by-9,"text-anchor":"middle","font-size":12.5,fill:ink,"font-weight":500,"font-family":FF});
+    vl.textContent=v.toLocaleString("en-US"); svg.appendChild(vl);
+    const xl=el("text",{x:c,y:m.t+ih+24,"text-anchor":"middle","font-size":13,fill:ink,"font-family":FF});
+    xl.textContent=periods[i]; svg.appendChild(xl);
+  });
+
+  // CPL line (drawn in same right-to-left order)
+  const pts=cpl.map((v,i)=>[cx(i),yC(v)]);
+  svg.appendChild(el("polyline",{points:pts.map(p=>p.join(",")).join(" "),fill:"none",stroke:gold,"stroke-width":2.5,"stroke-linejoin":"round","stroke-linecap":"round"}));
+  pts.forEach((p,i)=>{
+    svg.appendChild(el("circle",{cx:p[0],cy:p[1],r:5,fill:"var(--paper-2)",stroke:gold,"stroke-width":2.5}));
+    const t=el("text",{x:p[0],y:p[1]-13,"text-anchor":"middle","font-size":12,fill:gold,"font-weight":500,"font-family":FF});
+    t.textContent=Math.round(cpl[i]).toLocaleString("en-US"); svg.appendChild(t);
+  });
+})();
+</script>
+</body>
+</html>

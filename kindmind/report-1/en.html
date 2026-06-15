@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KindMind — Performance Report · Brandology</title>
+<style>
+  /* Thmanyah Serif Text — hosted woff2 (official font.thmanyah.com assets) */
+  @font-face{font-family:"Thmanyah Serif Text";src:url("https://framerusercontent.com/assets/pXAhTrUNoEDB4CTUcjXvXy1gFAc.woff2") format("woff2");font-weight:300;font-style:normal;font-display:swap}
+  @font-face{font-family:"Thmanyah Serif Text";src:url("https://framerusercontent.com/assets/3WPjrTAizPcMoDaKDtKdNB0Jo50.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:"Thmanyah Serif Text";src:url("https://framerusercontent.com/assets/bsVNF5mKouPfUJiPWsBKDU324NM.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+  @font-face{font-family:"Thmanyah Serif Text";src:url("https://framerusercontent.com/assets/z8brS6Wjld2pvgVBkmzMQpyPO4.woff2") format("woff2");font-weight:900;font-style:normal;font-display:swap}
+  /* display cut for the very large numerals */
+  @font-face{font-family:"Thmanyah Serif Display";src:url("https://framerusercontent.com/assets/a9r2dKNoQcqFiTkwxTUnXgAfjws.woff2") format("woff2");font-weight:900;font-style:normal;font-display:swap}
+
+  :root{
+    --paper:oklch(0.974 0.008 70);
+    --paper-2:oklch(0.992 0.006 80);
+    --ink:oklch(0.255 0.014 250);
+    --ink-soft:oklch(0.46 0.012 250);
+    --ink-faint:oklch(0.62 0.01 250);
+    --rule:oklch(0.255 0.014 250 / 0.14);
+    --rule-soft:oklch(0.255 0.014 250 / 0.07);
+    --red:oklch(0.535 0.214 27);     /* #C9100E */
+    --red-deep:oklch(0.44 0.18 27);  /* #8E0A09 */
+    --red-wash:oklch(0.535 0.214 27 / 0.08);
+    --gold:oklch(0.79 0.155 80);     /* #F5B301 */
+    --gold-ink:oklch(0.55 0.12 75);
+    --good:oklch(0.55 0.12 150);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Thmanyah Serif Text",Georgia,serif;font-weight:400;
+    line-height:1.5;letter-spacing:-0.003em;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    font-feature-settings:"tnum" 0;
+  }
+  .num{font-variant-numeric:tabular-nums lining-nums;font-feature-settings:"tnum" 1,"lnum" 1}
+  .wrap{max-width:1080px;margin:0 auto;padding:clamp(28px,5vw,72px) clamp(20px,5vw,56px)}
+
+  /* ---- masthead ---- */
+  .mast{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+    padding-bottom:18px;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:-0.02em;font-size:19px}
+  .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px var(--red-wash)}
+  .meta{text-align:right;font-size:12.5px;color:var(--ink-soft);line-height:1.6;letter-spacing:0.01em}
+  .meta b{color:var(--ink);font-weight:500}
+
+  .lede{margin:clamp(34px,6vw,60px) 0 clamp(30px,5vw,52px);max-width:30ch}
+  .kicker{font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--red-deep);font-weight:500;margin-bottom:18px}
+  h1{font-family:"Thmanyah Serif Display","Thmanyah Serif Text",serif;font-weight:900;
+    font-size:clamp(38px,7vw,76px);line-height:0.98;letter-spacing:-0.025em;margin:0;color:var(--ink)}
+  h1 em{font-style:normal;color:var(--red)}
+  .lede p{font-size:clamp(16px,2.1vw,19px);color:var(--ink-soft);font-weight:300;
+    max-width:58ch;margin:22px 0 0;line-height:1.55}
+
+  /* ---- top figures (editorial strip, not card grid) ---- */
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+  .fig{padding:26px 26px 24px;border-right:1px solid var(--rule-soft)}
+  .fig:last-child{border-right:0}
+  .fig .lab{font-size:11.5px;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink-faint);font-weight:500}
+  .fig .val{font-family:"Thmanyah Serif Display","Thmanyah Serif Text",serif;font-weight:900;
+    font-size:clamp(30px,4.4vw,46px);line-height:1;margin:14px 0 7px;letter-spacing:-0.02em}
+  .fig .val small{font-size:0.42em;font-weight:500;color:var(--ink-soft);letter-spacing:0;margin-left:2px}
+  .fig .sub{font-size:13px;color:var(--ink-soft);font-weight:300}
+  .fig.accent .val{color:var(--red)}
+
+  section{margin-top:clamp(48px,8vw,88px)}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:28px}
+  .sec-head h2{font-size:clamp(21px,3vw,27px);font-weight:900;letter-spacing:-0.02em;margin:0;white-space:nowrap}
+  .sec-head .line{flex:1;height:1px;background:var(--rule)}
+  .sec-head .idx{font-size:12px;color:var(--ink-faint);font-weight:500;letter-spacing:0.08em}
+
+  /* ---- chart ---- */
+  .chart-card{background:var(--paper-2);border:1px solid var(--rule);border-radius:3px;padding:clamp(18px,3vw,30px) clamp(14px,3vw,26px) clamp(10px,2vw,18px)}
+  .legend{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--ink-soft);margin-bottom:6px;padding-left:4px}
+  .legend span{display:inline-flex;align-items:center;gap:8px}
+  .swatch{width:14px;height:14px;border-radius:2px;display:inline-block}
+  .swatch.bar{background:var(--red)}
+  .swatch.line{width:18px;height:0;border-top:2.5px solid var(--gold-ink);border-radius:0;position:relative}
+  .swatch.line::after{content:"";position:absolute;left:50%;top:50%;width:7px;height:7px;border-radius:50%;background:var(--gold-ink);transform:translate(-50%,-50%)}
+  svg{display:block;width:100%;height:auto;overflow:visible}
+  .chart-note{font-size:12.5px;color:var(--ink-faint);font-weight:300;margin:14px 4px 0;max-width:70ch}
+
+  /* ---- table ---- */
+  table{width:100%;border-collapse:collapse;font-size:14.5px}
+  caption{text-align:left;font-size:13px;color:var(--ink-faint);padding-bottom:12px;font-weight:300}
+  thead th{font-size:11.5px;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-faint);
+    font-weight:500;text-align:right;padding:0 0 12px;border-bottom:1.5px solid var(--ink)}
+  thead th:first-child{text-align:left}
+  tbody td{padding:14px 0;border-bottom:1px solid var(--rule-soft);text-align:right;color:var(--ink)}
+  tbody td:first-child{text-align:left;font-weight:500}
+  tbody tr:hover{background:var(--red-wash)}
+  .muted{color:var(--ink-faint)}
+  .cpl-best{color:var(--red);font-weight:500}
+  tfoot td{padding:16px 0;border-top:1.5px solid var(--ink);text-align:right;font-weight:900;
+    font-family:"Thmanyah Serif Display","Thmanyah Serif Text",serif}
+  tfoot td:first-child{text-align:left}
+
+  /* ---- funnel ---- */
+  .funnel{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,22px)}
+  .stage{padding:28px 24px;border:1px solid var(--rule);border-radius:3px;background:var(--paper-2);position:relative}
+  .stage .lab{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:500}
+  .stage .n{font-family:"Thmanyah Serif Display","Thmanyah Serif Text",serif;font-weight:900;font-size:clamp(40px,6vw,60px);line-height:1;margin:16px 0 6px}
+  .stage .rate{font-size:13px;color:var(--ink-soft);font-weight:300}
+  .stage.s2 .n{color:var(--gold-ink)}
+  .stage.s3 .n{color:var(--red)}
+
+  .read{max-width:64ch;font-size:16px;color:var(--ink-soft);font-weight:300;line-height:1.65}
+  .read strong{color:var(--ink);font-weight:500}
+  .read p{margin:0 0 16px}
+
+  footer{margin-top:clamp(56px,9vw,96px);padding-top:20px;border-top:1px solid var(--rule);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    font-size:12px;color:var(--ink-faint);letter-spacing:0.02em}
+
+  @media(max-width:720px){
+    .figs{grid-template-columns:repeat(2,1fr)}
+    .fig:nth-child(2){border-right:0}
+    .fig:nth-child(1),.fig:nth-child(2){border-bottom:1px solid var(--rule-soft)}
+    .funnel{grid-template-columns:1fr}
+    .meta{text-align:left}
+    table{font-size:13px}
+  }
+  @media print{
+    body{background:#fff}
+    .chart-card,.stage{break-inside:avoid}
+    section{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="mast">
+    <div class="brand"><span class="dot"></span>Brandology</div>
+    <div class="meta">
+      Client Performance Report<br>
+      <b>KindMind</b> · Paid Acquisition<br>
+      <span class="num">Jan – 13 Jun 2026</span>
+    </div>
+  </header>
+
+  <div class="lede">
+    <div class="kicker">Six-month review</div>
+    <h1>Spend down,<br>leads <em>up.</em></h1>
+    <p>Cost per lead fell from EGP 1,526 in January to EGP 416 by mid-June, while monthly lead volume more than doubled. The funnel now tracks all the way to closed.</p>
+  </div>
+
+  <div class="figs">
+    <div class="fig">
+      <div class="lab">Total spend</div>
+      <div class="val num">263,062<small>EGP</small></div>
+      <div class="sub">across six reporting periods</div>
+    </div>
+    <div class="fig">
+      <div class="lab">Leads + messages</div>
+      <div class="val num">311</div>
+      <div class="sub">292 leads · 19 direct messages</div>
+    </div>
+    <div class="fig accent">
+      <div class="lab">Blended CPL</div>
+      <div class="val num">846<small>EGP</small></div>
+      <div class="sub">total spend ÷ total contacts</div>
+    </div>
+    <div class="fig">
+      <div class="lab">Latest CPL</div>
+      <div class="val num">416<small>EGP</small></div>
+      <div class="sub">1–13 June · best full-month run</div>
+    </div>
+  </div>
+
+  <section>
+    <div class="sec-head">
+      <span class="idx">01</span>
+      <h2>Spend against efficiency</h2>
+      <span class="line"></span>
+    </div>
+    <div class="chart-card">
+      <div class="legend">
+        <span><i class="swatch bar"></i>Monthly budget (EGP)</span>
+        <span><i class="swatch line"></i>Cost per lead (EGP)</span>
+      </div>
+      <svg id="chart" viewBox="0 0 960 460" role="img"
+        aria-label="Combination chart: red bars show monthly budget, gold line shows cost per lead. Budget peaks in January and April; cost per lead spikes in February then falls steadily to its lowest in May and June."></svg>
+      <p class="chart-note">February is the outlier: near-average spend returned only 9 leads, pushing CPL to EGP 4,455. From March onward efficiency improves every period as targeting and creative settle.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="idx">02</span>
+      <h2>The full ledger</h2>
+      <span class="line"></span>
+    </div>
+    <table>
+      <caption>CPL is budget ÷ (leads + messages) through April, and budget ÷ leads for the May–June periods, matching the source sheet.</caption>
+      <thead>
+        <tr>
+          <th>Period</th>
+          <th>Budget</th>
+          <th>Leads</th>
+          <th>Msg</th>
+          <th>CPL</th>
+          <th>Qualified</th>
+          <th>Done</th>
+        </tr>
+      </thead>
+      <tbody class="num">
+        <tr><td>January</td><td>67,125</td><td>36</td><td>8</td><td>1,525.57</td><td class="muted">—</td><td class="muted">—</td></tr>
+        <tr><td>February</td><td>40,093</td><td>9</td><td class="muted">0</td><td>4,454.78</td><td class="muted">—</td><td class="muted">—</td></tr>
+        <tr><td>March</td><td>50,555</td><td>75</td><td class="muted">0</td><td>674.07</td><td class="muted">—</td><td class="muted">—</td></tr>
+        <tr><td>April</td><td>65,520</td><td>66</td><td>11</td><td>850.91</td><td class="muted">—</td><td class="muted">—</td></tr>
+        <tr><td>22–31 May</td><td>8,968</td><td>32</td><td class="muted">0</td><td class="cpl-best">280.25</td><td>1</td><td class="muted">—</td></tr>
+        <tr><td>1–13 June</td><td>30,801</td><td>74</td><td class="muted">0</td><td>416.23</td><td>35</td><td>4</td></tr>
+      </tbody>
+      <tfoot class="num">
+        <tr><td>Total</td><td>263,062</td><td>292</td><td>19</td><td>845.86</td><td>36</td><td>4</td></tr>
+      </tfoot>
+    </table>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="idx">03</span>
+      <h2>From lead to closed</h2>
+      <span class="line"></span>
+    </div>
+    <div class="funnel">
+      <div class="stage s1">
+        <div class="lab">Total contacts</div>
+        <div class="n num">311</div>
+        <div class="rate">leads and direct messages</div>
+      </div>
+      <div class="stage s2">
+        <div class="lab">Qualified</div>
+        <div class="n num">36</div>
+        <div class="rate">11.6% of contacts · tracked from late May</div>
+      </div>
+      <div class="stage s3">
+        <div class="lab">Done</div>
+        <div class="n num">4</div>
+        <div class="rate">11.1% of qualified · first closes in June</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="idx">04</span>
+      <h2>Reading the quarter</h2>
+      <span class="line"></span>
+    </div>
+    <div class="read">
+      <p><strong>Efficiency is trending the right way.</strong> After the February dip, cost per lead dropped four periods running, from EGP 674 in March to EGP 416 in June. The late-May burst (EGP 280) came on a small EGP 8,968 test budget, so treat it as directional rather than a stable benchmark.</p>
+      <p><strong>Volume is recovering with less money.</strong> June produced 74 leads on EGP 30,801, roughly half of January's spend for double the leads. Qualification and closing only entered the tracker in the last two periods, so 36 qualified and 4 done are an early read, not a full-funnel verdict.</p>
+      <p><strong>Next:</strong> hold June's targeting, scale the budget back toward the EGP 50–65k range that historically drives volume, and keep qualified and done logged from period one so conversion rates become trustworthy.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Prepared by Brandology for KindMind</span>
+    <span class="num">Source: Report Clients.xlsx · 15 Jun 2026</span>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  const periods=["Jan","Feb","Mar","Apr","22–31 May","1–13 Jun"];
+  const budget=[67125,40093,50555,65520,8968,30801];
+  const cpl=[1525.57,4454.78,674.07,850.91,280.25,416.23];
+
+  const W=960,H=460,m={t:34,r:64,b:58,l:64};
+  const iw=W-m.l-m.r, ih=H-m.t-m.b;
+  const bMax=70000, cMax=4600;
+  const x=i=>m.l+(iw/periods.length)*i;
+  const bw=(iw/periods.length)*0.5;
+  const yB=v=>m.t+ih-(v/bMax)*ih;
+  const yC=v=>m.t+ih-(v/cMax)*ih;
+
+  const NS="http://www.w3.org/2000/svg";
+  const svg=document.getElementById("chart");
+  const css=getComputedStyle(document.documentElement);
+  const red=css.getPropertyValue("--red").trim();
+  const gold=css.getPropertyValue("--gold-ink").trim();
+  const ink=css.getPropertyValue("--ink").trim();
+  const faint=css.getPropertyValue("--ink-faint").trim();
+  const ruleSoft=css.getPropertyValue("--rule-soft").trim();
+  const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+
+  // gridlines + left axis (budget)
+  for(let v=0;v<=bMax;v+=10000){
+    const y=yB(v);
+    svg.appendChild(el("line",{x1:m.l,y1:y,x2:m.l+iw,y2:y,stroke:ruleSoft,"stroke-width":1}));
+    const t=el("text",{x:m.l-12,y:y+4,"text-anchor":"end","font-size":12,fill:faint,"font-family":"Thmanyah Serif Text, serif"});
+    t.textContent=(v/1000)+"k"; svg.appendChild(t);
+  }
+  // right axis (CPL)
+  for(let v=0;v<=cMax;v+=1000){
+    const y=yC(v);
+    const t=el("text",{x:m.l+iw+12,y:y+4,"text-anchor":"start","font-size":12,fill:gold,"font-family":"Thmanyah Serif Text, serif"});
+    t.textContent=(v/1000).toFixed(0)+"k"; svg.appendChild(t);
+  }
+
+  // bars + value labels + x labels
+  budget.forEach((v,i)=>{
+    const cx=x(i)+(iw/periods.length)/2;
+    const bx=cx-bw/2, by=yB(v);
+    svg.appendChild(el("rect",{x:bx,y:by,width:bw,height:m.t+ih-by,fill:red,rx:2}));
+    const vl=el("text",{x:cx,y:by-9,"text-anchor":"middle","font-size":12.5,fill:ink,"font-weight":500,"font-family":"Thmanyah Serif Text, serif"});
+    vl.textContent=v.toLocaleString("en-US"); svg.appendChild(vl);
+    const xl=el("text",{x:cx,y:m.t+ih+24,"text-anchor":"middle","font-size":13,fill:ink,"font-family":"Thmanyah Serif Text, serif"});
+    xl.textContent=periods[i]; svg.appendChild(xl);
+  });
+
+  // CPL line
+  const pts=cpl.map((v,i)=>[x(i)+(iw/periods.length)/2,yC(v)]);
+  svg.appendChild(el("polyline",{points:pts.map(p=>p.join(",")).join(" "),fill:"none",stroke:gold,"stroke-width":2.5,"stroke-linejoin":"round","stroke-linecap":"round"}));
+  pts.forEach((p,i)=>{
+    svg.appendChild(el("circle",{cx:p[0],cy:p[1],r:5,fill:"var(--paper-2)",stroke:gold,"stroke-width":2.5}));
+    const above = cpl[i]>1200; // place label clear of the bar top
+    const ly = above ? p[1]-13 : p[1]-13;
+    const t=el("text",{x:p[0]+ (i===0?6:0),y:ly,"text-anchor":"middle","font-size":12,fill:gold,"font-weight":500,"font-family":"Thmanyah Serif Text, serif"});
+    t.textContent=Math.round(cpl[i]).toLocaleString("en-US"); svg.appendChild(t);
+  });
+})();
+</script>
+</body>
+</html>
