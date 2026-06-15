@@ -32,8 +32,11 @@
     font-family:"Thmanyah Serif Text",Georgia,serif;font-weight:400;
     line-height:1.7;letter-spacing:0;
     -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    overflow-x:hidden;
   }
   .num{font-variant-numeric:tabular-nums lining-nums;font-feature-settings:"tnum" 1,"lnum" 1;unicode-bidi:isolate}
+  /* numeric ranges (22–31, 1–13, 50–65) must stay left-to-right so the dash reads correctly */
+  .rng{direction:ltr;unicode-bidi:isolate;white-space:nowrap}
   .lat{direction:ltr;unicode-bidi:isolate;display:inline-block}
   .wrap{max-width:1080px;margin:0 auto;padding:clamp(28px,5vw,72px) clamp(20px,5vw,56px)}
 
@@ -78,7 +81,8 @@
   svg{display:block;width:100%;height:auto;overflow:visible}
   .chart-note{font-size:13.5px;color:var(--ink-faint);font-weight:300;margin:14px 4px 0;max-width:72ch;line-height:1.7}
 
-  table{width:100%;border-collapse:collapse;font-size:15px}
+  .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{width:100%;min-width:540px;border-collapse:collapse;font-size:15px}
   caption{text-align:right;font-size:13.5px;color:var(--ink-faint);padding-bottom:12px;font-weight:300;line-height:1.7}
   thead th{font-size:13px;color:var(--ink-faint);font-weight:500;text-align:right;padding:0 0 12px;border-bottom:1.5px solid var(--ink)}
   tbody td{padding:14px 0;border-bottom:1px solid var(--rule-soft);text-align:right;color:var(--ink)}
@@ -111,6 +115,14 @@
     .funnel{grid-template-columns:1fr}
     .meta{text-align:right}
     table{font-size:13.5px}
+  }
+  @media(max-width:520px){
+    .figs{grid-template-columns:1fr}
+    .fig{border-left:0;border-bottom:1px solid var(--rule-soft);padding:20px 4px}
+    .fig:last-child{border-bottom:0}
+    .fig .val{font-size:34px}
+    .mast{align-items:flex-start}
+    h1{font-size:clamp(34px,11vw,48px)}
   }
   @media print{ body{background:#fff} .chart-card,.stage,section{break-inside:avoid} }
 </style>
@@ -152,7 +164,7 @@
     <div class="fig">
       <div class="lab">أحدث تكلفة</div>
       <div class="val num">416<small>جنيه</small></div>
-      <div class="sub"><span class="num">1–13</span> يونيو · أفضل أداء</div>
+      <div class="sub"><span class="rng">1–13</span> يونيو · أفضل أداء</div>
     </div>
   </div>
 
@@ -179,6 +191,7 @@
       <h2>السجل الكامل</h2>
       <span class="line"></span>
     </div>
+    <div class="table-scroll">
     <table>
       <caption>تُحتسب تكلفة العميل = الميزانية ÷ (المحتملون + الرسائل) حتى أبريل، و الميزانية ÷ المحتملون لفترتي مايو ويونيو، مطابقةً للملف المصدر.</caption>
       <thead>
@@ -197,13 +210,14 @@
         <tr><td>فبراير</td><td>40,093</td><td>9</td><td class="muted">0</td><td>4,454.78</td><td class="muted">—</td><td class="muted">—</td></tr>
         <tr><td>مارس</td><td>50,555</td><td>75</td><td class="muted">0</td><td>674.07</td><td class="muted">—</td><td class="muted">—</td></tr>
         <tr><td>أبريل</td><td>65,520</td><td>66</td><td>11</td><td>850.91</td><td class="muted">—</td><td class="muted">—</td></tr>
-        <tr><td>22–31 مايو</td><td>8,968</td><td>32</td><td class="muted">0</td><td class="cpl-best">280.25</td><td>1</td><td class="muted">—</td></tr>
-        <tr><td>1–13 يونيو</td><td>30,801</td><td>74</td><td class="muted">0</td><td>416.23</td><td>35</td><td>4</td></tr>
+        <tr><td><span class="rng">22–31</span> مايو</td><td>8,968</td><td>32</td><td class="muted">0</td><td class="cpl-best">280.25</td><td>1</td><td class="muted">—</td></tr>
+        <tr><td><span class="rng">1–13</span> يونيو</td><td>30,801</td><td>74</td><td class="muted">0</td><td>416.23</td><td>35</td><td>4</td></tr>
       </tbody>
       <tfoot class="num">
         <tr><td>الإجمالي</td><td>263,062</td><td>292</td><td>19</td><td>845.86</td><td>36</td><td>4</td></tr>
       </tfoot>
     </table>
+    </div>
   </section>
 
   <section>
@@ -240,7 +254,7 @@
     <div class="read">
       <p><strong>الكفاءة تتجه في الاتجاه الصحيح.</strong> بعد تراجع فبراير، انخفضت تكلفة العميل المحتمل أربع فترات متتالية، من <span class="num">674</span> جنيهاً في مارس إلى <span class="num">416</span> جنيهاً في يونيو. وجاءت دفعة أواخر مايو (<span class="num">280</span> جنيهاً) على ميزانية اختبارية صغيرة بلغت <span class="num">8,968</span> جنيهاً، فتعامل معها كمؤشر اتجاه لا كمعيار ثابت.</p>
       <p><strong>الحجم يتعافى بأموال أقل.</strong> حقّق يونيو <span class="num">74</span> عميلاً محتملاً على <span class="num">30,801</span> جنيه، أي نحو نصف إنفاق يناير مقابل ضِعف العملاء. ولم يدخل التأهيل والإغلاق في التتبّع إلا في الفترتين الأخيرتين، لذا فإن <span class="num">36</span> مؤهلاً و<span class="num">4</span> صفقات مكتملة قراءة مبكرة لا حكماً نهائياً على القمع كاملاً.</p>
-      <p><strong>الخطوة التالية:</strong> الحفاظ على استهداف يونيو، وإعادة رفع الميزانية نحو نطاق <span class="num">50–65</span> ألف جنيه الذي يقود الحجم تاريخياً، وتسجيل المؤهلين والصفقات المكتملة من الفترة الأولى حتى تصبح معدلات التحويل موثوقة.</p>
+      <p><strong>الخطوة التالية:</strong> الحفاظ على استهداف يونيو، وإعادة رفع الميزانية نحو نطاق <span class="rng">50–65</span> ألف جنيه الذي يقود الحجم تاريخياً، وتسجيل المؤهلين والصفقات المكتملة من الفترة الأولى حتى تصبح معدلات التحويل موثوقة.</p>
     </div>
   </section>
 
