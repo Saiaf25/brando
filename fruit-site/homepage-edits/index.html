@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elite — Homepage Edit Preview (Annotated)</title>
+<title>Elite - Homepage Edit Preview (Annotated)</title>
 <!--
   ════════════════════════════════════════════════════════════════════════════
-  ANNOTATED HOMEPAGE PREVIEW — elitexfood.com
+  ANNOTATED HOMEPAGE PREVIEW - elitexfood.com
   ════════════════════════════════════════════════════════════════════════════
   This file is a faithful static recreation of the LIVE homepage at
   https://elitexfood.com/ (fetched 2026-06-23), with inline edit annotations.
 
   Each section carries a coloured badge in its top-right corner:
-    🟢 KEEP  — leave as-is
-    🟠 EDIT  — modify this section (instruction text in the badge + HTML comment)
-    🟡 ADD   — brand-new section, styled to match, ready to drop into the live site
+    🟢 KEEP  - leave as-is
+    🟠 EDIT  - modify this section (instruction text in the badge + HTML comment)
+    🟡 ADD   - brand-new section, styled to match, ready to drop into the live site
 
-  The badge CSS is scoped under body.annotate — the developer deletes the
+  The badge CSS is scoped under body.annotate - the developer deletes the
   <style id="annotate-only"> block and every element with class="ann" to ship.
   Everything else is the real homepage markup, restyled to match the live site.
   ════════════════════════════════════════════════════════════════════════════
@@ -252,10 +252,10 @@
   .reveal{opacity:1}
   @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
 
-  /* ═════════════════ ANNOTATION OVERLAY — developer deletes this block + every .ann element ═════════════════ */
+  /* ═════════════════ ANNOTATION OVERLAY - developer deletes this block + every .ann element ═════════════════ */
   body.annotate{position:relative}
   body.annotate::before{
-    content:"HOMEPAGE EDIT PREVIEW — annotations are temporary. Delete the #annotate-only style block and all .ann elements before shipping.";
+    content:"HOMEPAGE EDIT PREVIEW - annotations are temporary. Delete the #annotate-only style block and all .ann elements before shipping.";
     position:fixed;top:0;left:0;right:0;z-index:9999;
     background:oklch(0.30 0.07 152);color:#fff;font-family:'Hanken Grotesk',sans-serif;font-size:0.78rem;font-weight:600;
     padding:8px 16px;text-align:center;letter-spacing:0.02em;
@@ -310,7 +310,7 @@
      ════════════════════════════════════════════════════════════════════════════ -->
 <div class="ann-wrap">
   <span class="ann keep">Keep</span>
-  <div class="ann-note"><strong>Nav — Keep</strong>Logo, wordmark, four anchor links, and lime "Request a quote" button stay unchanged. Optional: add <code>#farming</code> and <code>#manufacturing</code> anchor links if you want the new sections in the nav bar.</div>
+  <div class="ann-note"><strong>Nav - Keep</strong>Logo, wordmark, four anchor links, and lime "Request a quote" button stay unchanged. Optional: add <code>#farming</code> and <code>#manufacturing</code> anchor links if you want the new sections in the nav bar.</div>
 <nav class="nav">
   <div class="nav-inner">
     <a class="brand" href="#top" aria-label="Elite home">
@@ -331,21 +331,21 @@
 <!-- ════════════════════════════════════════════════════════════════════════════
      2 · HERO  [EDIT × 2]
      Edit A: REPLACE the vague headline "Harvest-fresh today. Frozen within hours." with a direct one.
-     Edit B: lede paragraph — add "grows + manufactures" ownership wording.
+     Edit B: lede paragraph - add "grows + manufactures" ownership wording.
      ════════════════════════════════════════════════════════════════════════════ -->
 <div class="ann-wrap edit-block">
   <span class="ann edit">Edit · headline + lede</span>
-  <div class="ann-note"><strong>Hero — Edit (2 changes)</strong><br><br><strong>A. Headline — REPLACE entirely.</strong> Current "Harvest-fresh today. Frozen within hours." is too vague/lifestyle for a B2B export buyer. Replace with: <em>"From our farms to your port. Egyptian frozen vegetables &amp; fruits."</em> Keep the <code>.frozen</code> lime-accent span on the word "frozen".<br><br><strong>B. Lede paragraph — add farming + manufacturing ownership.</strong> New wording shown highlighted below.</div>
+  <div class="ann-note"><strong>Hero - Edit (2 changes)</strong><br><br><strong>A. Headline - REPLACE entirely.</strong> Current "Harvest-fresh today. Frozen within hours." is too vague/lifestyle for a B2B export buyer. Replace with: <em>"From our farms to your port. Egyptian frozen vegetables &amp; fruits."</em> Keep the <code>.frozen</code> lime-accent span on the word "frozen".<br><br><strong>B. Lede paragraph - add farming + manufacturing ownership.</strong> New wording shown highlighted below.</div>
 <header class="hero" id="top">
   <div class="hero-inner">
     <div>
-      <!-- EDIT A: headline — old struck through, new shown highlighted -->
+      <!-- EDIT A: headline - old struck through, new shown highlighted -->
       <h1>
         <span style="text-decoration:line-through;opacity:0.45;font-size:0.55em;display:block;margin-bottom:0.4rem;font-weight:500">Harvest-fresh today. Frozen within hours.</span>
         <span style="background:oklch(0.86 0.20 132 / 0.28);padding:0.05em 0.25em;border-radius:8px">From our farms to your port.<br>Egyptian <span class="frozen">frozen</span> vegetables &amp; fruits.</span>
       </h1>
-      <!-- EDIT B: lede paragraph — replaced wording -->
-      <p class="lede">Elite <span style="background:oklch(0.86 0.20 132 / 0.30);padding:0.05em 0.3em;border-radius:5px">grows, manufactures, and exports</span> premium Egyptian frozen vegetables and fruits — picked at peak season from our own Nile Delta farms, processed in our facility, and blast-frozen the same day, so they arrive at your port tasting like harvest morning.</p>
+      <!-- EDIT B: lede paragraph - replaced wording -->
+      <p class="lede">Elite <span style="background:oklch(0.86 0.20 132 / 0.30);padding:0.05em 0.3em;border-radius:5px">grows, manufactures, and exports</span> premium Egyptian frozen vegetables and fruits - picked at peak season from our own Nile Delta farms, processed in our facility, and blast-frozen the same day, so they arrive at your port tasting like harvest morning.</p>
       <div class="hero-ctas">
         <a class="btn btn-lime" href="#contact">Request a quote</a>
         <a class="btn btn-ghost" href="#products">Browse products</a>
@@ -367,7 +367,7 @@
      ════════════════════════════════════════════════════════════════════════════ -->
 <div class="ann-wrap">
   <span class="ann keep">Keep</span>
-  <div class="ann-note"><strong>Markets ribbon — Keep</strong>No change. Gabon · Senegal · West &amp; Central Africa · Europe · Russia · Asia stays as-is.</div>
+  <div class="ann-note"><strong>Markets ribbon - Keep</strong>No change. Gabon · Senegal · West &amp; Central Africa · Europe · Russia · Asia stays as-is.</div>
 <div class="markets reveal">
   <div class="markets-inner">
     <span class="markets-label">Shipping to</span>
@@ -380,12 +380,12 @@
 
 <!-- ════════════════════════════════════════════════════════════════════════════
      4 · ROUTE BAND  [EDIT]
-     Edit: expand from 4 steps to 5 — add "Manufacturing" step between Frozen and Packed.
+     Edit: expand from 4 steps to 5 - add "Manufacturing" step between Frozen and Packed.
      CSS: .elite-route-steps grid changes from repeat(4,1fr) to repeat(5,1fr).
      ════════════════════════════════════════════════════════════════════════════ -->
 <div class="ann-wrap edit-block">
   <span class="ann edit">Edit</span>
-  <div class="ann-note"><strong>Route — Edit (4→5 steps)</strong>Add a new "Manufacturing" step between Frozen and Packed. Renumber 03→04, 04→05. Change CSS <code>grid-template-columns:repeat(5,1fr)</code>. New step is shown highlighted below.</div>
+  <div class="ann-note"><strong>Route - Edit (4→5 steps)</strong>Add a new "Manufacturing" step between Frozen and Packed. Renumber 03→04, 04→05. Change CSS <code>grid-template-columns:repeat(5,1fr)</code>. New step is shown highlighted below.</div>
 <section class="route reveal" aria-label="How your order travels">
   <h2>From Egyptian fields to your warehouse, one unbroken line</h2>
   <div class="route-steps five">
@@ -403,7 +403,7 @@
     <div class="step new-step">
       <span class="step-no">03 <span style="font-size:0.62rem;color:var(--lime);font-weight:700;margin-left:4px">NEW</span></span>
       <h3>Manufactured for export</h3>
-      <p>Sorted, cleaned, cut, and processed in our own facility — prepped for retail packs, bulk cartons, and private-label formats before freezing.</p>
+      <p>Sorted, cleaned, cut, and processed in our own facility - prepped for retail packs, bulk cartons, and private-label formats before freezing.</p>
     </div>
     <div class="step">
       <span class="step-no">04</span>
@@ -420,17 +420,17 @@
 </div>
 
 <!-- ════════════════════════════════════════════════════════════════════════════
-     5 · FARMING  [ADD — brand-new section]
+     5 · FARMING  [ADD - brand-new section]
      Insert AFTER the route band and BEFORE the products mosaic.
      Source: brochure/index.html page 2. Image fallback: all-product.jpeg until client sends real farm photos.
      ════════════════════════════════════════════════════════════════════════════ -->
 <div class="ann-wrap new-block">
   <span class="ann add">Add · New section</span>
-  <div class="ann-note"><strong>Farming — ADD (new)</strong>Drop this section after the route band, before products. CSS uses <code>.elite-farm</code> classes matching the Elite system. Image is a temp fallback (<code>all-product.jpeg</code>) — swap when client sends real farm photos.</div>
+  <div class="ann-note"><strong>Farming - ADD (new)</strong>Drop this section after the route band, before products. CSS uses <code>.elite-farm</code> classes matching the Elite system. Image is a temp fallback (<code>all-product.jpeg</code>) - swap when client sends real farm photos.</div>
 <section class="farm reveal" id="farming" aria-label="Farming">
   <div class="farm-grid">
     <div class="farm-media">
-      <img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/all-product.jpeg" alt="Elite farm — Egyptian Nile Delta fields supplying frozen vegetables and fruits">
+      <img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/all-product.jpeg" alt="Elite farm - Egyptian Nile Delta fields supplying frozen vegetables and fruits">
       <div class="farm-stamp">Grown by Elite</div>
     </div>
     <div>
@@ -438,7 +438,7 @@
       <p class="farm-lead">Elite controls the chain from the soil up. Our vegetables and fruits are grown and sourced from Egyptian agricultural supply areas across the Nile Delta and Upper Egypt, harvested at full ripeness so colour, texture, and flavour survive the freezer and the journey to your port.</p>
       <ul class="farm-points">
         <li>Own and partner farms across the Nile Delta and Upper Egypt</li>
-        <li>Harvested at peak season, not before — for full ripeness and yield</li>
+        <li>Harvested at peak season, not before - for full ripeness and yield</li>
         <li>Egypt's long growing season gives us harvest windows most origins can't match</li>
         <li>Same-day handover from field to factory, no middlemen, no waiting</li>
       </ul>
@@ -448,27 +448,27 @@
 </div>
 
 <!-- ════════════════════════════════════════════════════════════════════════════
-     6 · MANUFACTURING  [ADD — brand-new section]
+     6 · MANUFACTURING  [ADD - brand-new section]
      Insert AFTER the farming section and BEFORE the products mosaic.
      Source: brochure/index.html page 2. Image fallback: 03-mp4.webp until client sends real factory photos.
      ════════════════════════════════════════════════════════════════════════════ -->
 <div class="ann-wrap new-block">
   <span class="ann add">Add · New section</span>
-  <div class="ann-note"><strong>Manufacturing — ADD (new)</strong>Drop after farming, before products. CSS uses <code>.elite-mfg</code> classes. Image is a temp fallback (<code>03-mp4.webp</code>) — swap when client sends real factory photos.</div>
+  <div class="ann-note"><strong>Manufacturing - ADD (new)</strong>Drop after farming, before products. CSS uses <code>.elite-mfg</code> classes. Image is a temp fallback (<code>03-mp4.webp</code>) - swap when client sends real factory photos.</div>
 <section class="mfg reveal" id="manufacturing" aria-label="Manufacturing">
   <div class="mfg-inner">
     <div>
       <h2>Manufactured in our own facility.</h2>
-      <p class="mfg-lead">Elite Fruit Manufacturing sorts, cleans, cuts, processes, and freezes vegetables and fruits in-house — built for retail packs, bulk cartons, and private-label formats. What passes our line is what reaches your customers, container after container.</p>
+      <p class="mfg-lead">Elite Fruit Manufacturing sorts, cleans, cuts, processes, and freezes vegetables and fruits in-house - built for retail packs, bulk cartons, and private-label formats. What passes our line is what reaches your customers, container after container.</p>
       <div class="mfg-list">
-        <div class="mfg-row"><span class="mfg-no">1</span><div><h3>Sorting, washing, cutting</h3><p>Raw produce is sorted by grade, washed, and cut to spec — IQF, diced, sliced, whole, or pulp.</p></div></div>
+        <div class="mfg-row"><span class="mfg-no">1</span><div><h3>Sorting, washing, cutting</h3><p>Raw produce is sorted by grade, washed, and cut to spec - IQF, diced, sliced, whole, or pulp.</p></div></div>
         <div class="mfg-row"><span class="mfg-no">2</span><div><h3>Blast freezing within hours</h3><p>IQF blast-frozen the same day to lock in colour, texture, and nutrients.</p></div></div>
         <div class="mfg-row"><span class="mfg-no">3</span><div><h3>Packing &amp; private label</h3><p>From 400&nbsp;g retail bags to 25&nbsp;kg bulk cartons, under your brand or ours.</p></div></div>
-        <div class="mfg-row"><span class="mfg-no">4</span><div><h3>Quality-controlled &amp; certified</h3><p>ISO 22000:2018 food safety + ISO 9001:2015 quality management — see certifications below.</p></div></div>
+        <div class="mfg-row"><span class="mfg-no">4</span><div><h3>Quality-controlled &amp; certified</h3><p>ISO 22000:2018 food safety + ISO 9001:2015 quality management - see certifications below.</p></div></div>
       </div>
     </div>
     <div class="mfg-media">
-      <img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/03-mp4.webp" alt="Elite Fruit Manufacturing — frozen vegetable and fruit processing line">
+      <img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/03-mp4.webp" alt="Elite Fruit Manufacturing - frozen vegetable and fruit processing line">
       <div class="mfg-chip">Elite Fruit Manufacturing<br>ISO 22000 · ISO 9001</div>
     </div>
   </div>
@@ -476,13 +476,13 @@
 </div>
 
 <!-- ════════════════════════════════════════════════════════════════════════════
-     7 · PRODUCTS MOSAIC  [EDIT — minor]
+     7 · PRODUCTS MOSAIC  [EDIT - minor]
      Edit: replace low-res Molokhia image (395×127) with a clearer shot from WhatsApp batch.
      All other 15 tiles keep their current real client images.
      ════════════════════════════════════════════════════════════════════════════ -->
 <div class="ann-wrap edit-block">
   <span class="ann edit">Edit · minor</span>
-  <div class="ann-note"><strong>Products — Edit (minor)</strong>Keep all 16 tiles, labels, grid structure. Only fix: <strong>Molokhia image</strong> is 395×127 px (low-res) — replace with a clearer shot from WhatsApp batch or request a new one from Nour.</div>
+  <div class="ann-note"><strong>Products - Edit (minor)</strong>Keep all 16 tiles, labels, grid structure. Only fix: <strong>Molokhia image</strong> is 395×127 px (low-res) - replace with a clearer shot from WhatsApp batch or request a new one from Nour.</div>
 <section class="products" id="products">
   <div class="products-head reveal">
     <h2>Sixteen products,<br>year-round supply</h2>
@@ -500,7 +500,7 @@
     <div class="tile"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/packd-spinach_1080x-1024x1024.webp" alt="Spinach"><div class="t-label"><strong>Spinach</strong><small>Leaf &amp; chopped</small></div></div>
     <div class="tile"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/Okra-1024x683.jpg" alt="Okra"><div class="t-label"><strong>Okra</strong><small>Zero &amp; extra</small></div></div>
     <!-- EDIT: Molokhia image is low-res (395x127). Replace with clearer shot. -->
-    <div class="tile" style="outline:2px dashed oklch(0.55 0.14 65);outline-offset:-6px"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/molokhia.jpeg" alt="Molokhia" style="opacity:0.7"><div class="t-label"><strong>Molokhia</strong><small>Minced leaf — <span style="color:oklch(0.55 0.14 65);font-weight:700">⚠ replace image</span></small></div></div>
+    <div class="tile" style="outline:2px dashed oklch(0.55 0.14 65);outline-offset:-6px"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/molokhia.jpeg" alt="Molokhia" style="opacity:0.7"><div class="t-label"><strong>Molokhia</strong><small>Minced leaf - <span style="color:oklch(0.55 0.14 65);font-weight:700">⚠ replace image</span></small></div></div>
     <div class="tile"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/frozen-fig2-3.webp" alt="Figs"><div class="t-label"><strong>Figs</strong><small>Whole</small></div></div>
     <div class="tile"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/apricots.jpg" alt="Apricot"><div class="t-label"><strong>Apricot</strong><small>Halves</small></div></div>
     <div class="tile"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/Pomegranate-1kg-1024x1024.png" alt="Pomegranate"><div class="t-label"><strong>Pomegranate</strong><small>Arils</small></div></div>
@@ -513,11 +513,11 @@
 
 <!-- ════════════════════════════════════════════════════════════════════════════
      8 · WHY ELITE  [EDIT]
-     Edit: add a 5th advantage row — "Certified quality you can verify" (ISO 22000 + ISO 9001).
+     Edit: add a 5th advantage row - "Certified quality you can verify" (ISO 22000 + ISO 9001).
      ════════════════════════════════════════════════════════════════════════════ -->
 <div class="ann-wrap edit-block">
   <span class="ann edit">Edit · add row</span>
-  <div class="ann-note"><strong>Why Elite — Edit</strong>Keep the 4 existing advantage rows. <strong>Add a 5th row</strong> for "Certified quality you can verify" (ISO 22000 + ISO 9001). New row shown highlighted below. Keeps stamp unchanged.</div>
+  <div class="ann-note"><strong>Why Elite - Edit</strong>Keep the 4 existing advantage rows. <strong>Add a 5th row</strong> for "Certified quality you can verify" (ISO 22000 + ISO 9001). New row shown highlighted below. Keeps stamp unchanged.</div>
 <section class="why" id="why">
   <div class="why-grid">
     <div class="why-media reveal">
@@ -545,13 +545,13 @@
      ════════════════════════════════════════════════════════════════════════════ -->
 <div class="ann-wrap edit-block">
   <span class="ann edit">Edit</span>
-  <div class="ann-note"><strong>About — Edit</strong>Replace the first paragraph to add farming + manufacturing ownership. Highlighted span shows the new wording. Keep second paragraph unchanged.</div>
+  <div class="ann-note"><strong>About - Edit</strong>Replace the first paragraph to add farming + manufacturing ownership. Highlighted span shows the new wording. Keep second paragraph unchanged.</div>
 <section class="about reveal" id="about">
   <div class="about-inner">
     <h2>About Elite</h2>
     <div>
-      <!-- EDIT: first paragraph — added "farming, manufacturing, and" + "own facility" -->
-      <p>Elite is an Egyptian <span class="ins">farming, manufacturing, and</span> export house specialised in frozen vegetables and fruits. We <span class="ins">grow and source from our own Nile Delta and Upper Egypt farms, process in our own Elite Fruit Manufacturing facility,</span> and ship through an unbroken cold chain — so importers get consistent quality, honest grading and competitive pricing from one accountable partner.</p>
+      <!-- EDIT: first paragraph - added "farming, manufacturing, and" + "own facility" -->
+      <p>Elite is an Egyptian <span class="ins">farming, manufacturing, and</span> export house specialised in frozen vegetables and fruits. We <span class="ins">grow and source from our own Nile Delta and Upper Egypt farms, process in our own Elite Fruit Manufacturing facility,</span> and ship through an unbroken cold chain - so importers get consistent quality, honest grading and competitive pricing from one accountable partner.</p>
       <p>We currently ship to partners across Africa, Europe, Russia and Asia, and we treat the first container with a new client as the start of a long relationship, not a one-off trade.</p>
     </div>
   </div>
@@ -563,7 +563,7 @@
      ════════════════════════════════════════════════════════════════════════════ -->
 <div class="ann-wrap">
   <span class="ann keep">Keep</span>
-  <div class="ann-note"><strong>Counter stats — Keep</strong>17 yrs · +6,000 m² · 98% · 10 days. Already supports the manufacturing story.</div>
+  <div class="ann-note"><strong>Counter stats - Keep</strong>17 yrs · +6,000 m² · 98% · 10 days. Already supports the manufacturing story.</div>
 <section class="counters reveal">
   <div class="counters-inner">
     <div class="counter"><div class="num">17</div><div class="lbl">Production experience (yrs)</div></div>
@@ -575,13 +575,13 @@
 </div>
 
 <!-- ════════════════════════════════════════════════════════════════════════════
-     11 · CERTIFICATIONS  [ADD — brand-new section]
+     11 · CERTIFICATIONS  [ADD - brand-new section]
      Insert AFTER counters and BEFORE the FAQ/benefits block.
      Upload brochure/assets/certificates/elite-fruit-22-cert.png + elite-fruit-9-cert.png to /wp-content/uploads/2026/06/certificates/.
      ════════════════════════════════════════════════════════════════════════════ -->
 <div class="ann-wrap new-block">
   <span class="ann add">Add · New section</span>
-  <div class="ann-note"><strong>Certifications — ADD (new)</strong>Drop after counters, before FAQ. Upload <code>elite-fruit-22-cert.png</code> (ISO 22000) + <code>elite-fruit-9-cert.png</code> (ISO 9001) to <code>/wp-content/uploads/2026/06/certificates/</code>. Placeholder cards shown below — replace <code>.ph</code> div with <code>&lt;img&gt;</code> once uploaded.</div>
+  <div class="ann-note"><strong>Certifications - ADD (new)</strong>Drop after counters, before FAQ. Upload <code>elite-fruit-22-cert.png</code> (ISO 22000) + <code>elite-fruit-9-cert.png</code> (ISO 9001) to <code>/wp-content/uploads/2026/06/certificates/</code>. Placeholder cards shown below - replace <code>.ph</code> div with <code>&lt;img&gt;</code> once uploaded.</div>
 <section class="certs reveal" id="certifications" aria-label="Certifications">
   <div class="certs-inner">
     <h2>Certified systems buyers can trust.</h2>
@@ -609,7 +609,7 @@
      ════════════════════════════════════════════════════════════════════════════ -->
 <div class="ann-wrap edit-block">
   <span class="ann edit">Edit · FAQ + year</span>
-  <div class="ann-note"><strong>Benefits + FAQ — Edit</strong>(1) Replace all 4 Lorem-ipsum FAQ items with the real B2B content shown highlighted. (2) Fix "Since 2025" → "Since 2009" to match the 17-year counter. Keep 3 benefit cards and 98% floater unchanged.</div>
+  <div class="ann-note"><strong>Benefits + FAQ - Edit</strong>(1) Replace all 4 Lorem-ipsum FAQ items with the real B2B content shown highlighted. (2) Fix "Since 2025" → "Since 2009" to match the 17-year counter. Keep 3 benefit cards and 98% floater unchanged.</div>
 <section class="benefits reveal">
   <div class="benefits-inner">
     <div class="benefits-left">
@@ -624,11 +624,11 @@
     </div>
     <div class="faq">
       <h2>Frequently Asked Questions</h2>
-      <!-- EDIT: all 4 FAQ items — old titles shown struck through, new content highlighted -->
+      <!-- EDIT: all 4 FAQ items - old titles shown struck through, new content highlighted -->
       <div class="faq-item open">
         <div class="faq-q"><span><span class="old-q"><strike>Lorem ipsum dolor sit amet</strike> &nbsp;→&nbsp; What is the minimum order quantity (MOQ)?</span></span><span class="pm"></span></div>
         <div class="faq-a">
-          <div class="new-a"><strong>New answer</strong>Our standard MOQ is one 20-foot reefer container, mixed by product and cut upon request. For new buyers testing a market, we can discuss a first-trial LCL shipment on selected SKUs — contact export@elitexfood.com with your product list and destination port for a tailored offer.</div>
+          <div class="new-a"><strong>New answer</strong>Our standard MOQ is one 20-foot reefer container, mixed by product and cut upon request. For new buyers testing a market, we can discuss a first-trial LCL shipment on selected SKUs - contact export@elitexfood.com with your product list and destination port for a tailored offer.</div>
         </div>
       </div>
       <div class="faq-item">
@@ -657,11 +657,11 @@
 <!-- ════════════════════════════════════════════════════════════════════════════
      13 · CONTACT  [EDIT × 1, KEEP rest]
      Edit: change the 3 email role labels to match the brochure (Delivery / Sales / Admin).
-     Confirm: WhatsApp link wa.me/201 is incomplete — get full number from client.
+     Confirm: WhatsApp link wa.me/201 is incomplete - get full number from client.
      ════════════════════════════════════════════════════════════════════════════ -->
 <div class="ann-wrap edit-block">
   <span class="ann edit">Edit · email roles</span>
-  <div class="ann-note"><strong>Contact — Edit (email roles)</strong>Keep headline, lede, both CTAs, and the 3 email addresses. <strong>Change the role labels</strong> under each email to match the brochure:<br>• export@ → <strong>Delivery</strong><br>• sales@ → <strong>Sales</strong><br>• info@ → <strong>Admin</strong><br><br>Also confirm: WhatsApp link <code>wa.me/201</code> is incomplete — get full business number from client.</div>
+  <div class="ann-note"><strong>Contact - Edit (email roles)</strong>Keep headline, lede, both CTAs, and the 3 email addresses. <strong>Change the role labels</strong> under each email to match the brochure:<br>• export@ → <strong>Delivery</strong><br>• sales@ → <strong>Sales</strong><br>• info@ → <strong>Admin</strong><br><br>Also confirm: WhatsApp link <code>wa.me/201</code> is incomplete - get full business number from client.</div>
 <section class="contact" id="contact">
   <div class="contact-inner">
     <div class="reveal">
@@ -693,7 +693,7 @@
      ════════════════════════════════════════════════════════════════════════════ -->
 <div class="ann-wrap">
   <span class="ann keep">Keep</span>
-  <div class="ann-note"><strong>Footer — Keep</strong>No change. elite wordmark + tagline + copyright stay.</div>
+  <div class="ann-note"><strong>Footer - Keep</strong>No change. elite wordmark + tagline + copyright stay.</div>
 <footer>
   <div class="foot-inner">
     <div class="foot-brand">
