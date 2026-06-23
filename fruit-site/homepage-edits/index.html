@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elite — Homepage Edit Preview (Annotated)</title>
+<!--
+  ════════════════════════════════════════════════════════════════════════════
+  ANNOTATED HOMEPAGE PREVIEW — elitexfood.com
+  ════════════════════════════════════════════════════════════════════════════
+  This file is a faithful static recreation of the LIVE homepage at
+  https://elitexfood.com/ (fetched 2026-06-23), with inline edit annotations.
+
+  Each section carries a coloured badge in its top-right corner:
+    🟢 KEEP  — leave as-is
+    🟠 EDIT  — modify this section (instruction text in the badge + HTML comment)
+    🟡 ADD   — brand-new section, styled to match, ready to drop into the live site
+
+  The badge CSS is scoped under body.annotate — the developer deletes the
+  <style id="annotate-only"> block and every element with class="ann" to ship.
+  Everything else is the real homepage markup, restyled to match the live site.
+  ════════════════════════════════════════════════════════════════════════════
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ---------- Elite design system (from live site) ---------- */
+  :root{
+    --forest: oklch(0.36 0.08 152);
+    --forest-deep: oklch(0.30 0.07 152);
+    --leaf: oklch(0.62 0.16 142);
+    --leaf-soft: oklch(0.93 0.05 140);
+    --lime: oklch(0.87 0.20 132);
+    --lime-hover: oklch(0.90 0.21 130);
+    --frost: oklch(0.60 0.13 240);
+    --frost-soft: oklch(0.94 0.03 235);
+    --cream: oklch(0.985 0.006 140);
+    --ink: oklch(0.27 0.04 152);
+    --ink-soft: oklch(0.45 0.03 152);
+    --on-dark: oklch(0.97 0.015 140);
+    --on-dark-soft: oklch(0.85 0.03 145);
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Hanken Grotesk',system-ui,sans-serif;
+    background:var(--cream);color:var(--ink);line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{font-family:'Gabarito',sans-serif;line-height:1.08;letter-spacing:-0.01em}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+
+  /* nav */
+  .nav{position:sticky;top:0;z-index:50;background:color-mix(in oklch, var(--cream) 88%, transparent);backdrop-filter:blur(12px);border-bottom:1px solid oklch(0.9 0.02 145)}
+  .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:2rem;padding:0.8rem clamp(1rem,4vw,2rem)}
+  .brand{display:flex;align-items:center;gap:0.55rem;text-decoration:none}
+  .brand .mark{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 30% 30%, var(--leaf), var(--forest));display:grid;place-items:center;color:#fff;font-family:'Gabarito',sans-serif;font-weight:900;font-size:0.7rem}
+  .brand-word{font-family:'Gabarito',sans-serif;font-weight:800;font-size:1.7rem;color:var(--forest);letter-spacing:-0.02em}
+  .nav-links{display:flex;gap:1.6rem;margin-left:auto;align-items:center}
+  .nav-links a{text-decoration:none;font-weight:600;font-size:0.95rem;color:var(--ink-soft);transition:color .2s var(--ease)}
+  .nav-links a:hover{color:var(--forest)}
+  .btn{display:inline-flex;align-items:center;gap:0.5rem;font-family:'Gabarito',sans-serif;font-weight:700;font-size:1rem;padding:0.75rem 1.5rem;border-radius:999px;text-decoration:none;transition:transform .25s var(--ease), background .2s var(--ease)}
+  .btn:active{transform:scale(0.97)}
+  .btn-lime{background:var(--lime);color:var(--forest-deep)}
+  .btn-lime:hover{background:var(--lime-hover);transform:translateY(-2px)}
+  .btn-ghost{border:2px solid color-mix(in oklch, var(--on-dark) 35%, transparent);color:var(--on-dark)}
+  .btn-ghost:hover{border-color:var(--on-dark);transform:translateY(-2px)}
+  .nav .btn{padding:0.55rem 1.2rem;font-size:0.92rem}
+  @media (max-width:860px){.nav-links a:not(.btn){display:none}}
+
+  /* hero */
+  .hero{background:var(--forest);color:var(--on-dark);overflow:hidden;position:relative}
+  .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.05fr 0.95fr;gap:clamp(2rem,5vw,4rem);padding:clamp(3rem,7vw,5.5rem) clamp(1rem,4vw,2rem) clamp(3.5rem,7vw,6rem);align-items:center}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.4rem);font-weight:900;color:var(--on-dark)}
+  .hero h1 .frozen{color:var(--lime)}
+  .hero p.lede{margin-top:1.3rem;font-size:clamp(1.05rem,1.6vw,1.25rem);color:var(--on-dark-soft);max-width:34rem;line-height:1.75}
+  .hero-ctas{margin-top:2.2rem;display:flex;gap:1rem;flex-wrap:wrap}
+  .hero-media{position:relative}
+  .hero-photo{width:100%;aspect-ratio:4/4.6;object-fit:cover;border-radius:46% 46% 24px 24px / 32% 32% 24px 24px}
+  .frost-chip{position:absolute;left:-1rem;bottom:1.6rem;background:var(--frost);color:oklch(0.98 0.01 235);border-radius:16px;padding:0.8rem 1.1rem;display:flex;align-items:center;gap:0.7rem;font-weight:600;font-size:0.92rem;line-height:1.35;box-shadow:0 12px 32px oklch(0.2 0.05 240 / 0.35);max-width:15.5rem}
+  .frost-chip svg{flex:none;width:26px;height:26px}
+  @media (max-width:860px){.hero-inner{grid-template-columns:1fr;padding-top:2.5rem}.hero-photo{aspect-ratio:4/3;border-radius:24px}.frost-chip{left:0.8rem}}
+
+  /* markets */
+  .markets{background:var(--cream);padding:1.4rem clamp(1rem,4vw,2rem) 0.4rem}
+  .markets-inner{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:baseline;gap:0.5rem 1.6rem}
+  .markets-label{font-weight:700;font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft)}
+  .markets-list{display:flex;flex-wrap:wrap;gap:0.5rem 1.6rem;font-family:'Gabarito',sans-serif;font-weight:700;font-size:1.15rem;color:var(--forest)}
+  .markets-list span::after{content:"·";margin-left:1.6rem;color:var(--leaf)}
+  .markets-list span:last-child::after{content:""}
+
+  /* route */
+  .route{max-width:1200px;margin:0 auto;padding:clamp(3rem,6vw,4.5rem) clamp(1rem,4vw,2rem)}
+  .route h2{font-size:clamp(1.8rem,3.4vw,2.6rem);color:var(--forest);max-width:24ch}
+  .route-steps{margin-top:2.4rem;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:2px solid var(--forest)}
+  .route-steps.five{grid-template-columns:repeat(5,1fr)}
+  .step{padding:1.4rem 1.4rem 0 0;position:relative}
+  .step + .step{padding-left:1.4rem;border-left:1px solid oklch(0.88 0.02 145)}
+  .step-no{font-family:'Gabarito',sans-serif;font-weight:800;font-size:0.95rem;color:var(--frost)}
+  .step h3{margin-top:0.4rem;font-size:1.2rem;color:var(--forest)}
+  .step p{margin-top:0.45rem;font-size:0.95rem;color:var(--ink-soft);line-height:1.6}
+  .step.new-step{background:oklch(0.86 0.20 132 / 0.08)}
+  @media (max-width:860px){.route-steps,.route-steps.five{grid-template-columns:1fr 1fr}.step{padding:1.2rem 1rem 1rem 0}.step + .step{padding-left:0;border-left:none}.step:nth-child(even){padding-left:1.2rem;border-left:1px solid oklch(0.88 0.02 145)}}
+  @media (max-width:520px){.route-steps,.route-steps.five{grid-template-columns:1fr}.step:nth-child(even){padding-left:0;border-left:none}.step + .step{border-top:1px solid oklch(0.88 0.02 145)}}
+
+  /* NEW: farming */
+  .farm{max-width:1200px;margin:0 auto;padding:clamp(3rem,6vw,4.5rem) clamp(1rem,4vw,2rem)}
+  .farm-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+  .farm h2{font-size:clamp(2rem,4vw,3rem);color:var(--forest);max-width:18ch}
+  .farm-lead{margin-top:1.2rem;color:var(--ink-soft);font-size:1.1rem;line-height:1.7;max-width:42rem}
+  .farm-points{margin-top:1.8rem;list-style:none;padding:0;display:grid;gap:0.9rem}
+  .farm-points li{display:grid;grid-template-columns:1.6rem 1fr;gap:0.8rem;align-items:start;color:var(--ink);font-size:0.98rem}
+  .farm-points li::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--leaf);margin-top:0.55rem}
+  .farm-media{position:relative}
+  .farm-media img{border-radius:24px;aspect-ratio:4/4.6;object-fit:cover;width:100%}
+  .farm-stamp{position:absolute;right:-0.9rem;top:-0.9rem;background:var(--leaf);color:var(--forest-deep);border-radius:50%;width:108px;height:108px;display:flex;align-items:center;justify-content:center;text-align:center;font-family:'Gabarito',sans-serif;font-weight:800;font-size:0.82rem;line-height:1.2;transform:rotate(-6deg);padding:0.7rem;box-shadow:0 10px 26px oklch(0.3 0.07 150 / 0.25)}
+  @media (max-width:860px){.farm-grid{grid-template-columns:1fr}.farm-media img{aspect-ratio:4/3}.farm-stamp{right:0.9rem;top:-0.9rem}}
+
+  /* NEW: manufacturing */
+  .mfg{background:var(--frost-soft);padding:clamp(3rem,6vw,4.5rem) clamp(1rem,4vw,2rem)}
+  .mfg-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:0.95fr 1.05fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+  .mfg h2{font-size:clamp(2rem,4vw,3rem);color:var(--forest);max-width:18ch}
+  .mfg-lead{margin-top:1.2rem;color:var(--ink);font-size:1.1rem;line-height:1.75;max-width:42rem}
+  .mfg-list{margin-top:1.8rem;display:grid;gap:0}
+  .mfg-row{display:grid;grid-template-columns:3rem 1fr;gap:1rem;padding:1.2rem 0;border-top:1px solid oklch(0.84 0.02 145)}
+  .mfg-row:last-child{border-bottom:1px solid oklch(0.84 0.02 145)}
+  .mfg-no{font-family:'Gabarito',sans-serif;font-weight:800;font-size:1.4rem;color:var(--frost)}
+  .mfg-row h3{font-size:1.12rem;color:var(--forest);margin:0}
+  .mfg-row p{margin:0.3rem 0 0;color:var(--ink-soft);font-size:0.95rem;max-width:50ch}
+  .mfg-media{position:relative}
+  .mfg-media img{border-radius:24px;aspect-ratio:4/4.8;object-fit:cover;width:100%}
+  .mfg-chip{position:absolute;left:-1rem;bottom:1.4rem;background:var(--forest);color:oklch(0.97 0.015 140);border-radius:16px;padding:0.8rem 1.1rem;font-family:'Gabarito',sans-serif;font-weight:700;font-size:0.88rem;line-height:1.3;box-shadow:0 12px 32px oklch(0.2 0.05 240 / 0.30);max-width:14rem}
+  @media (max-width:860px){.mfg-inner{grid-template-columns:1fr}.mfg-media img{aspect-ratio:4/3}.mfg-chip{left:0.8rem}}
+
+  /* products */
+  .products{background:var(--leaf-soft);padding:clamp(3rem,6vw,5rem) 0}
+  .products-head{max-width:1200px;margin:0 auto 2.2rem;padding:0 clamp(1rem,4vw,2rem);display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+  .products-head h2{font-size:clamp(2rem,4vw,3rem);color:var(--forest)}
+  .products-head p{max-width:30rem;color:var(--ink-soft)}
+  .mosaic{max-width:1200px;margin:0 auto;padding:0 clamp(1rem,4vw,2rem);display:grid;gap:0.8rem;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));grid-auto-rows:150px;grid-auto-flow:dense}
+  .tile{border-radius:18px;overflow:hidden;position:relative;display:flex;align-items:flex-end}
+  .tile.tall{grid-row:span 2}
+  .tile.wide{grid-column:span 2}
+  .tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .tile .t-label{position:relative;z-index:1;width:100%;padding:2.2rem 0.95rem 0.8rem;background:linear-gradient(to top, oklch(0.2 0.05 152 / 0.78), transparent);color:var(--on-dark)}
+  .t-label strong{font-family:'Gabarito',sans-serif;font-weight:700;font-size:1.08rem;display:block}
+  .t-label small{font-size:0.78rem;opacity:0.85;font-weight:500}
+  .products-note{max-width:1200px;margin:1.6rem auto 0;padding:0 clamp(1rem,4vw,2rem);font-size:0.95rem;color:var(--ink-soft)}
+  .products-note a{color:var(--forest);font-weight:600}
+
+  /* why */
+  .why{max-width:1200px;margin:0 auto;padding:clamp(3.5rem,7vw,6rem) clamp(1rem,4vw,2rem)}
+  .why-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+  .why-media{position:relative}
+  .why-media img{border-radius:24px;aspect-ratio:4/4.8;object-fit:cover;width:100%}
+  .why-media .stamp{position:absolute;right:-0.9rem;top:-0.9rem;width:104px;height:104px;border-radius:50%;background:var(--lime);color:var(--forest-deep);display:flex;align-items:center;justify-content:center;text-align:center;font-family:'Gabarito',sans-serif;font-weight:800;font-size:0.82rem;line-height:1.2;transform:rotate(8deg);padding:0.6rem;box-shadow:0 10px 26px oklch(0.3 0.07 150 / 0.25)}
+  .why h2{font-size:clamp(2rem,4vw,3rem);color:var(--forest);max-width:18ch}
+  .adv{margin-top:2rem;display:grid;gap:0}
+  .adv-row{display:grid;grid-template-columns:3.2rem 1fr;gap:1rem;padding:1.3rem 0;border-top:1px solid oklch(0.88 0.02 145)}
+  .adv-row:last-child{border-bottom:1px solid oklch(0.88 0.02 145)}
+  .adv-no{font-family:'Gabarito',sans-serif;font-weight:800;font-size:1.5rem;color:var(--leaf)}
+  .adv-row h3{font-size:1.18rem;color:var(--forest)}
+  .adv-row p{margin-top:0.35rem;color:var(--ink-soft);font-size:0.98rem;max-width:52ch}
+  .adv-row.new-adv{background:oklch(0.86 0.20 132 / 0.08)}
+  @media (max-width:860px){.why-grid{grid-template-columns:1fr}.why-media img{aspect-ratio:4/3}.why-media .stamp{right:0.9rem;top:-0.9rem}}
+
+  /* about */
+  .about{background:var(--frost-soft);padding:clamp(3rem,6vw,4.5rem) clamp(1rem,4vw,2rem)}
+  .about-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:clamp(1.5rem,4vw,4rem);align-items:start}
+  .about h2{font-size:clamp(1.8rem,3.4vw,2.6rem);color:var(--forest);white-space:nowrap}
+  .about p{font-size:clamp(1.05rem,1.5vw,1.2rem);line-height:1.8;max-width:65ch;color:var(--ink)}
+  .about p + p{margin-top:1rem}
+  .about .ins{background:oklch(0.86 0.20 132 / 0.12);padding:0.05em 0.35em;border-radius:5px}
+  @media (max-width:760px){.about-inner{grid-template-columns:1fr}.about h2{white-space:normal}}
+
+  /* counters */
+  .counters{background:var(--forest);color:var(--on-dark);padding:clamp(2.5rem,5vw,3.5rem) clamp(1rem,4vw,2rem)}
+  .counters-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+  .counter{text-align:center}
+  .counter .num{font-family:'Gabarito',sans-serif;font-weight:900;font-size:clamp(2.2rem,4vw,3rem);color:var(--lime);line-height:1}
+  .counter .lbl{margin-top:0.5rem;font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--on-dark-soft)}
+  @media (max-width:680px){.counters-inner{grid-template-columns:1fr 1fr;gap:2rem 1.5rem}}
+
+  /* NEW: certifications */
+  .certs{background:var(--forest);color:var(--on-dark);padding:clamp(3.5rem,7vw,6rem) clamp(1rem,4vw,2rem);border-top:1px solid oklch(0.4 0.06 150)}
+  .certs-inner{max-width:1200px;margin:0 auto}
+  .certs h2{font-size:clamp(2rem,4vw,3rem);color:var(--on-dark);max-width:22ch}
+  .certs-lead{margin-top:1rem;color:var(--on-dark-soft);max-width:42rem;font-size:1.05rem;line-height:1.7}
+  .certs-grid{margin-top:2.4rem;display:grid;grid-template-columns:1fr 1fr;gap:1.6rem}
+  .cert-card{background:oklch(0.97 0.005 140);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 18px 50px oklch(0.15 0.05 152 / 0.30)}
+  .cert-card .ph{width:100%;height:300px;background:#fff;display:grid;place-items:center;color:var(--ink-soft);font-size:0.85rem;text-align:center;padding:1rem}
+  .cert-card .ph .iso{font-family:'Gabarito',sans-serif;font-weight:900;font-size:2rem;color:var(--forest);margin-bottom:0.3rem}
+  .cert-caption{padding:1.2rem 1.4rem 1.4rem;border-top:1px solid oklch(0.88 0.02 145)}
+  .cert-caption strong{display:block;font-family:'Gabarito',sans-serif;font-weight:800;font-size:1.3rem;color:var(--forest)}
+  .cert-caption span{display:block;margin-top:0.4rem;color:var(--ink-soft);font-size:0.9rem;line-height:1.5}
+  @media (max-width:760px){.certs-grid{grid-template-columns:1fr}.cert-card .ph{height:240px}}
+
+  /* faq + benefits block (combined section as on live) */
+  .benefits{padding:clamp(3rem,6vw,4.5rem) clamp(1rem,4vw,2rem);background:var(--cream)}
+  .benefits-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem)}
+  .benefits-left h2{font-size:clamp(1.6rem,3vw,2.2rem);color:var(--forest);margin-bottom:1rem}
+  .benefits-left .since{font-size:0.9rem;color:var(--ink-soft);margin-bottom:1.2rem}
+  .benefits-left .since strike{color:oklch(0.5 0.13 70);text-decoration:line-through}
+  .benefits-left .since .fix{color:var(--forest);font-weight:700;background:oklch(0.86 0.20 132 / 0.18);padding:0.05em 0.3em;border-radius:5px}
+  .benefits-cards{display:grid;gap:1rem;margin-top:1rem}
+  .b-card{display:grid;grid-template-columns:2.4rem 1fr;gap:1rem;align-items:start;padding:1rem;border:1px solid oklch(0.88 0.02 145);border-radius:14px;background:#fff}
+  .b-card .ic{width:2.4rem;height:2.4rem;border-radius:50%;background:var(--frost-soft);display:grid;place-items:center;color:var(--frost)}
+  .b-card h3{font-size:1rem;color:var(--forest);margin:0}
+  .b-card p{margin:0.3rem 0 0;font-size:0.88rem;color:var(--ink-soft)}
+  .faq h2{font-size:clamp(1.6rem,3vw,2.2rem);color:var(--forest);margin-bottom:1rem}
+  .faq-item{border:1px solid oklch(0.88 0.02 145);border-radius:14px;margin-bottom:0.8rem;overflow:hidden;background:#fff}
+  .faq-q{padding:1rem 1.2rem;font-weight:700;color:var(--forest);cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:var(--cream)}
+  .faq-q .pm{color:var(--frost);font-size:1.2rem;font-weight:900}
+  .faq-a{padding:0 1.2rem;max-height:0;overflow:hidden;transition:max-height .3s var(--ease), padding .3s var(--ease);color:var(--ink-soft);font-size:0.92rem;line-height:1.6}
+  .faq-item.open .faq-a{padding:0.8rem 1.2rem 1.2rem;max-height:300px}
+  .faq-item.open .faq-q .pm::before{content:"−"}
+  .faq-q .pm::before{content:"+"}
+  .faq-q .old-q strike{color:oklch(0.5 0.13 70)}
+  .faq-a .new-a{background:oklch(0.86 0.20 132 / 0.10);padding:0.6rem 0.8rem;border-radius:8px;border-left:3px solid var(--lime)}
+  .faq-a .new-a strong{color:var(--forest);display:block;margin-bottom:0.2rem;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.05em}
+  @media (max-width:860px){.benefits-inner{grid-template-columns:1fr}}
+
+  /* contact */
+  .contact{background:var(--forest);color:var(--on-dark);padding:clamp(3.5rem,8vw,6.5rem) clamp(1rem,4vw,2rem)}
+  .contact-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.2fr 0.8fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+  .contact h2{font-size:clamp(2.2rem,4.6vw,3.4rem);color:var(--on-dark)}
+  .contact h2 em{font-style:normal;color:var(--lime)}
+  .contact p{margin-top:1.1rem;color:var(--on-dark-soft);max-width:34rem;line-height:1.75}
+  .contact-ctas{margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap}
+  .btn-wa{background:oklch(0.65 0.16 155);color:oklch(0.98 0.01 150)}
+  .btn-wa:hover{background:oklch(0.69 0.17 155);transform:translateY(-2px)}
+  .btn-wa svg{width:20px;height:20px}
+  .contact-card{background:color-mix(in oklch, var(--forest-deep) 70%, transparent);border:1px solid oklch(0.45 0.06 150);border-radius:20px;padding:1.8rem}
+  .contact-card h3{font-size:1.05rem;color:var(--on-dark-soft);font-weight:700;letter-spacing:0.06em;text-transform:uppercase}
+  .contact-card ul{list-style:none;margin-top:1rem;display:grid;gap:0.7rem}
+  .contact-card a{font-family:'Gabarito',sans-serif;font-weight:700;font-size:1.15rem;color:var(--on-dark);text-decoration:none}
+  .contact-card a:hover{color:var(--lime)}
+  .contact-card li small{display:block;font-size:0.82rem;color:var(--on-dark-soft)}
+  @media (max-width:860px){.contact-inner{grid-template-columns:1fr}}
+
+  /* footer */
+  footer{background:var(--forest-deep);color:var(--on-dark-soft);padding:2rem clamp(1rem,4vw,2rem)}
+  .foot-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;justify-content:space-between;font-size:0.9rem}
+  .foot-brand{display:flex;align-items:center;gap:0.5rem}
+  .foot-brand .mark{width:30px;height:30px}
+  .foot-brand span{font-family:'Gabarito',sans-serif;font-weight:800;font-size:1.2rem;color:var(--on-dark)}
+
+  /* reveal */
+  .reveal{opacity:1}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+
+  /* ═════════════════ ANNOTATION OVERLAY — developer deletes this block + every .ann element ═════════════════ */
+  body.annotate{position:relative}
+  body.annotate::before{
+    content:"HOMEPAGE EDIT PREVIEW — annotations are temporary. Delete the #annotate-only style block and all .ann elements before shipping.";
+    position:fixed;top:0;left:0;right:0;z-index:9999;
+    background:oklch(0.30 0.07 152);color:#fff;font-family:'Hanken Grotesk',sans-serif;font-size:0.78rem;font-weight:600;
+    padding:8px 16px;text-align:center;letter-spacing:0.02em;
+  }
+  body.annotate{padding-top:34px}
+  .ann{
+    position:absolute;top:10px;right:14px;z-index:60;
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Gabarito',sans-serif;font-weight:800;font-size:0.66rem;
+    letter-spacing:0.05em;text-transform:uppercase;
+    padding:5px 11px;border-radius:999px;color:#fff;
+    box-shadow:0 6px 18px oklch(0.2 0.05 152 / 0.30);
+    pointer-events:none;white-space:nowrap;
+  }
+  .ann.keep{background:oklch(0.55 0.13 145)}
+  .ann.edit{background:oklch(0.55 0.14 65)}
+  .ann.add{background:oklch(0.55 0.18 132)}
+  .ann::before{content:"●";font-size:0.5rem}
+  .ann-note{
+    position:absolute;top:42px;right:14px;z-index:60;
+    max-width:340px;background:#fff;border-radius:12px;
+    padding:10px 14px;font-family:'Hanken Grotesk',sans-serif;font-size:0.8rem;line-height:1.5;
+    color:#333;box-shadow:0 10px 30px oklch(0.2 0.05 152 / 0.20);
+    border:1px solid #eee;display:none;
+  }
+  .ann-wrap{position:relative}
+  .ann-wrap:hover .ann-note{display:block}
+  .ann-note strong{color:var(--forest);font-family:'Gabarito',sans-serif;font-weight:800;display:block;margin-bottom:4px;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.04em}
+  .ann-note code{background:#f3f3f3;padding:1px 5px;border-radius:4px;font-size:0.74rem;color:#b1411e}
+  .new-block{outline:2px dashed oklch(0.55 0.18 132);outline-offset:-8px}
+  .edit-block{outline:2px dashed oklch(0.55 0.14 65);outline-offset:-8px}
+  .legend-bar{
+    position:fixed;bottom:18px;left:18px;z-index:999;
+    background:#fff;border-radius:14px;padding:12px 16px;
+    box-shadow:0 10px 30px oklch(0.2 0.05 152 / 0.20);
+    font-family:'Hanken Grotesk',sans-serif;font-size:0.78rem;
+    display:flex;gap:14px;align-items:center;flex-wrap:wrap;max-width:calc(100vw - 36px);
+  }
+  .legend-bar .lg{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:#333}
+  .legend-bar .dot{width:11px;height:11px;border-radius:50%}
+  .legend-bar .dot.keep{background:oklch(0.55 0.13 145)}
+  .legend-bar .dot.edit{background:oklch(0.55 0.14 65)}
+  .legend-bar .dot.add{background:oklch(0.55 0.18 132)}
+  .legend-bar a{color:var(--frost);text-decoration:none;font-weight:700;margin-left:auto}
+  /* ═════════════════ END ANNOTATION OVERLAY ═════════════════ */
+</style>
+</head>
+<body class="annotate">
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     1 · NAV  [KEEP]
+     ════════════════════════════════════════════════════════════════════════════ -->
+<div class="ann-wrap">
+  <span class="ann keep">Keep</span>
+  <div class="ann-note"><strong>Nav — Keep</strong>Logo, wordmark, four anchor links, and lime "Request a quote" button stay unchanged. Optional: add <code>#farming</code> and <code>#manufacturing</code> anchor links if you want the new sections in the nav bar.</div>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top" aria-label="Elite home">
+      <span class="mark">e</span>
+      <span class="brand-word">elite</span>
+    </a>
+    <div class="nav-links">
+      <a href="#products">Products</a>
+      <a href="#why">Why Elite</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a class="btn btn-lime" href="#contact">Request a quote</a>
+    </div>
+  </div>
+</nav>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     2 · HERO  [EDIT]
+     Edit: lede paragraph — add "grows + manufactures" ownership wording.
+     ════════════════════════════════════════════════════════════════════════════ -->
+<div class="ann-wrap">
+  <span class="ann edit">Edit</span>
+  <div class="ann-note"><strong>Hero — Edit</strong>Keep headline, CTAs, hero image, frost chip. <strong>Edit only the lede paragraph</strong> to add farming + manufacturing ownership. New wording shown below highlighted.</div>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <div>
+      <h1>Harvest&#8209;fresh today.<br><span class="frozen">Frozen</span> within hours.</h1>
+      <!-- EDIT: lede paragraph — replaced wording -->
+      <p class="lede">Elite <span style="background:oklch(0.86 0.20 132 / 0.30);padding:0.05em 0.3em;border-radius:5px">grows, manufactures, and exports</span> premium Egyptian frozen vegetables and fruits — picked at peak season from our own Nile Delta farms, processed in our facility, and blast-frozen the same day, so they arrive at your port tasting like harvest morning.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-lime" href="#contact">Request a quote</a>
+        <a class="btn btn-ghost" href="#products">Browse products</a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img class="hero-photo" src="https://elitexfood.com/wp-content/uploads/2026/06/all-product.jpeg" alt="Elite branded frozen vegetable and fruit packs ready for export" fetchpriority="high">
+      <div class="frost-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2v20M4 6l16 12M20 6L4 18M12 5l-2-2m2 2 2-2M12 19l-2 2m2-2 2 2M6.2 7.6 5.5 4.9m.7 2.7-2.7.7M17.8 16.4l2.7-.7m-2.7.7.7 2.7M17.8 7.6l.7-2.7m-.7 2.7 2.7.7M6.2 16.4l-2.7.7m2.7-.7-.7 2.7"/></svg>
+        Unbroken cold chain, farm to port at &minus;18&nbsp;&deg;C
+      </div>
+    </div>
+  </div>
+</header>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     3 · MARKETS RIBBON  [KEEP]
+     ════════════════════════════════════════════════════════════════════════════ -->
+<div class="ann-wrap">
+  <span class="ann keep">Keep</span>
+  <div class="ann-note"><strong>Markets ribbon — Keep</strong>No change. Gabon · Senegal · West &amp; Central Africa · Europe · Russia · Asia stays as-is.</div>
+<div class="markets reveal">
+  <div class="markets-inner">
+    <span class="markets-label">Shipping to</span>
+    <div class="markets-list">
+      <span>Gabon</span><span>Senegal</span><span>West &amp; Central Africa</span><span>Europe</span><span>Russia</span><span>Asia</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     4 · ROUTE BAND  [EDIT]
+     Edit: expand from 4 steps to 5 — add "Manufacturing" step between Frozen and Packed.
+     CSS: .elite-route-steps grid changes from repeat(4,1fr) to repeat(5,1fr).
+     ════════════════════════════════════════════════════════════════════════════ -->
+<div class="ann-wrap edit-block">
+  <span class="ann edit">Edit</span>
+  <div class="ann-note"><strong>Route — Edit (4→5 steps)</strong>Add a new "Manufacturing" step between Frozen and Packed. Renumber 03→04, 04→05. Change CSS <code>grid-template-columns:repeat(5,1fr)</code>. New step is shown highlighted below.</div>
+<section class="route reveal" aria-label="How your order travels">
+  <h2>From Egyptian fields to your warehouse, one unbroken line</h2>
+  <div class="route-steps five">
+    <div class="step">
+      <span class="step-no">01</span>
+      <h3>Picked at peak</h3>
+      <p>Sourced directly from partner farms across the Nile Delta and Upper Egypt, harvested at full ripeness.</p>
+    </div>
+    <div class="step">
+      <span class="step-no">02</span>
+      <h3>Frozen same day</h3>
+      <p>Sorted, washed and IQF blast-frozen within hours of harvest to lock in color, texture and nutrients.</p>
+    </div>
+    <!-- ADD: new step 03 -->
+    <div class="step new-step">
+      <span class="step-no">03 <span style="font-size:0.62rem;color:var(--lime);font-weight:700;margin-left:4px">NEW</span></span>
+      <h3>Manufactured for export</h3>
+      <p>Sorted, cleaned, cut, and processed in our own facility — prepped for retail packs, bulk cartons, and private-label formats before freezing.</p>
+    </div>
+    <div class="step">
+      <span class="step-no">04</span>
+      <h3>Packed your way</h3>
+      <p>Retail bags or bulk cartons, your label or ours, with documentation prepared for your market.</p>
+    </div>
+    <div class="step">
+      <span class="step-no">05</span>
+      <h3>Shipped at &minus;18&nbsp;&deg;C</h3>
+      <p>Loaded into reefer containers and monitored to your port, with the cold chain never broken.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     5 · FARMING  [ADD — brand-new section]
+     Insert AFTER the route band and BEFORE the products mosaic.
+     Source: brochure/index.html page 2. Image fallback: all-product.jpeg until client sends real farm photos.
+     ════════════════════════════════════════════════════════════════════════════ -->
+<div class="ann-wrap new-block">
+  <span class="ann add">Add · New section</span>
+  <div class="ann-note"><strong>Farming — ADD (new)</strong>Drop this section after the route band, before products. CSS uses <code>.elite-farm</code> classes matching the Elite system. Image is a temp fallback (<code>all-product.jpeg</code>) — swap when client sends real farm photos.</div>
+<section class="farm reveal" id="farming" aria-label="Farming">
+  <div class="farm-grid">
+    <div class="farm-media">
+      <img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/all-product.jpeg" alt="Elite farm — Egyptian Nile Delta fields supplying frozen vegetables and fruits">
+      <div class="farm-stamp">Grown by Elite</div>
+    </div>
+    <div>
+      <h2>We grow what we freeze.</h2>
+      <p class="farm-lead">Elite controls the chain from the soil up. Our vegetables and fruits are grown and sourced from Egyptian agricultural supply areas across the Nile Delta and Upper Egypt, harvested at full ripeness so colour, texture, and flavour survive the freezer and the journey to your port.</p>
+      <ul class="farm-points">
+        <li>Own and partner farms across the Nile Delta and Upper Egypt</li>
+        <li>Harvested at peak season, not before — for full ripeness and yield</li>
+        <li>Egypt's long growing season gives us harvest windows most origins can't match</li>
+        <li>Same-day handover from field to factory, no middlemen, no waiting</li>
+      </ul>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     6 · MANUFACTURING  [ADD — brand-new section]
+     Insert AFTER the farming section and BEFORE the products mosaic.
+     Source: brochure/index.html page 2. Image fallback: 03-mp4.webp until client sends real factory photos.
+     ════════════════════════════════════════════════════════════════════════════ -->
+<div class="ann-wrap new-block">
+  <span class="ann add">Add · New section</span>
+  <div class="ann-note"><strong>Manufacturing — ADD (new)</strong>Drop after farming, before products. CSS uses <code>.elite-mfg</code> classes. Image is a temp fallback (<code>03-mp4.webp</code>) — swap when client sends real factory photos.</div>
+<section class="mfg reveal" id="manufacturing" aria-label="Manufacturing">
+  <div class="mfg-inner">
+    <div>
+      <h2>Manufactured in our own facility.</h2>
+      <p class="mfg-lead">Elite Fruit Manufacturing sorts, cleans, cuts, processes, and freezes vegetables and fruits in-house — built for retail packs, bulk cartons, and private-label formats. What passes our line is what reaches your customers, container after container.</p>
+      <div class="mfg-list">
+        <div class="mfg-row"><span class="mfg-no">1</span><div><h3>Sorting, washing, cutting</h3><p>Raw produce is sorted by grade, washed, and cut to spec — IQF, diced, sliced, whole, or pulp.</p></div></div>
+        <div class="mfg-row"><span class="mfg-no">2</span><div><h3>Blast freezing within hours</h3><p>IQF blast-frozen the same day to lock in colour, texture, and nutrients.</p></div></div>
+        <div class="mfg-row"><span class="mfg-no">3</span><div><h3>Packing &amp; private label</h3><p>From 400&nbsp;g retail bags to 25&nbsp;kg bulk cartons, under your brand or ours.</p></div></div>
+        <div class="mfg-row"><span class="mfg-no">4</span><div><h3>Quality-controlled &amp; certified</h3><p>ISO 22000:2018 food safety + ISO 9001:2015 quality management — see certifications below.</p></div></div>
+      </div>
+    </div>
+    <div class="mfg-media">
+      <img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/03-mp4.webp" alt="Elite Fruit Manufacturing — frozen vegetable and fruit processing line">
+      <div class="mfg-chip">Elite Fruit Manufacturing<br>ISO 22000 · ISO 9001</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     7 · PRODUCTS MOSAIC  [EDIT — minor]
+     Edit: replace low-res Molokhia image (395×127) with a clearer shot from WhatsApp batch.
+     All other 15 tiles keep their current real client images.
+     ════════════════════════════════════════════════════════════════════════════ -->
+<div class="ann-wrap edit-block">
+  <span class="ann edit">Edit · minor</span>
+  <div class="ann-note"><strong>Products — Edit (minor)</strong>Keep all 16 tiles, labels, grid structure. Only fix: <strong>Molokhia image</strong> is 395×127 px (low-res) — replace with a clearer shot from WhatsApp batch or request a new one from Nour.</div>
+<section class="products" id="products">
+  <div class="products-head reveal">
+    <h2>Sixteen products,<br>year-round supply</h2>
+    <p>Every item is available IQF in retail or bulk packing. Tell us the product, the cut and the volume, and we will quote within one working day.</p>
+  </div>
+  <div class="mosaic reveal">
+    <div class="tile tall"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/Frozen-Strawberries-1-1024x1024.jpg" alt="Strawberries"><div class="t-label"><strong>Strawberries</strong><small>IQF whole &amp; sliced</small></div></div>
+    <div class="tile"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/frozen-french-beans-500x500-1.webp" alt="Green Beans"><div class="t-label"><strong>Green Beans</strong><small>Cut</small></div></div>
+    <div class="tile"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/greenbeans-1024x762.png" alt="Green Beans"><div class="t-label"><strong>Green Beans</strong><small>Whole</small></div></div>
+    <div class="tile"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/12367.jpg" alt="Broccoli"><div class="t-label"><strong>Broccoli</strong><small>Florets</small></div></div>
+    <div class="tile"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/Cauliflower-1024x683.jpg" alt="Cauliflower"><div class="t-label"><strong>Cauliflower</strong><small>Florets</small></div></div>
+    <div class="tile wide"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/frozen-mango-the-soap-dispensary_1000x1000.webp" alt="Mango"><div class="t-label"><strong>Mango</strong><small>Chunks &amp; pulp</small></div></div>
+    <div class="tile"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/Elbardy_FrozenArtichokes_9_1024x1024.webp" alt="Artichoke"><div class="t-label"><strong>Artichoke</strong><small>Hearts &amp; bottoms</small></div></div>
+    <div class="tile"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/Onions.webp" alt="Onions"><div class="t-label"><strong>Onions</strong><small>Diced &amp; rings</small></div></div>
+    <div class="tile"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/packd-spinach_1080x-1024x1024.webp" alt="Spinach"><div class="t-label"><strong>Spinach</strong><small>Leaf &amp; chopped</small></div></div>
+    <div class="tile"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/Okra-1024x683.jpg" alt="Okra"><div class="t-label"><strong>Okra</strong><small>Zero &amp; extra</small></div></div>
+    <!-- EDIT: Molokhia image is low-res (395x127). Replace with clearer shot. -->
+    <div class="tile" style="outline:2px dashed oklch(0.55 0.14 65);outline-offset:-6px"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/molokhia.jpeg" alt="Molokhia" style="opacity:0.7"><div class="t-label"><strong>Molokhia</strong><small>Minced leaf — <span style="color:oklch(0.55 0.14 65);font-weight:700">⚠ replace image</span></small></div></div>
+    <div class="tile"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/frozen-fig2-3.webp" alt="Figs"><div class="t-label"><strong>Figs</strong><small>Whole</small></div></div>
+    <div class="tile"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/apricots.jpg" alt="Apricot"><div class="t-label"><strong>Apricot</strong><small>Halves</small></div></div>
+    <div class="tile"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/Pomegranate-1kg-1024x1024.png" alt="Pomegranate"><div class="t-label"><strong>Pomegranate</strong><small>Arils</small></div></div>
+    <div class="tile"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/frozen-carrot1_600x.webp" alt="Carrots"><div class="t-label"><strong>Carrots</strong><small>Sliced &amp; diced</small></div></div>
+    <div class="tile"><img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/fc38b463327918f4ca1ec547abd371ac.jpg" alt="Mixed Vegetables"><div class="t-label"><strong>Mixed Vegetables</strong><small>Custom blends</small></div></div>
+  </div>
+  <p class="products-note">Need a cut, blend or pack size you don't see here? <a href="#contact">Ask us</a>, custom specifications are our daily work.</p>
+</section>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     8 · WHY ELITE  [EDIT]
+     Edit: add a 5th advantage row — "Certified quality you can verify" (ISO 22000 + ISO 9001).
+     ════════════════════════════════════════════════════════════════════════════ -->
+<div class="ann-wrap edit-block">
+  <span class="ann edit">Edit · add row</span>
+  <div class="ann-note"><strong>Why Elite — Edit</strong>Keep the 4 existing advantage rows. <strong>Add a 5th row</strong> for "Certified quality you can verify" (ISO 22000 + ISO 9001). New row shown highlighted below. Keeps stamp unchanged.</div>
+<section class="why" id="why">
+  <div class="why-grid">
+    <div class="why-media reveal">
+      <img loading="lazy" src="https://elitexfood.com/wp-content/uploads/2026/06/fc38b463327918f4ca1ec547abd371ac.jpg" alt="Farm harvest">
+      <div class="stamp">100% natural, nothing added</div>
+    </div>
+    <div class="reveal">
+      <h2>Why importers stay with Elite</h2>
+      <div class="adv">
+        <div class="adv-row"><span class="adv-no">1</span><div><h3>Competitive pricing, direct from source</h3><p>We work with farms, not middlemen. The savings show up in your landed cost, container after container.</p></div></div>
+        <div class="adv-row"><span class="adv-no">2</span><div><h3>Quality controlled at every step</h3><p>Sorting, washing and freezing are inspected in-house. What passes our line is what reaches your customers.</p></div></div>
+        <div class="adv-row"><span class="adv-no">3</span><div><h3>Cold chain you can verify</h3><p>Temperature is logged from the freezing tunnel to the reefer container. Records travel with every shipment.</p></div></div>
+        <div class="adv-row"><span class="adv-no">4</span><div><h3>Flexible packing and private label</h3><p>From 400&nbsp;g retail bags to 25&nbsp;kg bulk cartons, packed under your brand or ours.</p></div></div>
+        <!-- ADD: 5th advantage row -->
+        <div class="adv-row new-adv"><span class="adv-no">5 <span style="font-size:0.62rem;color:var(--lime);font-weight:700;margin-left:4px">NEW</span></span><div><h3>Certified quality you can verify</h3><p>Elite Fruit Manufacturing holds <strong>ISO 22000:2018</strong> (food safety) and <strong>ISO 9001:2015</strong> (quality management). Certificates travel with every shipment.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     9 · ABOUT  [EDIT]
+     Edit: add farming + manufacturing ownership to the first paragraph.
+     ════════════════════════════════════════════════════════════════════════════ -->
+<div class="ann-wrap edit-block">
+  <span class="ann edit">Edit</span>
+  <div class="ann-note"><strong>About — Edit</strong>Replace the first paragraph to add farming + manufacturing ownership. Highlighted span shows the new wording. Keep second paragraph unchanged.</div>
+<section class="about reveal" id="about">
+  <div class="about-inner">
+    <h2>About Elite</h2>
+    <div>
+      <!-- EDIT: first paragraph — added "farming, manufacturing, and" + "own facility" -->
+      <p>Elite is an Egyptian <span class="ins">farming, manufacturing, and</span> export house specialised in frozen vegetables and fruits. We <span class="ins">grow and source from our own Nile Delta and Upper Egypt farms, process in our own Elite Fruit Manufacturing facility,</span> and ship through an unbroken cold chain — so importers get consistent quality, honest grading and competitive pricing from one accountable partner.</p>
+      <p>We currently ship to partners across Africa, Europe, Russia and Asia, and we treat the first container with a new client as the start of a long relationship, not a one-off trade.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     10 · COUNTERS  [KEEP]
+     ════════════════════════════════════════════════════════════════════════════ -->
+<div class="ann-wrap">
+  <span class="ann keep">Keep</span>
+  <div class="ann-note"><strong>Counter stats — Keep</strong>17 yrs · +6,000 m² · 98% · 10 days. Already supports the manufacturing story.</div>
+<section class="counters reveal">
+  <div class="counters-inner">
+    <div class="counter"><div class="num">17</div><div class="lbl">Production experience (yrs)</div></div>
+    <div class="counter"><div class="num">+6,000</div><div class="lbl">Square meters</div></div>
+    <div class="counter"><div class="num">98%</div><div class="lbl">Five-star praise rate</div></div>
+    <div class="counter"><div class="num">10</div><div class="lbl">Days fast delivery</div></div>
+  </div>
+</section>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     11 · CERTIFICATIONS  [ADD — brand-new section]
+     Insert AFTER counters and BEFORE the FAQ/benefits block.
+     Upload brochure/assets/certificates/elite-fruit-22-cert.png + elite-fruit-9-cert.png to /wp-content/uploads/2026/06/certificates/.
+     ════════════════════════════════════════════════════════════════════════════ -->
+<div class="ann-wrap new-block">
+  <span class="ann add">Add · New section</span>
+  <div class="ann-note"><strong>Certifications — ADD (new)</strong>Drop after counters, before FAQ. Upload <code>elite-fruit-22-cert.png</code> (ISO 22000) + <code>elite-fruit-9-cert.png</code> (ISO 9001) to <code>/wp-content/uploads/2026/06/certificates/</code>. Placeholder cards shown below — replace <code>.ph</code> div with <code>&lt;img&gt;</code> once uploaded.</div>
+<section class="certs reveal" id="certifications" aria-label="Certifications">
+  <div class="certs-inner">
+    <h2>Certified systems buyers can trust.</h2>
+    <p class="certs-lead">Elite Fruit Manufacturing holds food safety and quality management certifications for packaging and wrapping food, vegetables, and fruits. The proof travels with every container.</p>
+    <div class="certs-grid">
+      <div class="cert-card">
+        <!-- Replace .ph with: <img src="https://elitexfood.com/wp-content/uploads/2026/06/certificates/elite-fruit-22-cert.png" alt="Elite Fruit ISO 22000:2018 certificate"> -->
+        <div class="ph"><div><div class="iso">ISO 22000:2018</div>Certificate image placeholder<br>(upload elite-fruit-22-cert.png)</div></div>
+        <div class="cert-caption"><strong>ISO 22000:2018</strong><span>Food safety management system certification for packaging and wrapping food, vegetables, and fruits.</span></div>
+      </div>
+      <div class="cert-card">
+        <!-- Replace .ph with: <img src="https://elitexfood.com/wp-content/uploads/2026/06/certificates/elite-fruit-9-cert.png" alt="Elite Fruit ISO 9001:2015 certificate"> -->
+        <div class="ph"><div><div class="iso">ISO 9001:2015</div>Certificate image placeholder<br>(upload elite-fruit-9-cert.png)</div></div>
+        <div class="cert-caption"><strong>ISO 9001:2015</strong><span>Quality management system certification for packaging and wrapping food, vegetables, and fruits.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     12 · BENEFITS + FAQ  [EDIT]
+     Edit A: replace all 4 Lorem-ipsum FAQ items with real B2B content (new content shown highlighted).
+     Edit B: fix "Since 2025" → "Since 2009" (matches 17-yr counter).
+     ════════════════════════════════════════════════════════════════════════════ -->
+<div class="ann-wrap edit-block">
+  <span class="ann edit">Edit · FAQ + year</span>
+  <div class="ann-note"><strong>Benefits + FAQ — Edit</strong>(1) Replace all 4 Lorem-ipsum FAQ items with the real B2B content shown highlighted. (2) Fix "Since 2025" → "Since 2009" to match the 17-year counter. Keep 3 benefit cards and 98% floater unchanged.</div>
+<section class="benefits reveal">
+  <div class="benefits-inner">
+    <div class="benefits-left">
+      <h2>Since <span class="fix">2009</span> <span class="since" style="display:inline;font-size:0.9rem;color:oklch(0.5 0.13 70)">(was <strike>2025</strike>)</span></h2>
+      <p style="font-size:0.9rem;color:var(--ink-soft);margin-bottom:1rem">Premium frozen vegetables &amp; fruits delivered across Gabon, Senegal &amp; West &amp; Central Africa.</p>
+      <p style="font-size:0.92rem;color:var(--ink-soft);margin-bottom:1.2rem">Crafting the perfect frozen experience bridging the gap between fresh farm produce and your table through industry-leading snap-freeze technology.</p>
+      <div class="benefits-cards">
+        <div class="b-card"><div class="ic">❄</div><div><h3>Superior Freshness</h3><p>Harvested at peak ripeness and frozen within hours to preserve nutrient density and flavour.</p></div></div>
+        <div class="b-card"><div class="ic">✿</div><div><h3>Purely Sourced</h3><p>Transparency is key. We offer chemical-free, organic, and biodynamic selections for your health.</p></div></div>
+        <div class="b-card"><div class="ic">🚚</div><div><h3>Precision Delivery</h3><p>Specialised cold-logistics ensure no thawing during transit across Gabon, Senegal &amp; West &amp; Central Africa.</p></div></div>
+      </div>
+    </div>
+    <div class="faq">
+      <h2>Frequently Asked Questions</h2>
+      <!-- EDIT: all 4 FAQ items — old titles shown struck through, new content highlighted -->
+      <div class="faq-item open">
+        <div class="faq-q"><span><span class="old-q"><strike>Lorem ipsum dolor sit amet</strike> &nbsp;→&nbsp; What is the minimum order quantity (MOQ)?</span></span><span class="pm"></span></div>
+        <div class="faq-a">
+          <div class="new-a"><strong>New answer</strong>Our standard MOQ is one 20-foot reefer container, mixed by product and cut upon request. For new buyers testing a market, we can discuss a first-trial LCL shipment on selected SKUs — contact export@elitexfood.com with your product list and destination port for a tailored offer.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span><span class="old-q"><strike>Lorem ipsum dolor sit amet</strike> &nbsp;→&nbsp; Do you offer private-label packing?</span></span><span class="pm"></span></div>
+        <div class="faq-a">
+          <div class="new-a"><strong>New answer</strong>Yes. From 400&nbsp;g retail bags to 25&nbsp;kg bulk cartons, packed under your brand or ours. Send your artwork, bag dimensions, and target market and we will prepare a private-label quote including printing lead time.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span><span class="old-q"><strike>Lorem ipsum dolor sit amet</strike> &nbsp;→&nbsp; How is the cold chain maintained during shipping?</span></span><span class="pm"></span></div>
+        <div class="faq-a">
+          <div class="new-a"><strong>New answer</strong>Product is blast-frozen and held at −18&nbsp;°C from the freezing tunnel through loading. Reefer containers are pre-cooled, sealed, and monitored at set temperature for the full voyage. Temperature logs travel with every shipment and are available to the buyer on request.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span><span class="old-q"><strike>Lorem ipsum dolor sit amet</strike> &nbsp;→&nbsp; Which markets do you currently ship to?</span></span><span class="pm"></span></div>
+        <div class="faq-a">
+          <div class="new-a"><strong>New answer</strong>We currently serve partners across Africa (Gabon, Senegal, West &amp; Central Africa), Europe, Russia, and Asia. Tell us your destination port and we will confirm routing, transit time, and documentation requirements for your market.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     13 · CONTACT  [KEEP]
+     Confirm: WhatsApp link wa.me/201 is incomplete — get full number from client.
+     ════════════════════════════════════════════════════════════════════════════ -->
+<div class="ann-wrap">
+  <span class="ann keep">Keep</span>
+  <div class="ann-note"><strong>Contact — Keep</strong>Headline, lede, both CTAs, export-desk card with 3 emails all stay. <strong>One fix:</strong> WhatsApp link <code>wa.me/201</code> is incomplete — confirm full business number with client and replace.</div>
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <h2>Tell us what you need.<br>We'll quote it <em>within a day</em>.</h2>
+      <p>Product, specification, volume and destination port. That's all it takes to get a firm offer from our export desk.</p>
+      <div class="contact-ctas">
+        <a class="btn btn-lime" href="#contact">Send an inquiry</a>
+        <a class="btn btn-wa" href="https://wa.me/201" rel="noopener" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-2-1.2 7.4 7.4 0 0 1-1.4-1.7c-.1-.2 0-.4.1-.5l.4-.5a1.8 1.8 0 0 0 .3-.4.5.5 0 0 0 0-.4c0-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.1 5 5 0 0 0 1 2.7 11.4 11.4 0 0 0 4.4 3.9 14.8 14.8 0 0 0 1.5.5 3.6 3.6 0 0 0 1.6.1 2.7 2.7 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3Z"/></svg>
+          WhatsApp us
+        </a>
+      </div>
+    </div>
+    <div class="contact-card reveal">
+      <h3>Export desk</h3>
+      <ul>
+        <li><a href="mailto:export@elitexfood.com">export@elitexfood.com</a><small>Quotes and new partnerships</small></li>
+        <li><a href="mailto:sales@elitexfood.com">sales@elitexfood.com</a><small>Existing orders</small></li>
+        <li><a href="mailto:info@elitexfood.com">info@elitexfood.com</a><small>Everything else</small></li>
+      </ul>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     14 · FOOTER  [KEEP]
+     ════════════════════════════════════════════════════════════════════════════ -->
+<div class="ann-wrap">
+  <span class="ann keep">Keep</span>
+  <div class="ann-note"><strong>Footer — Keep</strong>No change. elite wordmark + tagline + copyright stay.</div>
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <span class="mark">e</span>
+      <span>elite</span>
+    </div>
+    <span>Frozen vegetables &amp; fruits export &middot; Egypt</span>
+    <span>&copy; 2026 Elite &middot; elitexfood.com</span>
+  </div>
+</footer>
+</div>
+
+<!-- Floating legend -->
+<div class="legend-bar">
+  <span class="lg"><span class="dot keep"></span>Keep</span>
+  <span class="lg"><span class="dot edit"></span>Edit</span>
+  <span class="lg"><span class="dot add"></span>Add (new)</span>
+  <a href="#top">↑ Top</a>
+</div>
+
+<!-- FAQ toggle (preview-only, developer: live site uses Elementor accordion) -->
+<script>
+  document.querySelectorAll('.faq-q').forEach(q=>{
+    q.addEventListener('click',()=>q.parentElement.classList.toggle('open'));
+  });
+</script>
+
+</body>
+</html>
