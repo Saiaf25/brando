@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ملخص طلبات مصر والفائزون خلال آخر 6 أشهر</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17211a;
+      --muted: #5d6b62;
+      --line: #dce4dd;
+      --soft: #f4f7f3;
+      --paper: #ffffff;
+      --accent: #176d3a;
+      --accent-soft: #e8f5ed;
+      --warn: #9b5b00;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #f7f8f5;
+      color: var(--ink);
+      font-family: "thmanyah serif text", Tahoma, Arial, sans-serif;
+      line-height: 1.7;
+    }
+
+    .page { max-width: 1180px; margin: 0 auto; padding: 32px 18px 48px; }
+    header { display: grid; gap: 16px; padding: 24px 0 22px; border-bottom: 1px solid var(--line); margin-bottom: 22px; }
+    h1 { margin: 0; font-size: clamp(28px, 4vw, 46px); line-height: 1.18; letter-spacing: 0; }
+    h2, h3 { margin: 0; letter-spacing: 0; }
+
+    .page-nav { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 6px; }
+    .page-nav a { display: inline-flex; align-items: center; justify-content: center; min-height: 38px; padding: 7px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 700; }
+    .page-nav a.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    .summary { display: flex; flex-wrap: wrap; gap: 10px; color: var(--muted); font-size: 15px; }
+    .summary span { display: inline-flex; align-items: center; min-height: 34px; padding: 4px 12px; border: 1px solid var(--line); background: var(--paper); border-radius: 8px; }
+    .notice { color: var(--warn); font-size: 14px; }
+    .section { margin-top: 28px; }
+    .section-head { display: flex; justify-content: space-between; gap: 16px; align-items: end; margin-bottom: 14px; }
+    .section-head p { margin: 0; color: var(--muted); font-size: 14px; max-width: 720px; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
+    .product-card { display: grid; grid-template-rows: 190px 1fr; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; min-width: 0; }
+    .product-image { display: grid; place-items: center; background: var(--soft); border-bottom: 1px solid var(--line); overflow: hidden; }
+    .product-image img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 10px; }
+    .image-placeholder { color: var(--muted); font-size: 14px; padding: 16px; text-align: center; }
+    .product-info { display: grid; gap: 10px; align-content: start; padding: 14px; min-width: 0; }
+    .product-meta { display: flex; justify-content: space-between; gap: 10px; color: var(--muted); font-size: 13px; }
+    .rank, .product-id { white-space: nowrap; }
+    .product-info h2 { font-size: 16px; line-height: 1.55; font-weight: 700; overflow-wrap: anywhere; }
+    .stock-badge { justify-self: start; padding: 5px 10px; background: var(--accent-soft); color: var(--accent); border: 1px solid #b9ddc6; border-radius: 8px; font-size: 14px; font-weight: 700; }
+    .metric-row { display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--line); padding-top: 7px; color: var(--muted); font-size: 14px; }
+    .metric-row strong { color: var(--ink); }
+
+    .insight-band { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .insight, .analysis-panel { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
+    .insight span { color: var(--muted); font-size: 13px; }
+    .insight strong { display: block; font-size: 25px; line-height: 1.35; margin-top: 4px; }
+    .analysis-panel { padding: 16px; }
+    .analysis-panel ul { margin: 10px 0 0; padding: 0 20px 0 0; }
+    .analysis-panel li { margin: 4px 0; }
+
+    .month-row { display: grid; grid-template-columns: 110px 1fr minmax(260px, auto); align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+    .month-row:last-child { border-bottom: 0; }
+    .month-bar { height: 10px; background: var(--soft); border-radius: 999px; overflow: hidden; }
+    .month-bar span { display: block; height: 100%; background: var(--accent); border-radius: inherit; }
+    .month-stats { color: var(--muted); text-align: left; direction: rtl; }
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+
+    .data-table-wrap { overflow-x: auto; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; min-width: 760px; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: right; vertical-align: top; }
+    th { color: var(--muted); font-size: 13px; background: var(--soft); }
+    td { font-size: 14px; }
+    tr:last-child td { border-bottom: 0; }
+
+    footer { margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 760px) {
+      .insight-band { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .section-head { display: grid; }
+      .month-row { grid-template-columns: 1fr; gap: 6px; }
+      .month-stats { text-align: right; }
+    }
+
+    @media (max-width: 560px) {
+      .page { padding-inline: 12px; }
+      .grid { grid-template-columns: 1fr; }
+      .product-card { grid-template-rows: 170px 1fr; }
+      .summary span, .page-nav a { width: 100%; }
+      .insight-band { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <nav class="page-nav" aria-label="روابط الصفحات">
+        <a href="index.html">المخزون الحالي</a>
+        <a href="orders-winners.html" class="active">ملخص الطلبات والفائزون</a>
+      </nav>
+      <h1>ملخص طلبات مصر والفائزون خلال آخر 6 أشهر</h1>
+      <div class="summary" aria-label="ملخص طلبات مصر">
+        <span>الفترة المتاحة: 1 يناير 2026 إلى 27 يونيو 2026</span>
+        <span>طلبات مصر: 1,146</span>
+        <span>القطع المباعة: 2,390</span>
+        <span>قيمة الطلبات: 5,246,805 ج.م</span>
+      </div>
+      <div class="notice">التحليل مبني على طلبات مصر المكتملة في ملف الطلبات، مع فصل المنتجات متعددة الأسطر داخل نفس الطلب قبل ترتيب الفائزين.</div>
+    </header>
+
+    <section class="insight-band" aria-label="مؤشرات رئيسية">
+      <div class="insight"><span>إيراد المنتجات بدون الشحن</span><strong>4,341,347 ج.م</strong></div>
+      <div class="insight"><span>متوسط قيمة الطلب</span><strong>4,578 ج.م</strong></div>
+      <div class="insight"><span>عدد المنتجات بعد التجميع</span><strong>565</strong></div>
+      <div class="insight"><span>أقوى منتج بالقطع</span><strong>Argivit Focus حبوب ارجيفيت فوكس لزيادة الطول ل</strong></div>
+    </section>
+
+    <section class="section">
+      <div class="analysis-panel">
+        <h2>قراءة تنفيذية</h2>
+        <ul><li>أقوى منتج حجماً هو Argivit Focus حبوب ارجيفيت فوكس لزيادة الطول للأطفال والمراهقين من سن 11 سنة فما فوق بعدد 459 قطعة و250 طلب، ويمثل 19.2% من القطع و11.6% من إيراد المنتجات.</li><li>أعلى مصدر طلبات مسجل هو Direct بعدد 430 طلب.</li><li>أعلى مدينة مكتوبة في بيانات الفوترة هي القاهرة بعدد 153 طلب، مع وجود اختلافات إملائية بين القاهرة/Cairo والقاهره.</li></ul>
+      </div>
+    </section>
+
+    <section class="section" aria-label="أفضل المنتجات الفائزة">
+      <div class="section-head">
+        <h2>الفائزون حسب القطع المباعة</h2>
+        <p>هذا الترتيب يعطي الأولوية للكمية، ثم عدد الطلبات، ثم إيراد المنتج. مناسب لاختيار منتجات التوسع والإعلانات ذات الطلب المتكرر.</p>
+      </div>
+      <div class="grid">
+        
+        <article class="product-card winner-card">
+          <div class="product-image"><img src="https://3arabtrend.com/wp-content/uploads/2023/08/%D8%AD%D8%A8%D9%88%D8%A8-%D8%A7%D8%B1%D8%AC%D9%8A%D9%81%D9%8A%D8%AA-%D9%81%D9%88%D9%83%D8%B3-%D9%84%D8%B2%D9%8A%D8%A7%D8%AF%D8%A9-%D8%A7%D9%84%D8%B7%D9%88%D9%84-%D9%84%D9%84%D8%A8%D8%A7%D9%84%D8%BA%D9%8A%D9%86.png" alt="Argivit Focus حبوب ارجيفيت فوكس لزيادة الطول للأطفال والمراهقين من سن 11 سنة فما فوق" loading="lazy"></div>
+          <div class="product-info">
+            <div class="product-meta">
+              <span class="rank">#1</span>
+              <span class="product-id">الأعلى بالقطع</span>
+            </div>
+            <h2>Argivit Focus حبوب ارجيفيت فوكس لزيادة الطول للأطفال والمراهقين من سن 11 سنة فما فوق</h2>
+            <div class="metric-row"><span>طلبات</span><strong>250</strong></div>
+            <div class="metric-row"><span>قطع</span><strong>459</strong></div>
+            <div class="stock-badge">إيراد المنتج: 503,798 ج.م</div>
+          </div>
+        </article>
+        <article class="product-card winner-card">
+          <div class="product-image"><div class="image-placeholder">لا توجد صورة مطابقة</div></div>
+          <div class="product-info">
+            <div class="product-meta">
+              <span class="rank">#2</span>
+              <span class="product-id">الأعلى بالقطع</span>
+            </div>
+            <h2>ارجيفيت فوكس شراب فيتامين الزرافة للأطفال Argivit Focus لزيادة الطول 150 مل</h2>
+            <div class="metric-row"><span>طلبات</span><strong>41</strong></div>
+            <div class="metric-row"><span>قطع</span><strong>79</strong></div>
+            <div class="stock-badge">إيراد المنتج: 73,563 ج.م</div>
+          </div>
+        </article>
+        <article class="product-card winner-card">
+          <div class="product-image"><img src="https://3arabtrend.com/wp-content/uploads/2024/01/%D8%B3%D8%B1%D8%A7%D9%88%D9%8A%D9%84-%D8%AF%D8%A7%D8%AE%D9%84%D9%8A%D9%87-%D9%86%D8%B3%D8%A7%D8%A6%D9%8A%D9%87-%D8%AF%D9%8A%D8%A8%D9%8A%D9%86%D8%AF-Depend-%D9%84%D8%B3%D9%84%D8%B3-%D8%A7%D9%84%D8%A8%D9%88%D9%84-%D8%A8%D9%82%D8%AF%D8%B1%D8%A9-%D8%A7%D9%85%D8%AA%D8%B5%D8%A7%D8%B5-%D9%81%D8%A7%D8%A6%D9%82%D8%A9-%D9%85%D9%82%D8%A7%D8%B3-XL.jpg" alt="فوطة ماصة كلوت نسائي لسلس البول والبريود بقدرة امتصاص وراحة فائقة" loading="lazy"></div>
+          <div class="product-info">
+            <div class="product-meta">
+              <span class="rank">#3</span>
+              <span class="product-id">الأعلى بالقطع</span>
+            </div>
+            <h2>فوطة ماصة كلوت نسائي لسلس البول والبريود بقدرة امتصاص وراحة فائقة</h2>
+            <div class="metric-row"><span>طلبات</span><strong>11</strong></div>
+            <div class="metric-row"><span>قطع</span><strong>62</strong></div>
+            <div class="stock-badge">إيراد المنتج: 15,708 ج.م</div>
+          </div>
+        </article>
+        <article class="product-card winner-card">
+          <div class="product-image"><div class="image-placeholder">لا توجد صورة مطابقة</div></div>
+          <div class="product-info">
+            <div class="product-meta">
+              <span class="rank">#4</span>
+              <span class="product-id">الأعلى بالقطع</span>
+            </div>
+            <h2>العسل الملكي الماليزي VIP</h2>
+            <div class="metric-row"><span>طلبات</span><strong>42</strong></div>
+            <div class="metric-row"><span>قطع</span><strong>54</strong></div>
+            <div class="stock-badge">إيراد المنتج: 91,125 ج.م</div>
+          </div>
+        </article>
+        <article class="product-card winner-card">
+          <div class="product-image"><img src="https://3arabtrend.com/wp-content/uploads/2023/08/%D8%AD%D8%A8%D9%88%D8%A8-%D8%A7%D8%B1%D8%AC%D9%8A%D9%81%D9%8A%D8%AA-%D9%81%D9%88%D9%83%D8%B3-%D9%84%D8%B2%D9%8A%D8%A7%D8%AF%D8%A9-%D8%A7%D9%84%D8%B7%D9%88%D9%84-%D9%84%D9%84%D8%A8%D8%A7%D9%84%D8%BA%D9%8A%D9%86.png" alt="Argivit Focus حبوب ارجيفيت فوكس لزيادة الطول للأطفال والمراهقين من سن 11 سنة 100% الأصلي" loading="lazy"></div>
+          <div class="product-info">
+            <div class="product-meta">
+              <span class="rank">#5</span>
+              <span class="product-id">الأعلى بالقطع</span>
+            </div>
+            <h2>Argivit Focus حبوب ارجيفيت فوكس لزيادة الطول للأطفال والمراهقين من سن 11 سنة 100% الأصلي</h2>
+            <div class="metric-row"><span>طلبات</span><strong>27</strong></div>
+            <div class="metric-row"><span>قطع</span><strong>31</strong></div>
+            <div class="stock-badge">إيراد المنتج: 68,115 ج.م</div>
+          </div>
+        </article>
+        <article class="product-card winner-card">
+          <div class="product-image"><div class="image-placeholder">لا توجد صورة مطابقة</div></div>
+          <div class="product-info">
+            <div class="product-meta">
+              <span class="rank">#6</span>
+              <span class="product-id">الأعلى بالقطع</span>
+            </div>
+            <h2>كبسول نوفوفان ACM Novophane</h2>
+            <div class="metric-row"><span>طلبات</span><strong>14</strong></div>
+            <div class="metric-row"><span>قطع</span><strong>28</strong></div>
+            <div class="stock-badge">إيراد المنتج: 59,021 ج.م</div>
+          </div>
+        </article>
+        <article class="product-card winner-card">
+          <div class="product-image"><img src="https://3arabtrend.com/wp-content/uploads/2024/03/%D8%AC%D9%84-%D8%B2%D9%8A%D8%A7%D8%AF%D8%A9-%D8%A7%D9%84%D8%B1%D8%BA%D8%A8%D8%A9-%D9%84%D9%84%D9%86%D8%B3%D8%A7%D8%A1-%D9%85%D9%86-%D8%AF%D9%8A%D9%88%D8%B1%D9%83%D8%B3-Durex.jpg" alt="جل زيادة الرغبة للنساء من ديوركس Durex للتحفيز المكثف" loading="lazy"></div>
+          <div class="product-info">
+            <div class="product-meta">
+              <span class="rank">#7</span>
+              <span class="product-id">الأعلى بالقطع</span>
+            </div>
+            <h2>جل زيادة الرغبة للنساء من ديوركس Durex للتحفيز المكثف</h2>
+            <div class="metric-row"><span>طلبات</span><strong>23</strong></div>
+            <div class="metric-row"><span>قطع</span><strong>26</strong></div>
+            <div class="stock-badge">إيراد المنتج: 48,530 ج.م</div>
+          </div>
+        </article>
+        <article class="product-card winner-card">
+          <div class="product-image"><img src="https://3arabtrend.com/wp-content/uploads/2022/12/%D8%B9%D8%B3%D9%84-%D8%A7%D9%84%D8%B3%D8%B1-%D8%A7%D9%84%D8%B9%D8%AB%D9%85%D8%A7%D9%86%D9%8A-%D8%B9%D9%84%D8%A8%D8%A9-12-%D8%B8%D8%B1%D9%81.jpg" alt="عسل السر العثماني الأصلي للرجال Erkexin" loading="lazy"></div>
+          <div class="product-info">
+            <div class="product-meta">
+              <span class="rank">#8</span>
+              <span class="product-id">الأعلى بالقطع</span>
+            </div>
+            <h2>عسل السر العثماني الأصلي للرجال Erkexin</h2>
+            <div class="metric-row"><span>طلبات</span><strong>18</strong></div>
+            <div class="metric-row"><span>قطع</span><strong>23</strong></div>
+            <div class="stock-badge">إيراد المنتج: 29,839 ج.م</div>
+          </div>
+        </article>
+        <article class="product-card winner-card">
+          <div class="product-image"><img src="https://3arabtrend.com/wp-content/uploads/2023/11/%D9%82%D8%B7%D8%B1%D8%A7%D8%AA-%D8%B2%D9%8A%D8%A7%D8%AF%D8%A9-%D8%A7%D9%84%D8%B1%D8%BA%D8%A8%D8%A9-%D8%A7%D9%84%D8%AC%D9%86%D8%B3%D9%8A%D8%A9-%D9%84%D9%84%D9%86%D8%B3%D8%A7%D8%A1-%D9%8A%D8%A7%D8%B3-%D8%A3%D9%88%D9%86-Yes-On-1.jpg" alt="Yes On قطرات منشط جنسي لزيادة الرغبة عند النساء" loading="lazy"></div>
+          <div class="product-info">
+            <div class="product-meta">
+              <span class="rank">#9</span>
+              <span class="product-id">الأعلى بالقطع</span>
+            </div>
+            <h2>Yes On قطرات منشط جنسي لزيادة الرغبة عند النساء</h2>
+            <div class="metric-row"><span>طلبات</span><strong>17</strong></div>
+            <div class="metric-row"><span>قطع</span><strong>23</strong></div>
+            <div class="stock-badge">إيراد المنتج: 25,265 ج.م</div>
+          </div>
+        </article>
+        <article class="product-card winner-card">
+          <div class="product-image"><img src="https://3arabtrend.com/wp-content/uploads/2024/03/%D9%85%D8%B9%D8%AC%D9%88%D9%86-%D9%85%D8%A7%D9%83%D8%B3-%D8%A8%D9%88%D9%84%D8%B2-%D8%A8%D8%A7%D9%88%D8%B1-MAX-BULLS-POWER-%D8%B9%D8%B3%D9%84-%D9%85%D9%82%D9%88%D9%8A-%D9%84%D9%84%D8%B1%D8%AC%D8%A7%D9%84.jpg" alt="معجون ماكس بولز باور MAX BULLS POWER عسل مقوي للرجال" loading="lazy"></div>
+          <div class="product-info">
+            <div class="product-meta">
+              <span class="rank">#10</span>
+              <span class="product-id">الأعلى بالقطع</span>
+            </div>
+            <h2>معجون ماكس بولز باور MAX BULLS POWER عسل مقوي للرجال</h2>
+            <div class="metric-row"><span>طلبات</span><strong>16</strong></div>
+            <div class="metric-row"><span>قطع</span><strong>23</strong></div>
+            <div class="stock-badge">إيراد المنتج: 38,650 ج.م</div>
+          </div>
+        </article>
+        <article class="product-card winner-card">
+          <div class="product-image"><img src="https://3arabtrend.com/wp-content/uploads/2023/05/img_1583.jpeg" alt="حبوب ارجيفيت سمارت لزيادة التركيز وتحسين وظائف الدماغ للأطفال والمراهقين 30 حبة Argivit Smart" loading="lazy"></div>
+          <div class="product-info">
+            <div class="product-meta">
+              <span class="rank">#11</span>
+              <span class="product-id">الأعلى بالقطع</span>
+            </div>
+            <h2>حبوب ارجيفيت سمارت لزيادة التركيز وتحسين وظائف الدماغ للأطفال والمراهقين 30 حبة Argivit Smart</h2>
+            <div class="metric-row"><span>طلبات</span><strong>11</strong></div>
+            <div class="metric-row"><span>قطع</span><strong>23</strong></div>
+            <div class="stock-badge">إيراد المنتج: 29,280 ج.م</div>
+          </div>
+        </article>
+        <article class="product-card winner-card">
+          <div class="product-image"><img src="https://3arabtrend.com/wp-content/uploads/2026/01/shot-2-min.webp" alt="ديبلونج مشروب منشط للقدرة الحميمية للرجال" loading="lazy"></div>
+          <div class="product-info">
+            <div class="product-meta">
+              <span class="rank">#12</span>
+              <span class="product-id">الأعلى بالقطع</span>
+            </div>
+            <h2>ديبلونج مشروب منشط للقدرة الحميمية للرجال</h2>
+            <div class="metric-row"><span>طلبات</span><strong>21</strong></div>
+            <div class="metric-row"><span>قطع</span><strong>22</strong></div>
+            <div class="stock-badge">إيراد المنتج: 38,823 ج.م</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-label="تطور الطلبات شهرياً">
+      <div class="section-head">
+        <h2>التطور الشهري في مصر</h2>
+        <p>يعرض كل شهر عدد الطلبات والقطع وإيراد المنتجات المسجلة في ملف الطلبات المصري.</p>
+      </div>
+      <div class="analysis-panel">
+        <div class="month-row">
+          <div class="month-label">يناير 2026</div>
+          <div class="month-bar"><span style="width:84.5%"></span></div>
+          <div class="month-stats">277 طلب / 570 قطعة / 876,566 ج.م</div>
+        </div>
+        <div class="month-row">
+          <div class="month-label">فبراير 2026</div>
+          <div class="month-bar"><span style="width:100.0%"></span></div>
+          <div class="month-stats">259 طلب / 584 قطعة / 1,037,391 ج.م</div>
+        </div>
+        <div class="month-row">
+          <div class="month-label">مارس 2026</div>
+          <div class="month-bar"><span style="width:63.6%"></span></div>
+          <div class="month-stats">175 طلب / 376 قطعة / 659,940 ج.م</div>
+        </div>
+        <div class="month-row">
+          <div class="month-label">أبريل 2026</div>
+          <div class="month-bar"><span style="width:72.4%"></span></div>
+          <div class="month-stats">195 طلب / 398 قطعة / 750,596 ج.م</div>
+        </div>
+        <div class="month-row">
+          <div class="month-label">مايو 2026</div>
+          <div class="month-bar"><span style="width:60.0%"></span></div>
+          <div class="month-stats">143 طلب / 277 قطعة / 621,948 ج.م</div>
+        </div>
+        <div class="month-row">
+          <div class="month-label">يونيو 2026</div>
+          <div class="month-bar"><span style="width:38.1%"></span></div>
+          <div class="month-stats">97 طلب / 185 قطعة / 394,906 ج.م</div>
+        </div></div>
+    </section>
+
+    <section class="section" aria-label="مصادر الطلبات والمدن">
+      <div class="section-head">
+        <h2>مصادر الطلبات والمدن الأعلى</h2>
+        <p>قراءة سريعة لقنوات الوصول والمدن كما ظهرت في بيانات الفوترة، بدون دمج إملائي للمدن المتشابهة.</p>
+      </div>
+      <div class="grid">
+        <div class="analysis-panel"><h3>مصادر الطلبات</h3><div class="summary tag-cloud"><span>Direct: 430 طلب</span><span>Source: Fb: 362 طلب</span><span>Source: Google: 144 طلب</span><span>Organic: Google: 79 طلب</span><span>Source: Ig: 78 طلب</span><span>Source:: 19 طلب</span><span>Referral: L.facebook.com: 9 طلب</span><span>Referral: M.facebook.com: 7 طلب</span></div></div>
+        <div class="analysis-panel"><h3>المدن الأعلى</h3><div class="summary tag-cloud"><span>القاهرة: 153 طلب</span><span>القاهره: 61 طلب</span><span>Cairo: 58 طلب</span><span>الجيزة: 28 طلب</span><span>Giza: 25 طلب</span><span>الجيزه: 22 طلب</span><span>الإسكندرية: 20 طلب</span><span>الشيخ زايد: 19 طلب</span></div></div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="جدول الفائزين حسب الإيراد">
+      <div class="section-head">
+        <h2>أفضل المنتجات حسب الإيراد</h2>
+        <p>هذا الترتيب يكشف المنتجات الأعلى قيمة حتى لو لم تكن الأعلى في عدد القطع.</p>
+      </div>
+      <div class="data-table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>المنتج</th><th>الطلبات</th><th>القطع</th><th>إيراد المنتج</th><th>متوسط القطعة</th></tr></thead>
+          <tbody>
+              <tr>
+                <td>1</td>
+                <td>Argivit Focus حبوب ارجيفيت فوكس لزيادة الطول للأطفال والمراهقين من سن 11 سنة فما فوق</td>
+                <td>250</td>
+                <td>459</td>
+                <td>503,798 ج.م</td>
+                <td>1,098 ج.م</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>العسل الملكي الماليزي VIP</td>
+                <td>42</td>
+                <td>54</td>
+                <td>91,125 ج.م</td>
+                <td>1,688 ج.م</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>ارجيفيت فوكس شراب فيتامين الزرافة للأطفال Argivit Focus لزيادة الطول 150 مل</td>
+                <td>41</td>
+                <td>79</td>
+                <td>73,563 ج.م</td>
+                <td>931 ج.م</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Argivit Focus حبوب ارجيفيت فوكس لزيادة الطول للأطفال والمراهقين من سن 11 سنة 100% الأصلي</td>
+                <td>27</td>
+                <td>31</td>
+                <td>68,115 ج.م</td>
+                <td>2,197 ج.م</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>كبسول نوفوفان ACM Novophane</td>
+                <td>14</td>
+                <td>28</td>
+                <td>59,021 ج.م</td>
+                <td>2,108 ج.م</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>تحاميل تضييق المهبل فاجي تايت Vagitight</td>
+                <td>12</td>
+                <td>14</td>
+                <td>52,288 ج.م</td>
+                <td>3,735 ج.م</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>جل زيادة الرغبة للنساء من ديوركس Durex للتحفيز المكثف</td>
+                <td>23</td>
+                <td>26</td>
+                <td>48,530 ج.م</td>
+                <td>1,867 ج.م</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>عطر OUD II السلطاني: أيقونة العود الصافي والكرز الطبيعي</td>
+                <td>1</td>
+                <td>1</td>
+                <td>48,100 ج.م</td>
+                <td>48,100 ج.م</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>فستق عنتاب التركي الأصلي 1 كجم مملح</td>
+                <td>11</td>
+                <td>11</td>
+                <td>43,922 ج.م</td>
+                <td>3,993 ج.م</td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>عسل العتم العماني النادر (عسل الزيتون البري) من البرومي</td>
+                <td>3</td>
+                <td>3</td>
+                <td>40,004 ج.م</td>
+                <td>13,335 ج.م</td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>ديبلونج مشروب منشط للقدرة الحميمية للرجال</td>
+                <td>21</td>
+                <td>22</td>
+                <td>38,823 ج.م</td>
+                <td>1,765 ج.م</td>
+              </tr>
+              <tr>
+                <td>12</td>
+                <td>معجون ماكس بولز باور MAX BULLS POWER عسل مقوي للرجال</td>
+                <td>16</td>
+                <td>23</td>
+                <td>38,650 ج.م</td>
+                <td>1,680 ج.م</td>
+              </tr>
+              <tr>
+                <td>13</td>
+                <td>فيتامين الزرافه شراب ارجيفيت فوكس للأطفال الأصلي مرخص ومعتمد لزيادة الطول 150 مل</td>
+                <td>13</td>
+                <td>18</td>
+                <td>38,220 ج.م</td>
+                <td>2,123 ج.م</td>
+              </tr>
+              <tr>
+                <td>14</td>
+                <td>اطلب Etumax ايتوماكس: العسل الملكي الماليزي الفضي للرجال 12 ظرف (أصلي وسريع المفعول)</td>
+                <td>15</td>
+                <td>15</td>
+                <td>35,119 ج.م</td>
+                <td>2,341 ج.م</td>
+              </tr>
+              <tr>
+                <td>15</td>
+                <td>حلقوم تركي حافظ مصطفى مشكل بالمكسرات 1.6 كجم</td>
+                <td>5</td>
+                <td>5</td>
+                <td>33,708 ج.م</td>
+                <td>6,742 ج.م</td>
+              </tr>
+              <tr>
+                <td>16</td>
+                <td>بقلاوة باديشاه مشكلة بالفستق والجوز 2 كجم حلويات حافظ مصطفى</td>
+                <td>4</td>
+                <td>4</td>
+                <td>32,480 ج.م</td>
+                <td>8,120 ج.م</td>
+              </tr>
+              <tr>
+                <td>17</td>
+                <td>مكمل لزيادة الطول inMAX Tall دعم نمو العظام والغضاريف للأولاد والبنات</td>
+                <td>9</td>
+                <td>9</td>
+                <td>31,981 ج.م</td>
+                <td>3,553 ج.م</td>
+              </tr>
+              <tr>
+                <td>18</td>
+                <td>عطر لبان ستورم باللبان العماني الفاخر والجلود لهيبة ملكية وثبات يدوم طويلاً</td>
+                <td>3</td>
+                <td>3</td>
+                <td>30,411 ج.م</td>
+                <td>10,137 ج.م</td>
+              </tr>
+              <tr>
+                <td>19</td>
+                <td>العسل الحيوي الماليزي Vital Honey VIP: أفضل عسل مقوي للرجال</td>
+                <td>14</td>
+                <td>17</td>
+                <td>30,306 ج.م</td>
+                <td>1,783 ج.م</td>
+              </tr>
+              <tr>
+                <td>20</td>
+                <td>حبوب التركيه A1 لسد الشهية ‏وإنقاص الوزن</td>
+                <td>17</td>
+                <td>20</td>
+                <td>30,207 ج.م</td>
+                <td>1,510 ج.م</td>
+              </tr>
+              <tr>
+                <td>21</td>
+                <td>عسل السر العثماني الأصلي للرجال Erkexin</td>
+                <td>18</td>
+                <td>23</td>
+                <td>29,839 ج.م</td>
+                <td>1,297 ج.م</td>
+              </tr>
+              <tr>
+                <td>22</td>
+                <td>حبوب ارجيفيت سمارت لزيادة التركيز وتحسين وظائف الدماغ للأطفال والمراهقين 30 حبة Argivit Smart</td>
+                <td>11</td>
+                <td>23</td>
+                <td>29,280 ج.م</td>
+                <td>1,273 ج.م</td>
+              </tr>
+              <tr>
+                <td>23</td>
+                <td>بقلاوة مشكلة بالفستق والجوز 2 كجم حلويات حافظ مصطفى</td>
+                <td>4</td>
+                <td>4</td>
+                <td>29,117 ج.م</td>
+                <td>7,279 ج.م</td>
+              </tr>
+              <tr>
+                <td>24</td>
+                <td>زيت العلقة الماليزي الأصلي 30 مل</td>
+                <td>17</td>
+                <td>19</td>
+                <td>27,342 ج.م</td>
+                <td>1,439 ج.م</td>
+              </tr>
+              <tr>
+                <td>25</td>
+                <td>حلوى الكستناء التركية الفاخرة (مارون جلاسيه) 850 جم Kafkas</td>
+                <td>6</td>
+                <td>8</td>
+                <td>26,230 ج.م</td>
+                <td>3,279 ج.م</td>
+              </tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" aria-label="جدول الفائزين حسب عدد الطلبات">
+      <div class="section-head">
+        <h2>أفضل المنتجات حسب عدد الطلبات</h2>
+        <p>هذا الترتيب يركز على التكرار والانتشار، وليس فقط حجم السلة أو سعر المنتج.</p>
+      </div>
+      <div class="data-table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>المنتج</th><th>الطلبات</th><th>القطع</th><th>إيراد المنتج</th><th>متوسط القطعة</th></tr></thead>
+          <tbody>
+              <tr>
+                <td>1</td>
+                <td>Argivit Focus حبوب ارجيفيت فوكس لزيادة الطول للأطفال والمراهقين من سن 11 سنة فما فوق</td>
+                <td>250</td>
+                <td>459</td>
+                <td>503,798 ج.م</td>
+                <td>1,098 ج.م</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>العسل الملكي الماليزي VIP</td>
+                <td>42</td>
+                <td>54</td>
+                <td>91,125 ج.م</td>
+                <td>1,688 ج.م</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>ارجيفيت فوكس شراب فيتامين الزرافة للأطفال Argivit Focus لزيادة الطول 150 مل</td>
+                <td>41</td>
+                <td>79</td>
+                <td>73,563 ج.م</td>
+                <td>931 ج.م</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Argivit Focus حبوب ارجيفيت فوكس لزيادة الطول للأطفال والمراهقين من سن 11 سنة 100% الأصلي</td>
+                <td>27</td>
+                <td>31</td>
+                <td>68,115 ج.م</td>
+                <td>2,197 ج.م</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>جل زيادة الرغبة للنساء من ديوركس Durex للتحفيز المكثف</td>
+                <td>23</td>
+                <td>26</td>
+                <td>48,530 ج.م</td>
+                <td>1,867 ج.م</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>ديبلونج مشروب منشط للقدرة الحميمية للرجال</td>
+                <td>21</td>
+                <td>22</td>
+                <td>38,823 ج.م</td>
+                <td>1,765 ج.م</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>عسل السر العثماني الأصلي للرجال Erkexin</td>
+                <td>18</td>
+                <td>23</td>
+                <td>29,839 ج.م</td>
+                <td>1,297 ج.م</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>Yes On قطرات منشط جنسي لزيادة الرغبة عند النساء</td>
+                <td>17</td>
+                <td>23</td>
+                <td>25,265 ج.م</td>
+                <td>1,098 ج.م</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>حبوب التركيه A1 لسد الشهية ‏وإنقاص الوزن</td>
+                <td>17</td>
+                <td>20</td>
+                <td>30,207 ج.م</td>
+                <td>1,510 ج.م</td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>زيت العلقة الماليزي الأصلي 30 مل</td>
+                <td>17</td>
+                <td>19</td>
+                <td>27,342 ج.م</td>
+                <td>1,439 ج.م</td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>معجون ماكس بولز باور MAX BULLS POWER عسل مقوي للرجال</td>
+                <td>16</td>
+                <td>23</td>
+                <td>38,650 ج.م</td>
+                <td>1,680 ج.م</td>
+              </tr>
+              <tr>
+                <td>12</td>
+                <td>زيت العلقة الماليزي الأصلي 30 مل Minyak Raja</td>
+                <td>16</td>
+                <td>19</td>
+                <td>23,092 ج.م</td>
+                <td>1,215 ج.م</td>
+              </tr>
+              <tr>
+                <td>13</td>
+                <td>كريم تاخير القذف برولونجينج من Doc Mr. Horny للمتزوجين 56 جم</td>
+                <td>15</td>
+                <td>18</td>
+                <td>21,726 ج.م</td>
+                <td>1,207 ج.م</td>
+              </tr>
+              <tr>
+                <td>14</td>
+                <td>اطلب Etumax ايتوماكس: العسل الملكي الماليزي الفضي للرجال 12 ظرف (أصلي وسريع المفعول)</td>
+                <td>15</td>
+                <td>15</td>
+                <td>35,119 ج.م</td>
+                <td>2,341 ج.م</td>
+              </tr>
+              <tr>
+                <td>15</td>
+                <td>كبسول نوفوفان ACM Novophane</td>
+                <td>14</td>
+                <td>28</td>
+                <td>59,021 ج.م</td>
+                <td>2,108 ج.م</td>
+              </tr>
+              <tr>
+                <td>16</td>
+                <td>العسل الحيوي الماليزي Vital Honey VIP: أفضل عسل مقوي للرجال</td>
+                <td>14</td>
+                <td>17</td>
+                <td>30,306 ج.م</td>
+                <td>1,783 ج.م</td>
+              </tr>
+              <tr>
+                <td>17</td>
+                <td>فيتامين الزرافه شراب ارجيفيت فوكس للأطفال الأصلي مرخص ومعتمد لزيادة الطول 150 مل</td>
+                <td>13</td>
+                <td>18</td>
+                <td>38,220 ج.م</td>
+                <td>2,123 ج.م</td>
+              </tr>
+              <tr>
+                <td>18</td>
+                <td>كبوسلات زيت حب القرع من Shiffa Home لعلاج البروستاتا وضعف الانتصاب 100 حبة جل</td>
+                <td>13</td>
+                <td>14</td>
+                <td>21,096 ج.م</td>
+                <td>1,507 ج.م</td>
+              </tr>
+              <tr>
+                <td>19</td>
+                <td>تحاميل تضييق المهبل فاجي تايت Vagitight</td>
+                <td>12</td>
+                <td>14</td>
+                <td>52,288 ج.م</td>
+                <td>3,735 ج.م</td>
+              </tr>
+              <tr>
+                <td>20</td>
+                <td>فوطة ماصة كلوت نسائي لسلس البول والبريود بقدرة امتصاص وراحة فائقة</td>
+                <td>11</td>
+                <td>62</td>
+                <td>15,708 ج.م</td>
+                <td>253 ج.م</td>
+              </tr>
+              <tr>
+                <td>21</td>
+                <td>حبوب ارجيفيت سمارت لزيادة التركيز وتحسين وظائف الدماغ للأطفال والمراهقين 30 حبة Argivit Smart</td>
+                <td>11</td>
+                <td>23</td>
+                <td>29,280 ج.م</td>
+                <td>1,273 ج.م</td>
+              </tr>
+              <tr>
+                <td>22</td>
+                <td>عسل الابيميديوم ثيمرا Themra</td>
+                <td>11</td>
+                <td>20</td>
+                <td>17,824 ج.م</td>
+                <td>891 ج.م</td>
+              </tr>
+              <tr>
+                <td>23</td>
+                <td>بيوماجيك BioMagic صبغة خالية من الامونيا</td>
+                <td>11</td>
+                <td>16</td>
+                <td>24,372 ج.م</td>
+                <td>1,523 ج.م</td>
+              </tr>
+              <tr>
+                <td>24</td>
+                <td>فستق عنتاب التركي الأصلي 1 كجم مملح</td>
+                <td>11</td>
+                <td>11</td>
+                <td>43,922 ج.م</td>
+                <td>3,993 ج.م</td>
+              </tr>
+              <tr>
+                <td>25</td>
+                <td>عبوتين</td>
+                <td>11</td>
+                <td>11</td>
+                <td>25,476 ج.م</td>
+                <td>2,316 ج.م</td>
+              </tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>
+      المصدر: orders-2026-06-27-16-41-47.xlsx. تمت قراءة 1,978 صف عالمي، وتصفية 1,171 صف طلب مصري مكتمل، ثم توسيعها إلى 1,843 بند منتج داخل 1,146 طلب. رؤوس مكررة في الملف: Order Total Amount و Cart Discount Amount؛ تم استخدام مواضع الأعمدة لتجنب الالتباس. اختلافات إجمالي الطلب بين عمودي Order Total Amount: 0. وقت التوليد: 2026-06-27T19:57:52
+    </footer>
+  </main>
+</body>
+</html>
