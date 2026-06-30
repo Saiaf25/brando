@@ -1,0 +1,1105 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>تقرير مركز الربحية فينورا</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: oklch(21% 0.035 350);
+      --muted: oklch(48% 0.035 352);
+      --paper: oklch(98% 0.012 24);
+      --surface: oklch(99% 0.009 21);
+      --warm: oklch(94% 0.035 48);
+      --rose: oklch(45% 0.18 2);
+      --rose-strong: oklch(38% 0.17 3);
+      --rose-soft: oklch(88% 0.07 4);
+      --silver: oklch(76% 0.015 255);
+      --line: oklch(88% 0.018 23);
+      --positive: oklch(51% 0.12 157);
+      --negative: oklch(52% 0.17 25);
+      --gold: oklch(72% 0.135 78);
+      --shadow: 0 18px 45px oklch(28% 0.04 350 / 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 0%, oklch(92% 0.08 8 / 0.42), transparent 34rem),
+        linear-gradient(180deg, var(--paper), oklch(96% 0.02 45));
+      font-family: "IBM Plex Sans Arabic", system-ui, sans-serif;
+      line-height: 1.75;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      width: clamp(140px, 18vw, 230px);
+    }
+
+    .doc-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .doc-meta span {
+      border: 1px solid var(--line);
+      background: oklch(99% 0.011 20 / 0.78);
+      padding: 5px 10px;
+      border-radius: 999px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(320px, 0.96fr);
+      gap: clamp(28px, 5vw, 68px);
+      align-items: center;
+      padding: clamp(38px, 7vw, 86px) 0 clamp(36px, 6vw, 72px);
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--rose-strong);
+      font-weight: 700;
+      margin: 0 0 14px;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      background: var(--rose);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.7rem, 6vw, 6.2rem);
+      line-height: 1.04;
+      letter-spacing: 0;
+      max-width: 9ch;
+    }
+
+    .hero-copy {
+      max-width: 65ch;
+      color: var(--muted);
+      font-size: clamp(1.02rem, 1.25vw, 1.18rem);
+      margin: 22px 0 0;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 14px;
+      align-items: end;
+    }
+
+    .visual-panel {
+      background:
+        linear-gradient(150deg, oklch(99% 0.014 27), oklch(92% 0.055 5));
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      min-height: 520px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: grid;
+      align-items: end;
+      padding: 28px;
+    }
+
+    .visual-panel::before {
+      content: "";
+      position: absolute;
+      inset-inline-start: -12%;
+      top: 8%;
+      width: 74%;
+      height: 18px;
+      background: var(--rose);
+      transform: rotate(-18deg);
+      opacity: 0.9;
+    }
+
+    .visual-panel img {
+      position: relative;
+      width: min(76%, 420px);
+      margin-inline: auto;
+      filter: drop-shadow(0 28px 30px oklch(24% 0.04 20 / 0.2));
+    }
+
+    .small-shot {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 16px 32px oklch(28% 0.04 350 / 0.09);
+    }
+
+    .small-shot img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .status-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-block: 8px 42px;
+    }
+
+    .metric {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px 18px 16px;
+      min-height: 152px;
+      box-shadow: 0 10px 24px oklch(28% 0.04 350 / 0.07);
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .metric strong {
+      display: block;
+      font-family: Poppins, "IBM Plex Sans Arabic", sans-serif;
+      direction: ltr;
+      text-align: right;
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      line-height: 1.1;
+      margin-top: 8px;
+      color: var(--rose-strong);
+    }
+
+    .metric p {
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .metric.negative strong { color: var(--negative); }
+    .metric.positive strong { color: var(--positive); }
+
+    section {
+      padding: clamp(32px, 6vw, 72px) 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(320px, 1.2fr);
+      gap: 28px;
+      align-items: start;
+      margin-bottom: 28px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.9rem, 3.2vw, 3.5rem);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 72ch;
+    }
+
+    .comparison {
+      display: grid;
+      gap: 18px;
+      background: oklch(99% 0.008 22 / 0.7);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: clamp(18px, 3vw, 32px);
+    }
+
+    .compare-row {
+      display: grid;
+      gap: 9px;
+    }
+
+    .compare-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .compare-head span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .bar-pair {
+      display: grid;
+      gap: 7px;
+    }
+
+    .bar {
+      min-height: 34px;
+      border-radius: 6px;
+      background: var(--warm);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+
+    .bar::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: var(--w);
+      background: var(--rose);
+    }
+
+    .bar.target::before {
+      background: linear-gradient(90deg, var(--gold), oklch(83% 0.09 82));
+    }
+
+    .bar span {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      height: 100%;
+      align-items: center;
+      padding-inline: 12px;
+      font-family: Poppins, "IBM Plex Sans Arabic", sans-serif;
+      font-size: 0.9rem;
+      color: var(--ink);
+    }
+
+    .legend {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-top: 12px;
+    }
+
+    .legend i {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-inline-end: 6px;
+      vertical-align: -1px;
+      background: var(--rose);
+    }
+
+    .legend .target-dot i { background: var(--gold); }
+
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .insight {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      padding: 18px;
+    }
+
+    .insight b {
+      display: block;
+      color: var(--rose-strong);
+      font-size: 1.08rem;
+    }
+
+    .insight p {
+      color: var(--muted);
+      margin: 8px 0 0;
+      font-size: 0.94rem;
+    }
+
+    .mix {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .mix-item {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      padding: 16px;
+    }
+
+    .mix-image {
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      min-height: 132px;
+      display: grid;
+      place-items: center;
+      background: oklch(97% 0.025 25);
+      overflow: hidden;
+    }
+
+    .mix-image img {
+      width: 100%;
+      height: 132px;
+      object-fit: contain;
+      padding: 10px;
+    }
+
+    .mix-item h3 {
+      margin: 0;
+      font-size: 1.3rem;
+    }
+
+    .mix-item p {
+      margin: 4px 0 12px;
+      color: var(--muted);
+    }
+
+    .mix-item b {
+      display: inline-block;
+      direction: ltr;
+      font-family: Poppins, "IBM Plex Sans Arabic", sans-serif;
+      color: var(--rose-strong);
+      margin-top: 9px;
+      margin-inline-end: 10px;
+    }
+
+    .mix-item small {
+      color: var(--muted);
+    }
+
+    .mix-line {
+      height: 10px;
+      border-radius: 999px;
+      background: var(--warm);
+      overflow: hidden;
+    }
+
+    .mix-line span {
+      display: block;
+      height: 100%;
+      width: var(--w);
+      background: var(--rose);
+    }
+
+    .product-initial {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: Poppins, sans-serif;
+      font-weight: 700;
+      color: oklch(99% 0.008 20);
+      background: var(--rose);
+    }
+
+    .ratio-board {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .ratio {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      padding: 18px;
+    }
+
+    .ratio strong {
+      display: block;
+      font-family: Poppins, "IBM Plex Sans Arabic", sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      direction: ltr;
+      text-align: right;
+      color: var(--rose-strong);
+    }
+
+    .ratio span {
+      color: var(--muted);
+    }
+
+    .ratio .delta {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .statement-wrap {
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: 0 12px 34px oklch(28% 0.04 350 / 0.06);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: right;
+      vertical-align: top;
+    }
+
+    thead th {
+      background: var(--rose-strong);
+      color: oklch(98% 0.012 24);
+      font-weight: 700;
+      position: sticky;
+      top: 0;
+    }
+
+    td:nth-child(2), td:nth-child(4) {
+      direction: ltr;
+      text-align: left;
+      font-family: Poppins, "IBM Plex Sans Arabic", sans-serif;
+      white-space: nowrap;
+    }
+
+    tr.section th {
+      background: oklch(94% 0.045 8);
+      color: var(--rose-strong);
+      font-size: 1.04rem;
+      border-top: 1px solid var(--line);
+    }
+
+    tr.total td {
+      background: oklch(97% 0.018 34);
+      font-weight: 700;
+    }
+
+    .foot {
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 28px 0 46px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 940px) {
+      .hero,
+      .section-head {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        max-width: 12ch;
+      }
+
+      .status-strip,
+      .insight-grid,
+      .ratio-board {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .mix {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: min(100% - 22px, 1180px);
+      }
+
+      .topbar {
+        align-items: flex-start;
+        padding-top: 18px;
+        flex-direction: column;
+      }
+
+      .doc-meta {
+        justify-content: flex-start;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .visual-panel {
+        min-height: 380px;
+      }
+
+      .status-strip,
+      .insight-grid,
+      .ratio-board {
+        grid-template-columns: 1fr;
+      }
+
+      .mix-item {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      body {
+        background: var(--paper);
+      }
+
+      .visual-panel,
+      .metric,
+      .statement-wrap {
+        box-shadow: none;
+      }
+
+      section {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <img class="logo" src="venura-profit-report-assets/logo-venura.svg" alt="Venura">
+      <div class="doc-meta">
+        <span>تقرير HTML</span>
+        <span>مصدر البيانات: ملف Excel</span>
+        <span>30 يونيو 2026</span>
+      </div>
+    </header>
+
+    <section class="hero" aria-labelledby="title">
+      <div>
+        <p class="kicker">مركز ربحية فينورا</p>
+        <h1 id="title">من الخسارة التشغيلية إلى هدف الربحية</h1>
+        <p class="hero-copy">
+          قراءة تنفيذية للأرقام الفعلية مقابل المستهدف حتى ديسمبر 2026، مع إظهار أثر المبيعات، تكلفة البضاعة، والمصروفات التشغيلية على مسار الربحية. الأرقام أدناه مأخوذة من ورقة <strong>القوائم المالية</strong> كما هي.
+        </p>
+      </div>
+      <div class="hero-grid">
+        <div class="visual-panel">
+          <img src="venura-profit-report-assets/vtightx-gel-pack.webp" alt="عبوة V-TightX من فينورا">
+        </div>
+        <div class="small-shot">
+          <img src="venura-profit-report-assets/vtightx-lifestyle.webp" alt="صورة منتج V-TightX من متجر فينورا">
+        </div>
+      </div>
+    </section>
+
+    <div class="status-strip" aria-label="مؤشرات رئيسية">
+      
+      <article class="metric ">
+        <span>صافي المبيعات الفعلية</span>
+        <strong>11,549 $</strong>
+        <p>12.6% من مستهدف ديسمبر</p>
+      </article>
+    
+      
+      <article class="metric positive">
+        <span>مجمل الربح الفعلي</span>
+        <strong>8,422.3 $</strong>
+        <p>هامش فعلي 72.9%</p>
+      </article>
+    
+      
+      <article class="metric ">
+        <span>المصروفات التشغيلية</span>
+        <strong>19,460 $</strong>
+        <p>34.3% من الميزانية المستهدفة</p>
+      </article>
+    
+      
+      <article class="metric negative">
+        <span>صافي النتيجة الفعلية</span>
+        <strong>-11,037.7 $</strong>
+        <p>المستهدف 17,825 $</p>
+      </article>
+    
+    </div>
+
+    <section aria-labelledby="comparison-title">
+      <div class="section-head">
+        <h2 id="comparison-title">الفجوة المالية في لقطة واحدة</h2>
+        <p>
+          الأداء الحالي يثبت هامش ربح إجمالي جيد، لكن الإنفاق التشغيلي سابق لحجم المبيعات. نقطة التحول ليست في تكلفة البضاعة فقط، بل في رفع الإيراد مع ضبط سرعة الصرف.
+        </p>
+      </div>
+      <div class="comparison">
+        
+      <div class="compare-row">
+        <div class="compare-head">
+          <strong>صافي المبيعات</strong>
+          <span>الفجوة: 79,951 $</span>
+        </div>
+        <div class="bar-pair" aria-label="صافي المبيعات">
+          <div class="bar actual" style="--w:12.62%"><span>11,549 $</span></div>
+          <div class="bar target" style="--w:100.00%"><span>91,500 $</span></div>
+        </div>
+      </div>
+    
+
+      <div class="compare-row">
+        <div class="compare-head">
+          <strong>مجمل الربح</strong>
+          <span>الفجوة: 66,112.7 $</span>
+        </div>
+        <div class="bar-pair" aria-label="مجمل الربح">
+          <div class="bar actual" style="--w:11.30%"><span>8,422.3 $</span></div>
+          <div class="bar target" style="--w:100.00%"><span>74,535 $</span></div>
+        </div>
+      </div>
+    
+
+      <div class="compare-row">
+        <div class="compare-head">
+          <strong>المصروفات التشغيلية</strong>
+          <span>الفجوة: 37,250 $</span>
+        </div>
+        <div class="bar-pair" aria-label="المصروفات التشغيلية">
+          <div class="bar actual" style="--w:34.31%"><span>19,460 $</span></div>
+          <div class="bar target" style="--w:100.00%"><span>56,710 $</span></div>
+        </div>
+      </div>
+    
+
+      <div class="compare-row">
+        <div class="compare-head">
+          <strong>صافي الربح</strong>
+          <span>الفجوة: 17,825 $</span>
+        </div>
+        <div class="bar-pair" aria-label="صافي الربح">
+          <div class="bar actual" style="--w:0.00%"><span>0 $</span></div>
+          <div class="bar target" style="--w:100.00%"><span>17,825 $</span></div>
+        </div>
+      </div>
+    
+        <div class="legend">
+          <span><i></i>الفعلي</span>
+          <span class="target-dot"><i></i>المستهدف حتى ديسمبر 2026</span>
+        </div>
+      </div>
+      <div class="insight-grid">
+        <article class="insight">
+          <b>المبيعات تحتاج مضاعفة كبيرة</b>
+          <p>الفعلية عند 11,549 $ مقابل مستهدف 91,500 $. هذا يعني أن التقرير لا يزال في مرحلة إثبات السوق أكثر من مرحلة الربحية.</p>
+        </article>
+        <article class="insight">
+          <b>الهامش الإجمالي قوي نسبيا</b>
+          <p>الهامش الفعلي 72.9% مقابل مستهدف 81.5%. تكلفة البضاعة ليست نقطة الضغط الأكبر حاليا.</p>
+        </article>
+        <article class="insight">
+          <b>المصروف التشغيلي هو مركز الضغط</b>
+          <p>المصروفات الفعلية 19,460 $، وهي أعلى من مجمل الربح الفعلي بنحو 11,037.7 $.</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="mix-title">
+      <div class="section-head">
+        <h2 id="mix-title">مزيج المنتجات في الإيرادات</h2>
+        <p>
+          المبيعات الحالية موزعة بين V-TightX ومناديل Alpha Vibes. صورة المنتج تساعد القارئ على ربط الأرقام بسياق تجاري واضح بدلا من قراءتها كجدول مجرد.
+        </p>
+      </div>
+      <div class="mix">
+        
+      <article class="mix-item">
+        <div class="mix-image"><img src="venura-profit-report-assets/vtightx-gel-open.webp" alt="V-TightX"></div>
+        <div>
+          <h3>V-TightX</h3>
+          <p>المستهدف حتى ديسمبر: 52,500 $</p>
+          <div class="mix-line"><span style="--w:58.45%"></span></div>
+          <b>6,750 $</b>
+          <small>58.4% من المبيعات الفعلية</small>
+        </div>
+      </article>
+    
+
+      <article class="mix-item">
+        <div class="mix-image"><img src="venura-profit-report-assets/alpha-vibes-pack.webp" alt="Alpha Vibes"></div>
+        <div>
+          <h3>Alpha Vibes</h3>
+          <p>المستهدف حتى ديسمبر: 39,000 $</p>
+          <div class="mix-line"><span style="--w:41.55%"></span></div>
+          <b>4,799 $</b>
+          <small>41.6% من المبيعات الفعلية</small>
+        </div>
+      </article>
+    
+      </div>
+    </section>
+
+    <section aria-labelledby="ratios-title">
+      <div class="section-head">
+        <h2 id="ratios-title">مؤشرات الأداء المالي</h2>
+        <p>
+          المؤشرات تقارن الوضع الفعلي بالمستهدف. قراءة النسب هنا أهم من قراءة الرقم وحده، لأنها تكشف ما إذا كان نموذج الربحية يتحسن عند الوصول إلى حجم مبيعات أعلى.
+        </p>
+      </div>
+      <div class="ratio-board">
+        <article class="ratio">
+          <span>هامش مجمل الربح</span>
+          <strong>72.9%</strong>
+          <div class="delta">المستهدف: 81.5%</div>
+        </article>
+        <article class="ratio">
+          <span>هامش صافي الربح</span>
+          <strong>-95.6%</strong>
+          <div class="delta">المستهدف: 19.5%</div>
+        </article>
+        <article class="ratio">
+          <span>العائد على الاستثمار ROI</span>
+          <strong>-48.9%</strong>
+          <div class="delta">المستهدف: 24.2%</div>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="statement-title">
+      <div class="section-head">
+        <h2 id="statement-title">القوائم المالية التفصيلية</h2>
+        <p>
+          هذا الجدول يحافظ على بنية ورقة Excel الأصلية، مع إبراز الصفوف الإجمالية والتحليل المالي حتى تبقى المراجعة قابلة للتتبع.
+        </p>
+      </div>
+      <div class="statement-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>البيان</th>
+              <th>الفعلي</th>
+              <th>مستهدف الكمية</th>
+              <th>قيمة المستهدف</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="section"><th colspan="4">مركز ربحية فينورا</th></tr>
+<tr class="section"><th colspan="4">البيان</th></tr>
+
+            <tr class="">
+              <td>اولا : الايرادات</td>
+              <td>الفعلي</td>
+              <td>المستهدف حتى ديسمبر 2026م</td>
+              <td></td>
+            </tr>
+            
+
+            <tr class="">
+              <td>مبيعات تيست الإمارات من مناديل ألفا ڤايبس * 250 عبوة * 17 $</td>
+              <td>4,250</td>
+              <td>1500 عبوة</td>
+              <td>39,000</td>
+            </tr>
+            
+
+            <tr class="">
+              <td>مبيعات تيست مصر من مناديل ألفا ڤايبس * 8 عبوة</td>
+              <td>240</td>
+              <td></td>
+              <td>0</td>
+            </tr>
+            
+
+            <tr class="">
+              <td>مبيعات تيست ليبيا من مناديل ألفا ڤايبس * 8 عبوة</td>
+              <td>220</td>
+              <td></td>
+              <td>0</td>
+            </tr>
+            
+
+            <tr class="">
+              <td>مبيعات تيست تركيا من مناديل ألفا ڤايبس * 4 عبوة</td>
+              <td>89</td>
+              <td></td>
+              <td>0</td>
+            </tr>
+            
+
+            <tr class="">
+              <td>مبيعات تيست الإمارات من كريم جيل Vtightx * 250 عبوة * 27 $</td>
+              <td>6,750</td>
+              <td>1500 عبوة</td>
+              <td>52,500</td>
+            </tr>
+            
+
+            <tr class="total">
+              <td>صافي المبيعات</td>
+              <td>11,549</td>
+              <td></td>
+              <td>91,500</td>
+            </tr>
+            
+<tr class="section"><th colspan="4">ثانيا : تكلفة المبيعات ( تكلفة البضاعة المباعة )</th></tr>
+
+            <tr class="">
+              <td>تكلفة مبيعات تيست الإمارات من مناديل ألفا ڤايبس * 250 عبوة * 2.45$</td>
+              <td>612.5</td>
+              <td></td>
+              <td>3,675</td>
+            </tr>
+            
+
+            <tr class="">
+              <td>تكلفة مبيعات تيست مصر من مناديل ألفا ڤايبس * 8 عبوة</td>
+              <td>19.6</td>
+              <td></td>
+              <td>0</td>
+            </tr>
+            
+
+            <tr class="">
+              <td>تكلفة مبيعات تيست ليبيا من مناديل ألفا ڤايبس * 8 عبوة</td>
+              <td>19.6</td>
+              <td></td>
+              <td>0</td>
+            </tr>
+            
+
+            <tr class="">
+              <td>تكلفة مبيعات تيست تركيا من مناديل ألفا ڤايبس * 4 عبوة</td>
+              <td>10</td>
+              <td></td>
+              <td>0</td>
+            </tr>
+            
+
+            <tr class="">
+              <td>تكلفة مبيعات التيست من كريم جيل Vtightx * 250 عبوة *3.86 $</td>
+              <td>965</td>
+              <td></td>
+              <td>5,790</td>
+            </tr>
+            
+
+            <tr class="">
+              <td>تكاليف شحن عبوة Vtightx لمصر وعمان وليبيا والإمارات 250 * 3</td>
+              <td>750</td>
+              <td></td>
+              <td>3,750</td>
+            </tr>
+            
+
+            <tr class="">
+              <td>تكاليف شحن مناديل ألفا ڤايبس لمصر وعمان وليبيا والإمارات 250 * 3</td>
+              <td>750</td>
+              <td></td>
+              <td>3,750</td>
+            </tr>
+            
+
+            <tr class="total">
+              <td>تكلفة البضاعة المباعة</td>
+              <td>3,126.7</td>
+              <td></td>
+              <td>16,965</td>
+            </tr>
+            
+
+            <tr class="total">
+              <td>مجمل الربح</td>
+              <td>8,422.3</td>
+              <td></td>
+              <td>74,535</td>
+            </tr>
+            
+<tr class="section"><th colspan="4">ثالثا : المصروفات التشغيلية</th></tr>
+<tr class="section"><th colspan="4">مصروفات التسويق</th></tr>
+
+            <tr class="">
+              <td>إنشاء مواقع إلكتروني</td>
+              <td>3,000</td>
+              <td></td>
+              <td>3,000</td>
+            </tr>
+            
+
+            <tr class="">
+              <td>إدارة منصات تسويق إلكتروني</td>
+              <td>3,500</td>
+              <td></td>
+              <td>11,000</td>
+            </tr>
+            
+
+            <tr class="">
+              <td>إعلانات التسويق الإلكتروني حتى ٢٩ يونيو 2026</td>
+              <td>3,250</td>
+              <td></td>
+              <td>30,000</td>
+            </tr>
+            
+<tr class="section"><th colspan="4">مصاريف الترخيص</th></tr>
+
+            <tr class="">
+              <td>الترخيص السنوي لسجل السعودية</td>
+              <td>6,934</td>
+              <td></td>
+              <td>6,934</td>
+            </tr>
+            
+
+            <tr class="">
+              <td>رخصة منصة غد لـ FDA السعودية</td>
+              <td>475</td>
+              <td></td>
+              <td>475</td>
+            </tr>
+            
+
+            <tr class="">
+              <td>ترخيص شركة VENURA ALPHA LLC في أمريكا</td>
+              <td>360</td>
+              <td></td>
+              <td>360</td>
+            </tr>
+            
+
+            <tr class="">
+              <td>ترخيص شركة VENURA LLC في بريطانيا</td>
+              <td>260</td>
+              <td></td>
+              <td>260</td>
+            </tr>
+            
+<tr class="section"><th colspan="4">مصروف التامين</th></tr>
+
+            <tr class="">
+              <td>تأمينات السجل السعودي</td>
+              <td>347</td>
+              <td></td>
+              <td>347</td>
+            </tr>
+            
+<tr class="section"><th colspan="4">مصروف ايجار</th></tr>
+
+            <tr class="">
+              <td>استئجار مستودع من شركة دار العناية</td>
+              <td>1,334</td>
+              <td></td>
+              <td>1,334</td>
+            </tr>
+            
+
+            <tr class="">
+              <td>مرتبات إدارية</td>
+              <td></td>
+              <td></td>
+              <td>3,000</td>
+            </tr>
+            
+
+            <tr class="total">
+              <td>اجمالي المصروفات التشغيلية</td>
+              <td>19,460</td>
+              <td></td>
+              <td>56,710</td>
+            </tr>
+            
+
+            <tr class="total">
+              <td>صافي خسارة/الربح</td>
+              <td>-11,037.7</td>
+              <td></td>
+              <td>17,825</td>
+            </tr>
+            
+<tr class="section"><th colspan="4">تحليل الاداء المالي للمستهدف حتي ديسمبر 2026</th></tr>
+
+            <tr class="total">
+              <td>نسبة هامش مجمل الربح من المبيعات</td>
+              <td>81.5%</td>
+              <td></td>
+              <td></td>
+            </tr>
+            
+
+            <tr class="total">
+              <td>نسبة هامش صافي الربح من المبيعات</td>
+              <td>19.5%</td>
+              <td></td>
+              <td></td>
+            </tr>
+            
+
+            <tr class="total">
+              <td>العائد على الاستثمار (ROI)</td>
+              <td>24.2%</td>
+              <td></td>
+              <td></td>
+            </tr>
+            
+<tr class="section"><th colspan="4">تحليل الاداء المالي الفعلي</th></tr>
+
+            <tr class="total">
+              <td>نسبة هامش مجمل الربح من المبيعات</td>
+              <td>72.9%</td>
+              <td></td>
+              <td></td>
+            </tr>
+            
+
+            <tr class="total">
+              <td>نسبة هامش صافي الربح من المبيعات</td>
+              <td>-95.6%</td>
+              <td></td>
+              <td></td>
+            </tr>
+            
+
+            <tr class="total">
+              <td>العائد على الاستثمار (ROI)</td>
+              <td>-48.9%</td>
+              <td></td>
+              <td></td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <span>أُنشئ هذا التقرير من: Copy of تقرير مركز الربحية فينورا   معدل.xlsx</span>
+      <span>العلامة والأصول البصرية مستندة إلى Venura Shop والملفات المحلية في مجلد فينورا.</span>
+    </footer>
+  </main>
+</body>
+</html>
