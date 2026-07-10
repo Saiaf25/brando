@@ -6,6 +6,42 @@
    ========================================================================= */
 
 /* === DESIGN TOKENS (Brandology palette) === */
+@font-face{
+  font-family:'Thmanyah Serif Text';
+  src:url('fonts/thmanyahseriftext-Light.woff2') format('woff2');
+  font-weight:300;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:'Thmanyah Serif Text';
+  src:url('fonts/thmanyahseriftext-Regular.woff2') format('woff2');
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:'Thmanyah Serif Text';
+  src:url('fonts/thmanyahseriftext-Medium.woff2') format('woff2');
+  font-weight:500 600;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:'Thmanyah Serif Text';
+  src:url('fonts/thmanyahseriftext-Bold.woff2') format('woff2');
+  font-weight:700;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:'Thmanyah Serif Text';
+  src:url('fonts/thmanyahseriftext-Black.woff2') format('woff2');
+  font-weight:800 900;
+  font-style:normal;
+  font-display:swap;
+}
+
 :root{
   /* Brand */
   --brand-red:#E30613;
@@ -36,11 +72,11 @@
   --mobader-purple:#6B2C8B;
 
   /* Type */
-  --font-display:'Fraunces', Georgia, serif;
-  --font-body:'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-mono:'IBM Plex Mono', 'SF Mono', Menlo, monospace;
-  --font-ar-display:'Baloo Bhaijaan 2', 'IBM Plex Sans Arabic', sans-serif;
-  --font-ar-body:'Baloo Bhaijaan 2', 'IBM Plex Sans Arabic', sans-serif;
+  --font-display:'Thmanyah Serif Text', Georgia, serif;
+  --font-body:'Thmanyah Serif Text', Georgia, serif;
+  --font-mono:'Thmanyah Serif Text', Georgia, serif;
+  --font-ar-display:'Thmanyah Serif Text', Georgia, serif;
+  --font-ar-body:'Thmanyah Serif Text', Georgia, serif;
 
   /* Spacing scale (8pt baseline) */
   --space-xs:8px;
