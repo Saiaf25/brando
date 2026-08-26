@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>تقرير الشهر الأول | MISK International</title>
+  <style>
+    @font-face {
+      font-family: "Thmanyah Sans";
+      src: url("./assets/fonts/thmanyahsans-Light.woff2") format("woff2");
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Thmanyah Sans";
+      src: url("./assets/fonts/thmanyahsans-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Thmanyah Sans";
+      src: url("./assets/fonts/thmanyahsans-Medium.woff2") format("woff2");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Thmanyah Sans";
+      src: url("./assets/fonts/thmanyahsans-Bold.woff2") format("woff2");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Thmanyah Sans";
+      src: url("./assets/fonts/thmanyahsans-Black.woff2") format("woff2");
+      font-weight: 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --red: #e30613;
+      --red-dark: #aa0710;
+      --yellow: #ffcc00;
+      --ink: #1e1e1c;
+      --muted: #686868;
+      --line: #e5e5e1;
+      --paper: #ffffff;
+      --wash: #f7f7f4;
+      --good: #147a4b;
+      --good-wash: #eaf6ef;
+      --warn: #8a5a00;
+      --warn-wash: #fff7da;
+      --radius: 18px;
+      --shadow: 0 14px 40px rgba(30, 30, 28, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--wash);
+      color: var(--ink);
+      font-family: "Thmanyah Sans", "Noto Sans Arabic", Tahoma, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.85;
+      text-align: right;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 32px auto 72px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 430px;
+      padding: 54px clamp(28px, 6vw, 72px);
+      border-radius: 28px;
+      background: var(--ink);
+      color: #fff;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto auto;
+      width: 240px;
+      height: 14px;
+      background: var(--red);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      left: -120px;
+      bottom: -170px;
+      border: 60px solid rgba(255, 204, 0, 0.16);
+      border-radius: 50%;
+    }
+
+    .brand-line,
+    .hero-copy,
+    .hero-meta { position: relative; z-index: 1; }
+
+    .brand-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      font-weight: 700;
+      letter-spacing: .01em;
+    }
+
+    .brand-line .prepared { color: #d7d7d2; font-size: .92rem; }
+
+    .eyebrow {
+      color: var(--yellow);
+      font-weight: 800;
+      margin: 0 0 8px;
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 0;
+      font-size: clamp(2.3rem, 6vw, 4.8rem);
+      line-height: 1.15;
+      letter-spacing: -.035em;
+    }
+
+    .hero-subtitle {
+      max-width: 760px;
+      margin: 20px 0 0;
+      color: #deded9;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 32px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 6px 14px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      color: #fff;
+      font-size: .9rem;
+    }
+
+    main { margin-top: 28px; }
+
+    section {
+      margin-top: 22px;
+      padding: clamp(26px, 4vw, 48px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: 0 8px 28px rgba(30, 30, 28, 0.045);
+    }
+
+    .section-kicker {
+      margin: 0 0 4px;
+      color: var(--red);
+      font-size: .82rem;
+      font-weight: 850;
+      letter-spacing: .08em;
+    }
+
+    h2 {
+      margin: 0 0 20px;
+      font-size: clamp(1.55rem, 3vw, 2.35rem);
+      line-height: 1.3;
+      letter-spacing: -.02em;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+      line-height: 1.5;
+    }
+
+    p { margin: 0 0 12px; }
+    p:last-child { margin-bottom: 0; }
+
+    .lead {
+      max-width: 920px;
+      font-size: 1.12rem;
+      color: #33332f;
+    }
+
+    .takeaway {
+      margin-top: 22px;
+      padding: 20px 22px;
+      border-right: 5px solid var(--yellow);
+      border-radius: 12px;
+      background: var(--warn-wash);
+      color: #493600;
+      font-weight: 700;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .metric {
+      min-height: 156px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fff, #fbfbf8);
+    }
+
+    .metric .label { color: var(--muted); font-size: .88rem; }
+    .metric strong {
+      display: block;
+      margin: 8px 0 3px;
+      color: var(--ink);
+      font-size: clamp(1.55rem, 3.1vw, 2.35rem);
+      line-height: 1.15;
+      font-variant-numeric: tabular-nums;
+    }
+    .metric .note { color: var(--muted); font-size: .82rem; line-height: 1.5; }
+
+    .grid-2,
+    .grid-3 {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .card {
+      padding: 21px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .card p { color: #4f4f4a; font-size: .95rem; }
+    .card .num {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      margin-left: 8px;
+      border-radius: 10px;
+      background: var(--red);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .status {
+      display: inline-block;
+      margin-bottom: 9px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 800;
+    }
+
+    .status.done { background: var(--good-wash); color: var(--good); }
+    .status.next { background: var(--warn-wash); color: var(--warn); }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 720px;
+      border-collapse: collapse;
+      background: #fff;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: right;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--ink);
+      color: #fff;
+      font-size: .88rem;
+      font-weight: 750;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+    tbody tr:nth-child(even) { background: #fafaf7; }
+    td.value { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+    .caption {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    .bars { display: grid; gap: 12px; margin-top: 20px; }
+    .bar-row { display: grid; grid-template-columns: 135px 1fr 70px; gap: 12px; align-items: center; }
+    .bar-label { font-size: .9rem; }
+    .bar-track { height: 12px; overflow: hidden; border-radius: 999px; background: #ecece7; }
+    .bar-fill { height: 100%; border-radius: inherit; background: var(--red); }
+    .bar-value { text-align: left; font-size: .85rem; font-variant-numeric: tabular-nums; }
+
+    .priority-list,
+    .clean-list { margin: 0; padding: 0; list-style: none; }
+    .priority-list { display: grid; gap: 14px; }
+    .priority-list li {
+      position: relative;
+      padding: 18px 58px 18px 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+    .priority-list li::before {
+      content: attr(data-n);
+      position: absolute;
+      right: 16px;
+      top: 18px;
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 9px;
+      background: var(--yellow);
+      color: var(--ink);
+      font-weight: 850;
+    }
+    .priority-list strong { display: block; margin-bottom: 3px; }
+    .priority-list span { color: #55554f; font-size: .94rem; }
+
+    .roadmap { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .phase { padding: 20px; border-top: 5px solid var(--red); border-radius: 12px; background: var(--wash); }
+    .phase .period { color: var(--red-dark); font-size: .82rem; font-weight: 850; }
+    .phase h3 { margin-top: 7px; }
+    .phase p { color: #54544f; font-size: .9rem; }
+
+    .owner-table td:first-child { width: 22%; font-weight: 800; }
+
+    .decision-box {
+      padding: 24px;
+      border: 2px solid var(--yellow);
+      border-radius: 16px;
+      background: #fffdf3;
+    }
+
+    .source-note {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 24px 6px 0;
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    bdi { unicode-bidi: isolate; }
+
+    @media (max-width: 860px) {
+      .metrics, .grid-3, .roadmap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      body { font-size: 15px; }
+      .page { width: min(100% - 18px, 1120px); margin-top: 9px; }
+      .hero { min-height: 500px; padding: 34px 24px; border-radius: 18px; }
+      .brand-line { align-items: flex-start; flex-direction: column; gap: 5px; }
+      .metrics, .grid-3, .roadmap { grid-template-columns: 1fr; }
+      section { padding: 24px 20px; }
+      .bar-row { grid-template-columns: 92px 1fr 52px; gap: 8px; }
+      footer { flex-direction: column; }
+    }
+
+    @media print {
+      @page { size: A4; margin: 14mm; }
+      body { background: #fff; font-size: 10.5pt; }
+      .page { width: 100%; margin: 0; }
+      .hero { min-height: 245mm; border-radius: 0; box-shadow: none; page-break-after: always; }
+      section { box-shadow: none; break-inside: avoid; margin-top: 10mm; }
+      .card, .metric, .phase, tr { break-inside: avoid; }
+      footer { margin-top: 12mm; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="brand-line">
+        <span>MISK International</span>
+        <span class="prepared">إعداد Brandology</span>
+      </div>
+      <div class="hero-copy">
+        <p class="eyebrow">تقرير الشهر الأول</p>
+        <h1>تقييم الأداء التسويقي والتشغيلي للعقارات</h1>
+        <p class="hero-subtitle">قراءة تنفيذية لما تحقق، وما كشفته البيانات، والأولويات المقترحة لبناء مسار أكثر استقرارًا من الإعلان إلى الصفقة.</p>
+      </div>
+      <div class="hero-meta">
+        <span class="tag">الفترة: <bdi>26 يوليو – 26 أغسطس 2026</bdi></span>
+        <span class="tag">النشاط: العقارات</span>
+        <span class="tag">النطاق: الإعلانات والمبيعات وCRM والأصول الرقمية</span>
+      </div>
+    </header>
+
+    <main>
+      <section id="summary">
+        <p class="section-kicker">الخلاصة التنفيذية</p>
+        <h2>الملخص التنفيذي</h2>
+        <p class="lead">خصص الشهر الأول لبناء خط أساس حقيقي لمنظومة التسويق والمبيعات الرقمية لدى MISK العقارية. أطلقت الحملات، واختبرت أكثر من مسار لاستقبال العملاء، وربط العمل ببيانات CRM، وبدأ تشغيل صفحة هبوط مخصصة.</p>
+        <p class="lead">أظهرت النتائج أن واتساب هو المدخل الأقل تكلفة للحصول على محادثة أولية، بينما كان النموذج والموقع أعلى تكلفة. وفي المقابل، أوضحت بيانات CRM أن المرحلة التالية يجب أن تركز على جودة العميل، وسرعة التأهيل، وانتظام المتابعة، وربط مصدر العميل بالنتيجة البيعية.</p>
+        <div class="takeaway">أولوية المرحلة القادمة ليست زيادة عدد العملاء الخام، بل رفع نسبة العملاء المؤهلين وتحويل البيانات الحالية إلى مسار مبيعات قابل للقياس والتحسين.</div>
+
+        <div class="metrics" aria-label="مؤشرات الفترة">
+          <article class="metric">
+            <span class="label">الإنفاق الإعلاني</span>
+            <strong><bdi>43,694.73</bdi></strong>
+            <span class="note">ليرة تركية، خلال <bdi>2–16 أغسطس</bdi></span>
+          </article>
+          <article class="metric">
+            <span class="label">مرات الظهور</span>
+            <strong><bdi>102,686</bdi></strong>
+            <span class="note">عبر حملات Meta خلال الفترة المتاحة</span>
+          </article>
+          <article class="metric">
+            <span class="label">سجلات CRM الفريدة</span>
+            <strong><bdi>99</bdi></strong>
+            <span class="note">في القائمتين المتاحتين حتى <bdi>16 أغسطس</bdi></span>
+          </article>
+          <article class="metric">
+            <span class="label">أقل تكلفة نتيجة أولية</span>
+            <strong><bdi>133.84</bdi></strong>
+            <span class="note">ليرة لمحادثة واتساب ضمن مسار تركيا</span>
+          </article>
+        </div>
+      </section>
+
+      <section id="method">
+        <p class="section-kicker">السياق</p>
+        <h2>نطاق ومنهج التقييم</h2>
+        <div class="grid-2">
+          <article class="card">
+            <h3>ما يغطيه التقرير</h3>
+            <p>الإعلانات المدفوعة، استقبال العملاء، متابعة CRM، جاهزية فريق المبيعات، الموقع وصفحة الهبوط، وحوكمة المحتوى الإعلاني.</p>
+          </article>
+          <article class="card">
+            <h3>كيف نقرأ النتائج</h3>
+            <p>نفصل بين نتيجة الإعلان الأولية والعميل المؤهل والاجتماع والصفقة. لذلك لا نعتبر المحادثة أو النموذج المكتمل بيعًا، ولا نربط الإيراد بالحملات قبل اكتمال بيانات الإسناد.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="baseline">
+        <p class="section-kicker">خط البداية</p>
+        <h2>نقطة البداية والأهداف</h2>
+        <div class="grid-3">
+          <article class="card">
+            <span class="status done">هدف تجاري</span>
+            <h3>مبيعات الجنسية</h3>
+            <p>الهدف المعلن هو الوصول إلى أربع صفقات مرتبطة بالجنسية خلال ستة أشهر.</p>
+          </article>
+          <article class="card">
+            <span class="status done">هدف اكتساب</span>
+            <h3>حجم العملاء</h3>
+            <p>استهداف نحو <bdi>60</bdi> عميلًا لكل رقم شهريًا، مع تكلفة مرجعية مقدارها <bdi>700</bdi> ليرة للعميل.</p>
+          </article>
+          <article class="card">
+            <span class="status next">يحتاج توحيدًا</span>
+            <h3>الميزانية</h3>
+            <p>تحتاج الميزانية الشهرية المعتمدة لكل رقم إلى توحيد مكتوب قبل بناء توقعات الأداء والتوسع.</p>
+          </article>
+        </div>
+        <p class="caption">يتطلب القياس الدقيق تعريفًا موحدًا لكلمة «عميل»: هل المقصود محادثة، أم بيانات مكتملة، أم عميل مؤهل وفق البلد والهدف والميزانية والتوقيت.</p>
+      </section>
+
+      <section id="achievements">
+        <p class="section-kicker">التقدم المحقق</p>
+        <h2>ما تم إنجازه خلال الفترة</h2>
+        <div class="grid-3">
+          <article class="card"><h3><span class="num">1</span>إطلاق الحملات</h3><p>تشغيل مسارات متعددة تشمل واتساب والنماذج والموقع والتفاعل، بدل الاعتماد على قناة واحدة.</p></article>
+          <article class="card"><h3><span class="num">2</span>اختبار الأسواق</h3><p>الفصل بين أسواق الخليج وتركيا وتكوين خط أساس أولي لتكلفة كل مسار.</p></article>
+          <article class="card"><h3><span class="num">3</span>تفعيل CRM</h3><p>بدء تجميع العملاء ومراجعة حالات التواصل والمتابعة ضمن قائمتين تشغيليتين.</p></article>
+          <article class="card"><h3><span class="num">4</span>صفحة هبوط</h3><p>تشغيل أصل رقمي مخصص لاستقبال زيارات الحملات وتقديم العرض العقاري بصورة أكثر تركيزًا.</p></article>
+          <article class="card"><h3><span class="num">5</span>قاعدة قياس</h3><p>تكوين أول قراءة تجمع الإنفاق ونتائج الحملات وحالات CRM لتحديد مواضع القوة والتسرب.</p></article>
+          <article class="card"><h3><span class="num">6</span>تنظيم المراجعة</h3><p>تحديد الحاجة إلى اعتماد المحتوى والمشروعات قبل النشر لضمان اتساق الرسائل المعروضة للعملاء.</p></article>
+        </div>
+      </section>
+
+      <section id="ads">
+        <p class="section-kicker">الأداء الإعلاني</p>
+        <h2>قراءة أداء الحملات المدفوعة</h2>
+        <p class="lead">توضح البيانات أن المحادثة المباشرة عبر واتساب كانت أكثر كفاءة من النموذج والموقع من حيث تكلفة النتيجة الأولية. لكن قرار التوسع يجب أن يعتمد على جودة العملاء واجتماعات المبيعات والصفقات، لا على التكلفة وحدها.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>مسار الحملة</th><th>النتيجة المسجلة</th><th>الإنفاق بالليرة</th><th>تكلفة النتيجة</th><th>القراءة</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>واتساب — تركيا</td><td class="value"><bdi>18</bdi> محادثة</td><td class="value"><bdi>2,409.04</bdi></td><td class="value"><bdi>133.84</bdi></td><td>أفضل تكلفة أولية، مع ضرورة تشديد اللغة والجمهور لضمان الوصول إلى العرب المستهدفين.</td></tr>
+              <tr><td>واتساب — رئيسي</td><td class="value"><bdi>44</bdi> محادثة</td><td class="value"><bdi>9,019.56</bdi></td><td class="value"><bdi>204.99</bdi></td><td>أفضل مسار قابل للتطوير بعد تثبيت معيار التأهيل والمتابعة.</td></tr>
+              <tr><td>نموذج — الخليج</td><td class="value"><bdi>15</bdi> نموذجًا</td><td class="value"><bdi>19,448.45</bdi></td><td class="value"><bdi>1,296.56</bdi></td><td>تكلفة أعلى؛ يحتاج مراجعة العرض والأسئلة والجمهور وجودة البيانات.</td></tr>
+              <tr><td>الموقع</td><td class="value"><bdi>3</bdi> نتائج</td><td class="value"><bdi>11,113.79</bdi></td><td class="value"><bdi>3,704.60</bdi></td><td>المسار الأعلى تكلفة، ويحتاج تحسين الصفحة والرسالة والقياس قبل زيادة الميزانية.</td></tr>
+              <tr><td>التفاعل</td><td class="value"><bdi>1,698</bdi> زيارة</td><td class="value"><bdi>1,703.89</bdi></td><td class="value"><bdi>1.00</bdi></td><td>مفيد لبناء الجمهور، لكنه لا يقاس بنفس معيار العملاء أو الصفقات.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="caption">المصدر: تصدير Meta المتاح للفترة من <bdi>2</bdi> إلى <bdi>16 أغسطس 2026</bdi>. أنواع النتائج مختلفة، ولذلك لا تُجمع بوصفها عددًا واحدًا من العملاء.</p>
+      </section>
+
+      <section id="crm">
+        <p class="section-kicker">المبيعات والمتابعة</p>
+        <h2>قراءة CRM والمبيعات</h2>
+        <p class="lead">تضم القائمتان <bdi>99</bdi> سجلًا فريدًا. أكثر من ثلث السجلات ما زال في حالة «جديد»، وثلث آخر في حالة «تم التواصل»، بينما تمثل المتابعة المسجلة نسبة محدودة. هذه القراءة تجعل تنظيم الخطوة التالية أولوية مباشرة.</p>
+        <div class="bars" aria-label="توزيع حالات CRM">
+          <div class="bar-row"><span class="bar-label">جديد</span><span class="bar-track"><span class="bar-fill" style="width:35.4%"></span></span><span class="bar-value"><bdi>35</bdi></span></div>
+          <div class="bar-row"><span class="bar-label">تم التواصل</span><span class="bar-track"><span class="bar-fill" style="width:34.3%"></span></span><span class="bar-value"><bdi>34</bdi></span></div>
+          <div class="bar-row"><span class="bar-label">شركات</span><span class="bar-track"><span class="bar-fill" style="width:10.1%"></span></span><span class="bar-value"><bdi>10</bdi></span></div>
+          <div class="bar-row"><span class="bar-label">مفقود</span><span class="bar-track"><span class="bar-fill" style="width:9.1%"></span></span><span class="bar-value"><bdi>9</bdi></span></div>
+          <div class="bar-row"><span class="bar-label">لا رد</span><span class="bar-track"><span class="bar-fill" style="width:8.1%"></span></span><span class="bar-value"><bdi>8</bdi></span></div>
+          <div class="bar-row"><span class="bar-label">متابعة</span><span class="bar-track"><span class="bar-fill" style="width:3%"></span></span><span class="bar-value"><bdi>3</bdi></span></div>
+        </div>
+        <div class="takeaway">الخطوة التالية: لا يبقى أي سجل بلا مالك، وحالة محددة، وموعد متابعة، ونتيجة آخر تواصل، والمشروع الأنسب للعميل.</div>
+      </section>
+
+      <section id="gaps">
+        <p class="section-kicker">فرص التحسين</p>
+        <h2>الفجوات التشغيلية ذات الأولوية</h2>
+        <ol class="priority-list">
+          <li data-n="1"><strong>تعريف العميل المؤهل</strong><span>اعتماد معايير البلد، والهدف، والميزانية، والتوقيت، وصاحب القرار؛ لقياس الجودة بصورة موحدة.</span></li>
+          <li data-n="2"><strong>ربط المصدر بالصفقة</strong><span>إضافة مصدر العميل والحملة والإعلان والمشروع إلى CRM، ثم تسجيل الاجتماع والصفقة والإيراد.</span></li>
+          <li data-n="3"><strong>توحيد العرض العقاري</strong><span>إعداد بطاقة معتمدة لكل مشروع تتضمن السعر، والحالة، والتسليم، والتقسيط، والجنسية، ونقاط القوة والقيود.</span></li>
+          <li data-n="4"><strong>حوكمة المحتوى</strong><span>اعتماد الإعلان والمشروع والميزانية والجمهور قبل النشر، مع سجل واضح للنسخة المعتمدة.</span></li>
+          <li data-n="5"><strong>إيقاع المتابعة</strong><span>تثبيت تقرير مبيعات يومي مختصر ومراجعة أسبوعية تربط الإنفاق بالعملاء المؤهلين والاجتماعات والصفقات.</span></li>
+        </ol>
+      </section>
+
+      <section id="team">
+        <p class="section-kicker">الجاهزية البيعية</p>
+        <h2>تطوير جاهزية فريق المبيعات</h2>
+        <p class="lead">يملك الفريق أساسًا جيدًا في التواصل وتوجد قابلية واضحة للتطوير. وللتعامل بكفاءة مع العملاء القادمين من الإعلانات، نوصي ببرنامج تطبيقي قصير يركز على المهارات التالية:</p>
+        <div class="grid-3">
+          <article class="card"><h3>إتقان المشروعات</h3><p>معرفة الفروق بين المشروعات وتحويل احتياج العميل إلى قائمة خيارات محددة.</p></article>
+          <article class="card"><h3>التأهيل والتصنيف</h3><p>طرح أسئلة ثابتة تميز العميل الجاد وتحدد الأولوية ومسار المتابعة.</p></article>
+          <article class="card"><h3>البيع الاستشاري</h3><p>الانتقال من عرض العقار إلى فهم الهدف والمخاطر والمقارنة وتقديم توصية مبررة.</p></article>
+          <article class="card"><h3>المتابعة والإغلاق</h3><p>تحديد خطوة تالية واضحة بعد كل تواصل، مع توقيت ورسالة وهدف لكل متابعة.</p></article>
+          <article class="card"><h3>انضباط CRM</h3><p>تحديث الحالة والملاحظات والموعد والمشروع والنتيجة فور انتهاء التواصل.</p></article>
+          <article class="card"><h3>مراجعة الجودة</h3><p>مراجعة عينة أسبوعية من المكالمات والمحادثات لتقديم تدريب مبني على مواقف حقيقية.</p></article>
+        </div>
+      </section>
+
+      <section id="ownership">
+        <p class="section-kicker">توزيع المسؤوليات</p>
+        <h2>مسؤوليات Brandology ومسؤوليات MISK</h2>
+        <div class="table-wrap">
+          <table class="owner-table">
+            <thead><tr><th>المسؤول</th><th>الالتزامات الأساسية في المرحلة القادمة</th></tr></thead>
+            <tbody>
+              <tr><td>Brandology</td><td>إدارة واختبار الحملات، إعداد تقارير الأداء، تحسين مسارات التحويل، اقتراح الرسائل والمحتوى، مراقبة جودة البيانات، وتقديم توصيات تطوير المبيعات وCRM.</td></tr>
+              <tr><td>MISK</td><td>اعتماد المشروعات والادعاءات والميزانيات، توفير بيانات المشروع الدقيقة، ضمان سرعة الرد وتحديث CRM، تنفيذ المتابعة، وتسجيل الاجتماعات والصفقات والإيرادات.</td></tr>
+              <tr><td>مسؤولية مشتركة</td><td>تعريف العميل المؤهل، مراجعة الجودة أسبوعيًا، اختيار الاختبارات، واتخاذ قرارات الاستمرار أو الإيقاف وفق نتائج موثقة.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="roadmap">
+        <p class="section-kicker">المسار المقترح</p>
+        <h2>خطة العمل المقترحة لمدة 90 يومًا</h2>
+        <div class="roadmap">
+          <article class="phase"><span class="period">الأسبوعان 1–2</span><h3>ضبط الأساس</h3><p>تعريف العميل المؤهل، توحيد حالات CRM، اعتماد بطاقات المشروعات، وإغلاق فجوات القياس والموافقة.</p></article>
+          <article class="phase"><span class="period">اليوم 15–30</span><h3>اختبارات مقيدة</h3><p>اختبار عرضين إلى ثلاثة، ورسائل وجماهير محددة، مع حدود إنفاق ومعيار نجاح مكتوب.</p></article>
+          <article class="phase"><span class="period">اليوم 31–60</span><h3>رفع الجودة</h3><p>إعادة توزيع الميزانية وفق تكلفة العميل المؤهل والاجتماع، مع تدريب أسبوعي ومراجعة المتابعة.</p></article>
+          <article class="phase"><span class="period">اليوم 61–90</span><h3>توسع محسوب</h3><p>زيادة الإنفاق فقط للمسارات التي تثبت جودة واستمرارية، وربط الصفقة والإيراد بمصدرهما.</p></article>
+        </div>
+      </section>
+
+      <section id="kpis">
+        <p class="section-kicker">لوحة الإدارة</p>
+        <h2>مؤشرات القياس المطلوبة</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>المرحلة</th><th>المؤشر</th><th>التعريف الإداري</th></tr></thead>
+            <tbody>
+              <tr><td>الإعلان</td><td>تكلفة النتيجة</td><td>تفصل محادثة واتساب عن النموذج ونتيجة الموقع.</td></tr>
+              <tr><td>الجودة</td><td>تكلفة العميل المؤهل</td><td>عميل مطابق للبلد والهدف والأهلية والميزانية والتوقيت.</td></tr>
+              <tr><td>السرعة</td><td>زمن أول رد</td><td>الوقت من وصول العميل حتى أول رد بشري.</td></tr>
+              <tr><td>المبيعات</td><td>الحجز والحضور</td><td>عدد الاجتماعات المحجوزة ثم المنفذة فعليًا.</td></tr>
+              <tr><td>المتابعة</td><td>اكتمال الخطوة التالية</td><td>نسبة العملاء الذين لديهم مالك وموعد ومهمة واضحة.</td></tr>
+              <tr><td>الإغلاق</td><td>التحويل إلى صفقة</td><td>الصفقات المغلقة مقسومة على العملاء المؤهلين.</td></tr>
+              <tr><td>العائد</td><td>تكلفة الاكتساب والعائد الإعلاني</td><td>تكلفة البيع وإيراده منسوبان إلى الحملة والمصدر.</td></tr>
+              <tr><td>الحوكمة</td><td>الإعلانات المعتمدة</td><td>نسبة المواد التي حصلت على موافقة موثقة قبل النشر.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="decisions">
+        <p class="section-kicker">ما نحتاج حسمه</p>
+        <h2>قرارات مطلوبة من الإدارة</h2>
+        <div class="decision-box">
+          <ol class="priority-list">
+            <li data-n="1"><strong>اعتماد الميزانية الشهرية</strong><span>رقم واحد واضح لكل حساب أو رقم استقبال.</span></li>
+            <li data-n="2"><strong>اعتماد الرسالة القانونية للجنسية</strong><span>الحد المالي، الشروط، والحالات المستبعدة بصياغة موحدة.</span></li>
+            <li data-n="3"><strong>اعتماد بطاقات المشروعات</strong><span>خصوصًا الأسعار والتقسيط والتسليم والادعاءات والأرقام المنشورة.</span></li>
+            <li data-n="4"><strong>اعتماد قاموس CRM</strong><span>تعريف العميل المؤهل، وحالات خط المبيعات، والحقول الإلزامية.</span></li>
+            <li data-n="5"><strong>اعتماد برنامج تطوير المبيعات</strong><span>تدريب تطبيقي ومراجعة منتظمة لعينات التواصل.</span></li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="conclusion">
+        <p class="section-kicker">التوجه المقترح</p>
+        <h2>الخلاصة</h2>
+        <p class="lead">لدى MISK مقومات جيدة للبناء: مخزون مشروعات، وأصول رقمية، وإدارة متعاونة، وفريق قابل للتطوير. وقد وفر الشهر الأول بيانات كافية لتحديد نقطة التحول المطلوبة من جمع العملاء إلى إدارة رحلة العميل.</p>
+        <p class="lead">النتيجة المستدامة ستأتي من ربط المشروع الصحيح بالرسالة والجمهور المناسبين، ثم ضمان رد سريع وتأهيل منضبط ومتابعة قابلة للقياس حتى الاجتماع والصفقة.</p>
+        <div class="takeaway">التوصية: أسبوعان لضبط الأساس التشغيلي، ثم اختبارات محدودة لمدة شهر، وبعدها يتخذ قرار التوسع وفق تكلفة العميل المؤهل والاجتماع والصفقة.</div>
+      </section>
+
+      <section id="sources">
+        <p class="section-kicker">شفافية البيانات</p>
+        <h2>المصادر وحدود القراءة</h2>
+        <p class="source-note">اعتمد التقرير على استبيان بدء العمل، وعرض نطاق الخدمات، وتقارير Meta للفترة المتاحة، وسجلات CRM، والأصول الرقمية الحالية، وسجل التنسيق خلال فترة التقرير.</p>
+        <p class="source-note">لا تتضمن البيانات الحالية ربطًا كاملًا بين الحملة والإعلان والصفقة والإيراد، لذلك لا يمكن احتساب العائد الإعلاني المنسوب بدقة في هذه المرحلة. كما يحتاج تقييم جودة التواصل البيعي إلى عينة منتظمة من المكالمات والمحادثات.</p>
+      </section>
+    </main>
+
+    <footer>
+      <span>MISK International × Brandology</span>
+      <span>تقرير الفترة <bdi>26 يوليو – 26 أغسطس 2026</bdi></span>
+    </footer>
+  </div>
+</body>
+</html>
