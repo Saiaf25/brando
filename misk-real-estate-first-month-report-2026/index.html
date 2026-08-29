@@ -83,6 +83,39 @@
       margin: 32px auto 72px;
     }
 
+    .report-tabs {
+      position: sticky;
+      top: 10px;
+      z-index: 20;
+      display: flex;
+      gap: 8px;
+      width: fit-content;
+      max-width: 100%;
+      margin: 0 auto 14px;
+      padding: 7px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .94);
+      box-shadow: 0 8px 24px rgba(30, 30, 28, .09);
+      backdrop-filter: blur(10px);
+    }
+
+    .report-tab {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 7px 18px;
+      border-radius: 999px;
+      color: var(--ink);
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .report-tab:hover { background: var(--wash); }
+    .report-tab.active { background: var(--ink); color: #fff; }
+
     .hero {
       position: relative;
       overflow: hidden;
@@ -409,6 +442,8 @@
       body { font-size: 15px; }
       .page { width: min(100% - 18px, 1120px); margin-top: 9px; }
       .hero { min-height: 500px; padding: 34px 24px; border-radius: 18px; }
+      .report-tabs { top: 6px; width: 100%; }
+      .report-tab { flex: 1; padding-inline: 10px; font-size: .9rem; }
       .brand-line { align-items: flex-start; flex-direction: column; gap: 5px; }
       .metrics, .grid-3, .roadmap { grid-template-columns: 1fr; }
       section { padding: 24px 20px; }
@@ -429,6 +464,10 @@
 </head>
 <body>
   <div class="page">
+    <nav class="report-tabs" aria-label="أقسام تقرير MISK">
+      <a class="report-tab active" href="./" aria-current="page">التقرير العام</a>
+      <a class="report-tab" href="./sales-performance-assessment/">تقييم الأداء البيعي</a>
+    </nav>
     <header class="hero">
       <div class="brand-line">
         <span>MISK International</span>

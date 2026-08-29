@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e1e1c'/%3E%3Cpath d='M16 44V20h7l9 12 9-12h7v24h-7V31l-9 11-9-11v13z' fill='%23e30613'/%3E%3C/svg%3E">
+  <title>تقييم الأداء البيعي | MISK International</title>
+  <style>
+    @font-face {
+      font-family: "Thmanyah Sans";
+      src: url("../assets/fonts/thmanyahsans-Light.woff2") format("woff2");
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Thmanyah Sans";
+      src: url("../assets/fonts/thmanyahsans-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Thmanyah Sans";
+      src: url("../assets/fonts/thmanyahsans-Medium.woff2") format("woff2");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Thmanyah Sans";
+      src: url("../assets/fonts/thmanyahsans-Bold.woff2") format("woff2");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Thmanyah Sans";
+      src: url("../assets/fonts/thmanyahsans-Black.woff2") format("woff2");
+      font-weight: 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --red: #e30613;
+      --red-dark: #a90812;
+      --yellow: #ffcc00;
+      --ink: #1e1e1c;
+      --muted: #696965;
+      --line: #e5e5e0;
+      --paper: #fff;
+      --wash: #f7f7f4;
+      --soft-red: #fff1f1;
+      --soft-yellow: #fff8dc;
+      --radius: 18px;
+      --shadow: 0 14px 38px rgba(30, 30, 28, .07);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--wash);
+      color: var(--ink);
+      font-family: "Thmanyah Sans", "Noto Sans Arabic", Tahoma, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.85;
+      text-align: right;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 32px auto 72px;
+    }
+
+    .report-tabs {
+      position: sticky;
+      top: 10px;
+      z-index: 20;
+      display: flex;
+      gap: 8px;
+      width: fit-content;
+      max-width: 100%;
+      margin: 0 auto 14px;
+      padding: 7px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .94);
+      box-shadow: 0 8px 24px rgba(30, 30, 28, .09);
+      backdrop-filter: blur(10px);
+    }
+
+    .report-tab {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 7px 18px;
+      border-radius: 999px;
+      color: var(--ink);
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .report-tab:hover { background: var(--wash); }
+    .report-tab.active { background: var(--ink); color: #fff; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 390px;
+      padding: 52px clamp(28px, 6vw, 72px);
+      border-radius: 28px;
+      background: var(--ink);
+      color: #fff;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto auto;
+      width: 250px;
+      height: 14px;
+      background: var(--red);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: -100px;
+      bottom: -150px;
+      width: 300px;
+      height: 300px;
+      border: 58px solid rgba(255, 204, 0, .16);
+      border-radius: 50%;
+    }
+
+    .brand-line, .hero-copy, .hero-meta { position: relative; z-index: 1; }
+    .brand-line { display: flex; justify-content: space-between; gap: 18px; font-weight: 700; }
+    .brand-line span:last-child { color: #d7d7d2; font-size: .92rem; }
+
+    .eyebrow { margin: 0 0 8px; color: var(--yellow); font-weight: 900; }
+
+    h1 {
+      max-width: 850px;
+      margin: 0;
+      font-size: clamp(2.35rem, 6vw, 4.75rem);
+      line-height: 1.14;
+      letter-spacing: -.035em;
+    }
+
+    .hero-subtitle {
+      max-width: 760px;
+      margin: 18px 0 0;
+      color: #ddddda;
+      font-size: clamp(1rem, 2vw, 1.18rem);
+    }
+
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 6px 14px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      color: #fff;
+      font-size: .9rem;
+    }
+
+    main { margin-top: 28px; }
+
+    section {
+      margin-top: 22px;
+      padding: clamp(26px, 4vw, 48px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: 0 8px 28px rgba(30, 30, 28, .045);
+    }
+
+    .section-kicker {
+      margin: 0 0 4px;
+      color: var(--red);
+      font-size: .82rem;
+      font-weight: 900;
+      letter-spacing: .07em;
+    }
+
+    h2 {
+      margin: 0 0 20px;
+      font-size: clamp(1.55rem, 3vw, 2.35rem);
+      line-height: 1.3;
+      letter-spacing: -.02em;
+    }
+
+    h3 { margin: 0 0 9px; font-size: 1.15rem; line-height: 1.5; }
+    p { margin: 0 0 12px; }
+    p:last-child { margin-bottom: 0; }
+    .lead { max-width: 920px; color: #343430; font-size: 1.1rem; }
+
+    .summary-grid, .skill-grid, .process-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 22px; }
+    .skill-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 16px; }
+    .process-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 20px; }
+
+    .card {
+      padding: 21px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .card p { color: #50504b; font-size: .95rem; }
+
+    .strength { border-top: 5px solid var(--yellow); }
+    .gap { border-top: 5px solid var(--red); }
+
+    .diagnosis {
+      display: grid;
+      gap: 16px;
+    }
+
+    .diagnosis-card {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(22px, 3vw, 34px);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    .diagnosis-card::before {
+      content: attr(data-n);
+      position: absolute;
+      left: 18px;
+      top: 14px;
+      color: #ededE8;
+      font-size: 5.4rem;
+      font-weight: 900;
+      line-height: 1;
+      z-index: 0;
+    }
+
+    .diagnosis-card > * { position: relative; z-index: 1; }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .skills li {
+      padding: 5px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--wash);
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    .result {
+      margin-top: 17px;
+      padding: 17px 19px;
+      border-right: 5px solid var(--red);
+      border-radius: 10px;
+      background: var(--soft-red);
+      color: #5d1619;
+    }
+
+    .result strong { color: var(--red-dark); }
+
+    .bridge {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 24px 0;
+    }
+
+    .bridge span {
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .bridge b { color: var(--red); font-size: 1.5rem; }
+
+    .process-step {
+      position: relative;
+      min-height: 118px;
+      padding: 20px 58px 20px 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--wash);
+    }
+
+    .process-step::before {
+      content: attr(data-n);
+      position: absolute;
+      right: 16px;
+      top: 18px;
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      background: var(--yellow);
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    .process-step strong { display: block; margin-bottom: 4px; }
+    .process-step span { color: var(--muted); font-size: .9rem; }
+
+    .team-note {
+      border-color: #2f2f2c;
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .team-note .section-kicker { color: var(--yellow); }
+    .team-note p { color: #e4e4df; }
+
+    .warning {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid rgba(255, 204, 0, .55);
+      border-radius: 14px;
+      background: rgba(255, 204, 0, .09);
+      color: #fff8da;
+      font-weight: 700;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      margin-top: 22px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: var(--red);
+      color: #fff;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .source-note { color: var(--muted); font-size: .88rem; }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 24px 6px 0;
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    bdi { unicode-bidi: isolate; }
+
+    @media (max-width: 820px) {
+      .skill-grid, .process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 600px) {
+      body { font-size: 15px; }
+      .page { width: min(100% - 18px, 1120px); margin-top: 9px; }
+      .report-tabs { top: 6px; width: 100%; }
+      .report-tab { flex: 1; padding-inline: 10px; font-size: .9rem; }
+      .hero { min-height: 470px; padding: 34px 24px; border-radius: 18px; }
+      .brand-line { align-items: flex-start; flex-direction: column; gap: 5px; }
+      section { padding: 24px 20px; }
+      .summary-grid, .skill-grid, .process-grid { grid-template-columns: 1fr; }
+      .diagnosis-card::before { font-size: 4.5rem; }
+      footer { flex-direction: column; }
+    }
+
+    @media print {
+      @page { size: A4; margin: 14mm; }
+      body { background: #fff; font-size: 10.5pt; }
+      .page { width: 100%; margin: 0; }
+      .report-tabs { display: none; }
+      .hero { min-height: 245mm; border-radius: 0; box-shadow: none; page-break-after: always; }
+      section { box-shadow: none; break-inside: avoid; margin-top: 10mm; }
+      .diagnosis-card, .card, .process-step { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="report-tabs" aria-label="أقسام تقرير MISK">
+      <a class="report-tab" href="../">التقرير العام</a>
+      <a class="report-tab active" href="./" aria-current="page">تقييم الأداء البيعي</a>
+    </nav>
+
+    <header class="hero">
+      <div class="brand-line">
+        <span>MISK International</span>
+        <span>إعداد Brandology</span>
+      </div>
+      <div class="hero-copy">
+        <p class="eyebrow">تقييم تشخيصي</p>
+        <h1>تقييم الأداء البيعي وقدرات فريق المبيعات</h1>
+        <p class="hero-subtitle">شركة مسك العقارية - قراءة منظمة لآلية العمل الحالية، من استلام العميل المحتمل حتى الجولة الميدانية ومحاولة إغلاق الصفقة.</p>
+      </div>
+      <div class="hero-meta">
+        <span class="tag">النطاق: الأداء البيعي ونظام العمل</span>
+        <span class="tag">المصدر: الصفحات البيعية من وثيقة التقييم</span>
+      </div>
+    </header>
+
+    <main>
+      <section id="introduction">
+        <p class="section-kicker">الإطار</p>
+        <h2>مقدمة</h2>
+        <p class="lead">بناءً على جلسة التشخيص التي شملت أفراد فريق العمل، تم تقييم آلية العمل الحالية ومراحل التعامل مع العميل، من استلام الـ<bdi lang="en">Lead</bdi> وحتى الجولة الميدانية ومحاولة إغلاق الصفقة.</p>
+        <p class="lead">يركز هذا التقييم على الأداء البيعي ونظام العمل وقدرات فريق المبيعات.</p>
+        <p class="lead">الحكم على الأفراد ليس هو الهدف من التقييم، وإنما تحديد نقاط القوة والفجوات الحالية، ووضع الأساس لبناء نظام مبيعات أكثر وضوحًا وقابلية للقياس.</p>
+      </section>
+
+      <section id="short-diagnosis">
+        <p class="section-kicker">الصورة الحالية</p>
+        <h2>التشخيص المختصر</h2>
+        <p class="lead">يمتلك الفريق أساسًا مقبولًا من قواعد التواصل، وإلمامًا عامًا بمراحل دورة حياة العميل، كما تظهر لدى بعض الأفراد روح المبادرة والرغبة في التطوير.</p>
+        <p class="lead">إلا أن الخبرات الحالية تعمل بدرجة كبيرة بصورة فردية، ولا تستند إلى نظام مبيعات موحد وواضح.</p>
+        <div class="summary-grid">
+          <article class="card strength"><h3>نقطة البناء</h3><p>قواعد تواصل مقبولة، معرفة عامة بدورة العميل، ومبادرة ورغبة في التطوير لدى بعض أفراد الفريق.</p></article>
+          <article class="card gap"><h3>الفجوة المركزية</h3><p>الخبرة موجودة، لكن ممارستها فردية ولا يحكمها نظام موحد يمكن قياسه وتكراره وتحسينه.</p></article>
+        </div>
+      </section>
+
+      <section id="four-gaps">
+        <p class="section-kicker">التشخيص التفصيلي</p>
+        <h2>الفجوات الأربع الرئيسية</h2>
+        <div class="diagnosis">
+          <article class="diagnosis-card" data-n="1">
+            <h3>غياب الأهداف البيعية الواضحة</h3>
+            <p>لا توجد رؤية رقمية محددة لحجم المبيعات المستهدف، ولا معادلة تربط بين المبيعات المطلوبة وعدد الصفقات والزيارات والعملاء المؤهلين والـ<bdi lang="en">Leads</bdi> اللازمة لتحقيقها.</p>
+            <div class="result"><strong>النتيجة الحالية:</strong> تعمل الشركة دون مرجعية رقمية واضحة يمكن من خلالها معرفة أين تقف، وما الذي يجب أن تحققه، ولا تتمكن حتى من قياس مؤشر نجاح أحد أقسام العمل.</div>
+          </article>
+
+          <article class="diagnosis-card" data-n="2">
+            <h3>ضعف منظومة تأهيل العملاء <bdi lang="en">Telesales</bdi></h3>
+            <p>توجد معرفة مبدئية بخطوات التواصل، لكن لا توجد منهجية موحدة لتصنيف العملاء وتحديد مستوى اهتمامهم وجاهزيتهم للشراء.</p>
+            <p>كما توجد حاجة واضحة لتطوير مهارات:</p>
+            <ul class="skills">
+              <li>اكتشاف احتياج العميل</li>
+              <li>تأهيل العميل</li>
+              <li>مهارات التواصل</li>
+              <li>التعامل مع اعتراضات العميل</li>
+              <li>تحديد الجولات الميدانية</li>
+            </ul>
+            <div class="result"><strong>النتيجة الحالية:</strong> يتم استهلاك جزء كبير من وقت الفريق في التعامل مع عملاء لم يصلوا بعد إلى مستوى الاهتمام والجاهزية، في الوقت الذي يتم فيه إهدار عملاء أكثر جدية وجهوزية لقرار الشراء.</div>
+          </article>
+
+          <article class="diagnosis-card" data-n="3">
+            <h3>الجولة الميدانية لا تزال تؤدي دورًا في التأهيل</h3>
+            <p>الجولة يجب أن تكون مرحلة متقدمة من عملية البيع، وليست مرحلة لاكتشاف مدى جدية العميل.</p>
+            <p>كما تحتاج آلية إدارة الجولة والمتابعة بعدها إلى توحيد، مع تحديد مسؤول واضح عن العميل حتى إتمام الصفقة.</p>
+            <div class="result"><strong>النتيجة الحالية:</strong> بدل أن تكون الجولة الميدانية في معظم الحالات فرصة لإغلاق صفقة، تتحول الشركة إلى مركز لتأهيل العملاء ثم تركهم للشركات المنافسة.</div>
+          </article>
+
+          <article class="diagnosis-card" data-n="4">
+            <h3>عدم وجود مسار مبيعات موحد <bdi lang="en">Sales Process</bdi></h3>
+            <p>تختلف طريقة إدارة العميل والجولة والإغلاق من موظف إلى آخر، مع الحاجة إلى تطوير:</p>
+            <ul class="skills">
+              <li>مهارة الاستماع واكتشاف الاحتياجات</li>
+              <li>إدارة الجولة الميدانية</li>
+              <li>معالجة الاعتراضات</li>
+              <li>التفاوض والإغلاق</li>
+              <li>المتابعة بعد الزيارة</li>
+              <li>تحديد الخطوة التالية ومسؤولية الموظف عنها</li>
+            </ul>
+            <p>كما ينبغي أن يكون حضور الشركة في عملية البيع أقوى، وألا تعتمد بشكل كبير على موظف مكتب مبيعات البازارلاما.</p>
+            <div class="result"><strong>النتيجة الحالية:</strong> تعتمد نتائج البيع بدرجة كبيرة على اجتهاد وخبرة الموظف الفردية، وليس على نظام موحد يمكن تكراره وقياسه وتحسينه، مما يجعل أداء المبيعات غير مستقر وصعب التنبؤ به.</div>
+          </article>
+        </div>
+      </section>
+
+      <section id="conclusion">
+        <p class="section-kicker">المحصلة</p>
+        <h2>الخلاصة</h2>
+        <p class="lead"><strong>الشركة تمتلك أفرادًا يمكن البناء على خبراتهم، لكنها لا تمتلك حتى الآن نظام مبيعات متكاملًا.</strong></p>
+        <p class="lead">المشكلة الأساسية ليست بالضرورة غياب الكفاءة الفردية، وإنما الفجوة بين:</p>
+        <div class="bridge" aria-label="فجوة النظام البيعي">
+          <span>المعرفة الفردية</span><b>←</b>
+          <span>التطبيق المنهجي</span><b>←</b>
+          <span>القياس</span><b>←</b>
+          <span>التحسين</span><b>←</b>
+          <span>الإغلاق</span>
+        </div>
+        <p class="lead">وعليه، فإن الأولوية هي بناء نظام واضح يبدأ من:</p>
+        <div class="process-grid">
+          <article class="process-step" data-n="1"><strong>العميل المحتمل</strong><span>تسجيل المصدر والبيانات والمالك داخل CRM.</span></article>
+          <article class="process-step" data-n="2"><strong>فهم الاحتياج</strong><span>معرفة الهدف والميزانية والتوقيت ومتخذ القرار.</span></article>
+          <article class="process-step" data-n="3"><strong>تأهيل العميل</strong><span>تحديد مستوى الاهتمام والجاهزية للشراء.</span></article>
+          <article class="process-step" data-n="4"><strong>تقديم العروض هاتفيًا</strong><span>ربط الاحتياج بالخيارات المناسبة قبل الجولة.</span></article>
+          <article class="process-step" data-n="5"><strong>تحديد خطوات وآلية الشراء</strong><span>توضيح المسار والمسؤوليات والخطوة التالية.</span></article>
+          <article class="process-step" data-n="6"><strong>الجولة الميدانية</strong><span>مرحلة متقدمة لدعم قرار الشراء والإغلاق.</span></article>
+          <article class="process-step" data-n="7"><strong>التفاوض</strong><span>معالجة الاعتراضات والوصول إلى اتفاق.</span></article>
+          <article class="process-step" data-n="8"><strong>إتمام الصفقة</strong><span>تثبيت القرار وإكمال الإجراءات المطلوبة.</span></article>
+          <article class="process-step" data-n="9"><strong>المتابعة بعد البيع</strong><span>استمرار العلاقة وتوثيق النتيجة.</span></article>
+        </div>
+        <div class="result"><strong>قاعدة القياس:</strong> ربط كل مرحلة بمؤشرات أداء واضحة داخل الـ<bdi lang="en">CRM</bdi>.</div>
+      </section>
+
+      <section id="team-note" class="team-note">
+        <p class="section-kicker">قرار إداري</p>
+        <h2>ملاحظة مهمة حول الفريق</h2>
+        <p class="lead">سيتم التعامل مع خطة الإصلاح باعتبارها مرحلة اختبار عملية لقدرات الفريق وقابليته للتطور.</p>
+        <p class="lead">ولا يفترض هذا التقييم مسبقًا أن جميع أفراد الفريق قابلون للتطوير بنفس الدرجة. فقد تكشف مرحلة التنفيذ أن بعض الفجوات قابلة للعلاج بالتدريب والمتابعة، بينما قد يتبين أن بعض الأفراد لا يمتلكون القابلية أو الملاءمة المطلوبة للدور.</p>
+        <div class="warning">وفي هذه الحالة، يكون استبدال الموظف قرارًا مهنيًا طبيعيًا لحماية أداء الشركة، ومنع استنزاف مواردها.</div>
+        <a class="back-link" href="../">العودة إلى التقرير العام</a>
+      </section>
+
+      <section id="source">
+        <p class="section-kicker">المصدر</p>
+        <h2>نطاق هذه الصفحة</h2>
+        <p class="source-note">تنظم هذه الصفحة نص تقييم الأداء البيعي وقدرات فريق المبيعات كما ورد في الصفحات الثلاث الأولى من وثيقة التقييم، مع الحفاظ على مضمونه وترتيب منطقه.</p>
+      </section>
+    </main>
+
+    <footer>
+      <span>MISK International × Brandology</span>
+      <a href="../" style="color:inherit">التقرير العام</a>
+    </footer>
+  </div>
+</body>
+</html>
