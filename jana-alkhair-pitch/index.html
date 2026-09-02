@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+  <meta name="referrer" content="no-referrer">
+  <title>Brandology × جنى الخير | خطة الإطلاق والنمو</title>
+  <style>
+    :root{
+      --red:#c9100e;--red-dark:#8e0a09;--navy:#0b1f3a;--navy-2:#132b4b;
+      --gold:#c9a227;--gold-2:#efd873;--ink:#111821;--muted:#667085;
+      --paper:#f7f5ef;--paper-2:#ede9df;--card:#fff;--line:#ded9cc;
+      --green:#1f7a55;--amber:#b96b10;--danger:#b42318;--blue:#2458a6;
+      --shadow:0 18px 55px rgba(18,27,37,.12);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{font-family:"SF Arabic","Geeza Pro","Noto Sans Arabic",Tahoma,Arial,sans-serif;background:#15191f;color:var(--ink);overflow:hidden}
+    body.print-mode{overflow:auto}
+    button{font:inherit}
+    .deck{width:100vw;height:100vh;position:relative}
+    .slide{position:absolute;inset:0;width:100%;height:100%;padding:clamp(48px,6.2vh,72px) clamp(44px,5.3vw,82px) clamp(50px,6vh,70px);background:var(--paper);overflow:hidden;opacity:0;pointer-events:none;display:flex;flex-direction:column;transition:opacity .28s ease}
+    .slide.active{opacity:1;pointer-events:auto}
+    .slide::after{content:"";position:absolute;inset:auto -8vw -28vh auto;width:44vw;height:44vw;border:1px solid rgba(201,16,14,.08);border-radius:50%;pointer-events:none}
+    .slide.dark{background:linear-gradient(135deg,var(--navy) 0%,#071425 62%,#101824 100%);color:#fff}
+    .slide.dark::after{border-color:rgba(201,162,39,.18)}
+    .chrome{position:absolute;top:20px;left:clamp(36px,5vw,72px);right:clamp(36px,5vw,72px);display:flex;justify-content:space-between;align-items:center;font-size:10px;letter-spacing:.16em;color:var(--muted);z-index:3}
+    .dark .chrome{color:rgba(255,255,255,.54)}
+    .chrome strong{color:var(--red);font-weight:800}.dark .chrome strong{color:var(--gold-2)}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--red);font-size:12px;font-weight:800;letter-spacing:.08em;margin-bottom:10px}
+    .eyebrow::before{content:"";width:24px;height:3px;border-radius:8px;background:currentColor}
+    .dark .eyebrow{color:var(--gold-2)}
+    h1{font-size:clamp(31px,4.1vw,60px);line-height:1.12;letter-spacing:-.025em;max-width:1120px}
+    h1 .accent{color:var(--red)}.dark h1 .accent{color:var(--gold-2)}
+    .subtitle{font-size:clamp(15px,1.45vw,21px);line-height:1.7;color:#475467;max-width:1100px;margin-top:12px}
+    .dark .subtitle{color:rgba(255,255,255,.72)}
+    .content{flex:1;display:flex;align-items:center;min-height:0;margin-top:24px;position:relative;z-index:1}
+    .grid{display:grid;gap:16px;width:100%}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 8px 24px rgba(18,27,37,.05)}
+    .dark .card{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14);box-shadow:none}
+    .card h2,.card h3{font-size:clamp(17px,1.55vw,23px);line-height:1.3;margin-bottom:8px}.card p,.card li{font-size:clamp(12px,1.08vw,16px);line-height:1.65;color:#53606f}.dark .card p,.dark .card li{color:rgba(255,255,255,.73)}
+    .card ul{padding-right:18px}.card li+li{margin-top:7px}
+    .kicker{color:var(--red);font-size:11px;font-weight:900;letter-spacing:.08em;margin-bottom:6px}.dark .kicker{color:var(--gold-2)}
+    .stat{padding:21px 18px}.stat b{display:block;font-size:clamp(28px,3.6vw,52px);line-height:1;color:var(--navy);direction:ltr;text-align:right}.dark .stat b{color:var(--gold-2)}.stat span{display:block;margin-top:9px;font-size:13px;line-height:1.5;color:var(--muted)}
+    .tag{display:inline-flex;align-items:center;border-radius:999px;padding:5px 10px;background:#f4e8e7;color:var(--red-dark);font-size:11px;font-weight:800}.tag.gold{background:#f5efcf;color:#765b00}.tag.green{background:#e5f3ec;color:#176343}.tag.blue{background:#e8eef8;color:#204c8c}.tag.gray{background:#e9e7e1;color:#555}
+    .number{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:var(--navy);color:white;font-weight:900;direction:ltr;flex:0 0 auto}.dark .number{background:var(--gold);color:var(--navy)}
+    .step{display:flex;gap:13px;align-items:flex-start}.step+.step{margin-top:15px}.step h3{margin:0 0 3px}.step p{margin:0}
+    .source{position:absolute;bottom:20px;right:clamp(36px,5vw,72px);font-size:9px;color:#7b8490;z-index:3;max-width:78%;line-height:1.5}.dark .source{color:rgba(255,255,255,.45)}
+    .source b{color:inherit}.mark{color:var(--red);font-weight:900}.dark .mark{color:var(--gold-2)}
+    .quote{font-size:clamp(21px,2.6vw,37px);line-height:1.45;font-weight:800;color:var(--navy);padding:24px 28px;border:1px solid var(--line);background:#fff;border-radius:18px}.dark .quote{color:#fff;background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14)}
+    .note{padding:13px 16px;border:1px solid #e7d59f;background:#fff9e5;border-radius:12px;color:#6d5100;font-size:12px;line-height:1.6}.note.red{border-color:#efc2be;background:#fff1f0;color:#8e1c14}.dark .note{background:rgba(201,162,39,.1);border-color:rgba(201,162,39,.35);color:#f3e7b1}
+    .bar-list{display:grid;gap:12px;width:100%}.bar-row{display:grid;grid-template-columns:175px 1fr 80px;align-items:center;gap:14px;font-size:13px}.bar-track{height:13px;border-radius:999px;background:#e8e4dc;overflow:hidden}.bar{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--red),#e15c4d)}.bar.gold{background:linear-gradient(90deg,var(--gold),#efd873)}.bar.blue{background:linear-gradient(90deg,var(--navy),#37669f)}.bar-row strong{direction:ltr;text-align:left}
+    .table{width:100%;border-collapse:collapse;background:white;border:1px solid var(--line);border-radius:16px;overflow:hidden;display:table}.table th,.table td{padding:11px 13px;text-align:right;border-bottom:1px solid #ece9e1;font-size:clamp(10px,.95vw,14px);line-height:1.42}.table th{background:var(--navy);color:white;font-weight:800}.table tr:last-child td{border-bottom:0}.table td strong{color:var(--navy)}
+    .flow{display:flex;align-items:stretch;gap:10px;width:100%;direction:rtl}.flow-item{flex:1;background:white;border:1px solid var(--line);border-radius:16px;padding:18px;position:relative}.flow-item:not(:last-child)::after{content:"←";position:absolute;left:-14px;top:50%;transform:translateY(-50%);width:18px;height:18px;display:grid;place-items:center;color:var(--red);font-weight:900;z-index:2}.flow-item b{display:block;font-size:19px;color:var(--navy);margin-bottom:5px}.flow-item span{font-size:12px;line-height:1.55;color:var(--muted)}
+    .split{display:grid;grid-template-columns:1.15fr .85fr;gap:24px;width:100%;align-items:center}.split.reverse{grid-template-columns:.8fr 1.2fr}
+    .phone-row{display:flex;gap:13px;align-items:center;justify-content:center;height:100%}.phone{height:min(50vh,510px);width:auto;border:7px solid #0a1320;border-radius:25px;box-shadow:var(--shadow);background:#081426;object-fit:cover}.phone.one{transform:rotate(1.5deg)}.phone.two{transform:rotate(-2deg);margin-top:22px}
+    .product-shot{width:100%;max-height:47vh;object-fit:contain;background:white;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:9px}
+    .mini-bars{display:flex;gap:7px;align-items:flex-end;height:84px;margin-top:16px}.mini-bars i{display:block;flex:1;border-radius:6px 6px 2px 2px;background:var(--red);opacity:.86}
+    .matrix{display:grid;grid-template-columns:1.15fr repeat(3,1fr);width:100%;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:white}.matrix>div{padding:10px 12px;border-left:1px solid #ece9e1;border-bottom:1px solid #ece9e1;font-size:11px;line-height:1.45}.matrix>div:nth-child(4n){border-left:0}.matrix .head{background:var(--navy);color:white;font-weight:800}.matrix .area{font-weight:800;color:var(--navy)}
+    .timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;width:100%}.phase{border-top:5px solid var(--red);background:white;border-radius:7px 7px 17px 17px;padding:18px;border-inline:1px solid var(--line);border-bottom:1px solid var(--line)}.phase:nth-child(even){border-top-color:var(--gold)}.phase b{display:block;font-size:19px;color:var(--navy);margin-bottom:7px}.phase ul{padding-right:17px}.phase li{font-size:12px;line-height:1.55;color:var(--muted)}
+    .cover{padding:0;background:var(--paper);display:grid;grid-template-columns:1.05fr .95fr}.cover::after{display:none}.cover-main{padding:8vh 6vw;display:flex;flex-direction:column;justify-content:center}.logos{display:flex;align-items:center;gap:17px;margin-bottom:7vh;direction:ltr}.logos img{width:88px;height:88px;object-fit:contain;border-radius:18px}.logos .client-logo{width:124px;background:var(--navy);object-fit:cover}.logos i{font-style:normal;font-size:25px;color:#9c9486}.cover h1{font-size:clamp(44px,5.4vw,78px);max-width:780px}.cover p{font-size:clamp(17px,1.55vw,23px);line-height:1.65;color:#5f6873;max-width:760px;margin-top:20px}.cover-side{background:linear-gradient(145deg,var(--navy),#071425);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}.cover-side::before,.cover-side::after{content:"";position:absolute;border:1px solid rgba(201,162,39,.32);border-radius:50%}.cover-side::before{width:48vw;height:48vw;right:-20vw;top:-18vw}.cover-side::after{width:30vw;height:30vw;left:-12vw;bottom:-12vw}.cover-loop{width:76%;position:relative;z-index:1}.cover-loop .ring{aspect-ratio:1;border:2px solid rgba(255,255,255,.2);border-radius:50%;display:grid;place-items:center;text-align:center;color:white;padding:20%}.cover-loop strong{font-size:clamp(24px,3vw,45px);line-height:1.25}.cover-loop span{display:block;color:var(--gold-2);font-size:14px;margin-top:10px}.cover-meta{margin-top:6vh;display:flex;gap:32px;font-size:12px;color:#67717e}.cover-meta b{display:block;color:var(--ink);font-size:14px;margin-top:2px}
+    .close{justify-content:center;align-items:flex-start}.close h1{font-size:clamp(52px,7vw,98px);max-width:900px}.close .subtitle{max-width:840px;font-size:22px}.close-grid{margin-top:36px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:min(950px,100%)}
+    .nav{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.94);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:7px 10px;box-shadow:0 8px 28px rgba(0,0,0,.18);direction:ltr}.nav button{border:0;background:transparent;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:18px;color:var(--ink)}.nav button:hover,.nav button:focus-visible{background:#ece8df;outline:2px solid var(--red);outline-offset:2px}.counter{min-width:70px;text-align:center;font-size:12px;color:#4b5563;font-variant-numeric:tabular-nums}
+    .progress{position:fixed;inset:0 0 auto;height:4px;background:rgba(0,0,0,.08);z-index:60}.progress span{display:block;height:100%;width:3.22%;background:var(--red);transition:width .25s ease}
+    .toc{position:fixed;right:17px;bottom:17px;z-index:55}.toc>button{width:42px;height:42px;border:0;border-radius:50%;background:var(--navy);color:#fff;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,.18)}.toc-panel{position:absolute;right:0;bottom:51px;width:min(340px,80vw);max-height:68vh;overflow:auto;background:white;border:1px solid var(--line);border-radius:14px;padding:8px;box-shadow:var(--shadow);display:none}.toc-panel.open{display:block}.toc-item{padding:8px 10px;border-radius:8px;font-size:12px;line-height:1.3;cursor:pointer;display:flex;gap:9px}.toc-item:hover,.toc-item.active{background:#f2eee5;color:var(--red-dark)}.toc-item span{direction:ltr;color:#8b9098;min-width:22px}
+    @media (max-width:850px), (max-aspect-ratio:4/3){.slide{padding:58px 28px 54px}.chrome{left:28px;right:28px}.source{right:28px}.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(2,1fr)}.split,.split.reverse{grid-template-columns:1fr 1fr;gap:14px}.phone{height:min(43vh,410px)}.timeline{grid-template-columns:repeat(2,1fr)}.cover{grid-template-columns:1fr}.cover-main{padding:8vh 8vw}.cover-side{display:none}.logos{margin-bottom:4vh}.bar-row{grid-template-columns:110px 1fr 55px}.matrix>div{padding:7px;font-size:9px}.flow-item{padding:12px}.flow-item b{font-size:15px}}
+    @media (max-width:620px){.subtitle{line-height:1.45}.content{margin-top:14px}.g2,.g3,.g4{grid-template-columns:1fr 1fr;gap:8px}.card{padding:11px;border-radius:12px}.card p,.card li{font-size:10px;line-height:1.45}.card h2,.card h3{font-size:14px}.timeline{gap:6px}.phase{padding:10px}.phase li{font-size:9px}.phone{height:34vh;border-width:4px}.table th,.table td{padding:6px;font-size:8px}.flow{gap:5px}.flow-item{padding:8px}.flow-item span{font-size:9px}.flow-item:not(:last-child)::after{display:none}.source{font-size:7px}.nav{bottom:9px}.toc{bottom:10px;right:8px}}
+    @media print{@page{size:13.333in 7.5in;margin:0}html,body{background:white;overflow:visible}.deck{width:auto;height:auto}.slide{position:relative!important;display:flex!important;opacity:1!important;pointer-events:auto!important;width:13.333in;height:7.5in;page-break-after:always;break-after:page}.cover{display:grid!important}.nav,.toc,.progress{display:none!important}.source{bottom:16px}}
+    .section-divider{justify-content:center;background:linear-gradient(135deg,var(--navy),#071425 72%,#172333);color:#fff}
+    .section-divider::before{content:attr(data-section-number);position:absolute;left:6vw;bottom:-4vh;font-size:min(34vw,420px);font-weight:950;line-height:.8;color:rgba(255,255,255,.035);direction:ltr}
+    .section-divider h1{font-size:clamp(48px,6vw,88px);max-width:980px}.section-divider .subtitle{font-size:clamp(17px,1.7vw,24px);max-width:850px}
+    .section-kicker{font-size:13px;font-weight:900;letter-spacing:.12em;color:var(--gold-2);margin-bottom:18px}
+    .evidence-strip{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;padding:10px 12px;background:#ece8dc;border:1px solid #d8d1c2;border-radius:12px;position:relative;z-index:2}
+    .dark .evidence-strip{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16)}
+    .evidence-strip span{font-size:10px;font-weight:800;color:#4c5866;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.72)}
+    .dark .evidence-strip span{color:#fff;background:rgba(255,255,255,.1)}
+    .external-link{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:7px 10px;border:1px solid currentColor;border-radius:8px;color:var(--red-dark);font-size:11px;font-weight:900;text-decoration:none;direction:ltr}
+    .dark .external-link{color:var(--gold-2)}.external-link:hover,.external-link:focus-visible{background:rgba(201,16,14,.08);outline:2px solid currentColor;outline-offset:2px}
+    .file-card{display:flex;flex-direction:column;min-height:205px}.file-card .file-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}.file-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:#f2e8e6;color:var(--red);flex:0 0 auto}.file-icon svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.file-card p{flex:1}.file-card .external-link{margin-top:0;direction:rtl}.file-meta{font-size:10px;font-weight:800;color:var(--muted);margin-top:6px}.file-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}.file-download{font-size:10px;font-weight:900;color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+    .agenda{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%}.agenda a{display:flex;gap:12px;align-items:center;padding:15px;background:#fff;border:1px solid var(--line);border-radius:14px;color:var(--ink);text-decoration:none}.agenda a:hover{border-color:var(--red)}.agenda b{font-size:22px;color:var(--red);direction:ltr}.agenda span{font-size:13px;font-weight:800;line-height:1.35}
+    .comparison td:first-child,.comparison th:first-child{direction:ltr;text-align:left}.section-divider .chrome{color:rgba(255,255,255,.58)}
+    @media(max-width:620px){.agenda{grid-template-columns:1fr 1fr}.agenda a{padding:9px}.agenda b{font-size:16px}.agenda span{font-size:10px}.evidence-strip{gap:4px;padding:6px}.evidence-strip span{font-size:8px;padding:3px 5px}.section-divider h1{font-size:38px}.file-card{min-height:175px}.file-icon{width:32px;height:32px}.file-icon svg{width:18px;height:18px}.file-meta{font-size:8px}}
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+  <main class="deck" id="deck">
+
+    <section class="slide cover active" data-title="الغلاف">
+      <div class="cover-main">
+        <div class="logos"><img src="assets/brandology.png" alt="Brandology"><i>×</i><img class="client-logo" src="assets/janalkhair-logo.jpg" alt="جنى الخير"></div>
+        <div class="eyebrow">عرض أولي للشراكة</div>
+        <h1>إطلاق جنى الخير من <span class="accent">الحي إلى النمو</span></h1>
+        <p>خطة تجمع جاهزية المنتج، ظهور البحث، المحتوى، والتفعيل الميداني حول شبكة تجار تبدأ من أحياء مختارة في الرياض.</p>
+        <div class="cover-meta"><div>إعداد<b>Brandology</b></div><div>السوق<b>الرياض، السعودية</b></div><div>تاريخ إعداد العرض<b>سبتمبر 2026</b></div></div>
+      </div>
+      <div class="cover-side"><div class="cover-loop"><div class="ring"><div><strong>تاجر جاهز<br>متسوق مفعّل<br>عملية مكتملة</strong><span>دورة نمو قابلة للقياس</span></div></div></div></div>
+    </section>
+
+    <section class="slide dark" data-title="سياق الإطلاق">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>سياق الإطلاق</strong></div>
+      <div class="eyebrow">من الموجز</div><h1>نبدأ من أحياء محددة، <span class="accent">ثم نوسع ما يثبت نجاحه</span></h1>
+      <p class="subtitle">الإطلاق الأول في الرياض يركز على عدد محدود من الأحياء. نجهز التجار أولًا، ثم نفعّل المتسوقين حول نقاط البيع الجاهزة.</p>
+      <div class="content"><div class="grid g2">
+        <div class="card"><div class="kicker">01</div><h3>نطاق جغرافي واضح</h3><p>نختار الأحياء حسب كثافة التجار، سهولة الإنتاج، وقدرة الفريق على متابعة التفعيل.</p></div>
+        <div class="card"><div class="kicker">02</div><h3>التاجر يسبق الإعلان</h3><p>لا نرسل المتسوق إلى متجر غير جاهز. ندرب الفريق ونثبت رمز الدفع ونراجع تجربة العملية.</p></div>
+      </div></div><div class="source">المصدر: موجز شريك التسويق والمحتوى المقدم من جنى الخير، أغسطس 2026.</div>
+    </section>
+
+    <section class="slide" data-title="فهمنا للمنصة">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>فهمنا للمنصة</strong></div>
+      <div class="eyebrow">جمهوران أساسيان</div><h1>المتسوق والتاجر</h1>
+      <p class="subtitle">لكل جمهور احتياج ورسالة وإجراء مختلف. يفهم المتسوق قيمة المكافأة، بينما يفهم التاجر أثر البرنامج على تكرار الشراء.</p>
+      <div class="content"><div class="grid g2">
+        <div class="card"><span class="tag">B2C</span><h3>المتسوق</h3><p>يبحث عن الكاش باك، النقاط، العروض، القسائم، والمتاجر القريبة.</p></div>
+        <div class="card"><span class="tag gold">B2B</span><h3>التاجر</h3><p>يريد عملاء يعودون، تكلفة مرتبطة بالبيع، وتقارير يفهمها فريقه.</p></div>
+      </div></div><div class="source">المصادر: موقع جنى الخير العام، عرض منصة التاجر، وموجز الشراكة. تبقى خصائص التشغيل المقيدة بالدخول بحاجة إلى تحقق عملي.</div>
+    </section>
+
+    <section class="slide" data-title="دورة النمو">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>دورة النمو</strong></div>
+      <div class="eyebrow">Merchant-first</div><h1>نحوّل كل حي إلى <span class="accent">دورة نمو صغيرة</span></h1>
+      <p class="subtitle">الهدف ليس تنزيل التطبيق وحده. النجاح يبدأ عندما يجد المتسوق متجرًا جاهزًا، يكمل أول عملية، ثم يعود.</p>
+      <div class="content"><div class="flow">
+        <div class="flow-item"><b>1. اختيار التجار</b><span>فئات يومية وتغطية قريبة داخل الحي.</span></div>
+        <div class="flow-item"><b>2. تجهيز نقاط البيع</b><span>رمز واضح، تدريب، ورسالة موحدة للفريق.</span></div>
+        <div class="flow-item"><b>3. تفعيل المتسوقين</b><span>بحث محلي ومحتوى وإعلانات ضمن النطاق.</span></div>
+        <div class="flow-item"><b>4. إكمال العملية</b><span>قياس الدفع والمكافأة دون انقطاع.</span></div>
+        <div class="flow-item"><b>5. تكرار ما نجح</b><span>نوسع الفئات والأحياء حسب العمليات الفعلية.</span></div>
+      </div></div><div class="source">منطق الإطلاق: موجز الشريك، أغسطس 2026. معيار القياس: المستخدمون المفعّلون والعمليات المكتملة.</div>
+    </section>
+
+    <section class="slide dark" data-title="أولويات العميل">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>أولويات العميل</strong></div>
+      <div class="eyebrow">شروط العمل</div><h1>أربع قواعد تحكم <span class="accent">الخطة والتنفيذ</span></h1>
+      <div class="content"><div class="grid g4">
+        <div class="card"><div class="number">1</div><h3>العربية تقود</h3><p>نكتب بصوت سعودي طبيعي، ثم نبني النسخة الإنجليزية بما يناسب جمهورها.</p></div>
+        <div class="card"><div class="number">2</div><h3>كل ادعاء له سند</h3><p>لا ننشر وعود دخل أو أرقام سوق أو امتثال دون وثيقة واعتماد.</p></div>
+        <div class="card"><div class="number">3</div><h3>الإنتاج من الرياض</h3><p>نصور المتجر وصاحبه وتجربة الدفع داخل الأحياء المستهدفة.</p></div>
+        <div class="card"><div class="number">4</div><h3>العملية أهم من الوصول</h3><p>نقيس التفعيل وأول عملية والتكرار، ولا نكتفي بالمتابعين والانطباعات.</p></div>
+      </div></div><div class="source">المصدر: قسم «ما يهمنا» في موجز الشريك.</div>
+    </section>
+
+    <section class="slide" data-title="رؤية المنتج والحالة المتحققة">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>حدود الدليل</strong></div>
+      <div class="eyebrow">الرؤية مقابل التحقق</div><h1>عرض المنتج يشرح الوجهة، <span class="accent">والفحص يحدد نقطة البداية</span></h1>
+      <p class="subtitle">المستند المقدم من جنى الخير يعرض بوابة التاجر والتقارير والتسويات والفروع. فحصنا المستقل لم يدخل الحساب التجاري، لذلك نعامل تلك الشاشات كرؤية منتج حتى نختبر دورة كاملة.</p>
+      <div class="content"><div class="split">
+        <div class="grid g2"><img class="product-shot" src="assets/product-portal.png" alt="تصور بوابة التاجر في العرض المقدم"><img class="product-shot" src="assets/product-reports.png" alt="تصور تقارير التاجر في العرض المقدم"></div>
+        <div><div class="card"><span class="tag gold">حسب مستند المنتج</span><h3>المسار المقصود</h3><p>عمليات، تقارير، تسويات، فروع، مستخدمون، رموز دفع، وتنبيهات.</p></div><div class="card" style="margin-top:12px"><span class="tag red">تم التحقق</span><h3>المتاح في الفحص</h3><p>تجربة المستهلك بحساب مسجل، وتجربة التاجر قبل تسجيل الدخول فقط.</p></div><div class="note red" style="margin-top:12px">نثبت السلوك الفعلي بحساب تجريبي وعملية من الدفع إلى التسوية والتقرير.</div></div>
+      </div></div><div class="source">المصادر: عرض منصة التاجر المقدم من جنى الخير، وفحصا UX لتطبيقي المستهلك والتاجر، سبتمبر 2026.</div>
+    </section>
+
+    <section class="slide dark" data-title="نقطة البداية في البحث">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>الظهور العضوي</strong></div>
+      <div class="eyebrow">لقطة 2 سبتمبر 2026</div><h1>الموقع يعمل، <span class="accent">لكن صفحاته غير واضحة لـGoogle</span></h1>
+      <p class="subtitle">Ahrefs لم يرصد كلمات أو زيارات عضوية سعودية للنطاق في هذه اللقطة. عدد المواقع التي تضع روابط إلى النطاق لا يعكس قوة؛ أعلى 20 موقعًا حيًا في العينة حمل إشارات Spam.</p>
+      <div class="content"><div class="grid g4">
+        <div class="card stat"><b>0</b><span>كلمات عضوية سعودية مرصودة</span></div>
+        <div class="card stat"><b>0</b><span>زيارات عضوية سعودية مقدرة</span></div>
+        <div class="card stat"><b>DR 0</b><span>تقييم النطاق في Ahrefs</span></div>
+        <div class="card stat"><b>406</b><span>مواقع تربط بالنطاق، مع تحذير جودة واضح</span></div>
+      </div></div><div class="source">المصدر: Ahrefs API، السعودية، وضع النطاقات الفرعية، 2 سبتمبر 2026. أرقام تقديرية خارجية وليست بيانات Search Console أو GA4.</div>
+    </section>
+
+    <section class="slide" data-title="دليل الزحف">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>SEO تقني</strong></div>
+      <div class="eyebrow">ما يصل إلى الزاحف</div><h1>المتصفح يعرض الموقع، <span class="accent">والزاحف يجد صفحة فارغة</span></h1>
+      <p class="subtitle">الموقع يعمل كتطبيق React أحادي الصفحة. الزحف التقليدي اكتشف الصفحة الرئيسية وثلاثة ملفات تقنية فقط، ولم يجد روابط صفحات التسويق التي تظهر بعد تشغيل JavaScript.</p>
+      <div class="content"><div class="split reverse">
+        <div class="grid g2"><div class="card stat"><b>4</b><span>موارد اكتشفها الزحف القياسي</span></div><div class="card stat"><b>0</b><span>كلمات وH1 وH2 في HTML المستلم</span></div><div class="card stat"><b>0</b><span>روابط داخلية اكتشفها الزاحف</span></div><div class="card stat"><b>1</b><span>عنوان ووصف يتكرران على مسارات React</span></div></div>
+        <div><div class="quote">يحتاج كل مسار عام إلى HTML قابل للفهرسة، عنوان ووصف خاصين، H1، روابط داخلية، ونسخة لغة مستقلة.</div><div class="note" style="margin-top:14px">مؤشر الأداء المختبري كان مقبولًا في عينة واحدة. لا نعرضه كبيانات Core Web Vitals قبل GSC وCrUX.</div></div>
+      </div></div><div class="source">المصادر: زحف تقني قياسي، HTML الخادم، وفحص المتصفح بعد تشغيل JavaScript، 2 سبتمبر 2026.</div>
+    </section>
+
+    <section class="slide" data-title="أولويات SEO التقنية">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>أولويات الإصلاح</strong></div>
+      <div class="eyebrow">الأساس قبل المحتوى</div><h1>ستة إصلاحات تفتح <span class="accent">باب الفهرسة الصحيحة</span></h1>
+      <div class="content"><div class="grid g3">
+        <div class="card"><span class="tag">حرج</span><h3>Sitemap حقيقي</h3><p>المسارات الشائعة تعيد صفحة HTML بدل ملف XML.</p></div>
+        <div class="card"><span class="tag">حرج</span><h3>404 حقيقية</h3><p>الرابط غير الموجود يعيد 200 ثم يظهر صفحة فارغة.</p></div>
+        <div class="card"><span class="tag gold">مرتفع</span><h3>Canonical وتحويلات</h3><p>www وبدونه، والحروف الكبيرة والصغيرة، تعمل دون توحيد.</p></div>
+        <div class="card"><span class="tag gold">مرتفع</span><h3>صفحات قابلة للزحف</h3><p>نخدم المحتوى والعناوين من الخادم أو عبر prerender موثوق.</p></div>
+        <div class="card"><span class="tag gold">مرتفع</span><h3>روابط عربية وإنجليزية</h3><p>نبني URL لكل لغة مع hreflang وMetadata مترجمة.</p></div>
+        <div class="card"><span class="tag blue">بناء الثقة</span><h3>Schema ومشاركة اجتماعية</h3><p>نضيف بيانات منظمة واقعية وصور مشاركة للصفحات الأساسية.</p></div>
+      </div></div><div class="source">المصدر: فحص HTTP وDOM للمسارات العامة، 2 سبتمبر 2026. التنفيذ النهائي يعتمد على صلاحيات الاستضافة وCloudflare.</div>
+    </section>
+
+    <section class="slide dark" data-title="فرصة البحث B2C">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>طلب المستهلك</strong></div>
+      <div class="eyebrow">Google Keyword Planner</div><h1>المتسوق يبحث بلغة <span class="accent">الكاش باك والنقاط</span></h1>
+      <p class="subtitle">الفرصة العربية واضحة. نبدأ بصفحة اكتساب رئيسية، ثم نفصل القسائم والعروض والاستبدال حتى لا تتنافس الصفحات مع بعضها.</p>
+      <div class="content"><div class="bar-list">
+        <div class="bar-row"><span>كاش باك</span><div class="bar-track"><div class="bar gold" style="width:100%"></div></div><strong>1,900</strong></div>
+        <div class="bar-row"><span>بطاقات هدايا</span><div class="bar-track"><div class="bar gold" style="width:46%"></div></div><strong>880</strong></div>
+        <div class="bar-row"><span>نقاط ولاء</span><div class="bar-track"><div class="bar gold" style="width:25.3%"></div></div><strong>480</strong></div>
+        <div class="bar-row"><span>تطبيق نقاط</span><div class="bar-track"><div class="bar gold" style="width:20.5%"></div></div><strong>390</strong></div>
+        <div class="bar-row"><span>كوبونات خصم</span><div class="bar-track"><div class="bar gold" style="width:20.5%"></div></div><strong>390</strong></div>
+        <div class="bar-row"><span>برنامج مكافآت</span><div class="bar-track"><div class="bar gold" style="width:11.1%"></div></div><strong>210</strong></div>
+      </div></div><div class="source">متوسط البحث الشهري، السعودية، Google Search، العربية، مطابقة تامة، 2 سبتمبر 2026. حجم البحث مدخل للتخطيط وليس توقعًا للزيارات أو المبيعات.</div>
+    </section>
+
+    <section class="slide" data-title="فرصة البحث B2B">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>طلب التاجر</strong></div>
+      <div class="eyebrow">B2B عربي وإنجليزي</div><h1>الحجم أقل، <span class="accent">والنية التجارية أعلى</span></h1>
+      <p class="subtitle">كلمات التاجر العربية تحمل حدود عروض سعرية أعلى من أغلب كلمات المستهلك. هذا يبرر مسارًا مستقلًا للتاجر وصفحات قطاعية للمقاهي والمطاعم.</p>
+      <div class="content"><div class="grid g2">
+        <div class="card"><h3>العربية</h3><table class="table"><thead><tr><th>الكلمة</th><th>بحث/شهر</th><th>حد عرض أعلى</th></tr></thead><tbody><tr><td>برنامج ولاء العملاء</td><td>140</td><td>$14.87</td></tr><tr><td>منصة ولاء</td><td>50</td><td>$3.78</td></tr><tr><td>نظام ولاء العملاء</td><td>40</td><td>$16.70</td></tr><tr><td>برنامج ولاء للمقاهي</td><td>30</td><td>$13.56</td></tr></tbody></table></div>
+        <div class="card"><h3>الإنجليزية</h3><table class="table"><thead><tr><th>Keyword</th><th>بحث/شهر</th><th>الدور</th></tr></thead><tbody><tr><td>loyalty platform</td><td>260</td><td>صفحة B2B أساسية</td></tr><tr><td>loyalty program software</td><td>90</td><td>حل تقني</td></tr><tr><td>restaurant loyalty program</td><td>30</td><td>قطاع المطاعم</td></tr><tr><td>QR loyalty program</td><td>10</td><td>صفحة ميزة أو دليل</td></tr></tbody></table></div>
+      </div></div><div class="source">المصدر: Google Keyword Planner، السعودية، العربية والإنجليزية، مطابقة تامة، 2 سبتمبر 2026. حدود العروض بالدولار كما أعادتها الأداة.</div>
+    </section>
+
+    <section class="slide" data-title="معمارية الصفحات">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>خريطة البحث</strong></div>
+      <div class="eyebrow">صفحة لكل نية</div><h1>نحوّل الموقع من رسالة عامة إلى <span class="accent">مسارات اكتساب</span></h1>
+      <div class="content"><div class="grid g2">
+        <div class="card"><span class="tag">/consumer</span><h3>الكاش باك والنقاط</h3><p>كيف يعمل، أين يستخدم، كيف يستبدل، ثم تحميل التطبيق.</p></div>
+        <div class="card"><span class="tag gold">/business</span><h3>برنامج ولاء للتاجر</h3><p>العائد، آلية التسجيل، التشغيل في الفرع، وطلب الانضمام.</p></div>
+      </div></div><div class="note">ننشئ صفحات قطاعية للمقاهي والمطاعم بعد توثيق الملاءمة التشغيلية وتجربة تاجر يمكن عرضها.</div><div class="source">المصدر: خريطة الكلمات المقترحة واحتياجات الجماهير في موقع جنى الخير وعرض منصة التاجر.</div>
+    </section>
+
+    <section class="slide dark" data-title="المنافسون">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>المشهد التنافسي</strong></div>
+      <div class="eyebrow">ثلاثة نماذج قريبة</div><h1>الفرصة مفتوحة لمن يشرح <span class="accent">التجربة ويثبتها</span></h1>
+      <div class="content"><div class="grid g3">
+        <div class="card"><h3>Sekkara</h3><p>أوضح فصلًا بين المستهلك والتاجر، ويشرح QR وPOS والتقارير في صفحات عربية مستقلة.</p><span class="tag gold">مرجع وضوح المنتج</span></div>
+        <div class="card"><h3>+More</h3><p>متمركز في السعودية ويجمع المستهلك والتاجر في صفحة واحدة، لكن ظهوره العضوي محدود وبعض ادعاءاته تحتاج سندًا.</p><span class="tag gray">منافس محلي مبكر</span></div>
+        <div class="card"><h3>Points / Papp</h3><p>أقرب دليل على أن نطاق ولاء سعودي يمكنه ترتيب كلمات «نقاط» و«نقاط الولاء».</p><span class="tag green">دليل طلب عضوي</span></div>
+      </div></div><div class="source">المصادر: فحص سريع لمواقع المنافسين، بيانات صفحاتهم العامة، ولقطة Ahrefs السعودية، 2 سبتمبر 2026.</div>
+    </section>
+
+    <section class="slide" data-title="دليل Ahrefs التنافسي">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>Ahrefs</strong></div>
+      <div class="eyebrow">الظهور المرصود</div><h1>Papp يثبت قابلية ترتيب <span class="accent">فئة النقاط</span></h1>
+      <p class="subtitle">من بين النطاقات الأربعة في اللقطة، ظهر Papp وحده بترتيب سعودي قابل للقياس. جنى الخير وSekkara وMore لم يسجلوا كلمات سعودية مرصودة في تلك اللحظة.</p>
+      <div class="content"><div class="split">
+        <div><table class="table"><thead><tr><th>الكلمة</th><th>الترتيب</th><th>الحجم في Ahrefs</th></tr></thead><tbody><tr><td>points</td><td>2</td><td>600</td></tr><tr><td>نقاط</td><td>4</td><td>700</td></tr><tr><td>نقاط الولاء</td><td>5</td><td>250</td></tr><tr><td>النقاط</td><td>1</td><td>400</td></tr><tr><td>حساب نقاط</td><td>8</td><td>30</td></tr></tbody></table></div>
+        <div><div class="card stat"><b>323</b><span>زيارة عضوية سعودية مقدرة لـ Papp</span></div><div class="card stat" style="margin-top:12px"><b>14</b><span>كلمة عضوية سعودية مرصودة</span></div><div class="note" style="margin-top:12px">نبني الصفحات العربية الأساسية أولًا، ثم نكسب روابط سعودية حقيقية من التجار والشركاء والإعلام.</div></div>
+      </div></div><div class="source">المصدر: Ahrefs، السعودية، 2 سبتمبر 2026. الترتيب والحجم والزيارات تقديرات طرف ثالث وقد تتغير.</div>
+    </section>
+
+    <section class="slide dark" data-title="UX المستهلك 1 من 5">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>تطبيق المستهلك · 1/5</strong></div>
+      <div class="eyebrow">الثقة قبل التجميل</div><h1>المسارات الرئيسية تحتاج <span class="accent">نهاية موثوقة</span></h1>
+      <div class="content"><div class="split">
+        <div><div class="grid g2"><div class="card stat"><b>11</b><span>ملاحظة حرجة</span></div><div class="card stat"><b>16</b><span>ملاحظة متوسطة</span></div></div><div class="card" style="margin-top:12px"><h3>أولوية الإطلاق</h3><ul><li>إصلاح خطأ الكاميرا في «امسح وادفع».</li><li>إخفاء الخريطة والتجار غير الجاهزين أو تقديم حالة انتظار صريحة.</li><li>توحيد الرصيد والتجار بين الشاشات.</li></ul></div></div>
+        <div class="phone-row"><img class="phone one" src="assets/consumer-19.jpg" alt="رسالة خطأ تقنية في مسار امسح وادفع"><img class="phone two" src="assets/consumer-11.jpg" alt="تجار بحالة قريبًا في تطبيق المستهلك"></div>
+      </div></div><div class="source">المصدر: فحص UX لتطبيق المستهلك بحساب مسجل، سبتمبر 2026. الحصيلة الكاملة: 33 ملاحظة و37 لقطة موثقة.</div>
+    </section>
+
+    <section class="slide" data-title="UX المستهلك 2 من 5">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>تطبيق المستهلك · 2/5</strong></div>
+      <div class="eyebrow">لغة المال</div><h1>يحتاج المستخدم إلى <span class="accent">مقياس واحد للقيمة</span></h1>
+      <div class="content"><div class="split reverse">
+        <div class="phone-row"><img class="phone one" src="assets/consumer-09.jpg" alt="تعدد مصطلحات القيمة في تطبيق المستهلك"><img class="phone two" src="assets/consumer-10.jpg" alt="خيارات استبدال أعلى من الرصيد المتاح"></div>
+        <div><div class="quote">نستخدم «نقاط» كمصطلح أساسي، ونشرح علاقتها بالقسيمة والكاش باك بلغة ثابتة.</div><div class="grid g2" style="margin-top:14px"><div class="card"><h3>اليوم</h3><p>نقاط، قسيمة، كاش باك، ريبيت، ومكافآت لنفس القيمة.</p></div><div class="card"><h3>المطلوب</h3><p>رصيد مفهوم، قيمة تحويل واضحة، ورسالة «تحتاج X نقطة».</p></div></div></div>
+      </div></div><div class="source">المصدر: البنود 3.1–3.3 و4.1–4.2 في فحص UX للمستهلك.</div>
+    </section>
+
+    <section class="slide" data-title="UX المستهلك 3 من 5">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>تطبيق المستهلك · 3/5</strong></div>
+      <div class="eyebrow">نظام التصميم</div><h1>نجمع الواجهة تحت <span class="accent">هوية واحدة</span></h1>
+      <div class="content"><div class="split">
+        <div class="grid g2"><div class="card"><h3>الألوان</h3><p>كحلي وذهبي للعلامة، وألوان دلالية محدودة للنجاح والتنبيه والخطأ.</p></div><div class="card"><h3>الخط</h3><p>عائلة عربية ولاتينية بأوزان واضحة بدل الاعتماد على خط النظام.</p></div><div class="card"><h3>الأيقونات</h3><p>مجموعة واحدة بدل الإيموجي والأنماط المتعددة لنفس الوجهة.</p></div><div class="card"><h3>الشعار</h3><p>SVG أو PNG شفاف، مع نسخة مبسطة للاستخدامات الصغيرة.</p></div></div>
+        <div class="phone-row"><img class="phone one" src="assets/consumer-03.jpg" alt="تدرجات ألوان متعددة في تطبيق المستهلك"><img class="phone two" src="assets/consumer-04.jpg" alt="نموذج لاستخدام خط النظام في تطبيق المستهلك"></div>
+      </div></div><div class="source">المصدر: قسم الهوية البصرية والأيقونات في فحص UX للمستهلك. الفحص وجد مشكلات حرجة في اللون والخط واستخدام الإيموجي.</div>
+    </section>
+
+    <section class="slide" data-title="UX المستهلك 4 من 5">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>تطبيق المستهلك · 4/5</strong></div>
+      <div class="eyebrow">التنقل والتخطيط</div><h1>نقلل الاختيارات، <span class="accent">ونحمي الإجراء الأساسي</span></h1>
+      <div class="content"><div class="split reverse">
+        <div class="phone-row"><img class="phone one" src="assets/consumer-17.jpg" alt="قص البطاقات في شبكة تطبيق المستهلك"><img class="phone two" src="assets/consumer-14.jpg" alt="مثال على عدم اتساق تسميات الشاشات"></div>
+        <div><div class="grid g2"><div class="card"><h3>مسارات أقل</h3><p>الشريط السفلي للوجهات الأساسية، والدرج للحساب والإعدادات.</p></div><div class="card"><h3>أزرار ظاهرة</h3><p>نحترم Safe Area حتى لا يختفي زر التحويل أو النسخ خلف شريط النظام.</p></div><div class="card"><h3>شبكات سليمة</h3><p>تظهر البطاقة كاملة في العربية والإنجليزية دون قص النص.</p></div><div class="card"><h3>حالات فارغة مفيدة</h3><p>عنوان وشرح وإجراء واحد بدل مساحات واسعة بلا توجيه.</p></div></div></div>
+      </div></div><div class="source">المصدر: قسما التنقل والتخطيط في فحص UX للمستهلك. اختبار التباين والوصولية يدخل ضمن ضمان الجودة.</div>
+    </section>
+
+    <section class="slide dark" data-title="UX المستهلك 5 من 5">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>تطبيق المستهلك · 5/5</strong></div>
+      <div class="eyebrow">ترتيب الإصلاح</div><h1>نجهز المنتج للتفعيل <span class="accent">على ثلاث دفعات</span></h1>
+      <div class="content"><div class="timeline" style="grid-template-columns:repeat(3,1fr)">
+        <div class="phase"><b>قبل الإطلاق</b><ul><li>الدفع والتجار والخريطة</li><li>المصطلح المالي والبيانات</li><li>النصوص المكسورة والترجمة</li></ul></div>
+        <div class="phase"><b>الدورة التالية</b><ul><li>الألوان والخط والأيقونات</li><li>القص والقوائم السفلية</li><li>التنقل والحالات الفارغة</li></ul></div>
+        <div class="phase"><b>التلميع</b><ul><li>التباين وتسميات الحقول</li><li>الحواف والظلال والرجوع</li><li>الإكرامية وحوافز المراجعات</li></ul></div>
+      </div></div><div class="note">بوابة الخروج: عملية دفع تجريبية مكتملة، رصيد متطابق بين الشاشات، وتدقيق عربي وإنجليزي على الأجهزة المستهدفة.</div><div class="source">المصدر: خارطة الأولويات في فحص UX للمستهلك.</div>
+    </section>
+
+    <section class="slide" data-title="UX التاجر 1 من 4">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>تطبيق التاجر · 1/4</strong></div>
+      <div class="eyebrow">مدخل أنضج</div><h1>تجربة الدخول تملك <span class="accent">أساسًا جيدًا</span></h1>
+      <div class="content"><div class="split">
+        <div><div class="grid g2"><div class="card stat"><b>0</b><span>ملاحظات حرجة في نطاق ما قبل الدخول</span></div><div class="card stat"><b>4</b><span>ملاحظات متوسطة</span></div></div><div class="card" style="margin-top:12px"><ul><li>Cairo للعربية وPoppins للاتينية.</li><li>انعكاس RTL/LTR سليم في الشاشات المفحوصة.</li><li>نصوص أمان مفيدة ومسارات استعادة متعددة.</li></ul></div><div class="note red" style="margin-top:12px">الرقم صفر لا يشمل لوحة التاجر أو الدفع أو التسويات أو التقارير.</div></div>
+        <div class="phone-row"><img class="phone one" src="assets/merchant-09.jpg" alt="شاشة الدخول في تطبيق التاجر"></div>
+      </div></div><div class="source">المصدر: فحص UX لتطبيق التاجر، سبتمبر 2026. النطاق اقتصر على الشاشات المتاحة دون حساب تاجر.</div>
+    </section>
+
+    <section class="slide" data-title="UX التاجر 2 من 4">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>تطبيق التاجر · 2/4</strong></div>
+      <div class="eyebrow">الحقول والتحقق</div><h1>نستخدم مكوّنًا واحدًا <span class="accent">في كل مسارات الدخول</span></h1>
+      <div class="content"><div class="split reverse">
+        <div class="phone-row"><img class="phone one" src="assets/merchant-03.jpg" alt="حقل استعادة كلمة المرور بنمط الخط السفلي"><img class="phone two" src="assets/merchant-04.jpg" alt="اختلاف ظهور تلميح رقم الجوال"></div>
+        <div><div class="card"><h3>الاختلاف الحالي</h3><p>الدخول يستخدم حقولًا مؤطرة، بينما الاستعادة ودخول المالك يستخدمان خطًا سفليًا.</p></div><div class="card" style="margin-top:12px"><h3>الحالة المطلوبة</h3><p>تسمية ثابتة، مثال ظاهر، تركيز واضح، خطأ تحت الحقل، وزر يتفعل بعد إدخال صحيح.</p></div></div>
+      </div></div><div class="source">المصدر: البنود 2.1–2.2 و3.2–3.3 في فحص UX لتطبيق التاجر.</div>
+    </section>
+
+    <section class="slide" data-title="UX التاجر 3 من 4">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>تطبيق التاجر · 3/4</strong></div>
+      <div class="eyebrow">الهوية والتخطيط</div><h1>نملأ الشاشة بالمعلومة، <span class="accent">لا بالفراغ</span></h1>
+      <div class="content"><div class="split">
+        <div class="grid g2"><div class="card"><h3>الشعار</h3><p>نستبدل JPG بأصل شفاف ونضبط ملاءمته داخل الحاوية.</p></div><div class="card"><h3>التخطيط</h3><p>شاشات الاستعادة تترك 75–85% من الارتفاع فارغًا.</p></div><div class="card"><h3>التباعد</h3><p>نفصل الحقل عن الزر ونثبت مساحة قراءة للنص المساعد.</p></div><div class="card"><h3>الأرقام</h3><p>نعتمد نظامًا واحدًا للأرقام في النصوص والجوال وOTP.</p></div></div>
+        <div class="phone-row"><img class="phone one" src="assets/merchant-05.jpg" alt="فراغ رأسي كبير في شاشة استعادة كلمة المرور"><img class="phone two" src="assets/merchant-02.jpg" alt="شعار تطبيق التاجر داخل الحاوية"></div>
+      </div></div><div class="source">المصدر: البنود 1.1 و3.1 و4.1 في فحص UX لتطبيق التاجر.</div>
+    </section>
+
+    <section class="slide dark" data-title="UX التاجر 4 من 4">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>تطبيق التاجر · 4/4</strong></div>
+      <div class="eyebrow">الأمان والتحقق</div><h1>نختبر الدورة التي يدير بها التاجر <span class="accent">ماله وفروعه</span></h1>
+      <div class="content"><div class="grid g3">
+        <div class="card"><h3>قبل الدخول</h3><p>نجعل «تذكرني» اختيارًا واضحًا، ونوضح ما يحفظه التطبيق على جهاز نقطة البيع.</p></div>
+        <div class="card"><h3>رمز التحقق</h3><p>رمز دولة، حالة إرسال، مهلة إعادة الإرسال، انتهاء الرمز، والمحاولات الخاطئة.</p></div>
+        <div class="card"><h3>بعد الدخول</h3><p>نختبر قبول دفعة، الإشعار، الحركات، التسوية، الفروع، المستخدمين، والتقرير.</p></div>
+      </div></div><div class="note">نحتاج حساب تاجر تجريبي وبيئة دفع آمنة قبل اعتماد تجربة ما بعد الدخول.</div><div class="source">المصادر: فحص UX لتطبيق التاجر وعرض المنتج المقدم من جنى الخير. العرض يصف الرؤية، والفحص العملي يثبت السلوك.</div>
+    </section>
+
+    <section class="slide" data-title="مصفوفة الخدمات">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>الاستجابة للموجز</strong></div>
+      <div class="eyebrow">نطاق مقترح</div><h1>نربط كل خدمة <span class="accent">بهدف الإطلاق</span></h1>
+      <p class="subtitle">الموجز يطلب مرونة ووضوحًا. نقترح مسارًا متكاملًا، ثم نثبت فريق الحساب، التقويم، وآلية التنفيذ في ورشة النطاق.</p>
+      <div class="content"><div class="matrix">
+        <div class="head">المجال</div><div class="head">دور Brandology</div><div class="head">الناتج</div><div class="head">مقياس النجاح</div>
+        <div class="area">توحيد العلامة</div><div>قيادة النظام والنبرة</div><div>دليل مختصر وقواعد ادعاءات</div><div>اتساق نقاط التواصل</div>
+        <div class="area">محتوى المستهلك</div><div>استراتيجية وإنتاج عربي أولًا</div><div>شرح الاستخدام وعروض التجار</div><div>تفعيل وأول عملية</div>
+        <div class="area">محتوى التاجر</div><div>مسار B2B مستقل</div><div>صفحات ومواد بيع ودراسات حالة</div><div>طلبات مؤهلة وتجار معتمدون</div>
+        <div class="area">تصوير الرياض</div><div>تخطيط وإدارة إنتاج المواقع</div><div>المتجر والمالك وتجربة الدفع</div><div>أصول معتمدة لكل حي</div>
+        <div class="area">القنوات الاجتماعية</div><div>إعداد ونشر وإدارة ردود</div><div>تقويم عربي وإنجليزي</div><div>تفعيل لا وصول فقط</div>
+        <div class="area">الإعلانات</div><div>حملات حول الأحياء الجاهزة</div><div>مسارات تاجر ومتسوق</div><div>تكلفة التفعيل والعملية</div>
+        <div class="area">المؤثرون</div><div>نطاق مشروط بالتحقق النظامي</div><div>قائمة واختيار وإفصاحات</div><div>عمليات منسوبة</div>
+        <div class="area">SEO والقياس</div><div>أساس تقني وصفحات وقياس</div><div>موقع قابل للفهرسة ولوحات أداء</div><div>طلب عضوي وتحويلات مكتملة</div>
+      </div></div><div class="source">المصدر: مجالات الدعم السبعة في موجز الشريك، مع إضافة SEO والقياس بناءً على الفحص الحالي وطلب المشروع.</div>
+    </section>
+
+    <section class="slide" data-title="خطة أول 90 يومًا">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>أول 90 يومًا</strong></div>
+      <div class="eyebrow">تأسيس ثم اختبار</div><h1>ثلاثة أشهر لبناء <span class="accent">دورة حي قابلة للتكرار</span></h1>
+      <div class="content"><div class="timeline" style="grid-template-columns:repeat(3,1fr)">
+        <div class="phase"><b>الأيام 1–30</b><ul><li>تثبيت الأحياء وفئات التجار</li><li>الوصول إلى GSC وGA4 والاستضافة</li><li>خطة إصلاح المنتج والموقع</li><li>قاموس الرسائل والادعاءات</li></ul></div>
+        <div class="phase"><b>الأيام 31–60</b><ul><li>صفحات عربية وإنجليزية قابلة للفهرسة</li><li>تجهيز أول مجموعة تجار</li><li>تصوير محتوى المواقع</li><li>إعداد القياس واختبار الرحلات</li></ul></div>
+        <div class="phase"><b>الأيام 61–90</b><ul><li>إطلاق حي أول بميزانية مضبوطة</li><li>تجربة تاجر ومتسوق من البداية للنهاية</li><li>تحسين الرسائل والصفحات</li><li>قرار التوسع حسب العمليات</li></ul></div>
+      </div></div><div class="source">الخطة المقترحة تعتمد على جاهزية الحسابات التجريبية، صلاحيات الموقع، واعتماد الأحياء والتجار.</div>
+    </section>
+
+    <section class="slide" data-title="خارطة 12 شهرًا">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>12 شهرًا</strong></div>
+      <div class="eyebrow">توسع مضبوط</div><h1>نبني القاعدة، ثم نكرر <span class="accent">ما يحقق عمليات</span></h1>
+      <div class="content"><div class="timeline">
+        <div class="phase"><b>Q1 · التأسيس</b><ul><li>إصلاح UX الحرج</li><li>البنية التقنية للبحث</li><li>مسارات القياس</li><li>اختبار حي أول</li></ul></div>
+        <div class="phase"><b>Q2 · إثبات الملاءمة</b><ul><li>صفحات المقاهي والمطاعم</li><li>دراسات حالة للتجار</li><li>تحسين أول عملية</li><li>توسيع محتوى البحث</li></ul></div>
+        <div class="phase"><b>Q3 · التوسع</b><ul><li>أحياء وفئات إضافية</li><li>محتوى تجار محلي</li><li>شراكات وروابط سعودية</li><li>اختبارات احتفاظ</li></ul></div>
+        <div class="phase"><b>Q4 · الكفاءة</b><ul><li>توزيع الميزانية حسب العائد</li><li>تحسين صفحات المتسوق والتاجر</li><li>رفع التكرار لكل حي</li><li>خطة العام التالي</li></ul></div>
+      </div></div><div class="source">خارطة مقترحة قابلة لإعادة الترتيب حسب جاهزية المنتج، كثافة التجار، وبيانات التحويل الشهرية.</div>
+    </section>
+
+    <section class="slide dark" data-title="نظام القياس">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>القياس</strong></div>
+      <div class="eyebrow">من التسجيل إلى التكرار</div><h1>نقرأ النجاح من <span class="accent">المستخدم المفعّل والعملية المكتملة</span></h1>
+      <div class="content"><div class="flow">
+        <div class="flow-item"><b>طلب تاجر</b><span>مصدر الطلب، الحي، والفئة.</span></div>
+        <div class="flow-item"><b>تاجر معتمد</b><span>اكتملت المتطلبات وبدأ التشغيل.</span></div>
+        <div class="flow-item"><b>متسوق مفعّل</b><span>أكمل التسجيل وأصبح جاهزًا للدفع.</span></div>
+        <div class="flow-item"><b>أول عملية</b><span>دفع ناجح ومكافأة صحيحة.</span></div>
+        <div class="flow-item"><b>عملية متكررة</b><span>عاد خلال نافذة زمنية متفق عليها.</span></div>
+      </div></div><div class="grid g4" style="margin-top:16px"><div class="card"><h3>حسب الحي</h3><p>تجار جاهزون وعمليات لكل نقطة بيع.</p></div><div class="card"><h3>حسب القناة</h3><p>بحث، محتوى، إعلان، وشراكات محلية.</p></div><div class="card"><h3>حسب الرحلة</h3><p>تسرب التسجيل والدفع والتكرار.</p></div><div class="card"><h3>حسب الجودة</h3><p>إلغاء، خطأ، نزاع، ورضا التاجر.</p></div></div><div class="source">المعيار مأخوذ من موجز العميل. تعريف كل حدث وفترة التكرار يحتاج اعتمادًا مشتركًا قبل الإطلاق.</div>
+    </section>
+
+    <section class="slide" data-title="مصادر الدليل">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>مصادر الدليل</strong></div>
+      <div class="eyebrow">لقطة مؤرخة</div><h1>بُنيت الخطة على <span class="accent">مصادر قابلة للمراجعة</span></h1>
+      <div class="content"><div class="grid g3">
+        <div class="card"><h3>من العميل</h3><p>موجز شريك التسويق والمحتوى، وعرض منصة التاجر. استخدمناهما لفهم الرؤية والأولويات.</p></div>
+        <div class="card"><h3>من المنتج والموقع</h3><p>فحصا UX للتطبيقين، فحص HTTP وDOM، زحف تقني، واختبار متصفح على الجوال.</p></div>
+        <div class="card"><h3>من السوق</h3><p>Google Keyword Planner للسعودية، لقطة Ahrefs، وفحص سريع لـ Sekkara وMore وPapp.</p></div>
+      </div></div><div class="note">لا تتوفر حتى الآن بيانات Search Console أو GA4 أو حساب تاجر تجريبي. نستخدمها في مرحلة التأسيس لتثبيت خط الأساس والتحويلات.</div><div class="source">تواريخ التحقق: أغسطس و2 سبتمبر 2026. كل رقم في العرض مرتبط بمصدر وتاريخ وحدود استخدام.</div>
+    </section>
+
+    <section class="slide" data-title="ضبط الادعاءات">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>ضبط الادعاءات</strong></div>
+      <div class="eyebrow">قبل النشر</div><h1>نراجع الدليل قبل أن <span class="accent">ننشر الوعد</span></h1>
+      <p class="subtitle">الموقع الحالي يعرض ادعاءات تحتاج ملف إثبات واعتمادًا واضحًا. نحفظ أثر المراجعة ونربط كل صياغة بالوثيقة وصاحب القرار وتاريخ الصلاحية.</p>
+      <div class="content"><div class="grid g3">
+        <div class="card"><span class="tag">ترخيص وامتثال</span><h3>MISA وSAMA وSOC 2</h3><p>نحتاج وثيقة ونطاقًا دقيقًا. «متوافق» و«مرخص» ليستا عبارة واحدة.</p></div>
+        <div class="card"><span class="tag gold">أداء وتشغيل</span><h3>فوري، لحظي، وآلاف المستخدمين</h3><p>نحدد زمن الخدمة، مصدر العدد، وتاريخ القياس قبل النشر.</p></div>
+        <div class="card"><span class="tag green">إثبات تجاري</span><h3>العائد وعدد المستخدمين</h3><p>نربط كل رقم بمصدر وفترة قياس واعتماد واضح قبل استخدامه.</p></div>
+      </div></div><div class="note red">أمثلة نسب توزيع الريبيت في عرض المنتج توضيحية وقابلة للتهيئة. لا نقدمها كقاعدة تجارية عامة.</div><div class="source">المصادر: الواجهة العامة للموقع، موجز العميل، عرض منصة التاجر، وصفحات التسعير والشروط. الاعتماد النهائي لدى جنى الخير ومستشاريها النظاميين.</div>
+    </section>
+
+    <section class="slide" data-title="الخطوات القادمة">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>الخطوات القادمة</strong></div>
+      <div class="eyebrow">ورشة تثبيت النطاق</div><h1>نخرج من الاجتماع <span class="accent">بخطة إطلاق قابلة للتنفيذ</span></h1>
+      <div class="content"><div class="grid g2">
+        <div class="card"><div class="step"><div class="number">1</div><div><h3>نثبت الأحياء والتجار الأوائل</h3><p>الفئات، الجاهزية، مواقع التصوير، وموعد التدريب.</p></div></div><div class="step"><div class="number">2</div><div><h3>نفتح مصادر القياس والبيئات التجريبية</h3><p>GSC وGA4 والاستضافة وحسابا مستهلك وتاجر.</p></div></div></div>
+        <div class="card"><div class="step"><div class="number">3</div><div><h3>نعتمد الرسائل والأدلة</h3><p>قاموس المنتج، قائمة الادعاءات، والوثائق المسموح استخدامها.</p></div></div><div class="step"><div class="number">4</div><div><h3>نقفل نطاق أول 90 يومًا</h3><p>الفريق، المخرجات، الاعتمادات، المواعيد، ومؤشرات النجاح.</p></div></div></div>
+      </div></div><div class="source">الخطوة المقترحة: ورشة مشتركة بين التسويق، المنتج، العمليات، والتقنية.</div>
+    </section>
+
+    <section class="slide dark close" data-title="الخاتمة">
+      <div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>الختام</strong></div>
+      <div class="eyebrow">Brandology</div><h1>نبدأ من حي واحد، <span class="accent">ونبني ما يستحق التوسع</span></h1>
+      <p class="subtitle">نجهز التاجر، نوضح القيمة للمتسوق، نثبت أول عملية، ثم نستخدم البيانات لاختيار الحي والفئة والخطوة التالية.</p>
+      <div class="close-grid"><div class="card"><h3>المنتج</h3><p>رحلات مستقرة وواضحة</p></div><div class="card"><h3>الاكتساب</h3><p>بحث ومحتوى وتوزيع محلي</p></div><div class="card"><h3>النتيجة</h3><p>مستخدم مفعّل وعملية مكتملة</p></div></div>
+    </section>
+
+  </main>
+  <script>
+    (()=>{
+      const deck=document.getElementById('deck');
+      const byTitle=Object.fromEntries([...deck.querySelectorAll('.slide')].map(s=>[s.dataset.title,s]));
+      const make=(title,html,classes='')=>{const s=document.createElement('section');s.className=`slide ${classes}`.trim();s.dataset.title=title;s.innerHTML=html;return s};
+      const chrome=(section)=>`<div class="chrome"><span>BRANDOLOGY × جنى الخير</span><strong>${section}</strong></div>`;
+      const divider=(num,title,desc)=>make(title,`${chrome(`${num} · ${title}`)}<div class="section-kicker">القسم ${num}</div><h1>${title}</h1><p class="subtitle">${desc}</p>`,`section-divider dark`);
+      const agenda=make('محتويات العرض',`${chrome('00 · مقدمة ونطاق التحليل')}<div class="eyebrow">هيكل العرض</div><h1>محتويات العرض</h1><p class="subtitle">نبدأ بما تم تحليله، ثم نعرض السوق والمنافسين، وبعدها نوضح ما ستنفذه Brandology وكيف سنقيسه.</p><div class="content"><div class="agenda">
+        <a href="#slide-3"><b>00</b><span>مقدمة ونطاق التحليل</span></a><a href="#slide-9"><b>01</b><span>تحليل الموقع وSEO التقني</span></a><a href="#slide-12"><b>02</b><span>الطلب على البحث في السعودية</span></a>
+        <a href="#slide-16"><b>03</b><span>تحليل المنافسين</span></a><a href="#slide-21"><b>04</b><span>تحليل تطبيق المستهلك</span></a><a href="#slide-27"><b>05</b><span>تحليل تطبيق التاجر</span></a>
+        <a href="#slide-33"><b>06</b><span>خلاصة التشخيص</span></a><a href="#slide-36"><b>07</b><span>خطة Brandology المقترحة</span></a><a href="#slide-41"><b>08</b><span>التنفيذ والقياس</span></a>
+      </div></div>`);
+      const intents=make('نوايا البحث ذات الأولوية',`${chrome('02 · الطلب على البحث في السعودية')}<div class="eyebrow">B2C وB2B</div><h1>نوايا البحث ذات الأولوية للأفراد والتجار</h1><p class="subtitle">نقسم الطلب حسب ما يريد الباحث إنجازه، ثم نخصص لكل نية صفحة وإجراء تحويل مستقلًا.</p><div class="evidence-strip"><span>الجغرافيا: المملكة العربية السعودية</span><span>Google Search</span><span>Google Ads Keyword Planner</span><span>مطابقة تامة</span><span>متوسط البحث الشهري</span><span>اللغة: العربية والإنجليزية</span><span>2 سبتمبر 2026</span></div><div class="content"><div class="grid g4"><div class="card"><span class="tag">B2C</span><h3>الحصول على مكافأة</h3><p>كاش باك، نقاط ولاء، برنامج مكافآت.</p></div><div class="card"><span class="tag">B2C</span><h3>استخدام المكافأة</h3><p>استبدال النقاط، بطاقات هدايا، كوبونات خصم.</p></div><div class="card"><span class="tag gold">B2B</span><h3>اختيار نظام ولاء</h3><p>برنامج ولاء العملاء، منصة ولاء، loyalty platform.</p></div><div class="card"><span class="tag gold">B2B</span><h3>حل حسب القطاع</h3><p>برنامج ولاء للمقاهي والمطاعم، QR loyalty program.</p></div></div></div><div class="source">الأحجام المعروضة وطنية للسعودية وليست تقديرًا خاصًا بالرياض. نطاق الإطلاق التشغيلي المقترح يبدأ من أحياء مختارة في الرياض.</div>`);
+      const compStats=make('مقارنة مؤشرات SEO للمنافسين',`${chrome('03 · تحليل المنافسين')}<div class="eyebrow">لقطة Ahrefs</div><h1>مقارنة مؤشرات SEO للمنافسين في السعودية</h1><p class="subtitle">المقارنة توضح حجم الظهور العضوي المرصود، ولا تمثل بيانات المبيعات أو التحليلات الداخلية لأي شركة.</p><div class="evidence-strip"><span>الجغرافيا: المملكة العربية السعودية</span><span>المصدر: Ahrefs API</span><span>تقديرات طرف ثالث</span><span>2 سبتمبر 2026</span></div><div class="content"><table class="table comparison"><thead><tr><th>النطاق</th><th>DR</th><th>مواقع تربط بالنطاق</th><th>Backlinks</th><th>كلمات سعودية</th><th>زيارات عضوية مقدرة</th></tr></thead><tbody><tr><td><strong>janalkhair.com</strong></td><td>0</td><td>406</td><td>639</td><td>0</td><td>0</td></tr><tr><td><a href="https://sekkara.io/ar" target="_blank" rel="noopener">sekkara.io</a></td><td>0</td><td>133</td><td>157</td><td>0</td><td>0</td></tr><tr><td><a href="https://more.com.sa/" target="_blank" rel="noopener">more.com.sa</a></td><td>0</td><td>320</td><td>348</td><td>0</td><td>0</td></tr><tr><td><a href="https://papp.sa/" target="_blank" rel="noopener">papp.sa</a></td><td>31</td><td>60</td><td>5,045</td><td>14</td><td>323</td></tr></tbody></table></div><div class="source">المصدر: Ahrefs API، قاعدة بيانات السعودية، 2 سبتمبر 2026. الأرقام تقديرية وليست بيانات Search Console أو GA4.</div>`);
+      const compLessons=make('ما يفعله المنافسون',`${chrome('03 · تحليل المنافسين')}<div class="eyebrow">النتيجة التنافسية</div><h1>ما يفعله المنافسون وما لا يزال متاحًا لجنى الخير</h1><div class="content"><div class="grid g3"><div class="card"><h3>Sekkara: فصل الجماهير</h3><p>يفصل المستهلك عن التاجر ويشرح QR وPOS والتقارير عبر صفحات عربية مستقلة.</p><a class="external-link" href="https://sekkara.io/ar" target="_blank" rel="noopener">sekkara.io/ar ↗</a></div><div class="card"><h3>More: تمركز سعودي</h3><p>يقدم نفسه للسوق السعودي، لكن الصفحة الواحدة تقلل عمق المحتوى وبعض ادعاءاته تحتاج إثباتًا.</p><a class="external-link" href="https://more.com.sa/" target="_blank" rel="noopener">more.com.sa ↗</a></div><div class="card"><h3>Papp: طلب عضوي مثبت</h3><p>يظهر على كلمات النقاط والولاء، ما يثبت وجود طلب بحث يمكن استهدافه بمحتوى عربي واضح.</p><a class="external-link" href="https://papp.sa/" target="_blank" rel="noopener">papp.sa ↗</a></div></div></div><div class="note">الفرصة المتاحة: بناء أفضل شرح عربي للفئة، مع مسارين واضحين للمستهلك والتاجر وإثبات المنتج بدل الاكتفاء بالوعود.</div><div class="source">المصادر: الصفحات العامة للمنافسين ولقطة Ahrefs السعودية بتاريخ 2 سبتمبر 2026.</div>`);
+      const blockers=make('أهم مشكلات الإطلاق',`${chrome('06 · خلاصة التشخيص')}<div class="eyebrow">ما وجدناه</div><h1>أهم المشكلات التي قد تعيق الإطلاق</h1><div class="content"><div class="grid g3"><div class="card"><h3>رحلة المستهلك</h3><p>المسارات الأساسية تحتاج إغلاق الأعطال وتوحيد الرصيد والمكافآت قبل التوسع.</p></div><div class="card"><h3>تشغيل التاجر</h3><p>تجربة ما بعد الدخول لم تُختبر عمليًا حتى الآن، بما فيها الدفع والتسوية والتقارير.</p></div><div class="card"><h3>الوصول من البحث</h3><p>المحتوى العام لا يصل كاملًا للزاحف، واللغتان لا تملكان روابط مستقلة قابلة للفهرسة.</p></div><div class="card"><h3>الظهور العضوي</h3><p>Ahrefs لم يرصد كلمات أو زيارات عضوية سعودية للنطاق في لقطة الفحص.</p></div><div class="card"><h3>الادعاءات العامة</h3><p>بعض ادعاءات الترخيص والأداء والدخل تحتاج وثائق واعتمادًا قبل استخدامها تسويقيًا.</p></div><div class="card"><h3>القياس</h3><p>لا تتوفر لنا بعد بيانات GSC وGA4 لتثبيت خط الأساس والتحويلات الفعلية.</p></div></div></div>`);
+      const opportunities=make('أهم فرص النمو',`${chrome('06 · خلاصة التشخيص')}<div class="eyebrow">ما يعنيه التحليل</div><h1>أهم فرص النمو المتاحة لجنى الخير</h1><div class="content"><div class="grid g4"><div class="card"><h3>فئة غير محسومة</h3><p>لا يهيمن أي منافس مختار على المحتوى العربي السعودي في اللقطة المرصودة.</p></div><div class="card"><h3>طلب بحث قائم</h3><p>Papp يثبت وجود طلب حول النقاط والولاء يمكن لجنى الخير استهدافه.</p></div><div class="card"><h3>مساران واضحان</h3><p>الفصل بين رحلة المستهلك ورحلة التاجر يرفع وضوح الرسالة والتحويل.</p></div><div class="card"><h3>إطلاق قابل للقياس</h3><p>بدء التشغيل من تاجر وحي محددين يجعل كل توسع مبنيًا على عمليات مكتملة.</p></div></div></div><div class="note">هذه الخلاصة هي نقطة الانتقال من التحليل إلى نطاق عمل Brandology المقترح.</div>`);
+      const keywordSheet='https://docs.google.com/spreadsheets/d/1t8uU9zF9wO1B3ZeSl8svK_0EPOEsLxBsN49WhWTlvZ0/edit?usp=drivesdk';
+      const technicalSheet='https://docs.google.com/spreadsheets/d/1fCg_REg7HJFUBzwekXsqoVRgt7S2PVeHU2C4PzQeE7M/edit?usp=drivesdk';
+      const projectFolder='https://drive.google.com/drive/folders/17TyU-O2b7IUUS1qqvikfIFSXxVWq_f8l';
+      const consumerUx='https://saiaf25.github.io/brando/jana-alkhair-pitch/ux-consumer/';
+      const merchantUx='https://saiaf25.github.io/brando/jana-alkhair-pitch/ux-merchant/';
+      const sheetIcon='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18M15 9v12M3 15h18"/></svg>';
+      const reportIcon='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M9 6h6M9 10h6M9 14h4M10 19h4"/></svg>';
+      const workFiles=make('ملفات العمل الجاهزة للمراجعة',`${chrome('05 · تحليل تطبيق التاجر')}<div class="eyebrow">ملفات قابلة للفتح</div><h1>ملفات العمل الجاهزة للمراجعة</h1><p class="subtitle">الشرائح تعرض الخلاصة. الملفات التالية تحتوي على التفاصيل الكاملة، ويمكن فتحها مباشرة أثناء الاجتماع أو مشاركتها مع فريق جنى الخير.</p><div class="content"><div class="grid g4">
+        <div class="card file-card"><div class="file-head"><span class="file-icon">${sheetIcon}</span><div><h3>Master Sheet للكلمات المفتاحية</h3><div class="file-meta">Google Sheets · SEO · أفراد وتجار</div></div></div><p>الكلمات العربية والإنجليزية في السعودية، الأولويات، نية البحث، وخريطة الصفحات المقترحة.</p><a class="external-link" href="${keywordSheet}" target="_blank" rel="noopener">فتح Google Sheet ↗</a></div>
+        <div class="card file-card"><div class="file-head"><span class="file-icon">${sheetIcon}</span><div><h3>Master Sheet للـSEO التقني</h3><div class="file-meta">Google Sheets · Technical SEO</div></div></div><p>قائمة الفحوص والمشكلات والأولويات والأدلة وخطوات التنفيذ والمتابعة.</p><a class="external-link" href="${technicalSheet}" target="_blank" rel="noopener">فتح Google Sheet ↗</a></div>
+        <div class="card file-card"><div class="file-head"><span class="file-icon">${reportIcon}</span><div><h3>التقرير الكامل لتطبيق المستهلك</h3><div class="file-meta">HTML · 33 ملاحظة · 37 لقطة</div></div></div><p>تفاصيل أدق من العرض، مع ملاحظات على مستوى الشاشة وتوصية تنفيذية ولقطة توثيقية لكل حالة.</p><a class="external-link" href="${consumerUx}" target="_blank" rel="noopener">فتح تقرير تطبيق المستهلك ↗</a></div>
+        <div class="card file-card"><div class="file-head"><span class="file-icon">${reportIcon}</span><div><h3>التقرير الكامل لتطبيق التاجر</h3><div class="file-meta">HTML · 9 ملاحظات وتحسينات · 8 لقطات</div></div></div><p>مراجعة تفصيلية لتجربة ما قبل الدخول، تشمل الحقول والتحقق والتخطيط والهوية واتساق اللغتين.</p><a class="external-link" href="${merchantUx}" target="_blank" rel="noopener">فتح تقرير تطبيق التاجر ↗</a></div>
+      </div></div><div class="source">الملفات التفصيلية من إعداد فريق العمل، وهي جاهزة للعرض والمشاركة مع فريق المنتج. <a href="${projectFolder}" target="_blank" rel="noopener">فتح مجلد المشروع على Google Drive ↗</a></div>`);
+
+      const direct={
+        'الغلاف':'خطة إطلاق ونمو جنى الخير في الرياض','سياق الإطلاق':'نطاق الإطلاق: أحياء مختارة في الرياض','فهمنا للمنصة':'الجمهوران الأساسيان: المتسوق والتاجر','دورة النمو':'نموذج التفعيل المقترح لكل حي','أولويات العميل':'متطلبات العميل التي تحكم المشروع','رؤية المنتج والحالة المتحققة':'ما يقدمه عرض المنتج وما تمكنا من اختباره','مصادر الدليل':'مصادر التحليل وما لم نتمكن من التحقق منه','ضبط الادعاءات':'ادعاءات الموقع الحالية التي تحتاج إثباتًا','نقطة البداية في البحث':'الوضع الحالي للظهور العضوي في السعودية','دليل الزحف':'مشكلة الزحف: محتوى الموقع لا يصل كاملًا إلى محركات البحث','أولويات SEO التقنية':'خطة معالجة مشكلات SEO التقنية','فرصة البحث B2C':'الكلمات المفتاحية للأفراد في السعودية','فرصة البحث B2B':'الكلمات المفتاحية للتجار في السعودية','معمارية الصفحات':'صفحات الموقع المطلوبة لخدمة نوايا البحث','المنافسون':'المنافسون المباشرون ومواقعهم','دليل Ahrefs التنافسي':'الكلمات التي يظهر عليها Papp في نتائج البحث السعودية','UX المستهلك 1 من 5':'تطبيق المستهلك: المشكلات الحرجة قبل الإطلاق','UX المستهلك 2 من 5':'تطبيق المستهلك: تضارب مصطلحات الرصيد والمكافآت','UX المستهلك 3 من 5':'تطبيق المستهلك: عدم اتساق الهوية ونظام التصميم','UX المستهلك 4 من 5':'تطبيق المستهلك: مشكلات التنقل والتخطيط','UX المستهلك 5 من 5':'أولويات تحسين تطبيق المستهلك','UX التاجر 1 من 4':'تطبيق التاجر: نتائج فحص تجربة تسجيل الدخول','UX التاجر 2 من 4':'تطبيق التاجر: عدم اتساق الحقول والتحقق','UX التاجر 3 من 4':'تطبيق التاجر: مشكلات التخطيط والهوية البصرية','UX التاجر 4 من 4':'تطبيق التاجر: ما يجب اختباره بعد تسجيل الدخول','مصفوفة الخدمات':'نطاق عمل Brandology المقترح','خطة أول 90 يومًا':'خطة العمل لأول 90 يومًا','خارطة 12 شهرًا':'خارطة العمل لمدة 12 شهرًا','نظام القياس':'مؤشرات الأداء من تسجيل المستخدم إلى تكرار العملية','الخطوات القادمة':'القرارات والصلاحيات المطلوبة لبدء العمل','الخاتمة':'النتيجة المستهدفة من الشراكة'};
+      Object.entries(direct).forEach(([key,value])=>{const s=byTitle[key];if(s){s.dataset.title=value;const h=s.querySelector('h1');if(h)h.textContent=value}});
+      byTitle['UX التاجر 4 من 4'].querySelector('.note').textContent='تم فحص تجربة ما قبل تسجيل الدخول فقط. اختبار ما بعد الدخول يحتاج حساب تاجر تجريبي وبيئة دفع آمنة.';
+      const methodology=(language)=>`<div class="evidence-strip"><span>الجغرافيا: المملكة العربية السعودية</span><span>Google Search</span><span>Google Ads Keyword Planner</span><span>مطابقة تامة</span><span>متوسط البحث الشهري</span><span>اللغة: ${language}</span><span>2 سبتمبر 2026</span></div>`;
+      byTitle['فرصة البحث B2C'].querySelector('.content').insertAdjacentHTML('beforebegin',methodology('العربية'));
+      byTitle['فرصة البحث B2B'].querySelector('.content').insertAdjacentHTML('beforebegin',methodology('العربية والإنجليزية'));
+      byTitle['دليل Ahrefs التنافسي'].querySelector('.content').insertAdjacentHTML('beforebegin','<div class="evidence-strip"><span>الجغرافيا: المملكة العربية السعودية</span><span>المصدر: Ahrefs</span><span>ترتيب وحجم تقديري</span><span>2 سبتمبر 2026</span></div>');
+      const competitorLinks=[['Sekkara','https://sekkara.io/ar'],['+More','https://more.com.sa/'],['Points / Papp','https://papp.sa/']];
+      competitorLinks.forEach(([name,url])=>{const h=[...byTitle['المنافسون'].querySelectorAll('h3')].find(x=>x.textContent.trim()===name);if(h)h.parentElement.insertAdjacentHTML('beforeend',`<a class="external-link" href="${url}" target="_blank" rel="noopener">${new URL(url).hostname} ↗</a>`)});
+      byTitle['دليل Ahrefs التنافسي'].querySelector('.content').insertAdjacentHTML('afterend','<div style="display:flex;gap:8px;position:relative;z-index:2"><a class="external-link" href="https://papp.sa/" target="_blank" rel="noopener">صفحة Papp الرئيسية ↗</a><a class="external-link" href="https://papp.sa/points-calculator" target="_blank" rel="noopener">حاسبة النقاط ↗</a></div>');
+
+      const sections={
+        intro:['00','مقدمة ونطاق التحليل'],tech:['01','تحليل الموقع وSEO التقني'],search:['02','الطلب على البحث في السعودية'],competitors:['03','تحليل المنافسين'],consumer:['04','تحليل تطبيق المستهلك'],merchant:['05','تحليل تطبيق التاجر'],summary:['06','خلاصة التشخيص'],plan:['07','خطة Brandology المقترحة'],execution:['08','التنفيذ والقياس']};
+      const setSection=(slides,key)=>slides.forEach(s=>{const [n,label]=sections[key];s.dataset.section=`${n} · ${label}`;const strong=s.querySelector('.chrome strong');if(strong)strong.textContent=`${n} · ${label}`});
+      const intro=[byTitle['الغلاف'],agenda,byTitle['سياق الإطلاق'],byTitle['فهمنا للمنصة'],byTitle['أولويات العميل'],byTitle['رؤية المنتج والحالة المتحققة'],byTitle['مصادر الدليل'],byTitle['ضبط الادعاءات']];
+      const techDiv=divider('01','تحليل الموقع وSEO التقني','ما تستطيع محركات البحث الوصول إليه الآن، وما الذي يمنع الفهرسة والظهور.');
+      const tech=[techDiv,byTitle['نقطة البداية في البحث'],byTitle['دليل الزحف']];
+      const searchDiv=divider('02','الطلب على البحث في السعودية','ما يبحث عنه الأفراد والتجار، وكيف تختلف نية البحث عن نطاق الإطلاق في الرياض.');
+      const search=[searchDiv,byTitle['فرصة البحث B2C'],byTitle['فرصة البحث B2B'],intents];
+      const compDiv=divider('03','تحليل المنافسين','من ينافس على الفئة، وما الذي يفعله كل منافس في المحتوى والظهور العضوي.');
+      const comps=[compDiv,byTitle['المنافسون'],compStats,byTitle['دليل Ahrefs التنافسي'],compLessons];
+      const consumerDiv=divider('04','تحليل تطبيق المستهلك','خلاصة فحص التطبيق في خمس شرائح فقط، مع ترتيب المشكلات حسب أثرها على الإطلاق.');
+      const consumer=[consumerDiv,...['UX المستهلك 1 من 5','UX المستهلك 2 من 5','UX المستهلك 3 من 5','UX المستهلك 4 من 5','UX المستهلك 5 من 5'].map(k=>byTitle[k])];
+      const merchantDiv=divider('05','تحليل تطبيق التاجر','أربع شرائح تلخص تجربة ما قبل الدخول، وما يحتاج تحققًا بعد تسجيل الدخول.');
+      const merchant=[merchantDiv,...['UX التاجر 1 من 4','UX التاجر 2 من 4','UX التاجر 3 من 4','UX التاجر 4 من 4'].map(k=>byTitle[k]),workFiles];
+      const summaryDiv=divider('06','خلاصة التشخيص','المشكلات التي تعيق الإطلاق والفرص التي تستحق الاستثمار قبل الانتقال إلى عرضنا.');
+      const summary=[summaryDiv,blockers,opportunities];
+      const planDiv=divider('07','خطة Brandology المقترحة','ما سننفذه لمعالجة المشكلات وتحويل الطلب إلى مسارات اكتساب قابلة للقياس.');
+      const plan=[planDiv,byTitle['مصفوفة الخدمات'],byTitle['أولويات SEO التقنية'],byTitle['معمارية الصفحات'],byTitle['دورة النمو']];
+      const execDiv=divider('08','التنفيذ والقياس','كيف نبدأ، متى نتوسع، وما المؤشرات والقرارات المطلوبة لإدارة العمل.');
+      const execution=[execDiv,byTitle['خطة أول 90 يومًا'],byTitle['خارطة 12 شهرًا'],byTitle['نظام القياس'],byTitle['الخطوات القادمة'],byTitle['الخاتمة']];
+      setSection(intro,'intro');setSection(tech,'tech');setSection(search,'search');setSection(comps,'competitors');setSection(consumer,'consumer');setSection(merchant,'merchant');setSection(summary,'summary');setSection(plan,'plan');setSection(execution,'execution');
+      [...intro,...tech,...search,...comps,...consumer,...merchant,...summary,...plan,...execution].forEach(s=>deck.appendChild(s));
+      [...deck.querySelectorAll('.section-divider')].forEach(s=>s.dataset.sectionNumber=s.querySelector('.section-kicker').textContent.replace('القسم ','').padStart(2,'0'));
+    })();
+  </script>
+  <nav class="nav" aria-label="التنقل بين الشرائح"><button id="prev" aria-label="الشريحة السابقة">←</button><div class="counter"><span id="current">1</span> / <span id="total">31</span></div><button id="next" aria-label="الشريحة التالية">→</button></nav>
+  <div class="toc"><button id="tocButton" aria-label="فتح فهرس الشرائح" aria-expanded="false">☰</button><div class="toc-panel" id="tocPanel" role="menu"></div></div>
+  <script>
+    (()=>{
+      const slides=[...document.querySelectorAll('.slide')], total=slides.length;
+      const current=document.getElementById('current'), totalEl=document.getElementById('total'), bar=document.getElementById('progressBar');
+      const panel=document.getElementById('tocPanel'), tocButton=document.getElementById('tocButton');
+      let index=0; totalEl.textContent=total;
+      slides.forEach((slide,i)=>{const item=document.createElement('div');item.className='toc-item'+(i===0?' active':'');item.setAttribute('role','menuitem');item.tabIndex=0;item.innerHTML=`<span>${String(i+1).padStart(2,'0')}</span>${slide.dataset.title||'شريحة'}`;item.addEventListener('click',()=>{go(i);closeToc()});item.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go(i);closeToc()}});panel.appendChild(item)});
+      function go(n){index=Math.max(0,Math.min(total-1,n));slides.forEach((s,i)=>s.classList.toggle('active',i===index));[...panel.children].forEach((x,i)=>x.classList.toggle('active',i===index));current.textContent=index+1;bar.style.width=((index+1)/total*100)+'%';location.hash='slide-'+(index+1)}
+      function closeToc(){panel.classList.remove('open');tocButton.setAttribute('aria-expanded','false')}
+      document.getElementById('next').addEventListener('click',()=>go(index+1));document.getElementById('prev').addEventListener('click',()=>go(index-1));
+      tocButton.addEventListener('click',()=>{const open=panel.classList.toggle('open');tocButton.setAttribute('aria-expanded',String(open))});
+      document.addEventListener('click',e=>{if(!e.target.closest('.toc'))closeToc()});
+      document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='PageDown'||e.key===' '){go(index+1);e.preventDefault()}else if(e.key==='ArrowRight'||e.key==='PageUp'){go(index-1);e.preventDefault()}else if(e.key==='Home'){go(0)}else if(e.key==='End'){go(total-1)}else if(e.key==='Escape'){closeToc()}else if(e.key.toLowerCase()==='p'){document.body.classList.toggle('print-mode')}});
+      const hash=Number((location.hash.match(/slide-(\d+)/)||[])[1]);if(hash)go(hash-1);else go(0);
+      window.addEventListener('hashchange',()=>{const n=Number((location.hash.match(/slide-(\d+)/)||[])[1]);if(n&&n!==index+1)go(n-1)});
+      document.querySelectorAll('.agenda a').forEach(a=>a.addEventListener('click',e=>{const n=Number((a.getAttribute('href').match(/slide-(\d+)/)||[])[1]);if(n){e.preventDefault();go(n-1)}}));
+    })();
+  </script>
+</body>
+</html>
